@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Адмінка: Скарги</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm">
+<aside class="aside">
+  <div class="brand"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><span>Адмінка</span></div>
+  <nav class="anav" aria-label="Розділи адмінки">
+    <a href="admin.html" aria-current="page"><i data-lucide="flag"></i>Скарги<span class="cnt num" id="navcnt">5</span></a>
+    <a href="admin-listings.html"><i data-lucide="layout-grid"></i>Оголошення</a>
+    <a href="admin-users.html"><i data-lucide="users"></i>Користувачі</a>
+    <a href="admin-stats.html"><i data-lucide="chart-line"></i>Показники</a>
+    <a href="admin-log.html"><i data-lucide="history"></i>Журнал дій</a>
+  </nav>
+  <div class="awho">
+    <div class="me"><span class="aava">ОК</span><div><b>Олена К.</b><small>Адміністратор</small></div></div>
+    <div class="links"><a href="home.html"><i data-lucide="external-link"></i>На сайт</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></div>
+  </div>
+</aside>
+<main class="amain">
+<div class="ahead"><h1>Скарги</h1></div>
+<div class="atools"><div class="seg" role="tablist" id="tabs"><button type="button" role="tab" aria-selected="true" data-tab="new">Нові<span class="num" id="newcnt">5</span></button><button type="button" role="tab" aria-selected="false" data-tab="done">Розглянуті</button></div></div>
+<section data-panel="new">
+  <div class="cases" id="cases"><div class="queue" id="queue" aria-label="Черга скарг"></div><article class="case" id="case" aria-live="polite"></article></div>
+  <div class="none" id="noq" hidden><b>Усі скарги розглянуто</b>Нові з’являться тут, щойно хтось поскаржиться на оголошення.</div>
+</section>
+<section data-panel="done" hidden>
+  <div class="tblwrap"><table class="tbl"><thead><tr><th>На що скаржилися</th><th>Причина скарги</th><th>Рішення</th><th>Хто вирішив</th><th>Коли</th></tr></thead><tbody id="donebody"><tr><td><div class="lc"><img src="assets/boots.jpg" alt=""><div><b>Черевики зимові, 39</b><small>№ 104 377</small></div></div></td><td>Неправдива інформація</td><td><span class="ast bad">Оголошення знято</span></td><td>Олена К.</td><td class="nw muted">9 листопада, 16:20</td></tr><tr><td><div class="lc"><img src="assets/tshirt.jpg" alt=""><div><b>Футболка біла, базова</b><small>№ 104 233</small></div></div></td><td>Спам або дублікат</td><td><span class="ast ">Відхилено</span></td><td>Максим Д.</td><td class="nw muted">8 листопада, 12:05</td></tr><tr><td><div class="lc"><img src="assets/jeans-2.jpg" alt=""><div><b>Джинси широкі, блакитні</b><small>№ 104 190</small></div></div></td><td>Шахрайство</td><td><span class="ast bad">Користувача заблоковано</span></td><td>Олена К.</td><td class="nw muted">7 листопада, 09:48</td></tr><tr><td><div class="lc"><img src="assets/hoodie.jpg" alt=""><div><b>Худі оверсайз, сіре</b><small>№ 104 498</small></div></div></td><td>Інше</td><td><span class="ast ">Відхилено</span></td><td>Максим Д.</td><td class="nw muted">6 листопада, 19:30</td></tr></tbody></table></div>
+</section>
+</main>
+<dialog class="dlg" id="dRemove" aria-labelledby="dRemove-h"><h2 id="dRemove-h">Зняти оголошення?</h2><p class="what">Оголошення зникне з каталогу. Продавець побачить причину в сповіщеннях.</p><div class="dopts" role="radiogroup" aria-label="Причина"><label><input type="radio" name="dRemove-why" value="Шахрайство">Шахрайство</label><label><input type="radio" name="dRemove-why" value="Заборонений товар">Заборонений товар</label><label><input type="radio" name="dRemove-why" value="Неправдива інформація">Неправдива інформація</label><label><input type="radio" name="dRemove-why" value="Спам або дублікат">Спам або дублікат</label><label><input type="radio" name="dRemove-why" value="Інше">Інше</label></div><textarea placeholder="Коментар для продавця (необов’язково)" aria-label="Коментар для продавця (необов’язково)"></textarea><div class="dfoot"><button class="abtn ghost" type="button" data-cancel>Скасувати</button><button class="abtn pri" type="button" data-ok>Зняти оголошення</button></div></dialog><dialog class="dlg" id="dBlock" aria-labelledby="dBlock-h"><h2 id="dBlock-h">Заблокувати користувача?</h2><p class="what"><b id="blockName"></b> не зможе увійти, а всі його оголошення зникнуть із каталогу.</p><div class="dopts" role="radiogroup" aria-label="Причина"><label><input type="radio" name="dBlock-why" value="Шахрайство">Шахрайство</label><label><input type="radio" name="dBlock-why" value="Спам">Спам</label><label><input type="radio" name="dBlock-why" value="Образи або погрози">Образи або погрози</label><label><input type="radio" name="dBlock-why" value="Повторні порушення правил">Повторні порушення правил</label><label><input type="radio" name="dBlock-why" value="Інше">Інше</label></div><textarea placeholder="Коментар (бачать лише адміністратори)" aria-label="Коментар (бачать лише адміністратори)"></textarea><div class="dfoot"><button class="abtn ghost" type="button" data-cancel>Скасувати</button><button class="abtn pri" type="button" data-ok>Заблокувати</button></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+
+  lucide.createIcons();
+  var Q = new URLSearchParams(location.search);
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(msg, undo) {
+    toastEl.textContent = msg;
+    if (undo) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Скасувати';
+      b.addEventListener('click', function () { toastEl.classList.remove('on'); undo(); });
+      toastEl.appendChild(b);
+    }
+    toastEl.classList.add('on'); clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove('on'); }, undo ? 6000 : 2800);
+  }
+  function syncOk(d) {
+    var ok = d.querySelector('[data-ok]'); if (!ok) return;
+    var need = !!d.querySelector('.dopts') && !d.querySelector('.dopts input:checked');
+    ok.disabled = need; ok.title = need ? 'Оберіть причину' : '';
+  }
+  function openDlg(id, pre) {
+    var d = document.getElementById(id);
+    d.querySelectorAll('.dopts input').forEach(function (r) { r.checked = r.value === pre; });
+    var ta = d.querySelector('textarea'); if (ta) ta.value = '';
+    syncOk(d); d.showModal(); return d;
+  }
+  function reasonOf(d) { var r = d.querySelector('.dopts input:checked'); return r ? r.value : ''; }
+  document.querySelectorAll('dialog.dlg').forEach(function (d) {
+    d.addEventListener('change', function () { syncOk(d); });
+    d.querySelectorAll('[data-cancel]').forEach(function (b) { b.addEventListener('click', function () { d.close(); }); });
+    d.addEventListener('click', function (e) {
+      var r = d.getBoundingClientRect();
+      if (e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) d.close();
+    });
+  });
+  function segs(root, fn) {
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+        fn(b.dataset.tab);
+      });
+    });
+  }
+
+  var open = [{"id": "104 577", "img": "phone", "title": "iPhone 13, 128 ГБ", "price": "4 500 ₴", "cat": "Смартфони", "city": "Харків", "date": "14 листопада", "video": false, "n": 3, "why": "Шахрайство", "ago": "12 хв тому", "desc": "Новий, запакований. Віддаю дешево, бо терміново потрібні гроші. Відправлю після оплати на картку.", "seller": "Андрій П.", "phone": "+380 63 555 01 17", "sinfo": "На TRAD з 10 листопада · 7 активних оголошень · 2 скарги раніше", "reps": [["Шахрайство", "Просить передоплату на картку, а після цього перестає відповідати.", "Ірина М. · сьогодні, 14:02"], ["Неправдива інформація", "Ціна втричі нижча за звичайну, а фото взято з інтернету.", "Олег Т. · сьогодні, 11:40"], ["Спам або дублікат", "Учора це саме оголошення було з іншого номера.", "Катерина Б. · учора, 21:15"]], "ini": "АП", "kind": "listing"}, {"id": "104 561", "img": "puffer-green", "title": "Пуховик зимовий, зелений", "price": "2 300 ₴", "cat": "Одяг і взуття", "city": "Львів", "date": "13 листопада", "video": true, "n": 1, "why": "Неправдива інформація", "ago": "1 год тому", "desc": "Теплий пуховик, розмір M. Носила один сезон, стан хороший. Без плям і потертостей.", "seller": "Світлана Д.", "phone": "+380 97 555 01 63", "sinfo": "На TRAD з 2 жовтня · 3 активні оголошення · скарг раніше не було", "reps": [["Неправдива інформація", "У чаті продавчиня надіслала фото іншої куртки, не тієї, що в оголошенні.", "Юлія С. · сьогодні, 13:10"]], "ini": "СД", "kind": "listing"}, {"id": "104 540", "img": "shoes", "title": "Кросівки Nike, 42", "price": "1 800 ₴", "cat": "Одяг і взуття", "city": "Одеса", "date": "13 листопада", "video": false, "n": 1, "why": "Спам або дублікат", "ago": "3 год тому", "desc": "Оригінал, 42 розмір, устілка 27 см. Взував кілька разів.", "seller": "Денис Р.", "phone": "+380 50 555 01 28", "sinfo": "На TRAD з 21 вересня · 4 активні оголошення · скарг раніше не було", "reps": [["Спам або дублікат", "Це оголошення опубліковано п’ять разів поспіль.", "Назар К. · сьогодні, 10:55"]], "ini": "ДР", "kind": "listing"}, {"id": "104 512", "img": "bag", "title": "Сумка шкіряна", "price": "950 ₴", "cat": "Одяг і взуття", "city": "Дніпро", "date": "12 листопада", "video": true, "n": 1, "why": "Інше", "ago": "учора", "desc": "Натуральна шкіра, колір коньячний. Довгий ремінець у комплекті.", "seller": "Наталя В.", "phone": "+380 66 555 01 90", "sinfo": "На TRAD з 5 листопада · 2 активні оголошення · скарг раніше не було", "reps": [["Інше", "Продавчиня грубо відповідає в чаті.", "Тарас Л. · учора, 18:32"]], "ini": "НВ", "kind": "listing"}, {"kind": "user", "title": "Богдан Я.", "seller": "Богдан Я.", "phone": "+380 99 555 01 08", "city": "Полтава", "n": 1, "why": "Інше", "ago": "учора", "sinfo": "На TRAD з 28 жовтня · 1 активне оголошення · скарг раніше не було", "reps": [["Інше", "Коли я відмовилася купувати, почав ображати мене в чаті.", "Олена Т. · учора, 20:14"]], "ini": "БЯ"}];
+
+  if (Q.get('empty')) open = [];
+  var cur = 0, queue = document.getElementById('queue'), box = document.getElementById('case');
+  function many(n) { return n === 1 ? '1 скарга' : n + ' скарги'; }
+  function draw() {
+    document.getElementById('newcnt').textContent = open.length;
+    var nav = document.getElementById('navcnt'); nav.textContent = open.length; nav.hidden = !open.length;
+    document.getElementById('cases').hidden = !open.length;
+    document.getElementById('noq').hidden = !!open.length;
+    if (!open.length) return;
+    if (cur >= open.length) cur = open.length - 1;
+    queue.innerHTML = open.map(function (c, i) {
+      return '<button class="qrow" type="button" data-i="' + i + '" aria-current="' + (i === cur) + '">' + (c.kind === 'user' ? '<span class="aava big">' + c.ini + '</span>' : '<img src="assets/' + c.img + '.jpg" alt="">') + '<div class="b"><div class="t">' + c.title + '</div><div class="why">' + c.why + '</div><div class="m">' + (c.kind === 'user' ? 'Скарга на користувача' : many(c.n)) + ' · ' + c.ago + '</div></div></button>';
+    }).join('');
+    var c = open[cur];
+    var acts = '<button class="abtn dng" type="button" data-a="block"><i data-lucide="ban"></i>Заблокувати користувача</button><button class="abtn ghost push" type="button" data-a="dismiss">' + (c.n === 1 ? 'Відхилити скаргу' : 'Відхилити скарги') + '</button>';
+    var reps = '<div class="case-reports"><div class="albl">' + (c.n === 1 ? 'Скарга' : 'Скарги · ' + c.n) + '</div>' + c.reps.map(function (r) { return '<div class="rep"><div class="why">' + r[0] + '</div><p>' + r[1] + '</p><div class="by">' + r[2] + '</div></div>'; }).join('') + '</div>';
+    if (c.kind === 'user') box.innerHTML = '<div class="case-user"><span class="aava big">' + c.ini + '</span><div><h2>' + c.seller + '</h2><div class="lmeta"><span>' + c.phone + '</span><span>' + c.city + '</span><a class="alink" href="seller.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Відкрити профіль</a></div><p class="adesc">' + c.sinfo + '</p></div></div>' + reps + '<div class="case-acts">' + acts + '</div>';
+    else box.innerHTML = '<div class="case-top"><div class="frame"><img src="assets/' + c.img + '.jpg" alt=""><div class="segs"><i class="' + (c.video ? 'video' : 'on') + '"></i><i></i><i></i></div>' + (c.video ? '<span class="dur"><i data-lucide="play"></i>0:24</span>' : '') + '<div class="cap"><div class="price">' + c.price + '</div></div></div>'
+      + '<div><h2>' + c.title + '</h2><div class="lmeta"><span>№ ' + c.id + '</span><span>' + c.cat + '</span><span>' + c.city + '</span><span>опубліковано ' + c.date + '</span><a class="alink" href="product.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>Відкрити на сайті</a></div>'
+      + '<p class="adesc">' + c.desc + '</p>'
+      + '<div class="csel"><span class="aava">' + c.ini + '</span><div><b>' + c.seller + ' · ' + c.phone + '</b><small>' + c.sinfo + '</small></div></div></div></div>'
+      + reps + '<div class="case-acts"><button class="abtn pri" type="button" data-a="remove"><i data-lucide="eye-off"></i>Зняти оголошення</button>' + acts + '</div>';
+    lucide.createIcons();
+  }
+  function resolve(label, cls, msg, undoable) {
+    var c = open[cur], at = cur;
+    open.splice(cur, 1);
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + (c.kind === 'user' ? '<div class="uc"><span class="aava">' + c.ini + '</span><div><b>' + c.seller + '</b><small>Користувач</small></div></div>' : '<div class="lc"><img src="assets/' + c.img + '.jpg" alt=""><div><b>' + c.title + '</b><small>№ ' + c.id + '</small></div></div>') + '</td><td>' + c.why + '</td><td><span class="ast ' + cls + '">' + label + '</span></td><td>Олена К.</td><td class="nw muted">щойно</td>';
+    document.getElementById('donebody').prepend(tr);
+    draw();
+    toast(msg, undoable ? function () { open.splice(at, 0, c); cur = at; tr.remove(); draw(); } : null);
+  }
+  queue.addEventListener('click', function (e) { var b = e.target.closest('.qrow'); if (b) { cur = +b.dataset.i; draw(); } });
+  box.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-a]'); if (!b) return;
+    var c = open[cur];
+    if (b.dataset.a === 'remove') openDlg('dRemove', c.why);
+    if (b.dataset.a === 'block') { document.getElementById('blockName').textContent = c.seller; openDlg('dBlock', c.why === 'Шахрайство' ? c.why : ''); }
+    if (b.dataset.a === 'dismiss') resolve('Відхилено', '', c.n === 1 ? 'Скаргу відхилено' : 'Скарги відхилено', true);
+  });
+  document.querySelector('#dRemove [data-ok]').addEventListener('click', function () { document.getElementById('dRemove').close(); resolve('Оголошення знято', 'bad', 'Оголошення знято. Продавець побачить причину в сповіщеннях.'); });
+  document.querySelector('#dBlock [data-ok]').addEventListener('click', function () { document.getElementById('dBlock').close(); resolve('Користувача заблоковано', 'bad', 'Користувача заблоковано, його оголошення прибрано з каталогу.'); });
+  segs(document.getElementById('tabs'), function (t) { document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t; }); });
+  draw();
+  if (Q.get('tab')) { var tb = document.querySelector('[data-tab="' + Q.get('tab') + '"]'); if (tb) tb.click(); }
+  if (Q.get('dlg') === 'remove' && open.length) openDlg('dRemove', open[cur].why);
+  if (Q.get('dlg') === 'block' && open.length) { document.getElementById('blockName').textContent = open[cur].seller; openDlg('dBlock', 'Шахрайство'); }
+
+</script>
+</body>
+</html>

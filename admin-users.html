@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Адмінка: Користувачі</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm">
+<aside class="aside">
+  <div class="brand"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><span>Адмінка</span></div>
+  <nav class="anav" aria-label="Розділи адмінки">
+    <a href="admin.html"><i data-lucide="flag"></i>Скарги<span class="cnt num" id="navcnt">5</span></a>
+    <a href="admin-listings.html"><i data-lucide="layout-grid"></i>Оголошення</a>
+    <a href="admin-users.html" aria-current="page"><i data-lucide="users"></i>Користувачі</a>
+    <a href="admin-stats.html"><i data-lucide="chart-line"></i>Показники</a>
+    <a href="admin-log.html"><i data-lucide="history"></i>Журнал дій</a>
+  </nav>
+  <div class="awho">
+    <div class="me"><span class="aava">ОК</span><div><b>Олена К.</b><small>Адміністратор</small></div></div>
+    <div class="links"><a href="home.html"><i data-lucide="external-link"></i>На сайт</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></div>
+  </div>
+</aside>
+<main class="amain">
+<div class="ahead"><h1>Користувачі</h1></div>
+<div class="atools"><label class="afield"><i data-lucide="search"></i><input type="search" id="q" placeholder="Номер телефону або ім’я" aria-label="Пошук користувачів"></label>
+<div class="seg" role="tablist" id="tabs"><button type="button" role="tab" aria-selected="true" data-tab="all">Усі<span class="num">1 906</span></button><button type="button" role="tab" aria-selected="false" data-tab="blocked">Заблоковані<span class="num">14</span></button></div></div>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Користувач</th><th>Місто</th><th>На TRAD з</th><th class="r">Оголошень</th><th class="r">Скарг</th><th>Статус</th><th></th></tr></thead><tbody id="rows"><tr data-status="active" data-name="Андрій П." data-text="андрій п. +380 63 555 01 17 +380635550117"><td><div class="uc"><span class="aava">АП</span><div><b>Андрій П.</b><small>+380 63 555 01 17</small></div></div></td><td>Харків</td><td class="nw muted">10 лист. 2026</td><td class="r">7</td><td class="r">5</td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="active" data-name="Марія К." data-text="марія к. +380 67 555 01 42 +380675550142"><td><div class="uc"><span class="aava">МК</span><div><b>Марія К.</b><small>+380 67 555 01 42</small></div></div></td><td>Київ</td><td class="nw muted">14 вер. 2026</td><td class="r">6</td><td class="r">1</td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="active" data-name="Оксана Л." data-text="оксана л. +380 93 555 01 05 +380935550105"><td><div class="uc"><span class="aava">ОЛ</span><div><b>Оксана Л.</b><small>+380 93 555 01 05</small></div></div></td><td>Вінниця</td><td class="nw muted">18 вер. 2026</td><td class="r">5</td><td class="r"><span class="muted">0</span></td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="active" data-name="Денис Р." data-text="денис р. +380 50 555 01 28 +380505550128"><td><div class="uc"><span class="aava">ДР</span><div><b>Денис Р.</b><small>+380 50 555 01 28</small></div></div></td><td>Одеса</td><td class="nw muted">21 вер. 2026</td><td class="r">4</td><td class="r">2</td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="active" data-name="Світлана Д." data-text="світлана д. +380 97 555 01 63 +380975550163"><td><div class="uc"><span class="aava">СД</span><div><b>Світлана Д.</b><small>+380 97 555 01 63</small></div></div></td><td>Львів</td><td class="nw muted">2 жовт. 2026</td><td class="r">3</td><td class="r">1</td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="active" data-name="Наталя В." data-text="наталя в. +380 66 555 01 90 +380665550190"><td><div class="uc"><span class="aava">НВ</span><div><b>Наталя В.</b><small>+380 66 555 01 90</small></div></div></td><td>Дніпро</td><td class="nw muted">5 лист. 2026</td><td class="r">2</td><td class="r">1</td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="active" data-name="Ігор С." data-text="ігор с. +380 68 555 01 74 +380685550174"><td><div class="uc"><span class="aava">ІС</span><div><b>Ігор С.</b><small>+380 68 555 01 74</small></div></div></td><td>Київ</td><td class="nw muted">27 жовт. 2026</td><td class="r">1</td><td class="r">2</td><td class="stc"><span class="ast ok">Активний</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button></span></td></tr><tr data-status="blocked" data-name="Віктор Г." data-text="віктор г. +380 73 555 01 36 +380735550136"><td><div class="uc"><span class="aava">ВГ</span><div><b>Віктор Г.</b><small>+380 73 555 01 36</small></div></div></td><td>Запоріжжя</td><td class="nw muted">1 лист. 2026</td><td class="r">0</td><td class="r">6</td><td class="stc"><span class="ast bad">Заблокований</span><span class="sub">Шахрайство · 7 лист.</span></td><td class="aact"><span class="acts"><button class="abtn ghost sm" type="button" data-act="unblock">Розблокувати</button></span></td></tr></tbody></table>
+<div class="none" id="none" hidden><b>Нікого не знайдено</b>Перевірте номер або ім’я.</div></div>
+<div class="pager" id="pager"><span>1–8 із 1 906</span><button class="abtn ghost sm" type="button" disabled aria-label="Попередня сторінка"><i data-lucide="chevron-left"></i></button><button class="abtn ghost sm" type="button" aria-label="Наступна сторінка"><i data-lucide="chevron-right"></i></button></div>
+</main>
+<dialog class="dlg" id="dBlock" aria-labelledby="dBlock-h"><h2 id="dBlock-h">Заблокувати користувача?</h2><p class="what"><b id="blockName"></b> не зможе увійти, а всі його оголошення зникнуть із каталогу.</p><div class="dopts" role="radiogroup" aria-label="Причина"><label><input type="radio" name="dBlock-why" value="Шахрайство">Шахрайство</label><label><input type="radio" name="dBlock-why" value="Спам">Спам</label><label><input type="radio" name="dBlock-why" value="Образи або погрози">Образи або погрози</label><label><input type="radio" name="dBlock-why" value="Повторні порушення правил">Повторні порушення правил</label><label><input type="radio" name="dBlock-why" value="Інше">Інше</label></div><textarea placeholder="Коментар (бачать лише адміністратори)" aria-label="Коментар (бачать лише адміністратори)"></textarea><div class="dfoot"><button class="abtn ghost" type="button" data-cancel>Скасувати</button><button class="abtn pri" type="button" data-ok>Заблокувати</button></div></dialog><dialog class="dlg" id="dUnblock" aria-labelledby="dUnblock-h"><h2 id="dUnblock-h">Розблокувати користувача?</h2><p class="what"><b id="unblockName"></b> знову зможе увійти, а його оголошення повернуться в каталог.</p><div class="dfoot"><button class="abtn ghost" type="button" data-cancel>Скасувати</button><button class="abtn pri" type="button" data-ok>Розблокувати</button></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+
+  lucide.createIcons();
+  var Q = new URLSearchParams(location.search);
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(msg, undo) {
+    toastEl.textContent = msg;
+    if (undo) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Скасувати';
+      b.addEventListener('click', function () { toastEl.classList.remove('on'); undo(); });
+      toastEl.appendChild(b);
+    }
+    toastEl.classList.add('on'); clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove('on'); }, undo ? 6000 : 2800);
+  }
+  function syncOk(d) {
+    var ok = d.querySelector('[data-ok]'); if (!ok) return;
+    var need = !!d.querySelector('.dopts') && !d.querySelector('.dopts input:checked');
+    ok.disabled = need; ok.title = need ? 'Оберіть причину' : '';
+  }
+  function openDlg(id, pre) {
+    var d = document.getElementById(id);
+    d.querySelectorAll('.dopts input').forEach(function (r) { r.checked = r.value === pre; });
+    var ta = d.querySelector('textarea'); if (ta) ta.value = '';
+    syncOk(d); d.showModal(); return d;
+  }
+  function reasonOf(d) { var r = d.querySelector('.dopts input:checked'); return r ? r.value : ''; }
+  document.querySelectorAll('dialog.dlg').forEach(function (d) {
+    d.addEventListener('change', function () { syncOk(d); });
+    d.querySelectorAll('[data-cancel]').forEach(function (b) { b.addEventListener('click', function () { d.close(); }); });
+    d.addEventListener('click', function (e) {
+      var r = d.getBoundingClientRect();
+      if (e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) d.close();
+    });
+  });
+  function segs(root, fn) {
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+        fn(b.dataset.tab);
+      });
+    });
+  }
+
+
+  var q = document.getElementById('q'), tab = 'all';
+  function filter() {
+    var s = q.value.trim().toLowerCase(), n = 0;
+    document.querySelectorAll('#rows tr').forEach(function (tr) {
+      var ok = (tab === 'all' || tr.dataset.status === tab) && (!s || tr.dataset.text.indexOf(s) > -1);
+      tr.hidden = !ok; if (ok) n++;
+    });
+    document.getElementById('none').hidden = n > 0;
+    document.querySelector('.tbl thead').hidden = n === 0;
+    document.getElementById('pager').hidden = !!s || tab !== 'all';
+  }
+  q.addEventListener('input', filter);
+  segs(document.getElementById('tabs'), function (t) { tab = t; filter(); });
+  if (Q.get('q')) { q.value = Q.get('q'); filter(); }
+
+  var row;
+  document.getElementById('rows').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-act]'); if (!b) return;
+    row = b.closest('tr');
+    if (b.dataset.act === 'block') { document.getElementById('blockName').textContent = row.dataset.name; openDlg('dBlock', ''); }
+    if (b.dataset.act === 'unblock') { document.getElementById('unblockName').textContent = row.dataset.name; openDlg('dUnblock', ''); }
+  });
+  function setRow(tr, blocked, why) {
+    tr.dataset.status = blocked ? 'blocked' : 'active';
+    tr.querySelector('.stc').innerHTML = blocked ? '<span class="ast bad">Заблокований</span><span class="sub">' + why + ' · сьогодні</span>' : '<span class="ast ok">Активний</span>';
+    tr.querySelector('.acts').innerHTML = blocked ? '<button class="abtn ghost sm" type="button" data-act="unblock">Розблокувати</button>' : '<button class="abtn ghost sm" type="button" data-act="block">Заблокувати</button>';
+    filter();
+  }
+  document.querySelector('#dBlock [data-ok]').addEventListener('click', function () {
+    var d = document.getElementById('dBlock'); setRow(row, true, reasonOf(d)); d.close();
+    toast('Користувача заблоковано, його оголошення прибрано з каталогу.');
+  });
+  document.querySelector('#dUnblock [data-ok]').addEventListener('click', function () {
+    document.getElementById('dUnblock').close(); setRow(row, false); toast('Користувача розблоковано');
+  });
+
+</script>
+</body>
+</html>

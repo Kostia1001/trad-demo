@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Обране</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="wide has-bar">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar" style="padding-left:16px"><h1>Обране</h1></div>
+<div class="shop" style="display:block">
+<main>
+  <h1 class="cat">Обране</h1>
+  <div class="tline full" role="tablist"><button type="button" role="tab" aria-selected="true" data-tab="items">Оголошення<span class="num">4</span></button><button type="button" role="tab" aria-selected="false" data-tab="searches">Пошуки<span class="num" id="scount">2</span></button></div>
+  <section data-panel="items">
+  <div class="tools" id="tools"><span class="n num">4 оголошення</span></div>
+  <div class="grid tight" id="grid">
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/jeans-1.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="dur"><i data-lucide="play"></i>0:31</span><button class="fav" type="button" aria-pressed="true" aria-label="Прибрати з обраного"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">900&nbsp;грн<s>1&nbsp;000</s></div><div class="title">Джинси Levi’s 501, W32 L32</div></div>
+      </div>
+      <div class="meta">Одеса · сьогодні, 11:40</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/bag.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="state">Заброньовано</span><button class="fav" type="button" aria-pressed="true" aria-label="Прибрати з обраного"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">1&nbsp;100&nbsp;грн</div><div class="title">Сумка шкіряна, коричнева</div></div>
+      </div>
+      <div class="meta">Київ · сьогодні, 14:20</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/phone.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i></span><button class="fav" type="button" aria-pressed="true" aria-label="Прибрати з обраного"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">9&nbsp;800&nbsp;грн</div><div class="title">iPhone 11, 64 ГБ, чорний</div></div>
+      </div>
+      <div class="meta">Львів · сьогодні, 13:05</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame off"><img src="assets/shoes.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></span><span class="state">Продано</span><button class="fav" type="button" aria-pressed="true" aria-label="Прибрати з обраного"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">1&nbsp;350&nbsp;грн</div><div class="title">Туфлі шкіряні, 42 розмір</div></div>
+      </div>
+      <div class="meta">Дніпро · вчора, 16:48</div>
+    </a>
+  </div>
+  <div class="empty" id="empty" hidden>
+    <div class="ico"><i data-lucide="heart"></i></div>
+    <h2>Тут будуть збережені оголошення</h2>
+    <p>Натисніть на серце на оголошенні, щоб не загубити його.</p>
+    <a class="btn primary" href="home.html">До оголошень</a>
+  </div>
+  </section>
+  <section data-panel="searches" hidden>
+    <div class="srows" id="srows">
+      <div class="srow"><a href="catalog.html?follow=1"><span class="ic"><i data-lucide="search"></i></span><span class="b"><span class="q">джинси</span><span class="f">Жіночий одяг · до 1 000 грн · Одеса</span></span><span class="snew num">3 нових</span></a><button class="srm" type="button" aria-label="Не стежити за пошуком «джинси»"><i data-lucide="x"></i></button></div>
+      <div class="srow"><a href="catalog.html?follow=1"><span class="ic"><i data-lucide="search"></i></span><span class="b"><span class="q">iPhone 13</span><span class="f">Смартфони · 128 ГБ · вся Україна</span></span></a><button class="srm" type="button" aria-label="Не стежити за пошуком «iPhone 13»"><i data-lucide="x"></i></button></div>
+    </div>
+    <div class="empty" id="sempty" hidden>
+      <div class="ico"><i data-lucide="bell-plus"></i></div>
+      <h2>Тут будуть збережені пошуки</h2>
+      <p>У каталозі натисніть дзвіночок поруч із фільтрами, і ми повідомимо про нові оголошення.</p>
+      <a class="btn primary" href="catalog.html">До каталогу</a>
+    </div>
+  </section>
+</main>
+</div>
+<nav class="tabs" aria-label="Головне меню">
+  <a class="tab" href="home.html"><i data-lucide="house"></i>Головна</a>
+  <a class="tab" href="favorites.html" aria-current="page"><i data-lucide="heart"></i>Обране</a>
+  <a class="tab create" href="create-ai.html"><span class="plus"><i data-lucide="plus"></i></span>Створити</a>
+  <a class="tab" href="chat.html"><i data-lucide="message-circle"></i><span class="count num">2</span>Чат</a>
+  <a class="tab" href="profile.html"><i data-lucide="user"></i>Профіль</a>
+</nav>
+
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  document.querySelectorAll('.fav').forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      var on = b.getAttribute('aria-pressed') === 'true';
+      b.setAttribute('aria-pressed', String(!on));
+      b.setAttribute('aria-label', on ? 'Додати в обране' : 'Прибрати з обраного');
+    });
+  });
+  if (new URLSearchParams(location.search).get('empty') === '1') { document.getElementById('grid').hidden = true; document.getElementById('tools').hidden = true; document.getElementById('empty').hidden = false; }
+
+  (function () {
+    var tabs = document.querySelectorAll('.tline button');
+    function open(t) {
+      tabs.forEach(function (x) { x.setAttribute('aria-selected', String(x.dataset.tab === t)); });
+      document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t; });
+    }
+    tabs.forEach(function (b) { b.addEventListener('click', function () { open(b.dataset.tab); }); });
+    function sync() {
+      var n = document.querySelectorAll('#srows .srow').length;
+      document.getElementById('scount').textContent = n;
+      document.getElementById('srows').hidden = !n; document.getElementById('sempty').hidden = !!n;
+    }
+    document.querySelectorAll('.srm').forEach(function (b) { b.addEventListener('click', function () { b.closest('.srow').remove(); sync(); }); });
+    var p = new URLSearchParams(location.search);
+    if (p.get('tab')) open(p.get('tab'));
+    if (p.get('nosearch') === '1') { document.querySelectorAll('#srows .srow').forEach(function (r) { r.remove(); }); sync(); }
+  })();
+</script>
+<!-- block3 -->
+<script src="shop.js"></script>
+</body>
+</html>

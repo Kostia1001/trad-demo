@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Адмінка: Журнал дій</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm">
+<aside class="aside">
+  <div class="brand"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><span>Адмінка</span></div>
+  <nav class="anav" aria-label="Розділи адмінки">
+    <a href="admin.html"><i data-lucide="flag"></i>Скарги<span class="cnt num" id="navcnt">5</span></a>
+    <a href="admin-listings.html"><i data-lucide="layout-grid"></i>Оголошення</a>
+    <a href="admin-users.html"><i data-lucide="users"></i>Користувачі</a>
+    <a href="admin-stats.html"><i data-lucide="chart-line"></i>Показники</a>
+    <a href="admin-log.html" aria-current="page"><i data-lucide="history"></i>Журнал дій</a>
+  </nav>
+  <div class="awho">
+    <div class="me"><span class="aava">ОК</span><div><b>Олена К.</b><small>Адміністратор</small></div></div>
+    <div class="links"><a href="home.html"><i data-lucide="external-link"></i>На сайт</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></div>
+  </div>
+</aside>
+<main class="amain">
+<div class="ahead"><h1>Журнал дій</h1></div>
+<div class="atools"><label class="afield"><i data-lucide="search"></i><input type="search" id="q" placeholder="Адміністратор, номер або ім’я" aria-label="Пошук у журналі"></label>
+<div class="seg" role="tablist" id="tabs"><button type="button" role="tab" aria-selected="true" data-tab="all">Усі дії</button><button type="button" role="tab" aria-selected="false" data-tab="report">Скарги</button><button type="button" role="tab" aria-selected="false" data-tab="listing">Оголошення</button><button type="button" role="tab" aria-selected="false" data-tab="user">Користувачі</button></div></div>
+<div class="tblwrap"><table class="tbl"><thead><tr><th>Коли</th><th>Адміністратор</th><th>Дія</th><th>З чим</th><th>Причина</th></tr></thead><tbody id="rows"><tr data-status="report" data-text="максим д. скаргу відхилено № 104 498 · худі оверсайз, сіре "><td class="nw muted">15 листопада, 13:48</td><td><div class="uc" style="min-width:150px"><span class="aava">МД</span><b>Максим Д.</b></div></td><td>Скаргу відхилено</td><td>№ 104 498 · Худі оверсайз, сіре</td><td class="muted">—</td></tr><tr data-status="user" data-text="олена к. користувача розблоковано роман ш. · +380 95 555 01 51 "><td class="nw muted">15 листопада, 10:12</td><td><div class="uc" style="min-width:150px"><span class="aava">ОК</span><b>Олена К.</b></div></td><td>Користувача розблоковано</td><td>Роман Ш. · +380 95 555 01 51</td><td class="muted">—</td></tr><tr data-status="listing" data-text="олена к. оголошення повернуто в каталог № 104 466 · куртка джинсова "><td class="nw muted">14 листопада, 17:30</td><td><div class="uc" style="min-width:150px"><span class="aava">ОК</span><b>Олена К.</b></div></td><td>Оголошення повернуто в каталог</td><td>№ 104 466 · Куртка джинсова</td><td class="muted">—</td></tr><tr data-status="listing" data-text="максим д. оголошення знято № 104 402 · телефон samsung a54 спам або дублікат"><td class="nw muted">12 листопада, 11:05</td><td><div class="uc" style="min-width:150px"><span class="aava">МД</span><b>Максим Д.</b></div></td><td>Оголошення знято</td><td>№ 104 402 · Телефон Samsung A54</td><td class="">Спам або дублікат</td></tr><tr data-status="listing" data-text="олена к. оголошення знято № 104 377 · черевики зимові, 39 неправдива інформація"><td class="nw muted">9 листопада, 16:20</td><td><div class="uc" style="min-width:150px"><span class="aava">ОК</span><b>Олена К.</b></div></td><td>Оголошення знято</td><td>№ 104 377 · Черевики зимові, 39</td><td class="">Неправдива інформація</td></tr><tr data-status="report" data-text="максим д. скаргу відхилено № 104 233 · футболка біла, базова "><td class="nw muted">8 листопада, 12:05</td><td><div class="uc" style="min-width:150px"><span class="aava">МД</span><b>Максим Д.</b></div></td><td>Скаргу відхилено</td><td>№ 104 233 · Футболка біла, базова</td><td class="muted">—</td></tr><tr data-status="user" data-text="олена к. користувача заблоковано віктор г. · +380 73 555 01 36 шахрайство"><td class="nw muted">7 листопада, 09:48</td><td><div class="uc" style="min-width:150px"><span class="aava">ОК</span><b>Олена К.</b></div></td><td>Користувача заблоковано</td><td>Віктор Г. · +380 73 555 01 36</td><td class="">Шахрайство</td></tr><tr data-status="report" data-text="максим д. скаргу відхилено № 104 498 · худі оверсайз, сіре "><td class="nw muted">6 листопада, 19:30</td><td><div class="uc" style="min-width:150px"><span class="aava">МД</span><b>Максим Д.</b></div></td><td>Скаргу відхилено</td><td>№ 104 498 · Худі оверсайз, сіре</td><td class="muted">—</td></tr></tbody></table>
+<div class="none" id="none" hidden><b>Нічого не знайдено</b>Спробуйте інший запит або оберіть «Усі дії».</div></div>
+<div class="pager" id="pager"><span>1–8 із 143</span><button class="abtn ghost sm" type="button" disabled aria-label="Попередня сторінка"><i data-lucide="chevron-left"></i></button><button class="abtn ghost sm" type="button" aria-label="Наступна сторінка"><i data-lucide="chevron-right"></i></button></div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+
+  lucide.createIcons();
+  var Q = new URLSearchParams(location.search);
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(msg, undo) {
+    toastEl.textContent = msg;
+    if (undo) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Скасувати';
+      b.addEventListener('click', function () { toastEl.classList.remove('on'); undo(); });
+      toastEl.appendChild(b);
+    }
+    toastEl.classList.add('on'); clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove('on'); }, undo ? 6000 : 2800);
+  }
+  function syncOk(d) {
+    var ok = d.querySelector('[data-ok]'); if (!ok) return;
+    var need = !!d.querySelector('.dopts') && !d.querySelector('.dopts input:checked');
+    ok.disabled = need; ok.title = need ? 'Оберіть причину' : '';
+  }
+  function openDlg(id, pre) {
+    var d = document.getElementById(id);
+    d.querySelectorAll('.dopts input').forEach(function (r) { r.checked = r.value === pre; });
+    var ta = d.querySelector('textarea'); if (ta) ta.value = '';
+    syncOk(d); d.showModal(); return d;
+  }
+  function reasonOf(d) { var r = d.querySelector('.dopts input:checked'); return r ? r.value : ''; }
+  document.querySelectorAll('dialog.dlg').forEach(function (d) {
+    d.addEventListener('change', function () { syncOk(d); });
+    d.querySelectorAll('[data-cancel]').forEach(function (b) { b.addEventListener('click', function () { d.close(); }); });
+    d.addEventListener('click', function (e) {
+      var r = d.getBoundingClientRect();
+      if (e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) d.close();
+    });
+  });
+  function segs(root, fn) {
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+        fn(b.dataset.tab);
+      });
+    });
+  }
+
+
+  var q = document.getElementById('q'), tab = 'all';
+  function filter() {
+    var s = q.value.trim().toLowerCase(), n = 0;
+    document.querySelectorAll('#rows tr').forEach(function (tr) {
+      var ok = (tab === 'all' || tr.dataset.status === tab) && (!s || tr.dataset.text.indexOf(s) > -1);
+      tr.hidden = !ok; if (ok) n++;
+    });
+    document.getElementById('none').hidden = n > 0;
+    document.querySelector('.tbl thead').hidden = n === 0;
+    document.getElementById('pager').hidden = !!s || tab !== 'all';
+  }
+  q.addEventListener('input', filter);
+  segs(document.getElementById('tabs'), function (t) { tab = t; filter(); });
+  if (Q.get('q')) { q.value = Q.get('q'); filter(); }
+
+</script>
+</body>
+</html>

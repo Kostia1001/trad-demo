@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Вхід і безпека</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="acctpage formpage wide has-bar keepbar">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar" style="padding-left:6px"><a class="x" href="profile.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><h1>Вхід і безпека</h1></div>
+<aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html" aria-current="page"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
+<main class="page">
+  <div class="nudge" id="nudge" hidden><i data-lucide="mail-plus"></i><div><p>Додайте пошту. З нею ви повернете доступ, якщо зміниться номер і забудеться пароль.</p><button class="textlink" type="button" data-sheet="mailsh">Додати пошту</button></div></div>
+  <p class="glabel">Як ви входите</p>
+  <div class="group">
+    <div class="lrow"><i data-lucide="smartphone"></i><span class="t">Номер телефону<small class="num" id="vphone">+380 67 123 45 67</small></span><button class="textlink go" type="button" data-sheet="chphone">Змінити</button></div>
+    <div class="lrow"><i data-lucide="mail"></i><span class="t">Пошта<small id="vmail">olena@gmail.com</small></span><button class="textlink go" type="button" data-sheet="mailsh" id="bmail">Змінити</button></div>
+    <div class="lrow"><i data-lucide="key-round"></i><span class="t">Пароль<small id="vpass">Змінено 3 жовтня</small></span><button class="textlink go" type="button" data-sheet="passsh">Змінити</button></div>
+  </div>
+  <p class="glabel">Де ви увійшли</p>
+  <div class="group" id="devs">
+    <div class="lrow"><i data-lucide="smartphone"></i><span class="t">iPhone 13 · Одеса<small>Цей пристрій</small></span></div>
+    <div class="lrow" data-other><i data-lucide="monitor"></i><span class="t">Chrome, Windows · Київ<small>Останній вхід 12 листопада</small></span><button class="textlink go" type="button" data-out>Вийти</button></div>
+    <div class="lrow" data-other><i data-lucide="smartphone"></i><span class="t">Samsung Galaxy A54 · Одеса<small>Останній вхід 2 листопада</small></span><button class="textlink go" type="button" data-out>Вийти</button></div>
+  </div>
+  <button class="btn ghost wide" id="outall" type="button" style="margin-top:14px">Вийти на всіх інших пристроях</button>
+  <p class="fhint" id="devhint">Не впізнаєте пристрій? Вийдіть на ньому і змініть пароль.</p>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<div class="scrim"></div>
+<section class="sheet" id="chphone" role="dialog" aria-modal="true" aria-label="Змінити номер">
+  <div class="sheet-head"><h2>Змінити номер</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <div data-part="1">
+      <div class="field"><span class="lbl">Новий номер</span><label class="phone"><b>+380</b><input type="tel" inputmode="numeric" placeholder="67 123 45 67" aria-label="Новий номер телефону" id="newph"></label></div>
+      <div class="field"><label for="cp1">Пароль</label><div class="pw"><input class="input" id="cp1" type="password" autocomplete="current-password"><button class="eye" type="button" aria-label="Показати пароль" aria-pressed="false"><i data-lucide="eye"></i></button></div></div>
+      <p class="errtext" role="alert" hidden></p>
+      <p class="fhint">Надішлемо код на новий номер. Оголошення, розмови й обране залишаться.</p>
+    </div>
+    <div data-part="2" hidden><p class="hint">Надіслали код на <span class="num" id="phdest"></span>.</p><div class="code"><input inputmode="numeric" maxlength="1" value="4" aria-label="Цифра 1"><input inputmode="numeric" maxlength="1" value="7" aria-label="Цифра 2"><input inputmode="numeric" maxlength="1" value="1" aria-label="Цифра 3"><input inputmode="numeric" maxlength="1" value="9" aria-label="Цифра 4"></div></div>
+  </div>
+  <div class="sheet-foot"><button class="btn primary" type="button" data-go>Отримати код</button></div>
+</section>
+<section class="sheet" id="mailsh" role="dialog" aria-modal="true" aria-label="Пошта">
+  <div class="sheet-head"><h2>Пошта</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <div data-part="1">
+      <div class="field"><label for="newmail">Електронна пошта</label><input class="input" id="newmail" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com"></div>
+      <p class="errtext" role="alert" hidden></p>
+      <p class="fhint">На пошту надішлемо код, якщо ви забудете пароль. Іншим користувачам її не видно.</p>
+    </div>
+    <div data-part="2" hidden><p class="hint">Надіслали лист із кодом на <span id="maildest"></span>. Якщо листа немає, перевірте папку «Спам».</p><div class="code"><input inputmode="numeric" maxlength="1" value="4" aria-label="Цифра 1"><input inputmode="numeric" maxlength="1" value="7" aria-label="Цифра 2"><input inputmode="numeric" maxlength="1" value="1" aria-label="Цифра 3"><input inputmode="numeric" maxlength="1" value="9" aria-label="Цифра 4"></div></div>
+  </div>
+  <div class="sheet-foot"><button class="btn primary" type="button" data-go>Надіслати код</button></div>
+</section>
+<section class="sheet" id="passsh" role="dialog" aria-modal="true" aria-label="Змінити пароль">
+  <div class="sheet-head"><h2>Змінити пароль</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <div class="field"><label for="op">Поточний пароль</label><div class="pw"><input class="input" id="op" type="password" autocomplete="current-password"><button class="eye" type="button" aria-label="Показати пароль" aria-pressed="false"><i data-lucide="eye"></i></button></div></div>
+    <div class="field"><label for="npw">Новий пароль</label><div class="pw"><input class="input" id="npw" type="password" autocomplete="new-password" placeholder="Щонайменше 8 символів"><button class="eye" type="button" aria-label="Показати пароль" aria-pressed="false"><i data-lucide="eye"></i></button></div></div>
+    <p class="errtext" role="alert" hidden></p>
+    <p class="fhint"><a href="login.html?step=forgot">Забули поточний пароль?</a></p>
+  </div>
+  <div class="sheet-foot"><button class="btn primary" type="button" data-go>Зберегти</button></div>
+</section>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+
+  document.querySelectorAll('.eye').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var i = b.parentNode.querySelector('input'), on = i.type === 'password';
+      i.type = on ? 'text' : 'password'; b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-label', on ? 'Сховати пароль' : 'Показати пароль');
+      b.innerHTML = '<i data-lucide="' + (on ? 'eye-off' : 'eye') + '"></i>'; lucide.createIcons();
+    });
+  });
+  function $(id) { return document.getElementById(id); }
+  function sheet(id, on) {
+    document.querySelectorAll('.sheet').forEach(function (s) { s.style.display = (!on || s.id === id) ? '' : 'none'; });
+    document.body.classList.toggle('sheet-on', on);
+  }
+  document.querySelectorAll('[data-sheet]').forEach(function (b) { b.addEventListener('click', function () { sheet(b.dataset.sheet, true); }); });
+  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
+
+  // Лист із двома кроками: дані, потім код
+  function twoPart(id, valid, done) {
+    var sh = $(id), goBtn = sh.querySelector('[data-go]'), label = goBtn.textContent, part = 1, err = sh.querySelector('.errtext');
+    function set(p) { part = p; sh.querySelectorAll('[data-part]').forEach(function (x) { x.hidden = +x.dataset.part !== p; }); goBtn.textContent = p === 1 ? label : 'Підтвердити'; }
+    sh.querySelectorAll('.code input').forEach(function (b) { b.addEventListener('input', function () { sh.querySelector('.code').classList.remove('err'); }); });
+    goBtn.addEventListener('click', function () {
+      if (part === 1) { var m = valid(); err.textContent = m || ''; err.hidden = !m; if (!m) set(2); return; }
+      var boxes = sh.querySelectorAll('.code input'), full = Array.prototype.every.call(boxes, function (b) { return b.value; });
+      sh.querySelector('.code').classList.toggle('err', !full); if (!full) return;
+      sheet('', false); done(); setTimeout(function () { set(1); }, 400);
+    });
+  }
+  function fmt(d) { return '+380 ' + d.slice(0, 2) + ' ' + d.slice(2, 5) + ' ' + d.slice(5, 7) + ' ' + d.slice(7); }
+  twoPart('chphone', function () {
+    var d = $('newph').value.replace(/\D/g, '');
+    if (d.length !== 9) return 'Введіть 9 цифр номера після +380.';
+    if (!$('cp1').value) return 'Введіть пароль.';
+    $('phdest').textContent = fmt(d);
+  }, function () { $('vphone').textContent = $('phdest').textContent; toast('Номер змінено'); });
+  twoPart('mailsh', function () {
+    var v = $('newmail').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return 'Перевірте адресу пошти.';
+    $('maildest').textContent = v;
+  }, function () { $('vmail').textContent = $('maildest').textContent; $('bmail').textContent = 'Змінити'; $('nudge').hidden = true; toast('Пошту підтверджено'); });
+
+  // Пароль
+  var ps = $('passsh'), perr = ps.querySelector('.errtext');
+  ps.querySelector('[data-go]').addEventListener('click', function () {
+    var m = !$('op').value ? 'Введіть поточний пароль.' : $('npw').value.length < 8 ? 'У новому паролі має бути щонайменше 8 символів.' : '';
+    perr.textContent = m; perr.hidden = !m; if (m) return;
+    sheet('', false); $('vpass').textContent = 'Змінено сьогодні'; $('op').value = ''; $('npw').value = ''; toast('Пароль змінено');
+  });
+
+  // Пристрої
+  function devs() { var n = document.querySelectorAll('#devs [data-other]').length; $('outall').hidden = !n; $('devhint').hidden = !n; }
+  document.querySelectorAll('[data-out]').forEach(function (b) { b.addEventListener('click', function () { b.closest('.lrow').remove(); devs(); toast('Вийшли на цьому пристрої'); }); });
+  $('outall').addEventListener('click', function () { document.querySelectorAll('#devs [data-other]').forEach(function (r) { r.remove(); }); devs(); toast('Вийшли на всіх інших пристроях'); });
+
+  var q = new URLSearchParams(location.search);
+  if (q.get('nomail') === '1') {
+    $('nudge').hidden = false; $('vmail').textContent = 'Не додано'; $('bmail').textContent = 'Додати';
+  }
+  if (q.get('sheet')) sheet(q.get('sheet'), true);
+</script>
+<!-- desk -->
+<script src="shop.js"></script>
+</body>
+</html>

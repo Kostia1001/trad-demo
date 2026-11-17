@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Олена, оголошення</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="sellerpage wide has-bar keepbar">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar" style="padding-left:6px"><a class="x" href="product.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><h1></h1>
+  <button class="act" type="button" data-toast="Посилання скопійовано" aria-label="Поділитися"><i data-lucide="share-2"></i></button><button class="act" type="button" data-sheet="smenu" aria-label="Ще"><i data-lucide="ellipsis-vertical"></i></button></div>
+<main>
+  <div class="phead" style="padding:4px 16px 8px"><span class="ava lg"><img src="assets/avatar.jpg" alt=""></span><div class="b"><div class="nm">Олена</div><div class="sub">Одеса · на TRAD з жовтня 2026</div><div class="facts"><span><i data-lucide="clock"></i>Відповідає протягом години</span><span><i data-lucide="shopping-bag"></i>2 продано</span></div></div></div>
+  <div class="head" style="padding-top:18px"><h2>4 оголошення</h2></div>
+  <div class="grid">
+    <a class="card" href="product.html"><div class="frame"><img src="assets/jeans-1.jpg" alt=""><span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="dur"><i data-lucide="play"></i>0:31</span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+      <div class="cap"><div class="price num">900&nbsp;грн</div><div class="title">Джинси Levi’s 501, W32 L32</div></div></div><div class="meta">сьогодні, 11:40</div></a>
+    <a class="card" href="product.html"><div class="frame"><img src="assets/puffer.jpg" alt=""><span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i></span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+      <div class="cap"><div class="price num">1&nbsp;900&nbsp;грн</div><div class="title">Пуховик жіночий, розмір M</div></div></div><div class="meta">вчора, 19:12</div></a>
+    <a class="card" href="product.html"><div class="frame"><img src="assets/bag.jpg" alt=""><span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="dur"><i data-lucide="play"></i>0:24</span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+      <div class="cap"><div class="price num">1&nbsp;100&nbsp;грн</div><div class="title">Сумка шкіряна, коричнева</div></div></div><div class="meta">сьогодні, 14:20</div></a>
+    <a class="card" href="product.html"><div class="frame"><img src="assets/tshirt.jpg" alt=""><span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i></span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+      <div class="cap"><div class="price num">250&nbsp;грн</div><div class="title">Футболка з принтом, розмір M</div></div></div><div class="meta">11 листопада</div></a>
+  </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<div class="scrim"></div>
+<section class="sheet" id="smenu" role="dialog" aria-modal="true" aria-label="Олена">
+  <div class="sheet-head"><h2>Олена</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body alist"><button class="lrow" type="button" data-close data-toast="Дякуємо, ми перевіримо профіль"><i data-lucide="flag"></i><span class="t">Поскаржитись на користувача</span></button></div>
+</section>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  function sheet(id, on) {
+    document.querySelectorAll('.sheet').forEach(function (s) { s.style.display = (!on || s.id === id) ? '' : 'none'; });
+    document.body.classList.toggle('sheet-on', on);
+  }
+  document.querySelectorAll('[data-sheet]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); sheet(b.dataset.sheet, true); }); });
+  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+  document.querySelectorAll('[data-toast]').forEach(function (b) { b.addEventListener('click', function () { toast(b.dataset.toast); }); });
+
+  document.querySelectorAll('.fav').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); }); });
+</script>
+<!-- block4 -->
+<!-- desk -->
+<script src="shop.js"></script>
+</body>
+</html>

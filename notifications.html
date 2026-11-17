@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Сповіщення</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="acctpage wide has-bar keepbar">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar" style="padding-left:6px"><a class="x" href="home.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><h1>Сповіщення</h1><button class="txt" id="readall" type="button">Прочитати всі</button></div>
+<aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html" aria-current="page"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
+<main class="page" id="list">
+  <div class="nrow new"><span class="ic"><i data-lucide="message-circle"></i></span><div class="b"><div class="tt">Олена відповіла</div><div class="tx">«Так, ще актуально. Можу показати сьогодні»</div><a class="mini" href="dialog.html">Відкрити розмову</a><div class="tm">14:32</div></div></div>
+  <div class="nrow new"><span class="ic"><i data-lucide="circle-help"></i></span><div class="b"><div class="tt">Були звернення щодо «Сумка шкіряна, коричнева»?</div><div class="tx">Ви опублікували її вчора.</div><a class="mini" href="my.html">Відповісти</a><div class="tm">10:00</div></div></div>
+  <div class="nrow"><span class="ic"><i data-lucide="clock"></i></span><div class="b"><div class="tt">Оголошення завершується через 3 дні</div><div class="tx">«Худі сіре, розмір L». Поновіть, щоб покупці бачили його далі.</div><button class="mini hot" type="button" data-toast="Оголошення поновлено на 30 днів">Поновити</button><div class="tm">вчора</div></div></div>
+  <div class="nrow"><span class="ic"><i data-lucide="eye-off"></i></span><div class="b"><div class="tt">Оголошення знято з публікації</div><div class="tx">«Навушники бездротові». Причина: неправдива інформація. <a href="rules.html">Правила TRAD</a></div><div class="tm">9 листопада</div></div></div>
+</main>
+<main class="page" id="none" hidden><div class="empty"><div class="ico"><i data-lucide="bell"></i></div><h2>Сповіщень поки немає</h2><p>Тут з’являться відповіді продавців і новини про ваші оголошення.</p></div></main>
+<div class="toast" id="toast" role="status"></div>
+<nav class="tabs" aria-label="Головне меню">
+  <a class="tab" href="home.html"><i data-lucide="house"></i>Головна</a>
+  <a class="tab" href="favorites.html"><i data-lucide="heart"></i>Обране</a>
+  <a class="tab create" href="create-ai.html"><span class="plus"><i data-lucide="plus"></i></span>Створити</a>
+  <a class="tab" href="chat.html"><i data-lucide="message-circle"></i><span class="count num">2</span>Чат</a>
+  <a class="tab" href="profile.html"><i data-lucide="user"></i>Профіль</a>
+</nav>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  function sheet(id, on) {
+    document.querySelectorAll('.sheet').forEach(function (s) { s.style.display = (!on || s.id === id) ? '' : 'none'; });
+    document.body.classList.toggle('sheet-on', on);
+  }
+  document.querySelectorAll('[data-sheet]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); sheet(b.dataset.sheet, true); }); });
+  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+  document.querySelectorAll('[data-toast]').forEach(function (b) { b.addEventListener('click', function () { toast(b.dataset.toast); }); });
+
+  document.getElementById('readall').addEventListener('click', function () { document.querySelectorAll('.nrow.new').forEach(function (n) { n.classList.remove('new'); }); toast('Усі сповіщення прочитано'); });
+  if (new URLSearchParams(location.search).get('empty') === '1') { document.getElementById('list').hidden = true; document.getElementById('none').hidden = false; document.getElementById('readall').hidden = true; }
+</script>
+<!-- desk -->
+<script src="shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Чат</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="wide has-bar keepbar chatpage">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar" style="padding-left:16px"><h1>Чат</h1></div>
+<div class="chatwrap"><div class="chatlist">
+<div class="tline" role="tablist">
+  <button type="button" role="tab" aria-selected="true" data-f="all">Усі</button>
+  <button type="button" role="tab" aria-selected="false" data-f="buy">Купую</button>
+  <button type="button" role="tab" aria-selected="false" data-f="sell">Продаю</button>
+</div>
+<main class="page" id="list">
+  <a class="crow unread cur" href="dialog.html" data-kind="buy">
+    <span class="ava"><img src="assets/avatar.jpg" alt=""></span><span class="b"><span class="l1"><span class="who">Олена</span><span class="tm num">14:32</span></span><span class="item">Джинси Levi’s 501, W32 L32 · 900 грн</span><span class="l3"><span class="last">Так, ще актуально. Можу показати сьогодні</span><span class="ub num">2</span></span></span>
+  </a>
+  <a class="crow unread" href="dialog.html" data-kind="sell">
+    <span class="ava" aria-hidden="true">М</span><span class="b"><span class="l1"><span class="who">Максим</span><span class="tm num">12:05</span></span><span class="item">Ваше оголошення: Сумка шкіряна, коричнева</span><span class="l3"><span class="last">Чи можливий торг?</span><span class="ub num">1</span></span></span>
+  </a>
+  <a class="crow" href="dialog.html" data-kind="buy">
+    <span class="ava" aria-hidden="true">І</span><span class="b"><span class="l1"><span class="who">Ірина</span><span class="tm num">вчора</span></span><span class="item">iPhone 11, 64 ГБ, чорний · 9 800 грн</span><span class="l3"><span class="last">Ви: Дякую, подумаю</span></span></span>
+  </a>
+  <a class="crow" href="dialog.html" data-kind="sell">
+    <span class="ava" aria-hidden="true">А</span><span class="b"><span class="l1"><span class="who">Андрій</span><span class="tm num">10 лист.</span></span><span class="item">Ваше оголошення: Туфлі шкіряні, 42 розмір</span><span class="l3"><span class="last">Домовились, до зустрічі</span></span></span>
+  </a>
+</main>
+<main class="page" id="none" hidden>
+  <div class="empty"><div class="ico"><i data-lucide="message-circle"></i></div><h2>Тут будуть ваші розмови</h2><p>Напишіть продавцю зі сторінки оголошення, і розмова з’явиться тут.</p><a class="btn primary" href="home.html">До оголошень</a></div>
+</main>
+</div><iframe class="dpane" src="dialog.html" title="Розмова"></iframe></div>
+<nav class="tabs" aria-label="Головне меню">
+  <a class="tab" href="home.html"><i data-lucide="house"></i>Головна</a>
+  <a class="tab" href="favorites.html"><i data-lucide="heart"></i>Обране</a>
+  <a class="tab create" href="create-ai.html"><span class="plus"><i data-lucide="plus"></i></span>Створити</a>
+  <a class="tab" href="chat.html" aria-current="page"><i data-lucide="message-circle"></i><span class="count num">2</span>Чат</a>
+  <a class="tab" href="profile.html"><i data-lucide="user"></i>Профіль</a>
+</nav>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  function sheet(id, on) {
+    document.querySelectorAll('.sheet').forEach(function (s) { s.style.display = (!on || s.id === id) ? '' : 'none'; });
+    document.body.classList.toggle('sheet-on', on);
+  }
+  document.querySelectorAll('[data-sheet]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); sheet(b.dataset.sheet, true); }); });
+  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+  document.querySelectorAll('[data-toast]').forEach(function (b) { b.addEventListener('click', function () { toast(b.dataset.toast); }); });
+
+  document.querySelectorAll('.tline button').forEach(function (t) {
+    t.addEventListener('click', function () {
+      document.querySelectorAll('.tline button').forEach(function (x) { x.setAttribute('aria-selected', String(x === t)); });
+      document.querySelectorAll('.crow').forEach(function (r) { r.hidden = t.dataset.f !== 'all' && r.dataset.kind !== t.dataset.f; });
+    });
+  });
+  document.querySelectorAll('.crow').forEach(function (r) {
+    r.addEventListener('click', function (e) {
+      if (innerWidth < 900) return;
+      e.preventDefault();
+      document.querySelectorAll('.crow').forEach(function (x) { x.classList.toggle('cur', x === r); });
+      r.classList.remove('unread'); var ub = r.querySelector('.ub'); if (ub) ub.remove();
+      document.querySelector('.dpane').src = 'dialog.html';
+    });
+  });
+  if (new URLSearchParams(location.search).get('empty') === '1') { document.getElementById('list').hidden = true; document.getElementById('none').hidden = false; document.querySelector('.tline').hidden = true; }
+</script>
+<!-- desk -->
+<script src="shop.js"></script>
+</body>
+</html>

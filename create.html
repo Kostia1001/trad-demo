@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Нове оголошення</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="flowpage">
+
+<header class="flow-top">
+  <div class="flow-row">
+    <button class="x" type="button" id="exit" aria-label="Закрити"><i data-lucide="x"></i></button>
+    <span class="ttl">Нове оголошення</span>
+    <span class="stepno num" id="stepno">1 з 4</span>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+</header>
+
+<aside class="pv" id="pv" aria-label="Попередній перегляд"><p class="pvt">Так оголошення побачать покупці</p><div class="card"><div class="frame"><img src="assets/jeans-1.jpg" alt=""><span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i><i></i></span><span class="dur"><i data-lucide="play"></i>0:31</span><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div></div></div><div class="meta">Одеса · щойно</div></div></aside>
+<main class="flow">
+  <section class="step" data-step="1">
+    <h1>Покажіть товар</h1>
+    <p class="hint">До 10 фото і одне відео до 60 секунд. Перше фото стане обкладинкою.</p>
+    <div class="shoot">
+      <button type="button" class="main"><i data-lucide="camera"></i>Зняти</button>
+      <button type="button"><i data-lucide="images"></i>Обрати з галереї</button>
+    </div>
+    <div class="mgrid">
+      <div class="mi"><img src="assets/jeans-1.jpg" alt="Відео"><span class="tag v"><i data-lucide="play"></i>0:31</span><button class="rm" type="button" aria-label="Прибрати відео"><i data-lucide="x"></i></button></div>
+      <div class="mi"><img src="assets/jeans-2.jpg" alt="Фото 1"><span class="tag">Обкладинка</span><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
+      <div class="mi"><img src="assets/jeans-3.jpg" alt="Фото 2"><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
+      <div class="mi"><img src="assets/jeans-4.jpg" alt="Фото 3"><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
+      <button class="mi add" type="button" aria-label="Додати фото"><i data-lucide="plus"></i></button>
+    </div>
+    <p class="count" id="mcount">3 фото з 10 · відео додано</p>
+  </section>
+
+  <section class="step" data-step="2">
+    <h1>Що продаєте?</h1>
+    <div class="field"><span class="lbl">Категорія</span>
+      <a class="rowbtn" href="category.html"><span id="catname">Жіночий одяг · Джинси</span><i data-lucide="chevron-right"></i></a></div>
+    <div class="field"><label for="f-title">Назва <span class="num" id="tcount">26 / 70</span></label>
+      <input class="input" id="f-title" value="Джинси Levi’s 501, W32 L32"></div>
+    <div class="field"><span class="lbl">Стан</span>
+      <div class="segc"><button type="button" aria-pressed="false">Нове</button><button type="button" aria-pressed="true">Вживане</button></div></div>
+    <div class="field two" data-cat="clothes">
+      <div><label for="f-brand">Бренд</label><input class="input" id="f-brand" value="Levi’s"></div>
+      <div><label for="f-size">Розмір</label><input class="input" id="f-size" value="W32 L32"></div>
+    </div>
+    <div data-cat="phone" hidden>
+      <div class="field"><span class="lbl">Модель</span>
+        <button class="rowbtn" type="button"><span>Apple · iPhone 13</span><i data-lucide="chevron-right"></i></button></div>
+      <div class="field"><span class="lbl">Пам’ять</span>
+        <div class="segc three"><button type="button" aria-pressed="true">128 ГБ</button><button type="button" aria-pressed="false">256 ГБ</button><button type="button" aria-pressed="false">512 ГБ</button></div></div>
+    </div>
+    <div class="field"><span class="lbl">Колір</span>
+      <button class="rowbtn" type="button"><span>Синій</span><i data-lucide="chevron-right"></i></button></div>
+    <div class="field"><label for="f-desc">Опис</label>
+      <textarea class="input" id="f-desc" placeholder="Стан, заміри, чому продаєте">Носила пів року. Колір не вицвів, потертостей і плям немає — усе видно на відео. Продаю, бо стали завеликі.</textarea></div>
+  </section>
+
+  <section class="step" data-step="3">
+    <h1>Ціна і зв’язок</h1>
+    <div class="field"><label for="f-price">Ціна</label>
+      <div class="pricebox"><input id="f-price" class="num" inputmode="numeric" value="900"><span>грн</span></div><p class="fhint bad" id="phint" hidden>Вкажіть ціну</p></div>
+    <div class="field"><span class="lbl">Місто</span>
+      <a class="rowbtn" href="city.html"><span>Одеса, Приморський район</span><i data-lucide="chevron-right"></i></a></div>
+    <div class="field"><span class="lbl">Як покупці можуть вам написати</span>
+      <div class="ways">
+        <div class="wayrow"><span class="ic tg"><img src="assets/icons/telegram-white.svg" alt=""></span><span class="t">Telegram<small class="num">+380 67 123 45 67</small></span><button class="sw" type="button" role="switch" aria-checked="true" aria-label="Показувати Telegram"></button></div>
+        <div class="wayrow"><span class="ic vb"><img src="assets/icons/viber-white.svg" alt=""></span><span class="t">Viber<small class="num">+380 67 123 45 67</small></span><button class="sw" type="button" role="switch" aria-checked="true" aria-label="Показувати Viber"></button></div>
+        <div class="wayrow"><span class="ic wa"><img src="assets/icons/whatsapp-white.svg" alt=""></span><span class="t">WhatsApp<small>Не показувати</small></span><button class="sw" type="button" role="switch" aria-checked="false" aria-label="Показувати WhatsApp"></button></div>
+        <div class="wayrow"><span class="ic ch"><i data-lucide="message-circle"></i></span><span class="t">Чат TRAD<small>Працює завжди</small></span><button class="sw" type="button" role="switch" aria-checked="true" aria-label="Чат TRAD" disabled></button></div>
+      </div>
+      <p class="hint">Покупці побачать лише увімкнені способи.</p></div>
+  </section>
+
+  <section class="step" data-step="4">
+    <h1>Перевірте оголошення</h1>
+    <p class="hint">Так його побачать покупці.</p>
+    <div class="review">
+      <div class="card"><div class="frame"><img src="assets/jeans-1.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i><i></i></span><span class="dur"><i data-lucide="play"></i>0:31</span>
+        <div class="cap"><div class="price num">900&nbsp;грн</div><div class="title">Джинси Levi’s 501, W32 L32</div></div></div></div>
+      <dl class="sum">
+        <div><dt>Категорія</dt><dd>Жіночий одяг · Джинси</dd></div>
+        <div><dt>Стан</dt><dd>Вживане</dd></div>
+        <div><dt>Місто</dt><dd>Одеса</dd></div>
+        <div><dt>Зв’язок</dt><dd>Telegram, Viber, чат TRAD</dd></div>
+      </dl>
+    </div>
+    <p class="hint"><a class="textlink" href="#" id="draft">Зберегти як чернетку</a></p>
+  </section>
+
+  <section class="step done" data-step="5">
+    <div class="ok"><i data-lucide="check"></i></div>
+    <h1>Оголошення опубліковано</h1>
+    <p class="hint">Покупці вже бачать його в каталозі. Коли хтось напише, ми надішлемо сповіщення.</p>
+    <div class="stack">
+      <a class="btn primary wide" href="product.html">Переглянути оголошення</a>
+      <a class="btn ghost wide" href="home.html">На головну</a>
+    </div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<section class="sheet" id="xsheet" role="dialog" aria-modal="true" aria-label="Вихід">
+  <div class="sheet-head"><h2>Зберегти чернетку?</h2><button class="x" type="button" id="xclose" aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body"><p class="hint">Чернетка чекатиме в «Моїх оголошеннях».</p>
+    <div class="stack"><a class="btn primary wide" href="my.html?tab=drafts">Зберегти й вийти</a><a class="btn ghost wide" href="home.html">Вийти без збереження</a><button class="btn ghost wide" type="button" id="xstay">Продовжити заповнення</button></div></div>
+</section>
+<div class="actions" id="actions">
+  <button class="btn ghost" id="back" type="button" hidden>Назад</button>
+  <button class="btn primary" id="next" type="button">Далі</button>
+</div>
+
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  var step = Math.min(5, Math.max(1, parseInt(new URLSearchParams(location.search).get('step'), 10) || 1));
+  var steps = document.querySelectorAll('.step'), bars = document.querySelectorAll('#progress i');
+  var back = document.getElementById('back'), next = document.getElementById('next');
+  function show() {
+    steps.forEach(function (s) { s.classList.toggle('on', +s.dataset.step === step); });
+    bars.forEach(function (b, i) { b.classList.toggle('on', i < Math.min(step, 4)); });
+    document.getElementById('stepno').textContent = step <= 4 ? step + ' з 4' : '';
+    back.hidden = step === 1;
+    next.textContent = step === 4 ? 'Опублікувати' : 'Далі';
+    document.getElementById('actions').style.display = step === 5 ? 'none' : '';
+    document.querySelector('.flow-top .ttl').textContent = step === 5 ? '' : 'Нове оголошення';
+    document.getElementById('progress').style.visibility = step === 5 ? 'hidden' : '';
+    window.scrollTo(0, 0);
+  }
+  next.addEventListener('click', function () { step = Math.min(5, step + 1); show(); });
+  back.addEventListener('click', function () { step = Math.max(1, step - 1); show(); });
+  function xs(on) { document.body.classList.toggle('sheet-on', on); }
+  document.getElementById('exit').addEventListener('click', function () { xs(true); });
+  ['scrim', 'xclose', 'xstay'].forEach(function (id) { document.getElementById(id).addEventListener('click', function () { xs(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') xs(false); });
+  var price = document.getElementById('f-price');
+  function need() {
+    var on = document.querySelector('.step.on'), bad = on && on.dataset.step === '3' && !price.value.trim();
+    next.disabled = !!bad; document.getElementById('phint').hidden = !bad;
+  }
+  price.addEventListener('input', need);
+  next.addEventListener('click', function () { setTimeout(need, 0); }); back.addEventListener('click', function () { setTimeout(need, 0); });
+  document.querySelectorAll('.sw:not([disabled])').forEach(function (s) {
+    s.addEventListener('click', function () { s.setAttribute('aria-checked', String(s.getAttribute('aria-checked') !== 'true')); });
+  });
+  document.querySelectorAll('.segc button').forEach(function (b) {
+    b.addEventListener('click', function () { b.parentNode.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); }); });
+  });
+  show();
+
+  (function () {
+    var p = new URLSearchParams(location.search);
+    if (p.get('cat') === 'phone') {
+      document.querySelector('[data-cat="clothes"]').hidden = true;
+      document.querySelector('[data-cat="phone"]').hidden = false;
+      document.getElementById('catname').textContent = 'Смартфони · Apple';
+      document.getElementById('f-title').value = 'iPhone 13, 128 ГБ, синій';
+      document.getElementById('tcount').textContent = '24 / 70';
+      var d = document.getElementById('f-desc');
+      d.placeholder = 'Стан екрана й корпусу, акумулятор, комплект';
+      d.value = 'Купував новим у 2023 році. Екран без подряпин, акумулятор тримає день. У комплекті коробка й кабель.';
+    }
+    if (p.get('novideo') === '1') {
+      var v = document.querySelector('.mgrid .mi');
+      v.outerHTML = '<button class="mi add vid" type="button" id="addvid" aria-label="Додати відео"><i data-lucide="video"></i><span>Додати відео</span></button>';
+      document.getElementById('mcount').textContent = '3 фото з 10 · відео ще немає';
+      lucide.createIcons();
+    }
+  })();
+
+  (function () {
+    var t = document.getElementById('f-title'), p = document.getElementById('f-price'), pv = document.getElementById('pv');
+    function sync() {
+      var d = p.value.replace(/\D/g, '');
+      document.getElementById('pvtitle').textContent = t.value.trim() || 'Назва оголошення';
+      document.getElementById('pvprice').textContent = d ? d.replace(/\B(?=(\d{3})+$)/g, ' ') + ' грн' : 'Ціна';
+      pv.hidden = step >= 4;
+    }
+    t.addEventListener('input', sync); p.addEventListener('input', sync);
+    var show0 = show; show = function () { show0(); sync(); };
+    sync();
+  })();
+
+  (function () {
+    var grid = document.querySelector('.mgrid'), cnt = document.getElementById('mcount'), POOL = ['jeans-3.jpg', 'jeans-4.jpg', 'jeans-2.jpg', 'jeans-1.jpg'], k = 0;
+    var VIDEO = '<div class="mi"><img src="assets/jeans-1.jpg" alt="Відео"><span class="tag v"><i data-lucide="play"></i>0:31</span><button class="rm" type="button" aria-label="Прибрати відео"><i data-lucide="x"></i></button></div>';
+    var ADDVID = '<button class="mi add vid" type="button" id="addvid" aria-label="Додати відео"><i data-lucide="video"></i><span>Додати відео</span></button>';
+    function photos() { return [].slice.call(grid.querySelectorAll('.mi:not(.add)')).filter(function (m) { return !m.querySelector('.tag.v'); }); }
+    function sync() {
+      var ph = photos(), hasV = !!grid.querySelector('.tag.v');
+      ph.forEach(function (m, i) { var tg = m.querySelector('.tag'); if (i === 0 && !tg) { tg = document.createElement('span'); tg.className = 'tag'; tg.textContent = 'Обкладинка'; m.insertBefore(tg, m.querySelector('.rm')); } else if (i > 0 && tg) tg.remove(); m.querySelector('img').alt = 'Фото ' + (i + 1); });
+      cnt.textContent = ph.length + ' фото з 10 · ' + (hasV ? 'відео додано' : 'відео ще немає');
+      grid.querySelector('.mi.add:not(.vid)').hidden = ph.length >= 10;
+      lucide.createIcons();
+    }
+    function addPhoto() {
+      if (photos().length >= 10) return;
+      var d = document.createElement('div'); d.className = 'mi';
+      d.innerHTML = '<img src="assets/' + POOL[k++ % POOL.length] + '" alt=""><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button>';
+      grid.insertBefore(d, grid.querySelector('.mi.add:not(.vid)')); sync();
+    }
+    function addVideo() { var a = document.getElementById('addvid'); if (a) a.outerHTML = VIDEO; else grid.insertAdjacentHTML('afterbegin', VIDEO); sync(); }
+    grid.addEventListener('click', function (e) {
+      var rm = e.target.closest('.rm'), add = e.target.closest('.mi.add');
+      if (rm) { var m = rm.closest('.mi'); if (m.querySelector('.tag.v')) m.outerHTML = ADDVID; else m.remove(); sync(); }
+      else if (add) { if (add.classList.contains('vid')) addVideo(); else addPhoto(); }
+    });
+    var shoot = document.querySelectorAll('.shoot button');
+    shoot[0].addEventListener('click', function () { if (grid.querySelector('.tag.v')) addPhoto(); else addVideo(); });
+    shoot[1].addEventListener('click', addPhoto);
+  })();
+  (function () {   // поля з вибором зі списку: колір, модель
+    var LISTS = { 'Колір': ['Чорний', 'Білий', 'Сірий', 'Синій', 'Зелений', 'Червоний', 'Бежевий', 'Інший'], 'Модель': ['Apple · iPhone 11', 'Apple · iPhone 12', 'Apple · iPhone 13', 'Apple · iPhone 14', 'Apple · iPhone 15'] };
+    var sh = document.createElement('section'); sh.className = 'sheet'; sh.id = 'pick'; sh.setAttribute('role', 'dialog'); sh.setAttribute('aria-modal', 'true'); sh.style.display = 'none';
+    sh.innerHTML = '<div class="sheet-head"><h2></h2><button class="x" type="button" aria-label="Закрити"><i data-lucide="x"></i></button></div><div class="sheet-body alist"></div>';
+    document.getElementById('xsheet').after(sh);
+    var xsheet = document.getElementById('xsheet'), target = null;
+    function close() { document.body.classList.remove('sheet-on'); setTimeout(function () { sh.style.display = 'none'; xsheet.style.display = ''; }, 350); }
+    document.querySelectorAll('.field > button.rowbtn').forEach(function (b) {
+      var name = b.closest('.field').querySelector('.lbl').textContent.trim(); if (!LISTS[name]) return;
+      b.addEventListener('click', function () {
+        target = b.querySelector('span'); sh.querySelector('h2').textContent = name; sh.setAttribute('aria-label', name);
+        sh.querySelector('.sheet-body').innerHTML = LISTS[name].map(function (o) { return '<button class="lrow" type="button"><span class="t">' + o + '</span>' + (o === target.textContent ? '<i class="ok" data-lucide="check"></i>' : '') + '</button>'; }).join('');
+        lucide.createIcons(); xsheet.style.display = 'none'; sh.style.display = ''; requestAnimationFrame(function () { document.body.classList.add('sheet-on'); });
+      });
+    });
+    sh.addEventListener('click', function (e) { var r = e.target.closest('.lrow'); if (r) { target.textContent = r.querySelector('.t').textContent; close(); } else if (e.target.closest('.x')) close(); });
+    document.getElementById('scrim').addEventListener('click', function () { if (sh.style.display !== 'none') close(); });
+    document.getElementById('exit').addEventListener('click', function () { sh.style.display = 'none'; xsheet.style.display = ''; });
+  })();
+</script>
+<!-- block2 -->
+<!-- desk -->
+<!-- demo -->
+</body>
+</html>

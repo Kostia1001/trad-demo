@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Категорія</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="flowpick">
+
+<div class="bar" style="padding-left:6px"><a class="x" href="create.html?step=2" id="back" aria-label="Назад"><i data-lucide="arrow-left"></i></a><h1 id="ttl">Категорія</h1></div>
+<main>
+  <section class="listsec alist" id="root" style="padding-top:8px">
+    <button class="lrow" type="button" data-open="0"><span class="t">Жіночий одяг</span><i data-lucide="chevron-right"></i></button>
+    <button class="lrow" type="button" data-open="1"><span class="t">Чоловічий одяг</span><i data-lucide="chevron-right"></i></button>
+    <button class="lrow" type="button" data-open="2"><span class="t">Взуття</span><i data-lucide="chevron-right"></i></button>
+    <button class="lrow" type="button" data-open="3"><span class="t">Смартфони</span><i data-lucide="chevron-right"></i></button>
+  </section>
+  <section class="listsec alist" data-level="0" hidden style="padding-top:8px">
+    <a class="lrow" href="create.html?step=2"><span class="t">Куртки й пальта</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Джинси</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Худі та світшоти</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Футболки</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Сукні</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Інше</span></a>
+  </section>
+  <section class="listsec alist" data-level="1" hidden style="padding-top:8px">
+    <a class="lrow" href="create.html?step=2"><span class="t">Куртки й пальта</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Джинси</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Худі та світшоти</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Футболки</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Інше</span></a>
+  </section>
+  <section class="listsec alist" data-level="2" hidden style="padding-top:8px">
+    <a class="lrow" href="create.html?step=2"><span class="t">Кросівки</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Черевики</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Туфлі</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Інше</span></a>
+  </section>
+  <section class="listsec alist" data-level="3" hidden style="padding-top:8px">
+    <a class="lrow" href="create.html?step=2"><span class="t">Apple</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Samsung</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Xiaomi</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Google</span></a>
+    <a class="lrow" href="create.html?step=2"><span class="t">Інші бренди</span></a>
+  </section>
+</main>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+
+  var names = ["Жіночий одяг", "Чоловічий одяг", "Взуття", "Смартфони"], cur = -1;
+  function show(i) {
+    cur = i;
+    document.getElementById('root').hidden = i >= 0;
+    document.querySelectorAll('[data-level]').forEach(function (s) { s.hidden = +s.dataset.level !== i; });
+    document.getElementById('ttl').textContent = i >= 0 ? names[i] : 'Категорія';
+  }
+  document.querySelectorAll('[data-open]').forEach(function (b) { b.addEventListener('click', function () { show(+b.dataset.open); }); });
+  document.getElementById('back').addEventListener('click', function (e) { if (cur >= 0) { e.preventDefault(); show(-1); } });
+
+  if (new URLSearchParams(location.search).get('from') === 'ai') document.querySelectorAll('a[href^="create.html"]').forEach(function (a) { a.setAttribute('href', 'create-ai.html?step=2'); });
+</script>
+<!-- desk -->
+<!-- ai -->
+</body>
+</html>
