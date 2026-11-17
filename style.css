@@ -677,16 +677,17 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .phead .facts { margin-top: 10px; }
 
 /* ---------- Комп'ютер: кабінет, вхід, створення, вибір міста, картка товару ---------- */
-.acct, .authwall, .authbrand, .pv { display: none; }
+.acct, .authwall, .authbrand, .pv, .cardtag, .flabel { display: none; }
 @keyframes wallup { to { transform: translateY(calc(-50% - 8px)); } }
 @keyframes walldown { from { transform: translateY(calc(-50% - 8px)); } }
 .authwall .card:hover .frame img { transform: none; }
 @media (max-width: 899px) {
-  /* вхід на телефоні: той самий вигляд, що на комп'ютері — стіна оголошень на весь екран, форма карткою поверх, на всіх кроках */
-  body.auth { max-width: none; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 84px 16px 44px; }
+  /* вхід на телефоні: стіна оголошень на весь екран, форма карткою поверх, на всіх кроках. Знак-бирка лежить на лівому
+     верхньому куті картки і прив'язана до неї шнурком через люверс (ескіз моделі, який обрав власник 17.11.2026). */
+  body.auth { max-width: none; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 96px 16px 56px; }
   body.auth .authwall { display: block; position: fixed; inset: 0; overflow: hidden; }
   body.auth .authwall .wordmark { display: none; }
-  body.auth .wall { position: absolute; inset: 0 -5%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  body.auth .wall { position: absolute; inset: 0 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   body.auth .wcol { display: grid; gap: 10px; align-content: start; animation: wallup 96s linear infinite; }
   body.auth .wcol:nth-child(even) { animation-name: walldown; animation-duration: 118s; }
   body.auth .wcol:nth-child(n+4) { display: none; }
@@ -694,15 +695,24 @@ body.embedded .dtop .r1 { padding-left: 16px; }
   .authwall .title, .authwall .dur { display: none; }
   .authwall .cap { left: 9px; right: 9px; bottom: 8px; }
   .authwall .price { font-size: 13px; }
-  body.auth .authwall::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, oklch(0.17 0.025 305 / 0.5), oklch(0.17 0.025 305 / 0.86) 24%, oklch(0.17 0.025 305 / 0.86) 76%, oklch(0.17 0.025 305 / 0.5)); }
-  body.auth .authbrand { display: block; position: absolute; z-index: 3; left: 16px; top: 16px; }
-  body.auth .authbrand .wordmark { display: block; font-size: 24px; }
-  body.auth .login { position: relative; z-index: 2; width: 100%; max-width: 460px; padding: 28px 22px 26px; border-radius: 26px; background: var(--bg); border: 1px solid var(--line); box-shadow: 0 24px 60px oklch(0.08 0.02 305 / 0.6); }
-  body.auth .login .wordmark { display: none; }
-  body.auth .login .wordmark + h1, body.auth .login .wordmark + .blocked { margin-top: 0; }
+  body.auth .authwall::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, oklch(0.17 0.025 305 / 0.92) 0, oklch(0.17 0.025 305 / 0.68) 12%, oklch(0.17 0.025 305 / 0.6) 22%, oklch(0.17 0.025 305 / 0.92) 32%, oklch(0.17 0.025 305 / 0.92) 72%, oklch(0.17 0.025 305 / 0.6) 82%, oklch(0.17 0.025 305 / 0.68) 100%); }
+  body.auth .authbrand { display: none; }
+  body.auth .login { position: relative; z-index: 2; width: 100%; max-width: 460px; padding: 84px 22px 26px; border-radius: 26px; background: var(--bg); border: 1px solid var(--line); box-shadow: 0 24px 60px oklch(0.08 0.02 305 / 0.6); }
+  body.auth .login .step .wordmark { display: none; }
+  body.auth .login .step .wordmark + h1, body.auth .login .step .wordmark + .blocked { margin-top: 0; }
   body.auth .login h1[style] { margin-top: 12px !important; }
   body.auth .login .flow-row { margin-top: -8px !important; }
   body.auth .toast { z-index: 30; }
+  body.auth .toshop { top: 14px; height: 44px; padding: 0 12px 0 16px; gap: 8px; font-size: 13px; }
+  /* бирка: точка відліку — дірочка бирки (92 px від лівого краю картки, 14 px від верхнього); бирка повернута навколо неї */
+  .cardtag { display: block; position: absolute; z-index: 3; left: 92px; top: 14px; width: 0; height: 0; pointer-events: none; }
+  .cardtag .wordmark { display: block; position: absolute; left: 0; top: 0; font-size: 28px; line-height: 1; }
+  .cardtag .tagx { position: absolute; left: -5.338em; top: -0.9435em; transform: rotate(-22deg); transform-origin: 91.1% 50%; }
+  .cardtag .cord { position: absolute; left: -7.5px; top: -22px; width: 31px; max-width: none; height: auto; filter: drop-shadow(0 2px 3px oklch(0.05 0.02 305 / 0.65)); }
+  body.auth .login .step[data-step="1"] h1::after { content: ""; display: block; width: 30px; height: 3px; margin-top: 12px; border-radius: 2px; background: var(--hot); }
+  .flabel { display: block; margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--text-2); }
+  body.auth .login .flabel + .phone { margin-top: 8px; }
+  body.auth .legal a { text-decoration-thickness: 1px; }
 }
 @media (min-width: 900px) {
   body.wide .search, body.wide .search input { min-width: 0; }

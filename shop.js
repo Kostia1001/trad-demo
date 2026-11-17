@@ -59,7 +59,19 @@
   }
 
   /* ---------- вхід: шлях назад до оголошень; кабінет: швидке редагування ---------- */
-  if (page === 'login.html') document.body.appendChild(el('<a class="toshop" href="home.html"><i data-lucide="arrow-left"></i>До оголошень</a>'));
+  if (page === 'login.html') {
+    document.body.appendChild(el('<a class="toshop" href="home.html">Дивитися без входу<i data-lucide="x"></i></a>'));
+    /* телефон: знак-бирка прив'язана шнурком до кута картки з формою (на комп'ютері знак лишається ліворуч угорі сторінки) */
+    var lgn = $('main.login'), wm0 = $('.authbrand .wordmark');
+    if (lgn && wm0) {
+      var ctag = el('<div class="cardtag"></div>');
+      ctag.appendChild(wm0.cloneNode(true));
+      ctag.appendChild(el('<img class="cord" src="assets/tag-cord.png" alt="">'));
+      lgn.insertBefore(ctag, lgn.firstChild);
+    }
+    var ph1 = $('.step[data-step="1"] .phone');
+    if (ph1) ph1.before(el('<span class="flabel">Номер телефону</span>'));
+  }
   if (page === 'my.html') $$('[data-panel="active"] .mrow').forEach(function (r) { var m = $('.more', r); if (m && !$('.edit', r)) m.before(el('<a class="edit" href="create.html?step=2" aria-label="Редагувати"><i data-lucide="pencil"></i></a>')); });
 
   /* ---------- пошук: явна дія «Шукати …» і область пошуку в підказках ---------- */
