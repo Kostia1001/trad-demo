@@ -680,22 +680,29 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .acct, .authwall, .authbrand, .pv { display: none; }
 @keyframes wallup { to { transform: translateY(calc(-50% - 8px)); } }
 @keyframes walldown { from { transform: translateY(calc(-50% - 8px)); } }
-@keyframes wallleft { to { transform: translateX(calc(-50% - 5px)); } }
 .authwall .card:hover .frame img { transform: none; }
 @media (max-width: 899px) {
-  /* вхід на телефоні: стрічка оголошень над заголовком, лише на першому кроці */
-  body.auth:has(.step[data-step="1"].on) .authwall { display: block; overflow: hidden; }
-  body.auth:has(.step[data-step="1"].on) .step[data-step="1"] > .wordmark { display: none; }
-  body.auth:has(.step[data-step="1"].on) .step[data-step="1"] h1 { margin-top: 30px; }
-  .authwall .wordmark { display: block; padding: 26px 20px 0; }
-  .authwall .wall { margin-top: 24px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
-  .authwall .wcol { display: none; }
-  .authwall .wcol:first-child { display: flex; gap: 10px; width: max-content; animation: wallleft 48s linear infinite; }
-  .authwall .card { flex: none; width: 108px; }
+  /* вхід на телефоні: той самий вигляд, що на комп'ютері — стіна оголошень на весь екран, форма карткою поверх, на всіх кроках */
+  body.auth { max-width: none; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 84px 16px 44px; }
+  body.auth .authwall { display: block; position: fixed; inset: 0; overflow: hidden; }
+  body.auth .authwall .wordmark { display: none; }
+  body.auth .wall { position: absolute; inset: 0 -5%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  body.auth .wcol { display: grid; gap: 10px; align-content: start; animation: wallup 96s linear infinite; }
+  body.auth .wcol:nth-child(even) { animation-name: walldown; animation-duration: 118s; }
+  body.auth .wcol:nth-child(n+4) { display: none; }
   .authwall .frame { border-radius: 14px; }
   .authwall .title, .authwall .dur { display: none; }
   .authwall .cap { left: 9px; right: 9px; bottom: 8px; }
   .authwall .price { font-size: 13px; }
+  body.auth .authwall::after { content: ""; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, oklch(0.17 0.025 305 / 0.5), oklch(0.17 0.025 305 / 0.86) 24%, oklch(0.17 0.025 305 / 0.86) 76%, oklch(0.17 0.025 305 / 0.5)); }
+  body.auth .authbrand { display: block; position: absolute; z-index: 3; left: 16px; top: 16px; }
+  body.auth .authbrand .wordmark { display: block; font-size: 24px; }
+  body.auth .login { position: relative; z-index: 2; width: 100%; max-width: 460px; padding: 28px 22px 26px; border-radius: 26px; background: var(--bg); border: 1px solid var(--line); box-shadow: 0 24px 60px oklch(0.08 0.02 305 / 0.6); }
+  body.auth .login .wordmark { display: none; }
+  body.auth .login .wordmark + h1, body.auth .login .wordmark + .blocked { margin-top: 0; }
+  body.auth .login h1[style] { margin-top: 12px !important; }
+  body.auth .login .flow-row { margin-top: -8px !important; }
+  body.auth .toast { z-index: 30; }
 }
 @media (min-width: 900px) {
   body.wide .search, body.wide .search input { min-width: 0; }
@@ -790,38 +797,6 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 @keyframes vplay { from { transform: scale(1.02); } to { transform: scale(1.2) translate(-2%, -2.5%); } }
 @keyframes vprog { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* ---------- Показ: фільтри каталогу на комп'ютері відкриваються кнопкою ---------- */
-@media (min-width: 900px) {
-  body.wide .shop { grid-template-columns: 1fr; }
-  body.wide .side { display: none; }
-  body.wide .shop .grid { grid-template-columns: repeat(5, 1fr); }
-  body.wide .tools .pill { display: inline-flex; }
-  body.wide .tools .pill[aria-pressed="true"] { background: var(--text); color: var(--bg); }
-  body.wide.fopen .shop { grid-template-columns: 264px 1fr; }
-  body.wide.fopen .side { display: block; }
-  body.wide.fopen .shop .grid { grid-template-columns: repeat(4, 1fr); }
-}
-@media (min-width: 900px) and (max-width: 1139px) {
-  body.wide .shop .grid { grid-template-columns: repeat(4, 1fr); }
-  body.wide.fopen .shop .grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-/* ---------- Знак: бирка ---------- */
-.hw { display: inline-block; font-size: 0.72em; vertical-align: middle; }
-.tagx { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 5.86em; height: 1.887em; padding-right: 0.46em; background: url(assets/tag.png) center / 100% 100% no-repeat; color: var(--on-hot); font: 700 1em/1 var(--display); letter-spacing: -0.02em; transform: rotate(6deg); filter: drop-shadow(0.12em 0.2em 0.22em oklch(0.05 0.02 305 / 0.6)); transition: transform 0.7s var(--ease); }
-.wordmark:hover .tagx { transform: rotate(1deg); }
-/* в адмінці підпис «Адмінка» має свої стилі для span — знак їх не успадковує */
-.aside .brand .wordmark .hw { font-size: 14px; }
-.aside .brand .wordmark .tagx { font-size: 1em; font-weight: 700; letter-spacing: -0.02em; text-transform: none; color: var(--on-hot); }
-@media (min-width: 900px) {
-  /* вхід із комп'ютера: знак маленький, ліворуч угорі сторінки, як у шапці сайту (так роблять Airbnb, Stripe,
-     Figma — приклади в docs/design/refs/login-modern/). Жодних шнурків і кілець: вони відволікали від форми. */
-  body.auth .authbrand { position: fixed; z-index: 3; left: 48px; top: 30px; }
-  body.auth .authbrand .wordmark { font-size: 28px; }
-}
-/* стрілка на головній кнопці входу */
-.login .btn.primary svg { width: 20px; height: 20px; stroke-width: 2.4; }
-
 /* ---------- Оголошення з AI: основний шлях ---------- */
 .ai-fail { display: none; }
 .ai-step.fail .scan, .ai-step.fail .ai-run { display: none; }
@@ -840,6 +815,38 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .srcstrip .s svg { position: absolute; inset: 0; margin: auto; width: 14px; height: 14px; color: #fff; fill: #fff; }
 .srcstrip small { margin-left: 6px; font-size: 13px; color: var(--text-2); }
 #f-def { margin-top: 10px; min-height: 76px; }
+
+/* ---------- Знак: бирка ---------- */
+.hw { display: inline-block; font-size: 0.72em; vertical-align: middle; }
+.tagx { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 5.86em; height: 1.887em; padding-right: 0.46em; background: url(assets/tag.png) center / 100% 100% no-repeat; color: var(--on-hot); font: 700 1em/1 var(--display); letter-spacing: -0.02em; transform: rotate(6deg); filter: drop-shadow(0.12em 0.2em 0.22em oklch(0.05 0.02 305 / 0.6)); transition: transform 0.7s var(--ease); }
+.wordmark:hover .tagx { transform: rotate(1deg); }
+/* в адмінці підпис «Адмінка» має свої стилі для span — знак їх не успадковує */
+.aside .brand .wordmark .hw { font-size: 14px; }
+.aside .brand .wordmark .tagx { font-size: 1em; font-weight: 700; letter-spacing: -0.02em; text-transform: none; color: var(--on-hot); }
+@media (min-width: 900px) {
+  /* вхід із комп'ютера: знак маленький, ліворуч угорі сторінки, як у шапці сайту (так роблять Airbnb, Stripe,
+     Figma — приклади в docs/design/refs/login-modern/). Жодних шнурків і кілець: вони відволікали від форми. */
+  body.auth .authbrand { position: fixed; z-index: 3; left: 48px; top: 30px; }
+  body.auth .authbrand .wordmark { font-size: 28px; }
+}
+/* стрілка на головній кнопці входу */
+.login .btn.primary svg { width: 20px; height: 20px; stroke-width: 2.4; }
+
+/* ---------- Показ: фільтри каталогу на комп'ютері відкриваються кнопкою ---------- */
+@media (min-width: 900px) {
+  body.wide .shop { grid-template-columns: 1fr; }
+  body.wide .side { display: none; }
+  body.wide .shop .grid { grid-template-columns: repeat(5, 1fr); }
+  body.wide .tools .pill { display: inline-flex; }
+  body.wide .tools .pill[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+  body.wide.fopen .shop { grid-template-columns: 264px 1fr; }
+  body.wide.fopen .side { display: block; }
+  body.wide.fopen .shop .grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 900px) and (max-width: 1139px) {
+  body.wide .shop .grid { grid-template-columns: repeat(4, 1fr); }
+  body.wide.fopen .shop .grid { grid-template-columns: repeat(3, 1fr); }
+}
 
 /* ---------- Навігація й полки вітрини ---------- */
 :root { --text-2: oklch(0.8 0.022 305); }
