@@ -145,14 +145,13 @@
     <h1>Оголошення опубліковано</h1>
     <p class="hint">Покупці вже бачать його в каталозі.</p>
     <div class="sharebox">
-      <h2>Покажіть товар у своїх соцмережах</h2>
-      <div class="nets" id="nets" aria-label="Соцмережа"><button type="button" aria-pressed="true">Instagram</button><button type="button" aria-pressed="false">TikTok</button><button type="button" aria-pressed="false">Facebook</button><button type="button" aria-pressed="false">Telegram</button></div>
+      <h2>Поділіться оголошенням</h2>
       <div class="sharecard">
-        <div class="thumb"><img id="thimg" src="assets/jeans-1.jpg" alt="Відео"><span class="dur"><i data-lucide="play"></i><span id="thdur">0:12</span></span></div>
-        <div class="postbox"><p class="posttext" id="posttext"></p><button class="chipbtn" type="button" id="copylink"><i data-lucide="link"></i>Копіювати посилання</button></div>
+        <div class="thumb"><img id="thimg" src="assets/jeans-1.jpg" alt="Фото товару"></div>
+        <div class="postbox"><p class="posttext" id="posttext"></p><p class="postlink"><i data-lucide="link"></i>і посилання на оголошення</p></div>
       </div>
-      <div class="shareacts"><button class="btn ghost" type="button" id="copytext"><i data-lucide="copy"></i>Копіювати текст</button><button class="btn ghost" type="button" id="getclip"><i data-lucide="download"></i>Зберегти відео</button></div>
-      <button class="btn primary wide" type="button" id="sharebtn"><i data-lucide="share-2"></i><span id="sharelbl">Поділитися в Instagram</span></button>
+      <button class="btn primary wide" type="button" id="sharebtn"><i data-lucide="share-2"></i><span id="sharelbl">Поділитися</span></button>
+      <button class="btn ghost wide" type="button" id="copylink"><i data-lucide="link"></i><span id="copylbl">Копіювати посилання</span></button>
       <p class="sharehint" id="sharehint"></p>
     </div>
     <div class="donelinks">
@@ -249,7 +248,7 @@
     $('enhrow').classList.toggle('raw', raw);
     $('enhnote').textContent = raw ? 'В оголошенні будуть фото такими, як ви їх зняли.' : 'В оголошенні будуть покращені фото: світло, різкість і кадр. Колір і стан товару не змінюємо.';
     var vi = vinfo(), cover = photos().length ? photos()[0].querySelector('img').getAttribute('src') : 'assets/jeans-1.jpg';
-    $('pvimg').src = $('rvimg').src = $('thimg').src = cover; $('thdur').textContent = vi.dur;
+    $('pvimg').src = $('rvimg').src = $('thimg').src = cover;
     $('rvmedia').textContent = 'Відео з фото ' + vi.dur + ' · фото ' + (raw ? 'як зняли' : 'покращені');
     $('clprice').textContent = money(price.value); $('cltitle').textContent = title.value.trim();
     if (id === '5') post();
@@ -348,32 +347,19 @@
   $('zoomv').addEventListener('click', function (e) { if (e.target.id !== 'zoomimg') $('zoomv').hidden = true; });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') $('zoomv').hidden = true; });
 
-  // після публікації: готовий текст під кожну соцмережу — лише те, що є в оголошенні
+  // після публікації ділимося лише самим оголошенням: готовий текст (тільки те, що є в оголошенні) і посилання.
+  // Склеєне відео в соцмережі не віддаємо (рішення власника 18.11.2026); банер для соцмереж — пізніше.
   function post() {
-    var net = document.querySelector('#nets [aria-pressed=true]').textContent, t = title.value.trim(), p = money(price.value);
+    var t = title.value.trim(), p = money(price.value), big = window.matchMedia('(min-width: 900px)').matches;
     var cond = document.querySelector('#cond [aria-pressed=true]').textContent, col = colorbtn.querySelector('span').textContent.toLowerCase();
-    $('posttext').textContent = net === 'Instagram' ? t + ' — ' + p + '. ' + cond + ', колір ' + col + '. Одеса. Відео й усі фото — в оголошенні на TRAD.'
-      : net === 'TikTok' ? t + ' за ' + p + '. Одеса. Пишіть мені в TRAD.'
-      : net === 'Facebook' ? 'Продаю: ' + t + '. ' + cond + ', колір ' + col + '. Ціна ' + p + ', Одеса. Відео й усі фото — в оголошенні на TRAD.'
-      : t + '\n' + p + ' · Одеса · ' + cond.toLowerCase() + '\nВідео й усі фото — в оголошенні на TRAD.';
-    // з телефона відкриваємо застосунок соцмережі з відео; на комп'ютері застосунку немає, тому там інакше
-    var big = window.matchMedia('(min-width: 900px)').matches, app = net === 'Instagram' || net === 'TikTok';
-    $('sharelbl').textContent = (big && app) ? 'Зберегти відео і скопіювати текст' : (net === 'Facebook' ? 'Поділитися у ' : 'Поділитися в ') + net;
-    $('sharehint').textContent = (big && app) ? (net === 'Instagram' ? 'В ' : 'У ') + net + ' відео викладають із телефона. Збережіть відео й перекиньте його на телефон, текст уже буде скопійовано.'
-      : big ? 'Відкриється ' + net + ' з текстом і посиланням на оголошення.'
-      : 'Відкриється меню телефона «Поділитися» — оберіть у ньому ' + net + '. Текст ми скопіюємо: вставте його в підпис.';
+    $('posttext').textContent = t + ' — ' + p + '. ' + cond + ', колір ' + col + '. Одеса.';
+    $('sharelbl').textContent = big ? 'Копіювати текст і посилання' : 'Поділитися';
+    $('copylbl').textContent = big ? 'Копіювати лише посилання' : 'Копіювати посилання';
+    $('sharehint').textContent = big ? 'Вставте в Telegram, Viber, Facebook або сторіс. Друзі побачать фото, ціну й посилання.'
+      : 'Відкриється меню телефона: оберіть Telegram, Viber, Instagram чи інший застосунок. Друзі побачать фото, ціну й посилання.';
   }
-  $('nets').addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
-    [].forEach.call($('nets').children, function (x) { x.setAttribute('aria-pressed', String(x === b)); }); post();
-  });
-  $('copytext').addEventListener('click', function () { toast('Текст скопійовано'); });
   $('copylink').addEventListener('click', function () { toast('Посилання скопійовано'); });
-  $('getclip').addEventListener('click', function () { toast('Відео збережено в галерею'); });
-  $('sharebtn').addEventListener('click', function () {
-    var net = document.querySelector('#nets [aria-pressed=true]').textContent, big = window.matchMedia('(min-width: 900px)').matches;
-    toast(big && (net === 'Instagram' || net === 'TikTok') ? 'Відео збережено, текст скопійовано' : big ? 'Відкриваємо ' + net : 'Відкриваємо меню «Поділитися»');
-  });
+  $('sharebtn').addEventListener('click', function () { toast(window.matchMedia('(min-width: 900px)').matches ? 'Текст і посилання скопійовано' : 'Відкриваємо меню «Поділитися»'); });
 
   // фото: додати, прибрати, обкладинка
   (function () {
