@@ -122,6 +122,10 @@
   }
 
   /* ---------- розмова: месенджери продавця поруч із полем ---------- */
+  if (page === 'dialog.html' && +q.get('offer') > 0) {
+    var lastMsg = $$('.msg').pop();
+    if (lastMsg) lastMsg.after(el('<div class="msg out">Пропоную ' + String(+q.get('offer')).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0грн. Що скажете?<span class="mt num">щойно</span></div>'));
+  }
   if (page === 'dialog.html') {
     var cbox = $('.cbox');
     if (cbox) {
@@ -166,11 +170,20 @@
     document.body.classList.add('home');
     var chips = $('nav.chips'); if (chips) chips.remove();
     var main = $('main'), head = $('.head', main), grid = $('.grid', main);
-    /* телефон: розділи — картинки з підписом одразу під шапкою (як у OLX і Kleinanzeigen), остання плитка — «Усі категорії».
-       Поки розділів чотири, усі видно без гортання; на комп'ютері розділи показує рядок у шапці */
-    main.insertBefore(el('<nav class="cats" aria-label="Розділи">' + CATS.map(function (c) {
+    /* розділи — картинки з підписом (як у OLX і Kleinanzeigen); перша плитка — «Усі категорії», вона завжди на виду.
+       Телефон: один ряд, що гортається вбік, коли розділів стане більше п'яти; плитка веде на екран з усіма розділами.
+       Комп'ютер: той самий ряд замість текстового рядка розділів у шапці; «Усі категорії» розкриває повний список. */
+    var megaCols = CATS.map(function (c) {
+      return '<div class="mcol"><a class="all" href="catalog.html?cat=' + c[1] + '">' + c[0] + '</a>'
+        + c[3].map(function (x) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(x) + '">' + x + '</a>'; }).join('') + '</div>';
+    }).join('');
+    var allTile = wide.matches
+      ? '<div class="ca allcat"><button class="cb" type="button" aria-haspopup="true" aria-expanded="false"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</button><div class="drop mega" role="menu">' + megaCols + '</div></div>'
+      : '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a>';
+    main.insertBefore(el('<nav class="cats" aria-label="Розділи">' + allTile + CATS.map(function (c) {
       return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span>' + c[0] + '</a>';
-    }).join('') + '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a></nav>'), head);
+    }).join('') + '</nav>'), head);
+    var catHolder = $('.cats .ca'); if (catHolder) holder(catHolder, true);
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     /* телефон: регіон і фільтри — у рядку заголовка; сортування на головній немає, воно у фільтрах каталогу */
@@ -287,6 +300,45 @@
         var im = $('img', sl); if (!im) return;
         im.style.cursor = 'zoom-in';
         im.addEventListener('click', function () { $('img', pz).src = im.getAttribute('src'); pz.hidden = false; });
+      });
+    }
+    var ptitle = info ? $('h1', info) : null, pprice = info ? $('.price', info) : null;
+    if (ptitle && pprice && q.get('own') !== '1') {
+      var obase = +(pprice.textContent.replace(/\D/g, '')) || 0, ostep = obase >= 2000 ? 100 : 50;
+      var osug = [0.95, 0.9, 0.85].map(function (k) { return Math.round(obase * k / ostep) * ostep; }).filter(function (v, i, arr) { return v > 0 && v < obase && arr.indexOf(v) === i; });
+      var ofmt = function (v) { return String(v).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0грн'; };
+      var ob = el('<button class="offerbtn" type="button"><i data-lucide="hand-coins"></i><span>Запропонувати ціну</span></button>');
+      ptitle.after(ob);
+      var osh = el('<div class="osh" hidden><div class="oscrim"></div><section class="obox" role="dialog" aria-modal="true" aria-label="Запропонувати ціну">'
+        + '<div class="sheet-head"><h2>Ваша ціна</h2><button class="x" type="button" aria-label="Закрити"><i data-lucide="x"></i></button></div>'
+        + '<label class="ofield"><input class="num" id="oprice" inputmode="numeric" autocomplete="off" aria-label="Ваша ціна, грн"><span>грн</span></label>'
+        + '<div class="ochips">' + osug.map(function (v) { return '<button class="qchip" type="button" data-v="' + v + '">' + ofmt(v) + '</button>'; }).join('') + '</div>'
+        + '<p class="ohint" id="ohint"></p><button class="btn primary wide" type="button" id="osend">Надіслати продавцю</button></section></div>');
+      document.body.appendChild(osh);
+      var oin = $('#oprice', osh), osend = $('#osend', osh), ohint = $('#ohint', osh);
+      var ocheck = function () {
+        var v = +(oin.value.replace(/\D/g, '')) || 0, ok = v > 0 && v < obase;
+        osend.disabled = !ok;
+        ohint.textContent = v >= obase ? 'Запропонуйте менше, ніж ' + ofmt(obase) + '.' : 'Продавець просить ' + ofmt(obase) + '. Вашу пропозицію він побачить у чаті TRAD.';
+        $$('.qchip', osh).forEach(function (c) { c.setAttribute('aria-pressed', String(+c.dataset.v === v)); });
+        return ok ? v : 0;
+      };
+      var oclose = function () { osh.hidden = true; };
+      ob.addEventListener('click', function () {
+        if (q.get('guest') === '1') { location.href = 'login.html?next=product.html'; return; }
+        oin.value = String(osug[1] || osug[0] || ''); ocheck(); osh.hidden = false;
+      });
+      oin.addEventListener('input', ocheck);
+      osh.addEventListener('click', function (e) {
+        var chip = e.target.closest('.qchip');
+        if (chip) { oin.value = chip.dataset.v; ocheck(); return; }
+        if (e.target.closest('.x') || e.target.classList.contains('oscrim')) oclose();
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') oclose(); });
+      osend.addEventListener('click', function () {
+        var v = ocheck(); if (!v) return;
+        oclose();
+        ob.replaceWith(el('<a class="offerbtn sent" href="dialog.html?offer=' + v + '"><span>Ви запропонували ' + ofmt(v) + '</span><b>Відкрити чат</b></a>'));
       });
     }
     var sblk = $('.seller', pmain) ? $('.seller', pmain).closest('.block') : null;

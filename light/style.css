@@ -858,6 +858,9 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .chipbtn[hidden] { display: none; }
 .mpanel { margin-top: 16px; padding: 14px; border-radius: 22px; background: var(--s1); }
 .mpanel + .mpanel { margin-top: 10px; }
+.step[data-step="2"] .ai-banner { margin-top: 12px; padding: 10px 12px; font-size: 13px; line-height: 1.4; }
+.actions { flex-wrap: wrap; }
+.whynot { flex: 1 1 100%; margin: -2px 0 0; font-size: 13px; color: var(--text-2); text-align: center; }
 .mpanel:has(.clip) { padding: 0; background: none; }
 .clip .dur svg { display: none; }
 .clip .dur { padding-left: 9px; }
@@ -950,9 +953,10 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .drop a.all { font-weight: 600; }
 
 /* головна: шапка в один рядок на телефоні, місто, рядок розділів, полка «З відео», сортування */
-/* телефон, головна: розділи — картинки з підписом (розміри — critique/pick-home-catpics.json) */
-.cats { display: grid; grid-template-columns: repeat(5, 70px); justify-content: space-between; gap: 0 2px; padding: 14px 16px 0; }
-.cats a { display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 96px; font-size: 12px; line-height: 16px; font-weight: 500; text-align: center; }
+/* головна: розділи — картинки з підписом (розміри — critique/pick-home-catpics.json); на телефоні один ряд, що гортається вбік */
+.cats { display: flex; gap: 2px; padding: 14px 16px 0; overflow-x: auto; scrollbar-width: none; }
+.cats::-webkit-scrollbar { display: none; }
+.cats > a { flex: none; width: 70px; display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 96px; font-size: 12px; line-height: 16px; font-weight: 500; text-align: center; }
 .cats .ph { flex: none; width: 58px; height: 58px; border-radius: 18px; overflow: hidden; display: grid; place-items: center; background: var(--s1); }
 .cats .ph img { width: 100%; height: 100%; object-fit: cover; }
 .cats .ph svg { width: 24px; height: 24px; }
@@ -1078,6 +1082,25 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .viaapp a { position: relative; }
 .viaapp a::before { content: ""; position: absolute; inset: -6px; }
 textarea { resize: none; }
+.offerbtn { display: inline-flex; align-items: center; gap: 8px; height: 44px; margin-top: 12px; padding: 0 16px; border-radius: 999px; background: var(--s1); font-size: 14px; font-weight: 600; color: var(--text); }
+.offerbtn:hover { background: var(--s2); }
+.offerbtn svg { width: 18px; height: 18px; color: var(--hot-ink); }
+.offerbtn.sent { gap: 10px; padding: 0; background: none; font-weight: 500; color: var(--text-2); }
+.offerbtn.sent b { font-weight: 600; color: var(--hot-ink); }
+.osh { position: fixed; z-index: 60; inset: 0; }
+.oscrim { position: absolute; inset: 0; background: oklch(0.1 0.02 305 / 0.5); }
+.obox { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 430px; padding: 0 16px calc(16px + env(safe-area-inset-bottom)); border-radius: 24px 24px 0 0; background: var(--bg); }
+.obox .sheet-head { padding: 8px 0 12px 4px; }
+.ofield { display: flex; align-items: center; gap: 8px; height: 64px; padding: 0 18px; border-radius: 16px; background: var(--s1); }
+.ofield input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; font: 700 24px var(--display); color: var(--text); }
+.ofield span { font-size: 16px; color: var(--text-2); }
+.ochips { display: flex; gap: 8px; margin-top: 10px; }
+.ohint { margin: 12px 0 14px; font-size: 13px; line-height: 1.4; color: var(--text-2); }
+@media (min-width: 900px) { .obox { bottom: 50%; transform: translate(-50%, 50%); padding-bottom: 20px; border-radius: 24px; } }
+.qcard .opts { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.qcard .opts::-webkit-scrollbar { display: none; }
+.qcard .opt { flex: none; }
+.favflt { padding-top: 14px; }
 .toshop.inform { position: static; display: flex; justify-content: center; width: 100%; height: 48px; margin-top: 8px; padding: 0; background: none; font-size: 16px; }
 .toshop.inform svg { display: none; }
 .morebox .morelink { justify-content: center; min-height: 44px; }
@@ -1175,7 +1198,16 @@ body.home .site-foot { margin-top: 0; }
   .catnav .cb svg { width: 16px; height: 16px; color: var(--text-2); }
   .catnav .drop { left: 0; top: 100%; width: 260px; }
   body.wide .shelf, body.wide .morebox { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
-  body.wide .cats { display: none; }
+  /* комп'ютер, головна: розділи картинками замість текстового рядка в шапці (на інших сторінках рядок лишається) */
+  body.wide.home .catnav { display: none; }
+  body.wide .cats { gap: 20px; max-width: 1280px; margin-inline: auto; padding: 22px 32px 0; overflow: visible; }
+  body.wide .cats > a, body.wide .cats .cb { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 104px; min-height: 0; padding: 0; background: none; font: 500 14px/18px var(--ui); color: var(--text); text-align: center; cursor: pointer; }
+  body.wide .cats .ph { width: 84px; height: 84px; border-radius: 24px; transition: transform 0.25s var(--ease); }
+  body.wide .cats .ph svg { width: 28px; height: 28px; }
+  body.wide .cats > a:hover .ph, body.wide .cats .cb:hover .ph, body.wide .cats .open .ph { transform: translateY(-2px); }
+  body.wide .cats .ca { position: relative; }
+  body.wide .cats .drop.mega { left: 0; width: min(920px, calc(100vw - 64px)); padding: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px 8px; text-align: left; }
+  body.wide .cats .open > .drop.mega { display: grid; }
   body.wide.home .shelf { padding-top: 8px; }
   body.wide .shelf .head { padding-inline: 0; }
   body.wide .shelf .row { padding: 0; gap: 16px; display: grid; grid-template-columns: repeat(6, 1fr); overflow: visible; }

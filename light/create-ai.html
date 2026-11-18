@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11181749">
+<link rel="stylesheet" href="style.css?v=11181806">
 </head>
 <body class="flowpage">
 
@@ -185,6 +185,7 @@
 </section>
 <div class="zoomv" id="zoomv" role="dialog" aria-modal="true" aria-label="Фото" hidden><button class="x" type="button" id="zoomx" aria-label="Закрити"><i data-lucide="x"></i></button><img id="zoomimg" src="assets/jeans-2.jpg" alt=""><p id="zoomcap"></p></div>
 <div class="actions" id="actions">
+  <p class="whynot" id="whynot" hidden></p>
   <button class="btn ghost" id="back" type="button" hidden>Назад</button>
   <button class="btn primary" id="next" type="button">Далі</button>
 </div>
@@ -232,6 +233,10 @@
       bad = nt || np || ns || nd;
     }
     next.disabled = bad;
+    var why = '';                                   /* чому «Далі» неактивна — поруч із кнопкою, а не лише біля поля вище */
+    if (bad && id === '1') why = 'Додайте хоча б одне фото';
+    if (bad && id === '2') why = nt ? 'Вкажіть назву' : np ? 'Вкажіть ціну' : ns ? 'Вкажіть розмір' : 'Оберіть, чи є дефекти';
+    $('whynot').textContent = why; $('whynot').hidden = !why;
   }
   function sync() {
     var id = order[pos], filled = id === '2' || id === '3';
