@@ -89,6 +89,8 @@
     CATS.slice($$('#root .lrow').length).forEach(function (c) {
       croot.appendChild(el('<a class="lrow" href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="t">' + c[0] + '</span><i data-lucide="chevron-right"></i></a>'));
     });
+    var CNT = { women: 128, men: 6 };
+    $$('#root .lrow').forEach(function (r, i) { var c = CATS[i], t = $('.t', r); if (!c || !t || $('small', t)) return; var k = CNT[c[1]] || 4; t.appendChild(el('<small>' + k + (k < 5 ? ' оголошення' : ' оголошень') + '</small>')); });
     document.addEventListener('click', function () { setTimeout(ctitle, 0); });
     ctitle();
   }
@@ -187,9 +189,26 @@
        Телефон: один ряд, що гортається вбік, коли розділів стане більше п'яти; плитка веде на екран з усіма розділами.
        Комп'ютер: той самий ряд замість текстового рядка розділів у шапці; «Усі категорії» розкриває повний список. */
     var allTile = wide.matches ? '' : '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a>';
-    main.insertBefore(el('<nav class="cats" aria-label="Розділи">' + allTile + CATS.map(function (c) {
-      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span>' + c[0] + '</a>';
-    }).join('') + '</nav>'), head);
+    var catsNav = el('<nav class="cats" aria-label="Розділи">' + allTile + CATS.map(function (c, i) {
+      return '<a href="catalog.html?cat=' + c[1] + '" data-i="' + i + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span>' + c[0] + '</a>';
+    }).join('') + '</nav>');
+    main.insertBefore(catsNav, head);
+    /* комп'ютер — як на головній OLX: заголовок «Розділи», плитки; натиск на розділ розкриває під рядом панель
+       із посиланням на всі оголошення розділу й підрозділами в чотири колонки, повторний натиск її закриває */
+    if (wide.matches) {
+      catsNav.before(el('<h2 class="catsh">Розділи</h2>'));
+      var cpanel = el('<div class="catpanel" hidden></div>'); catsNav.after(cpanel);
+      catsNav.addEventListener('click', function (e) {
+        var t = e.target.closest('a[data-i]'); if (!t) return; e.preventDefault();
+        var c = CATS[+t.dataset.i], was = t.getAttribute('aria-expanded') === 'true';
+        $$('a[data-i]', catsNav).forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
+        if (was) { cpanel.hidden = true; return; }
+        t.setAttribute('aria-expanded', 'true');
+        cpanel.innerHTML = '<a class="call" href="catalog.html?cat=' + c[1] + '">Переглянути всі оголошення в розділі «' + c[0] + '»<i data-lucide="chevron-right"></i></a><div class="csubs">'
+          + c[3].map(function (x) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(x) + '">' + x + '</a>'; }).join('') + '</div>';
+        cpanel.hidden = false; icons();
+      });
+    }
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     /* телефон: регіон і фільтри — у рядку заголовка; сортування на головній немає, воно у фільтрах каталогу */

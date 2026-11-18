@@ -954,9 +954,9 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 
 /* головна: шапка в один рядок на телефоні, місто, рядок розділів, полка «З відео», сортування */
 /* головна: розділи — картинки з підписом (розміри — critique/pick-home-catpics.json); на телефоні один ряд, що гортається вбік */
-.cats { display: flex; gap: 2px; padding: 14px 16px 0; overflow-x: auto; scrollbar-width: none; }
-.cats::-webkit-scrollbar { display: none; }
-.cats > a { flex: none; width: 70px; display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 96px; font-size: 12px; line-height: 16px; font-weight: 500; text-align: center; }
+/* телефон — як у OLX: два ряди клітинок під пошуком, перша — «Усі категорії»; дев'ять клітинок видно без гортання */
+.cats { display: grid; grid-template-columns: repeat(5, 70px); justify-content: space-between; gap: 10px 2px; padding: 14px 16px 0; }
+.cats > a { display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 0; font-size: 12px; line-height: 16px; font-weight: 500; text-align: center; }
 .cats .ph { flex: none; width: 58px; height: 58px; border-radius: 18px; overflow: hidden; display: grid; place-items: center; background: var(--s1); }
 .cats .ph img { width: 100%; height: 100%; object-fit: cover; }
 .cats .ph svg { width: 24px; height: 24px; }
@@ -1203,7 +1203,16 @@ body.home .site-foot { margin-top: 0; }
   body.wide .shelf, body.wide .morebox { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
   /* комп'ютер, головна: усі розділи — ряд картинок під шапкою (як «Головні рубрики» в OLX); текстового рядка розділів на головній немає */
   body.wide.home .catnav { display: none; }
-  body.wide .cats { gap: 12px; justify-content: space-between; max-width: 1280px; margin-inline: auto; padding: 24px 32px 4px; overflow: visible; }
+  body.wide .catsh { max-width: 1280px; margin: 28px auto 0; padding-inline: 32px; font: 500 20px/1.25 var(--display); letter-spacing: -0.01em; }
+  body.wide .cats { display: flex; gap: 12px; justify-content: space-between; max-width: 1280px; margin-inline: auto; padding: 18px 32px 4px; overflow: visible; }
+  body.wide .cats > a[aria-expanded="true"] { color: var(--hot-ink); }
+  body.wide .cats > a[aria-expanded="true"] .ph { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--hot); }
+  body.wide .catpanel { width: calc(100% - 64px); max-width: 1216px; margin: 16px auto 0; padding: 20px 24px 22px; border-radius: 20px; background: var(--s1); }
+  .catpanel .call { display: inline-flex; align-items: center; gap: 6px; font-size: 16px; font-weight: 600; }
+  .catpanel .call svg { width: 18px; height: 18px; }
+  .catpanel .csubs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px 24px; margin-top: 12px; }
+  .catpanel .csubs a { display: flex; align-items: center; min-height: 36px; font-size: 14px; color: var(--text-2); }
+  .catpanel .csubs a:hover, .catpanel .call:hover { color: var(--hot-ink); }
   body.wide .cats > a { flex: 1 1 0; width: auto; max-width: 132px; min-height: 0; gap: 10px; font-size: 14px; line-height: 18px; font-weight: 500; color: var(--text); }
   body.wide .cats .ph { width: 88px; height: 88px; border-radius: 24px; transition: transform 0.25s var(--ease); }
   body.wide .cats > a:hover .ph { transform: translateY(-3px); }
