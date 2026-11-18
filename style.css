@@ -914,6 +914,11 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .shareacts .btn svg { width: 16px; height: 16px; }
 .sharebox .btn.primary { margin-top: 8px; }
 .sharebox .btn.primary svg { width: 18px; height: 18px; }
+@media (min-width: 900px) {
+  /* на комп'ютері після публікації немає картки-перегляду праворуч, тому екран стоїть по центру */
+  body.flowpage.donepage .flow { margin-inline: auto; max-width: 560px; }
+  body.flowpage.donepage .flow-top { padding-inline: max(32px, calc(50% - 280px)); }
+}
 .donelinks { display: grid; gap: 8px; margin-top: 10px; text-align: left; }
 .donelinks a { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px; border-radius: 18px; background: var(--s1); font-size: 16px; font-weight: 500; transition: background 0.2s var(--ease); }
 .donelinks a:hover { background: var(--s2); }
