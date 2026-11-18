@@ -9,8 +9,14 @@
     ['Жіночий одяг', 'women', 'cat-women.jpg', ['Куртки й пальта', 'Джинси', 'Худі та світшоти', 'Футболки', 'Сукні'], 'Жіноче'],
     ['Чоловічий одяг', 'men', 'cat-men.jpg', ['Куртки й пальта', 'Джинси', 'Худі та світшоти', 'Футболки'], 'Чоловіче'],
     ['Взуття', 'shoes', 'cat-shoes.jpg', ['Кросівки', 'Черевики', 'Туфлі'], 'Взуття'],
-    ['Смартфони', 'phones', 'cat-phones.jpg', ['Apple', 'Samsung', 'Xiaomi', 'Google'], 'Смартфони']
+    ['Смартфони', 'phones', 'cat-phones.jpg', ['Apple', 'Samsung', 'Xiaomi', 'Google'], 'Смартфони'],
+    /* розділи нижче — припущення для макета: показати, як вітрина живе, коли розділів більше; остаточний список дає замовник */
+    ['Сумки й аксесуари', 'bags', 'cat-bags.jpg', ['Сумки', 'Рюкзаки', 'Ремені', 'Шарфи й шапки'], 'Сумки'],
+    ['Дитячі речі', 'kids', 'cat-kids.jpg', ['Одяг', 'Взуття', 'Іграшки', 'Візочки'], 'Дитячі'],
+    ['Електроніка', 'tech', 'cat-electronics.jpg', ['Ноутбуки', 'Навушники', 'Планшети', 'Фото й відео'], 'Електроніка'],
+    ['Дім і сад', 'home', 'cat-home.jpg', ['Меблі', 'Посуд', 'Освітлення', 'Рослини'], 'Дім']
   ];
+  var NAVCATS = CATS.slice(0, 5);   /* у текстовому рядку шапки (комп'ютер, усі сторінки, крім головної) — перші розділи, решта в «Усі категорії» */
   function icons() { if (window.lucide) lucide.createIcons(); }
   function el(html) { var t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; }
   function $(s, r) { return (r || document).querySelector(s); }
@@ -55,7 +61,7 @@
       + CATS.map(function (c) {
         return '<div class="mcol"><a class="all" href="catalog.html?cat=' + c[1] + '">' + c[0] + '</a>'
           + c[3].map(function (s) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(s) + '">' + s + '</a>'; }).join('') + '</div>';
-      }).join('') + '</div></div>' + CATS.map(function (c) {
+      }).join('') + '</div></div>' + NAVCATS.map(function (c) {
       return '<div class="ci"><button class="cb" type="button" aria-haspopup="true" aria-expanded="false">' + c[0] + '<i data-lucide="chevron-down"></i></button><div class="drop" role="menu"><a class="all" href="catalog.html?cat=' + c[1] + '">Усе в розділі</a>'
         + c[3].map(function (s) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(s) + '">' + s + '</a>'; }).join('') + '</div></div>';
     }).join('') + '</nav>');
@@ -79,6 +85,10 @@
     });
     /* у списку розділів — та сама картинка, що й на головній */
     $$('#root .lrow').forEach(function (r) { var c = CATS[+r.dataset.open]; if (c && !$('.ph', r)) r.insertBefore(el('<span class="ph"><img src="assets/' + c[2] + '" alt=""></span>'), r.firstChild); });
+    /* розділи, яких немає в розмітці сторінки, ведуть одразу в каталог: підкатегорії там рядком угорі */
+    CATS.slice($$('#root .lrow').length).forEach(function (c) {
+      croot.appendChild(el('<a class="lrow" href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="t">' + c[0] + '</span><i data-lucide="chevron-right"></i></a>'));
+    });
     document.addEventListener('click', function () { setTimeout(ctitle, 0); });
     ctitle();
   }
@@ -176,17 +186,10 @@
     /* розділи — картинки з підписом (як у OLX і Kleinanzeigen); перша плитка — «Усі категорії», вона завжди на виду.
        Телефон: один ряд, що гортається вбік, коли розділів стане більше п'яти; плитка веде на екран з усіма розділами.
        Комп'ютер: той самий ряд замість текстового рядка розділів у шапці; «Усі категорії» розкриває повний список. */
-    var megaCols = CATS.map(function (c) {
-      return '<div class="mcol"><a class="all" href="catalog.html?cat=' + c[1] + '">' + c[0] + '</a>'
-        + c[3].map(function (x) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(x) + '">' + x + '</a>'; }).join('') + '</div>';
-    }).join('');
-    var allTile = wide.matches
-      ? '<div class="ca allcat"><button class="cb" type="button" aria-haspopup="true" aria-expanded="false"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</button><div class="drop mega" role="menu">' + megaCols + '</div></div>'
-      : '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a>';
+    var allTile = wide.matches ? '' : '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a>';
     main.insertBefore(el('<nav class="cats" aria-label="Розділи">' + allTile + CATS.map(function (c) {
       return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span>' + c[0] + '</a>';
     }).join('') + '</nav>'), head);
-    var catHolder = $('.cats .ca'); if (catHolder) holder(catHolder, true);
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     /* телефон: регіон і фільтри — у рядку заголовка; сортування на головній немає, воно у фільтрах каталогу */
@@ -216,6 +219,25 @@
   /* ---------- каталог: шлях і швидкі фільтри ---------- */
   if (page === 'catalog.html') {
     var h1 = $('h1.cat'), tools = $('.tools');
+    /* приклади оголошень для розділів: у «Жіночому одязі» лишається стрічка зі сторінки, в інших розділах — свої товари */
+    var CITEMS = {
+      men: [['hoodie.jpg', '650', 'Худі сіре', 'Вживане · L', 'Київ · вчора'], ['tshirt.jpg', '250', 'Футболка з принтом', 'Нове · M', 'Одеса · 11 листопада'], ['jeans-black.jpg', '1 100', 'Джинси чорні слім', 'Вживане · W32 L34', 'Львів · сьогодні'], ['puffer-green.jpg', '1 700', 'Пуховик зелений', 'Вживане · L', 'Харків · вчора'], ['jeans-grey.jpg', '600', 'Джинси сірі прямі', 'Вживане · W31 L32', 'Дніпро · вчора'], ['boots.jpg', '2 200', 'Черевики зимові', 'Вживане · 43', 'Вінниця · вчора']],
+      shoes: [['it-sneakers.jpg', '900', 'Кросівки білі шкіряні', 'Вживане · 39', 'Київ · сьогодні'], ['shoes.jpg', '1 350', 'Туфлі шкіряні', 'Вживане · 42', 'Дніпро · вчора'], ['boots.jpg', '2 200', 'Черевики зимові', 'Вживане · 41', 'Вінниця · вчора'], ['it-heels.jpg', '1 100', 'Ботильйони замшеві', 'Вживане · 38', 'Львів · вчора']],
+      phones: [['phone.jpg', '9 800', 'iPhone 11, чорний', 'Вживане · 64 ГБ', 'Львів · сьогодні'], ['it-phone-3.jpg', '6 500', 'Samsung Galaxy A34, синій', 'Вживане · 128 ГБ', 'Київ · сьогодні'], ['it-phone-4.jpg', '7 200', 'iPhone XR, чорний', 'Вживане · 64 ГБ', 'Одеса · вчора'], ['it-phone-2.jpg', '3 200', 'iPhone SE, білий, з чохлом', 'Вживане · 64 ГБ', 'Харків · вчора']],
+      bags: [['it-backpack.jpg', '700', 'Рюкзак міський сірий', 'Вживане', 'Львів · сьогодні'], ['it-crossbody.jpg', '850', 'Сумка через плече, чорна', 'Вживане', 'Одеса · сьогодні'], ['it-belt.jpg', '300', 'Ремінь шкіряний', 'Вживане · 105 см', 'Дніпро · вчора'], ['it-scarf.jpg', '250', 'Шарф вовняний', 'Нове', 'Харків · 11 листопада']],
+      kids: [['it-kids-jacket.jpg', '450', 'Дощовик дитячий жовтий', 'Вживане · 104 см', 'Київ · сьогодні'], ['it-kids-shoes.jpg', '350', 'Кросівки дитячі', 'Вживане · 24', 'Львів · сьогодні'], ['it-kids-toy.jpg', '400', 'Потяг дерев’яний', 'Вживане', 'Одеса · вчора'], ['it-stroller.jpg', '3 200', 'Візочок прогулянковий', 'Вживане', 'Харків · вчора']],
+      tech: [['it-laptop.jpg', '14 500', 'Ноутбук 14″, сірий', 'Вживане · 256 ГБ', 'Київ · сьогодні'], ['it-headphones.jpg', '1 800', 'Навушники накладні з чохлом', 'Вживане', 'Львів · сьогодні'], ['it-tablet.jpg', '5 400', 'Планшет 10″ з чохлом', 'Вживане · 64 ГБ', 'Дніпро · вчора'], ['it-camera.jpg', '3 900', 'Фотоапарат компактний', 'Вживане', 'Одеса · вчора']],
+      home: [['it-lamp.jpg', '450', 'Лампа настільна біла', 'Вживане', 'Київ · сьогодні'], ['it-plates.jpg', '600', 'Набір тарілок, 8 предметів', 'Вживане', 'Харків · сьогодні'], ['it-chair.jpg', '900', 'Стілець дерев’яний', 'Вживане', 'Львів · вчора'], ['it-plant.jpg', '200', 'Вазон у горщику', 'Нове', 'Вінниця · вчора']]
+    };
+    var citems = !q.get('q') && q.get('empty') !== '1' && CITEMS[q.get('cat')], cg0 = $('#grid');
+    if (citems && cg0) {
+      cg0.innerHTML = citems.map(function (x) {
+        return '<a class="card" href="product.html"><div class="frame"><img src="assets/' + x[0] + '" alt=""><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>'
+          + '<div class="cap"><div class="price num">' + x[1].replace(/ /g, '&nbsp;') + '&nbsp;грн</div><div class="title">' + x[2] + '</div><div class="attrs">' + x[3] + '</div></div></div><div class="meta">' + x[4] + '</div></a>';
+      }).join('');
+      cg0.addEventListener('click', function (e) { var f = e.target.closest('.fav'); if (!f) return; e.preventDefault(); f.setAttribute('aria-pressed', String(f.getAttribute('aria-pressed') !== 'true')); });
+      var cn0 = $('#n'); if (cn0) cn0.textContent = citems.length + (citems.length < 5 ? ' оголошення' : ' оголошень');
+    }
     if (h1) h1.before(el('<nav class="crumbs" aria-label="Шлях"><a href="home.html">Головна</a><i data-lucide="chevron-right"></i><span>' + h1.textContent + '</span></nav>'));
     var sheet = $('#sheet'), side = $('aside.side'), apply = $('#apply');
     if (tools && sheet && apply) {

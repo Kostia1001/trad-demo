@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11181815">
+<link rel="stylesheet" href="style.css?v=11181829">
 </head>
 <body class="wide has-bar">
 <header class="top">
@@ -217,7 +217,11 @@
       women: ['Жіночий одяг', ['Куртки й пальта', 'Джинси', 'Худі та світшоти', 'Футболки', 'Сукні']],
       men: ['Чоловічий одяг', ['Куртки й пальта', 'Джинси', 'Худі та світшоти', 'Футболки']],
       shoes: ['Взуття', ['Кросівки', 'Черевики', 'Туфлі']],
-      phones: ['Смартфони', ['Apple', 'Samsung', 'Xiaomi', 'Google']]
+      phones: ['Смартфони', ['Apple', 'Samsung', 'Xiaomi', 'Google']],
+      bags: ['Сумки й аксесуари', ['Сумки', 'Рюкзаки', 'Ремені', 'Шарфи й шапки']],
+      kids: ['Дитячі речі', ['Одяг', 'Взуття', 'Іграшки', 'Візочки']],
+      tech: ['Електроніка', ['Ноутбуки', 'Навушники', 'Планшети', 'Фото й відео']],
+      home: ['Дім і сад', ['Меблі', 'Посуд', 'Освітлення', 'Рослини']]
     };
     var p = new URLSearchParams(location.search), c = CATS[p.get('cat')], nav = document.querySelector('.shop .chips, nav.chips');
     if (c && !p.get('q') && p.get('fix') !== '1') {
@@ -297,7 +301,7 @@
   /* demo:end */
 </script>
 <!-- block3 -->
-<script src="shop.js?v=11181815"></script>
+<script src="shop.js?v=11181829"></script>
 <!-- demo -->
 </body>
 </html>

@@ -1201,16 +1201,13 @@ body.home .site-foot { margin-top: 0; }
   .catnav .cb svg { width: 16px; height: 16px; color: var(--text-2); }
   .catnav .drop { left: 0; top: 100%; width: 260px; }
   body.wide .shelf, body.wide .morebox { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
-  /* комп'ютер, головна: розділи картинками замість текстового рядка в шапці (на інших сторінках рядок лишається) */
+  /* комп'ютер, головна: усі розділи — ряд картинок під шапкою (як «Головні рубрики» в OLX); текстового рядка розділів на головній немає */
   body.wide.home .catnav { display: none; }
-  body.wide .cats { gap: 20px; max-width: 1280px; margin-inline: auto; padding: 22px 32px 0; overflow: visible; }
-  body.wide .cats > a, body.wide .cats .cb { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 104px; min-height: 0; padding: 0; background: none; font: 500 14px/18px var(--ui); color: var(--text); text-align: center; cursor: pointer; }
-  body.wide .cats .ph { width: 84px; height: 84px; border-radius: 24px; transition: transform 0.25s var(--ease); }
-  body.wide .cats .ph svg { width: 28px; height: 28px; }
-  body.wide .cats > a:hover .ph, body.wide .cats .cb:hover .ph, body.wide .cats .open .ph { transform: translateY(-2px); }
-  body.wide .cats .ca { position: relative; }
-  body.wide .cats .drop.mega { left: 0; width: min(920px, calc(100vw - 64px)); padding: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px 8px; text-align: left; }
-  body.wide .cats .open > .drop.mega { display: grid; }
+  body.wide .cats { gap: 12px; justify-content: space-between; max-width: 1280px; margin-inline: auto; padding: 24px 32px 4px; overflow: visible; }
+  body.wide .cats > a { flex: 1 1 0; width: auto; max-width: 132px; min-height: 0; gap: 10px; font-size: 14px; line-height: 18px; font-weight: 500; color: var(--text); }
+  body.wide .cats .ph { width: 88px; height: 88px; border-radius: 24px; transition: transform 0.25s var(--ease); }
+  body.wide .cats > a:hover .ph { transform: translateY(-3px); }
+  body.wide .cats > a:hover { color: var(--hot-ink); }
   body.wide.home .shelf { padding-top: 8px; }
   body.wide .shelf .head { padding-inline: 0; }
   body.wide .shelf .row { padding: 0; gap: 16px; display: grid; grid-template-columns: repeat(6, 1fr); overflow: visible; }
