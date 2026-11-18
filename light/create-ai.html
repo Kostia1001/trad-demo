@@ -10,9 +10,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11182251">
+<link rel="stylesheet" href="style.css?v=11182341">
 </head>
-<body class="flowpage">
+<body class="flowpage aiflow">
+
+<!-- комп'ютер: шапка як на сайті (на телефоні схована, там лишається рядок із хрестиком нижче) -->
+<header class="af-top">
+  <div class="af-in">
+    <a class="wordmark" href="home.html" id="af-home"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <a class="af-link" href="help.html">Про TRAD</a>
+    <form class="af-search" role="search" action="catalog.html"><i data-lucide="search"></i><input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень"></form>
+    <nav class="af-nav" aria-label="Меню">
+      <a href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="af-ava" href="profile.html" aria-label="Профіль"><img src="assets/avatar.jpg" alt=""></a>
+    </nav>
+  </div>
+</header>
 
 <header class="flow-top">
   <div class="flow-row">
@@ -21,18 +36,20 @@
     <span class="stepno num" id="stepno">1 з 4</span>
   </div>
   <div class="progress" id="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-  <ol class="stepper" id="stepper" aria-hidden="true"><li>Фото</li><li>AI аналіз</li><li>Деталі</li><li>Відео</li><li>Публікація</li></ol>
 </header>
 
-<aside class="pv" id="pv" aria-label="Попередній перегляд"><div class="aiwhat"><p class="h"><span class="b">AI</span>Що зробить AI</p><ul><li><i data-lucide="check"></i>Розпізнає товар</li><li><i data-lucide="check"></i>Заповнить назву, опис і характеристики</li><li><i data-lucide="check"></i>Підкаже ціну</li><li><i data-lucide="check"></i>Покращить фото</li><li><i data-lucide="check"></i>Збере відео з фото</li></ul></div><p class="pvt">Так оголошення побачать покупці</p><div class="card cv"><div class="frame"><img id="pvimg" src="assets/jeans-1.jpg" alt=""><span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span></div><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div><div class="attrs">Одеса</div></div></div></aside>
+<aside class="pv" id="pv" aria-label="Попередній перегляд"><p class="pvt">Так оголошення побачать покупці</p><div class="card cv"><div class="frame"><img id="pvimg" src="assets/jeans-1.jpg" alt=""><span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span></div><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div><div class="attrs">Одеса</div></div></div></aside>
 
 <main class="flow">
+  <nav class="af-crumbs" aria-label="Шлях"><a href="home.html" id="af-crumb"><i data-lucide="house"></i>Головна</a><span aria-hidden="true">/</span><b>Додати оголошення</b></nav>
+  <ol class="stepper" id="stepper" aria-hidden="true"><li>Фото</li><li>AI аналіз</li><li>Деталі</li><li>Відео</li><li>Публікація</li></ol>
   <section class="step" data-step="1">
     <h1>Створити оголошення з AI</h1>
     <p class="hint">До 10 фото. AI збере з них відео й сам заповнить оголошення.</p>
-    <div class="shoot">
-      <button type="button" class="main"><i data-lucide="camera"></i>Зняти</button>
-      <button type="button"><i data-lucide="images"></i>Обрати з галереї</button>
+    <div class="shoot" id="dropz">
+      <span class="af-zico" aria-hidden="true"><i data-lucide="image"></i></span><b class="af-zt">Завантажте фото</b><span class="af-zh">Перетягніть сюди або виберіть файли</span>
+      <button type="button" class="main"><i data-lucide="camera"></i><span class="af-m">Зняти</span><span class="af-d">Зробити фото</span></button>
+      <button type="button"><i data-lucide="images"></i><span class="af-m">Обрати з галереї</span><span class="af-d">Вибрати файли</span></button>
     </div>
     <div class="mgrid">
       <div class="mi"><img src="assets/jeans-1.jpg" alt="Фото 1"><span class="tag">Обкладинка</span><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
@@ -44,11 +61,17 @@
     <p class="count" id="mcount">4 фото з 10</p>
     <p class="fhint bad" id="mhint" hidden>Додайте хоча б одне фото</p>
     <p class="hint"><a class="textlink" href="create.html?step=2" id="manual">Заповнити самому</a></p>
+    <div class="aiwhat" aria-label="Що зробить AI">
+      <div class="af-aihead" aria-hidden="true"><i data-lucide="sparkles"></i><span class="b">AI</span></div>
+      <div class="af-aipic" aria-hidden="true"><img id="af-aiimg" src="assets/jeans-1.jpg" alt=""><span class="af-pl"><i data-lucide="play"></i></span></div>
+      <ul><li><i data-lucide="check"></i>Розпізнає товар</li><li><i data-lucide="check"></i>Заповнить деталі й опис</li><li><i data-lucide="check"></i>Покращить фото, збере відео</li><li><i data-lucide="check"></i>Підкаже ціну</li></ul>
+    </div>
   </section>
 
   <section class="step ai-step" data-step="ai">
     <div class="scan"><img src="assets/jeans-2.jpg" alt=""></div>
     <div class="ai-run">
+      <span class="af-glow" aria-hidden="true"><i data-lucide="aperture"></i></span>
       <h1>AI заповнює оголошення</h1>
       <p class="hint">Це кілька секунд. Перед публікацією ви все перевірите.</p>
       <div class="tasks">
@@ -69,17 +92,19 @@
   </section>
 
   <section class="step" data-step="2">
+    <div class="af-gal" aria-label="Ваші фото"><div class="af-big"><img id="af-gbig" src="assets/jeans-1.jpg" alt="Фото товару"></div><div class="af-thumbs" id="af-gthumbs"></div></div>
+    <div class="af-form">
     <h1>Перевірте, що заповнив AI</h1>
-    <div class="ai-banner"><i data-lucide="sparkles"></i><span><b>Заповнено за вашими фото.</b> Перевірте поля й позначте, чи є дефекти: це знаєте лише ви.</span></div>
+    <div class="ai-banner"><i data-lucide="sparkles"></i><span><b>Заповнено за вашими фото.</b> Перевірте поля й позначте, чи є дефекти: це знаєте лише ви.</span><span class="af-d">Згенеровано AI</span></div>
     <div class="srcstrip" aria-label="Ваші фото"><span class="s"><img src="assets/jeans-1.jpg" alt="Фото 1"></span><span class="s"><img src="assets/jeans-2.jpg" alt="Фото 2"></span><span class="s"><img src="assets/jeans-3.jpg" alt="Фото 3"></span><span class="s"><img src="assets/jeans-4.jpg" alt="Фото 4"></span><small>Ваші фото</small></div>
-    <div class="field"><span class="lbl">Категорія</span>
+    <div class="field af-cat"><span class="lbl">Категорія</span>
       <a class="rowbtn" href="category.html?from=ai"><span>Жіночий одяг · Джинси</span><i data-lucide="chevron-right"></i></a></div>
-    <div class="field"><label for="f-title">Назва <span class="num" id="tcount">27 / 70</span></label>
+    <div class="field af-ttl"><label for="f-title">Назва <span class="num" id="tcount">27 / 70</span></label>
       <input class="input" id="f-title" maxlength="70" value="Джинси Levi’s 501, W32 L32"><p class="fhint bad" id="thint" hidden>Вкажіть назву</p></div>
-    <div class="field"><span class="lbl">Стан</span>
+    <div class="field af-cond"><span class="lbl">Стан</span>
       <div class="segc" id="cond"><button type="button" aria-pressed="false">Нове</button><button type="button" aria-pressed="true">Вживане</button></div>
       <p class="from">Обрано за фото. Змініть, якщо це не так.</p></div>
-    <div class="field"><span class="lbl">Дефекти <span class="num">обов’язково</span></span>
+    <div class="field af-defs"><span class="lbl">Дефекти <span class="num">обов’язково</span></span>
       <div class="segc" id="defs"><button type="button" aria-pressed="false">Немає</button><button type="button" aria-pressed="false">Є</button></div>
       <textarea class="input" id="f-def" placeholder="Що саме: пляма, потертість, зламана блискавка" hidden></textarea>
       <p class="need-hint" id="dneed">Оберіть самі: AI не стверджує, що дефектів немає</p></div>
@@ -87,32 +112,51 @@
       <div><label for="f-brand">Бренд</label><input class="input" id="f-brand" value="Levi’s"></div>
       <div><label for="f-size">Розмір</label><input class="input" id="f-size" value="W32 L32"><p class="from" id="sfrom">З бирки на фото</p><p class="need-hint" id="sneed" hidden>На фото не видно бирки. Вкажіть самі</p></div>
     </div>
-    <div class="field"><span class="lbl">Колір</span>
+    <div class="field af-col"><span class="lbl">Колір</span>
       <button class="rowbtn" type="button" id="colorbtn"><span>Синій</span><i data-lucide="chevron-right"></i></button></div>
-    <div class="field"><label for="f-desc">Опис</label>
+    <div class="field af-desc"><label for="f-desc">Опис</label>
       <textarea class="input" id="f-desc" placeholder="Стан, заміри, чому продаєте">Сині джинси Levi’s 501 прямого крою, розмір W32 L32. Колір індиго, застібка на ґудзиках, п’ять кишень.</textarea>
       <button class="chipbtn" type="button" id="rewrite"><i data-lucide="sparkles"></i>Переписати інакше</button></div>
-    <div class="field"><label for="f-price">Ціна</label>
+    <div class="field af-price"><label for="f-price">Ціна</label>
       <div class="pricebox"><input id="f-price" class="num" inputmode="numeric" value="900"><span>грн</span></div>
       <p class="from" id="pfrom">Схожі джинси продають за 750–1 100 грн. Ціну вирішуєте ви.</p><p class="fhint bad" id="phint" hidden>Вкажіть ціну</p></div>
-    <div class="field"><span class="lbl">Місто</span>
+    <div class="field af-city"><span class="lbl">Місто</span>
       <a class="rowbtn" href="city.html"><span>Одеса, Приморський район</span><i data-lucide="chevron-right"></i></a></div>
-    <div class="field"><span class="lbl">Як покупці можуть вам написати</span>
+    <div class="field af-ways"><span class="lbl"><span class="af-m">Як покупці можуть вам написати</span><span class="af-d">Зв’язок</span></span>
       <button class="rowbtn" type="button" id="waysbtn"><span id="wayssum">Telegram, Viber, чат TRAD</span><i data-lucide="chevron-right"></i></button>
       <p class="from">Місто й способи зв’язку взято з вашого профілю.</p></div>
+    </div>
   </section>
 
   <section class="step" data-step="m">
     <h1>Відео і фото готові</h1>
+    <div class="af-making" aria-live="polite">
+      <h2>AI створює відео…</h2>
+      <ul class="af-vtasks" id="af-vtasks"><li><span class="af-dot"><i data-lucide="check"></i></span>Обирає найкращі кадри</li><li><span class="af-dot"><i data-lucide="check"></i></span>Додає плавні переходи</li><li><span class="af-dot"><i data-lucide="check"></i></span>Збирає відео з фото</li><li><span class="af-dot"><i data-lucide="check"></i></span>Додає назву й ціну</li></ul>
+      <div class="af-bar"><span class="af-track"><i id="af-fill"></i></span><b class="num" id="af-pct">0%</b></div>
+    </div>
+    <dl class="af-facts">
+      <div><dt><i data-lucide="clock"></i>Тривалість</dt><dd class="num" id="af-fdur">0:12</dd></div>
+      <div><dt><i data-lucide="smartphone"></i>Формат</dt><dd>Вертикальне, 9:16</dd></div>
+      <div><dt><i data-lucide="images"></i>Кадри</dt><dd id="af-fn">4 фото</dd></div>
+    </dl>
         <div class="mpanel"><div class="clipwrap">
+      <div class="af-stage">
+      <div class="af-build" aria-hidden="true">
+        <div class="af-fan" id="af-fan"></div>
+        <span class="af-pl"><i data-lucide="play"></i></span>
+        <div class="af-ctl"><i data-lucide="play"></i><span class="num" id="af-bt">0:00 / 0:12</span><i data-lucide="volume-2"></i><i data-lucide="maximize"></i></div>
+      </div>
       <div class="clip" id="clip" role="button" tabindex="0" aria-label="Відео: зупинити або відтворити">
         <span class="clipbar" id="clipbar" aria-hidden="true"></span>
         <span class="dur"><i data-lucide="play"></i><span id="cldur">0:12</span></span>
         <span class="pp"><i data-lucide="play"></i></span>
         <div class="cap"><div class="price num" id="clprice">900&nbsp;грн</div><div class="title" id="cltitle">Джинси Levi’s 501, W32 L32</div></div>
       </div>
+      </div>
       <div class="clipside">
         <div><span class="mlabel"><i data-lucide="video"></i>Відео</span><p>AI зібрав його з ваших фото</p></div>
+        <button class="af-rep" type="button" id="replay"><i data-lucide="play"></i>Переглянути ще раз</button>
         <button class="chipbtn" type="button" id="reclip"><i data-lucide="sparkles"></i>Зібрати інакше</button>
       </div>
     </div></div>
@@ -126,8 +170,9 @@
   <section class="step" data-step="3">
     <h1>Так оголошення побачать покупці</h1>
     <div class="review">
-      <div class="card cv"><div class="frame"><img id="rvimg" src="assets/jeans-1.jpg" alt=""><span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span></div>
+      <div class="card cv"><div class="frame"><img id="rvimg" src="assets/jeans-1.jpg" alt=""><span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span><span class="af-vtime num" aria-hidden="true"><i data-lucide="play"></i><span id="af-rvdur">0:12</span></span></div>
         <div class="cap"><div class="price num" id="rvprice">900&nbsp;грн</div><div class="title" id="rvtitle">Джинси Levi’s 501, W32 L32</div><div class="attrs">Вживане · Одеса</div></div></div>
+      <div class="af-sum"><div class="af-stt" id="af-rvt"></div><div class="af-spr num" id="af-rvp"></div><div class="pchips" id="af-rvchips"></div><p class="af-sds" id="af-rvd"></p></div>
       <dl class="sum">
         <div><dt>Категорія</dt><dd>Жіночий одяг · Джинси</dd></div>
         <div><dt>Стан і розмір</dt><dd id="rvcond">Вживане · W32 L32</dd></div>
@@ -137,6 +182,7 @@
         <div><dt>Зв’язок</dt><dd id="rvways">Telegram, Viber, чат TRAD</dd></div>
       </dl>
     </div>
+    <div class="af-ready"><i data-lucide="circle-check"></i><div><b>Оголошення готове до публікації!</b><span>Опис і відео підготував AI. Перевірте дані перед публікацією.</span></div></div>
     <p class="hint"><a class="textlink" href="my.html?tab=drafts" id="draft">Зберегти як чернетку</a></p>
   </section>
 
@@ -189,6 +235,7 @@
   <p class="whynot" id="whynot" hidden></p>
   <button class="btn ghost" id="back" type="button" hidden>Назад</button>
   <button class="btn primary" id="next" type="button">Далі</button>
+  <a class="btn ghost af-draft" href="my.html?tab=drafts" id="draft2"><i data-lucide="clock"></i>Зберегти як чернетку</a>
 </div>
 <div class="toast" id="toast" role="status"></div>
 
@@ -201,6 +248,7 @@
   var hold = q.get('hold') === '1', fail = q.get('err') === '1';
   var steps = document.querySelectorAll('.step'), bars = document.querySelectorAll('#progress i');
   var back = $('back'), next = $('next'), timers = [];
+  var big = window.matchMedia('(min-width: 900px)'), fwd = false, gsel = 0, addMore = null, vbT = [];   /* лише для комп'ютера */
   var title = $('f-title'), price = $('f-price'), size = $('f-size'), desc = $('f-desc'), grid = document.querySelector('.mgrid');
   if (order[pos] === 'm' || order[pos] === '3' || order[pos] === '5' || q.get('defs') === '0') document.querySelector('#defs button').setAttribute('aria-pressed', 'true');
   if (q.get('unsure') === '1') { size.value = ''; size.classList.add('need'); size.placeholder = 'Вкажіть самі'; }
@@ -258,6 +306,7 @@
     $('clprice').textContent = money(price.value); $('cltitle').textContent = title.value.trim();
     if (id === '5') post();
     $('pv').hidden = id === '3' || id === '5';
+    if (big.matches) deskSync(cover, vi);
   }
   function show() {
     var id = order[pos], n = NUM[id];
@@ -267,7 +316,8 @@
     document.querySelectorAll('#stepper li').forEach(function (l, i) { l.className = i < SI ? 'sdone' : i === SI ? 'scur' : ''; });
     $('stepno').textContent = (id === 'ai' || !n) ? '' : n + ' з 4';
     back.hidden = id === '1';
-    next.textContent = id === '3' ? 'Опублікувати' : 'Далі';
+    if (big.matches && id === '3') { next.innerHTML = '<i data-lucide="rocket"></i>Опублікувати оголошення'; lucide.createIcons(); }
+    else next.textContent = id === '3' ? 'Опублікувати' : 'Далі';
     $('actions').style.display = (id === '5' || id === 'ai') ? 'none' : '';
     document.body.classList.toggle('donepage', id === '5');
     document.querySelector('.flow-top .ttl').textContent = id === '5' ? '' : 'Нове оголошення';
@@ -275,9 +325,12 @@
     window.scrollTo(0, 0);
     if (id === 'ai') runAi();
     if (id === 'm') buildMedia(); else clearInterval(clipT);
+    vstop();
+    if (big.matches && id === '2') deskGal();
+    if (big.matches && id === 'm' && (fwd || q.get('build') === '1')) vbuild(q.get('build') === '1' && hold);
     sync(); need();
   }
-  next.addEventListener('click', function () { pos = Math.min(order.length - 1, pos + 1); show(); });
+  next.addEventListener('click', function () { pos = Math.min(order.length - 1, pos + 1); fwd = true; show(); fwd = false; });
   back.addEventListener('click', function () { pos = Math.max(0, pos - (order[pos] === '2' ? 2 : 1)); show(); });
   $('retry').addEventListener('click', function () { fail = false; runAi(); });
   [title, price, size].forEach(function (f) { f.addEventListener('input', function () { sync(); need(); }); });
@@ -375,7 +428,9 @@
       ph.forEach(function (m, i) { var tg = m.querySelector('.tag'); if (i === 0 && !tg) { tg = document.createElement('span'); tg.className = 'tag'; tg.textContent = 'Обкладинка'; m.insertBefore(tg, m.querySelector('.rm')); } else if (i > 0 && tg) tg.remove(); m.querySelector('img').alt = 'Фото ' + (i + 1); });
       cnt.textContent = ph.length + ' фото з 10' + (ph.length && ph.length < 3 ? ' · для відео краще від трьох' : '');
       grid.querySelector('.mi.add').hidden = ph.length >= 10;
+      if (big.matches) grid.style.setProperty('--n', Math.max(4, Math.min(6, ph.length + (ph.length < 10 ? 1 : 0))));
       lucide.createIcons(); need();
+      if (big.matches) sync();
     }
     function addPhoto() {
       if (photos().length >= 10) return;
@@ -389,6 +444,70 @@
     });
     document.querySelector('.shoot .main').addEventListener('click', addPhoto);
     document.querySelector('.shoot button:not(.main)').addEventListener('click', addPhoto);
+    addMore = addPhoto;
+  })();
+
+  // ---- лише комп'ютер (від 900 px): галерея біля форми, картка-підсумок, «AI створює відео», вихід через шапку.
+  // На телефоні ці блоки сховані стилями, а функції нижче не викликаються.
+  function deskSync(cover, vi) {
+    $('af-aiimg').src = cover;
+    $('af-rvt').textContent = title.value.trim(); $('af-rvp').textContent = money(price.value);
+    var chips = $('af-rvchips'), sz = size.value.trim();
+    chips.textContent = '';
+    [document.querySelector('#cond [aria-pressed=true]').textContent, sz ? 'Розмір ' + sz : '', colorbtn.querySelector('span').textContent].forEach(function (t) {
+      if (!t) return; var c = document.createElement('span'); c.textContent = t; chips.appendChild(c);
+    });
+    $('af-rvd').textContent = desc.value.trim();
+    $('af-rvdur').textContent = $('af-fdur').textContent = vi.dur;
+    $('af-fn').textContent = Math.min(5, photos().length) + ' фото';
+  }
+  function deskGal() {
+    var srcs = photos().map(function (m) { return m.querySelector('img').getAttribute('src'); }), more = srcs.length < 10, box = $('af-gthumbs');
+    if (gsel >= srcs.length) gsel = 0;
+    $('af-gbig').src = srcs[gsel] || 'assets/jeans-1.jpg';
+    box.innerHTML = srcs.map(function (s, i) { return '<button class="af-th" type="button"' + (i === gsel ? ' aria-current="true"' : '') + ' aria-label="Фото ' + (i + 1) + '"><img src="' + s + '" alt=""></button>'; }).join('')
+      + (more ? '<button class="af-th af-add" type="button" aria-label="Додати фото"><i data-lucide="plus"></i></button>' : '');
+    box.style.setProperty('--n', Math.max(4, Math.min(6, srcs.length + (more ? 1 : 0))));
+    lucide.createIcons();
+  }
+  $('af-gthumbs').addEventListener('click', function (e) {
+    var b = e.target.closest('.af-th'); if (!b) return;
+    if (b.classList.contains('af-add')) addMore(); else gsel = [].indexOf.call(this.children, b);
+    deskGal();
+  });
+  // відео «збирається»: чотири кроки й смужка з відсотками, потім готове відео
+  function vstop() { vbT.forEach(clearTimeout); vbT = []; document.body.classList.remove('vbuild'); }
+  function vbuild(frozen) {
+    var li = $('af-vtasks').children, p = 0;
+    function setp(v) {
+      $('af-fill').style.width = v + '%'; $('af-pct').textContent = v + '%';
+      [].forEach.call(li, function (t, i) { t.className = v >= (i + 1) * 25 ? 'af-ok' : v >= i * 25 ? 'af-run' : ''; });
+    }
+    $('af-fan').innerHTML = photos().slice(0, 3).map(function (m) { return '<img src="' + m.querySelector('img').getAttribute('src') + '" alt="">'; }).join('');
+    $('af-bt').textContent = '0:00 / ' + vinfo().dur;
+    document.body.classList.add('vbuild');
+    if (frozen) { setp(72); return; }
+    setp(0);
+    (function tick() {
+      p = Math.min(100, p + 4); setp(p);
+      vbT.push(setTimeout(p < 100 ? tick : function () { vstop(); ci = 0; clipShow(); if (!hold) clipPlay(); }, p < 100 ? 110 : 400));
+    })();
+  }
+  $('replay').addEventListener('click', function () { ci = 0; clipShow(); clipPlay(); });
+  // «Головна» і знак у шапці — це вихід зі створення: спершу питаємо про чернетку
+  ['af-home', 'af-crumb'].forEach(function (k) {
+    $(k).addEventListener('click', function (e) { if (order[pos] === '5') return; e.preventDefault(); open('xsheet'); });
+  });
+  // фото можна перетягнути в рамку
+  (function () {
+    var dz = $('dropz');
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(function (ev) {
+      dz.addEventListener(ev, function (e) {
+        if (!big.matches) return;
+        e.preventDefault(); dz.classList.toggle('af-over', ev === 'dragenter' || ev === 'dragover');
+        if (ev === 'drop') addMore();
+      });
+    });
   })();
   sheets.forEach(function (s) { s.style.display = 'none'; });
   show();

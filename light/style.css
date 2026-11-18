@@ -929,11 +929,7 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .sharebox .btn { margin-top: 10px; }
 .sharebox .btn.ghost { margin-top: 8px; background: var(--s2); }
 .sharebox .btn svg { width: 18px; height: 18px; }
-@media (min-width: 900px) {
-  /* на комп'ютері після публікації немає картки-перегляду праворуч, тому екран стоїть по центру */
-  body.flowpage.donepage .flow { margin-inline: auto; max-width: 560px; }
-  body.flowpage.donepage .flow-top { padding-inline: max(32px, calc(50% - 280px)); }
-}
+/* вигляд на комп'ютері (шапка сайту, аркуш, лінійка кроків, усі кроки) — у build_shop.py, блок «крок 3: створення оголошення на комп'ютері» */
 .donelinks { display: grid; gap: 8px; margin-top: 10px; text-align: left; }
 .donelinks a { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px; border-radius: 18px; background: var(--s1); font-size: 16px; font-weight: 500; transition: background 0.2s var(--ease); }
 .donelinks a:hover { background: var(--s2); }
@@ -1241,48 +1237,317 @@ textarea { resize: none; }
   body.wide .info .price { font-size: 36px; }
   body.wide .pwrap .block h2 { font-size: 22px; }
 }
-/* ---- крок 3: створення оголошення на комп'ютері — темне тло, світлий аркуш; крок «AI працює» темний (refs/trad-gpt-create-flow.png) ---- */
+/* ---- крок 3: створення оголошення на комп'ютері за рисунками refs/create-big/step-1…6.png. create-ai.html (клас aiflow):
+   шапка як на сайті, світлий аркуш на темному тлі, шлях, лінійка кроків в аркуші, шість екранів. Розміри двох рівнів:
+   звичайний і великий (вікно від 1280 x 860) — змінні на body. Ручна форма create.html: темний рядок із хрестиком і той самий аркуш.
+   Усе нове має префікс af- і на телефоні сховане. ---- */
+.stepper, .aiwhat, .af-top, .af-crumbs, .af-zico, .af-zt, .af-zh, .af-d, .af-glow, .af-gal, .af-build, .af-making, .af-facts, .af-rep, .af-sum, .af-vtime, .af-ready, .actions .af-draft { display: none; }
 @media (min-width: 900px) {
   body.flowpage { background: var(--ink); }
-  body.flowpage::before { content: ""; position: fixed; z-index: -1; top: 142px; bottom: 0; left: 50%; width: 1000px; margin-left: -500px; border-radius: 28px 28px 0 0; background: var(--bg); }
-  body.flowpage .flow-top { background: var(--ink); color: var(--on-ink); }
-  body.flowpage .flow-top .x { color: var(--on-ink); }
-  body.flowpage .flow-top .stepno, body.flowpage .flow-top .progress { display: none; }
-  body.flowpage .stepper { display: flex; width: 620px; max-width: 100%; margin: 4px auto 0; padding: 0 0 12px; list-style: none; counter-reset: st; }
-  body.flowpage .stepper li { position: relative; flex: 1; display: grid; justify-items: center; gap: 6px; counter-increment: st; font-size: 13px; font-weight: 500; color: oklch(1 0 0 / 0.6); }
-  body.flowpage .stepper li::before { content: counter(st); position: relative; z-index: 1; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: oklch(0.32 0.02 300); color: var(--on-ink); font-size: 14px; font-weight: 700; }
-  body.flowpage .stepper li:not(:first-child)::after { content: ""; position: absolute; top: 13px; left: calc(-50% + 14px); right: calc(50% + 14px); height: 2px; background: oklch(1 0 0 / 0.16); }
-  body.flowpage .stepper li.sdone::before { content: "✓"; background: var(--hot); color: var(--on-hot); }
-  body.flowpage .stepper li.scur::before { background: var(--hot); color: var(--on-hot); }
-  body.flowpage .stepper li.sdone, body.flowpage .stepper li.scur { color: var(--on-ink); }
-  body.flowpage .stepper li.sdone::after, body.flowpage .stepper li.scur::after { background: var(--hot); }
-  body.flowpage.donepage .stepper { display: none; }
-  body.flowpage .pv { margin-top: 56px; }
-  body.flowpage .flow-row { position: relative; }
-  body.flowpage .flow-row .ttl { position: absolute; left: 50%; transform: translateX(-50%); }
-  body.flowpage:has(.step[data-step="1"].on) #pv > :not(.aiwhat) { display: none; }
-  body.flowpage:has(.step[data-step="1"].on) #pv .aiwhat { display: block; padding: 20px; border-radius: 20px; background: oklch(0.95 0.03 30); }
-  .aiwhat .h { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
-  .aiwhat .b { padding: 3px 7px; border: 2px solid var(--hot-ink); border-radius: 8px; color: var(--hot-ink); font: 700 14px/1 var(--display); }
-  .aiwhat ul { display: grid; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 14px; }
-  .aiwhat li { display: flex; align-items: center; gap: 10px; }
-  .aiwhat li svg { flex: none; width: 18px; height: 18px; color: var(--hot-ink); }
-  body.flowpage:has(.ai-step.on)::before { background: none; }
-  body.flowpage:has(.ai-step.on) #pv { display: none; }
-  body.flowpage .ai-step.on { color: var(--on-ink); }
-  body.flowpage:has(.ai-step.on) main.flow { transform: translateX(200px); }
-  body.flowpage .ai-step.on { text-align: center; }
-  body.flowpage .ai-step.on .scan { margin-inline: auto; }
-  body.flowpage .ai-step.on .tasks { width: fit-content; margin-inline: auto; text-align: left; }
+  /* ручна форма */
+  body.flowpage:not(.aiflow)::before { content: ""; position: fixed; z-index: -1; top: 92px; bottom: 0; left: 50%; width: 1000px; max-width: calc(100% - 24px); transform: translateX(-50%); border-radius: 28px 28px 0 0; background: var(--bg); }
+  body.flowpage:not(.aiflow) .flow-top { background: var(--ink); color: var(--on-ink); }
+  body.flowpage:not(.aiflow) .flow-top .x:hover { background: oklch(1 0 0 / 0.12); }
+  body.flowpage:not(.aiflow) .flow-top .stepno { color: oklch(1 0 0 / 0.62); }
+  body.flowpage:not(.aiflow) .progress i { background: oklch(1 0 0 / 0.16); }
+  body.flowpage:not(.aiflow) .progress i.on { background: var(--hot); }
+  body.flowpage:not(.aiflow) .flow-row { position: relative; }
+  body.flowpage:not(.aiflow) .flow-row .ttl { position: absolute; left: 50%; transform: translateX(-50%); }
+
+  /* створення з AI: розміри */
+  body.flowpage.aiflow {
+    --sw: min(calc(100vw - 20px), clamp(980px, calc((100vh - 68px) * 1.585), 1520px)); --sp: 44px; --cw: calc(var(--sw) - 2 * var(--sp)); --cg: 28px;
+    --f-h1: 36px; --f-h2: 28px; --f-sub: 16px; --f-zt: 22px; --f-lg: 16px; --f-chk: 16px; --f-md: 16px; --f-sm: 14px; --f-xs: 13px; --f-step: 14px; --f-fld: 14px; --f-btn: 16px; --f-ai: 24px; --f-pct: 24px; --f-rb: 20px; --f-rs: 14px; --xs: 0px;
+    --dot: 32px; --dotc: 38px; --bh: 52px; --ab: 48px; --fh: 40px; --rg: 6px; --dh: 56px; --aiw: clamp(240px, 30%, 300px); --ai-ic: 40px; --aig: 14px;
+    --zh: clamp(276px, calc(100vh - 478px), 340px); --zi: 52px; --th: clamp(76px, calc(100vh - 700px), 104px); --th2: 76px;
+    --ph: clamp(400px, calc(100vh - 236px), 600px); --sh: clamp(380px, calc(100vh - 304px), 620px); --gh: clamp(220px, calc(100vh - 392px), 420px);
+    --gi: 84px; --tg: 10px; --tg2: 18px; --fr: 38px; --ob: 44px;
+    --rw: 250px; --rh: clamp(150px, calc(100vh - 610px), 220px); --rgap: 24px; --rp: 14px; --ch: 32px; --bp: 10px; --ri: 44px;
+    padding-bottom: 10px;
+  }
+  body.flowpage.aiflow .flow-top, body.flowpage.aiflow .pv { display: none; }
+  body.flowpage.aiflow::before { content: ""; position: fixed; z-index: -1; top: 68px; bottom: 10px; left: 50%; width: var(--sw); transform: translateX(-50%); border-radius: 28px; background: var(--bg); }
+  body.flowpage.aiflow::after { content: ""; position: fixed; z-index: 12; left: 0; right: 0; bottom: 0; height: 10px; background: var(--ink); }
+  .aiflow .af-m { display: none; }
+  .aiflow .af-d { display: inline; }
+
+  /* шапка як на сайті */
+  body.flowpage.aiflow .af-top { display: block; position: sticky; top: 0; z-index: 20; height: 68px; background: var(--ink); color: var(--on-ink); }
+  .af-in { display: flex; align-items: center; gap: 20px; width: var(--sw); max-width: 100%; height: 100%; margin: 0 auto; padding: 0 calc(var(--sp) - 14px); }
+  .af-top .wordmark { flex: none; font-size: 28px; }
+  .af-link { margin-left: auto; font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .af-link:hover { color: var(--hot); }
+  .af-search { display: flex; align-items: center; gap: 10px; flex: 0 1 400px; min-width: 140px; height: 44px; margin-left: 8px; padding: 0 16px; border-radius: 999px; background: oklch(1 0 0 / 0.1); }
+  .af-search svg { width: 20px; height: 20px; color: oklch(1 0 0 / 0.62); }
+  .af-search input { flex: 1; min-width: 0; height: 100%; border: 0; outline: 0; background: none; color: var(--on-ink); font: 400 16px var(--ui); }
+  .af-search input::placeholder { color: oklch(1 0 0 / 0.62); }
+  .af-nav { display: flex; align-items: center; gap: 6px; margin-left: clamp(16px, 5vw, 84px); }
+  .af-nav a { position: relative; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; transition: background 0.2s var(--ease); }
+  .af-nav a:hover { background: oklch(1 0 0 / 0.1); }
+  .af-nav .dot { top: 7px; right: 7px; box-shadow: 0 0 0 2px var(--ink); }
+  .af-nav .af-ava { margin-left: 10px; }
+  .af-ava img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+
+  /* аркуш: шлях і лінійка кроків */
+  body.flowpage.aiflow .flow { width: var(--cw); max-width: calc(100% - 2 * var(--sp)); margin: 0 auto; padding: 0 0 6px; }
+  body.flowpage.aiflow .flow h1 { margin: 0; font: 700 var(--f-h2)/1.15 var(--display); letter-spacing: -0.02em; }
+  body.flowpage.aiflow .af-crumbs { display: flex; align-items: center; gap: 10px; padding-top: calc(18px + var(--xs)); font-size: var(--f-sm); line-height: 22px; color: var(--text-2); }
+  .af-crumbs a { display: inline-flex; align-items: center; gap: 8px; }
+  .af-crumbs a:hover { color: var(--text); }
+  .af-crumbs svg { width: 18px; height: 18px; color: var(--text); }
+  .af-crumbs b { font-weight: 500; color: var(--text); }
+  body.flowpage.aiflow .stepper { display: flex; margin: calc(12px + var(--xs) * 0.6) 0 0; padding: 0; list-style: none; counter-reset: st; }
+  body.flowpage.aiflow:has(.step[data-step="1"].on) .stepper, body.flowpage.aiflow.donepage .stepper { display: none; }
+  .aiflow .stepper li { position: relative; flex: 1; display: grid; justify-items: center; align-content: start; gap: 6px; counter-increment: st; font-size: var(--f-step); font-weight: 500; line-height: 1.3; color: var(--text-2); }
+  .aiflow .stepper li::before { content: counter(st); position: relative; z-index: 1; display: grid; place-items: center; width: var(--dot); height: var(--dot); margin: calc((var(--dotc) - var(--dot)) / 2); border-radius: 50%; background: var(--s2); color: var(--text-2); font-weight: 700; line-height: 1; }
+  .aiflow .stepper li:not(:first-child)::after { content: ""; position: absolute; top: calc(var(--dotc) / 2 - 1px); left: calc(-50% + var(--dotc) / 2 + 8px); right: calc(50% + var(--dotc) / 2 + 8px); height: 2px; border-radius: 1px; background: var(--line); }
+  .aiflow .stepper li.sdone, .aiflow .stepper li.scur { color: var(--text); }
+  .aiflow .stepper li.scur { font-weight: 700; }
+  .aiflow .stepper li.sdone::before { content: ""; background: var(--hot) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 58% no-repeat; }
+  .aiflow .stepper li.scur::before { width: var(--dotc); height: var(--dotc); margin: 0; background: var(--hot); color: #fff; }
+  .aiflow .stepper li.sdone::after, .aiflow .stepper li.scur::after { background: var(--hot); }
+
+  /* 1. фото: заголовок, рамка для фото, ряд мініатюр; праворуч картка «AI» */
+  body.flowpage.aiflow .step[data-step="1"].on { display: grid; grid-template-columns: minmax(0, 1fr) var(--aiw); column-gap: var(--cg); align-items: start; padding-top: calc(12px + var(--xs)); }
+  .aiflow .step[data-step="1"] > * { grid-column: 1; }
+  body.flowpage.aiflow .step[data-step="1"] h1 { grid-row: 1; font-size: var(--f-h1); font-weight: 800; line-height: 1.12; }
+  .aiflow .step[data-step="1"] h1 + .hint { grid-row: 2; margin-top: 8px; font-size: var(--f-sub); line-height: 1.4; color: var(--text); }
+  .aiflow .step[data-step="1"] .shoot { grid-row: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; min-height: var(--zh); margin-top: 16px; padding: 20px 24px; border: 2px dashed var(--text-2); border-radius: 24px; transition: background 0.2s var(--ease), border-color 0.2s var(--ease); }
+  .aiflow .shoot.af-over { border-color: var(--hot); background: oklch(0.95 0.03 30); }
+  .aiflow .af-zico { display: block; }
+  .aiflow .af-zico svg { display: block; width: var(--zi); height: var(--zi); stroke-width: 1.6; }
+  .aiflow .af-zt { display: block; margin-top: 8px; font: 700 var(--f-zt)/1.2 var(--display); letter-spacing: -0.01em; }
+  .aiflow .af-zh { display: block; margin-top: 4px; font-size: var(--f-lg); color: var(--text-2); }
+  .aiflow .shoot button { flex-direction: row; gap: 12px; width: 82%; height: var(--bh); border-radius: 999px; font-size: var(--f-btn); font-weight: 700; }
+  .aiflow .shoot button svg { width: 24px; height: 24px; }
+  .aiflow .shoot button:not(.main) { order: 1; margin-top: 16px; background: var(--hot); color: var(--on-hot); }
+  .aiflow .shoot button:not(.main):hover { background: var(--hot-deep); }
+  .aiflow .shoot button.main { order: 2; height: calc(var(--bh) - 6px); margin-top: 12px; background: var(--card); color: var(--text); box-shadow: inset 0 0 0 1.5px var(--text-2); }
+  .aiflow .shoot button.main:hover { background: var(--s1); }
+  .aiflow .mgrid { grid-row: 4; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+  .aiflow .mgrid .mi { aspect-ratio: auto; height: var(--th); }
+  .aiflow .mgrid .mi.add { border: 1.5px solid var(--line); background: var(--card); color: var(--text); }
+  .aiflow .mgrid .mi.add svg { width: 30px; height: 30px; }
+  .aiflow .mgrid .mi .rm { width: 26px; height: 26px; }
+  .aiflow .step[data-step="1"] .count { grid-row: 5; justify-self: start; margin-top: 10px; font-size: var(--f-xs); line-height: 20px; }
+  .aiflow .step[data-step="1"] > .hint:last-of-type { grid-row: 5; justify-self: end; margin-top: 10px; font-size: var(--f-xs); line-height: 20px; }
+  .aiflow .step[data-step="1"] #mhint { grid-row: 6; }
+  body.flowpage.aiflow .step[data-step="1"] > .aiwhat { display: flex; flex-direction: column; grid-column: 2; grid-row: 1 / span 4; align-self: stretch; padding: 7% 7% 6%; border-radius: 32px; background: linear-gradient(172deg, oklch(0.88 0.075 30), oklch(0.945 0.03 30) 58%, oklch(0.955 0.02 30)); }
+  .af-aihead { display: flex; align-items: flex-start; gap: 10px; padding-left: 6%; color: var(--hot); }
+  .af-aihead svg { width: var(--ai-ic); height: var(--ai-ic); margin-top: 8px; fill: currentColor; stroke-width: 1.2; }
+  .af-aihead .b { display: grid; place-items: center; padding: 0.24em 0.42em; border: 2px solid var(--hot); border-radius: 0.36em; background: oklch(1 0 0 / 0.45); color: var(--hot-ink); font: 700 var(--f-ai)/1 var(--display); }
+  .af-aipic { position: relative; width: 88%; margin: 5% auto 0; aspect-ratio: 5 / 4; border: 7px solid var(--card); border-radius: 22px; overflow: hidden; transform: rotate(-5deg); box-shadow: 0 16px 34px oklch(0.4 0.09 30 / 0.24); background: var(--s1); }
+  .af-aipic img { width: 100%; height: 100%; object-fit: cover; }
+  .af-pl { position: absolute; inset: 0; margin: auto; width: 30%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: oklch(0.17 0.02 300 / 0.6); color: #fff; }
+  .af-pl svg { width: 42%; height: 42%; margin-left: 8%; fill: #fff; }
+  .aiflow .aiwhat ul { display: grid; gap: var(--aig); margin: auto 0 0; padding: 9% 0 3% 3%; list-style: none; font-size: var(--f-chk); font-weight: 500; line-height: 1.3; }
+  .aiflow .aiwhat li { display: flex; align-items: center; gap: 12px; }
+  .aiflow .aiwhat li svg { flex: none; width: 1.3em; height: 1.3em; stroke-width: 3; color: var(--hot-ink); }
+
+  /* 2. AI працює: темна панель в аркуші */
+  body.flowpage.aiflow .ai-step.on { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: center; gap: var(--cg); min-height: var(--ph); margin-top: calc(20px + var(--xs)); padding: 32px var(--sp); border-radius: 32px; background: radial-gradient(52% 62% at 30% 30%, oklch(0.5 0.16 28 / 0.4), transparent 72%), var(--ink); color: var(--on-ink); text-align: left; }
+  .aiflow .ai-step .scan { order: 2; justify-self: center; width: 100%; max-width: 460px; margin: 0; aspect-ratio: 7 / 6; border: 8px solid var(--card); border-radius: 26px; transform: rotate(6deg); box-shadow: 0 22px 54px oklch(0 0 0 / 0.45); }
+  .aiflow .ai-step .scan::before { display: none; }
+  .aiflow .ai-step .ai-run { order: 1; justify-self: center; }
+  .aiflow .af-glow { display: grid; place-items: center; width: var(--gi); height: var(--gi); margin: 0 auto 14px; color: var(--hot); filter: drop-shadow(0 0 14px oklch(0.7 0.19 30 / 0.85)); }
+  .aiflow .af-glow svg { width: 100%; height: 100%; stroke-width: 1.3; }
+  .aiflow .ai-step .hint { margin-top: 8px; font-size: var(--f-sm); color: oklch(1 0 0 / 0.7); }
+  .aiflow .ai-step .tasks { max-width: none; margin: 20px 0 0; gap: var(--tg); }
+  .aiflow .ai-step .task { gap: 16px; font-size: var(--f-chk); color: oklch(1 0 0 / 0.55); }
+  .aiflow .ai-step .task.ok, .aiflow .ai-step .task.run { color: var(--on-ink); }
+  .aiflow .ai-step .task .st { width: 28px; height: 28px; background: none; box-shadow: inset 0 0 0 2.5px oklch(1 0 0 / 0.26); }
+  .aiflow .ai-step .task.ok .st { box-shadow: none; color: var(--hot); }
+  .aiflow .ai-step .task.ok .st svg { width: 26px; height: 26px; stroke-width: 3.4; }
+  .aiflow .ai-step .task.run .st { box-shadow: inset 0 0 0 2.5px oklch(1 0 0 / 0.14); }
+  body.flowpage.aiflow .ai-step.fail.on { grid-template-columns: minmax(0, 1fr); }
+  .aiflow .ai-step .ai-fail { justify-self: center; width: 100%; max-width: 520px; text-align: center; }
+  .aiflow .ai-fail .ok { margin-top: 0; background: oklch(1 0 0 / 0.1); color: var(--on-ink); }
+  body.flowpage.aiflow .ai-fail h1 { margin-top: 20px; }
+  .aiflow .ai-fail .stack { display: grid; gap: 10px; }
+  .aiflow .ai-fail .btn.ghost { background: oklch(1 0 0 / 0.12); color: var(--on-ink); }
+  .aiflow .ai-fail .btn.ghost:hover { background: oklch(1 0 0 / 0.2); }
+
+  /* 3. деталі: фото з мініатюрами ліворуч, щільна форма праворуч */
+  body.flowpage.aiflow .step[data-step="2"].on { display: grid; grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr); column-gap: var(--cg); align-items: start; margin-top: calc(18px + var(--xs)); }
+  .aiflow .af-gal { display: block; position: sticky; top: 84px; }
+  .af-big { height: var(--gh); border-radius: 24px; overflow: hidden; background: var(--s1); }
+  .af-big img { width: 100%; height: 100%; object-fit: cover; }
+  .af-thumbs { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
+  .af-th { height: var(--th2); border-radius: 14px; overflow: hidden; background: var(--s1); }
+  .af-th img { width: 100%; height: 100%; object-fit: cover; }
+  .af-th[aria-current="true"] { box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--hot); }
+  .af-th.af-add { display: grid; place-items: center; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--line); }
+  .af-th.af-add svg { width: 28px; height: 28px; }
+  .aiflow .af-form { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--rg) 12px; align-items: start; }
+  .aiflow .af-form > * { grid-column: 1 / -1; }
+  .aiflow .af-form .srcstrip { display: none; }
+  .aiflow .af-form .field { min-width: 0; margin-top: 0; }
+  .aiflow .af-form .field > label, .aiflow .af-form .field > .lbl, .aiflow .af-form .two label { margin-bottom: 5px; font-size: var(--f-xs); font-weight: 600; line-height: 1.3; color: var(--text); }
+  .aiflow .af-form .lbl .num, .aiflow .af-form label .num { font-weight: 400; color: var(--text-2); }
+  .aiflow .af-form .input, .aiflow .af-form .rowbtn { min-height: 0; height: var(--fh); padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); font-size: var(--f-fld); font-weight: 500; }
+  .aiflow .af-form .input:focus, .aiflow .af-form .input.need { border-color: var(--hot); background: var(--card); }
+  .aiflow .af-form textarea.input { height: auto; min-height: var(--dh); padding: 9px 14px; font-weight: 400; line-height: 1.45; }
+  .aiflow .af-form .rowbtn span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .aiflow .af-form .rowbtn svg { width: 18px; height: 18px; transform: rotate(90deg); color: var(--text); }
+  .aiflow .af-form .segc { height: var(--fh); gap: 3px; padding: 3px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .aiflow .af-form .segc button { height: 100%; border-radius: 9px; font-size: var(--f-fld); }
+  .aiflow .af-form .pricebox { align-items: center; height: var(--fh); padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+  .aiflow .af-form .pricebox:focus-within { border-color: var(--hot); }
+  .aiflow .af-form .pricebox input { font-size: 20px; }
+  .aiflow .af-form .pricebox span { font-size: 14px; }
+  .aiflow .af-form .from, .aiflow .af-form .need-hint, .aiflow .af-form .fhint { margin-top: 4px; font-size: 12px; line-height: 1.35; }
+  .aiflow .af-ttl { order: 1; }
+  .aiflow .af-cat { order: 2; }
+  .aiflow .af-form .two { order: 3; grid-column: span 4; }
+  .aiflow .af-form .af-col { order: 4; grid-column: span 2; }
+  .aiflow .af-form .af-cond { order: 5; grid-column: span 2; }
+  .aiflow .af-form .af-defs { order: 6; grid-column: span 2; }
+  .aiflow .af-defs #f-def { min-height: 56px; margin-top: 6px; padding: 8px 12px; }
+  .aiflow .af-ways .from { display: none; }
+  .aiflow .af-form .af-price { order: 7; grid-column: span 2; }
+  .aiflow .af-form .af-desc { order: 8; position: relative; }
+  .aiflow .af-desc .chipbtn { position: absolute; top: -6px; right: 0; height: 26px; margin: 0; padding: 0 2px; background: none; font-size: 13px; color: var(--hot-ink); }
+  .aiflow .af-desc .chipbtn:hover { text-decoration: underline; text-underline-offset: 3px; }
+  body.flowpage.aiflow .af-form .ai-banner { order: 9; grid-column: span 2; align-self: end; justify-self: start; display: inline-flex; align-items: center; gap: 8px; height: var(--fh); margin: 0; padding: 0 16px; border-radius: 999px; background: oklch(0.93 0.045 30); font-size: var(--f-xs); font-weight: 600; line-height: 1; white-space: nowrap; }
+  .aiflow .af-form .ai-banner > span:not(.af-d) { display: none; }
+  .aiflow .af-form .ai-banner svg { width: 18px; height: 18px; margin: 0; }
+  .aiflow .af-form .af-city { order: 10; grid-column: span 2; }
+  .aiflow .af-form .af-ways { order: 11; grid-column: span 2; }
+
+  /* 4–5. відео: сцена ліворуч; праворуч спершу «AI створює відео», потім готове відео й фото */
+  body.flowpage.aiflow .step[data-step="m"].on { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr); column-gap: var(--cg); align-items: start; align-content: start; margin-top: calc(18px + var(--xs)); }
+  .aiflow .step[data-step="m"] .mpanel:has(.clip), .aiflow .step[data-step="m"] .clipwrap { display: contents; }
+  .aiflow .step[data-step="m"] > *, .aiflow .step[data-step="m"] .clipside { grid-column: 2; }
+  .aiflow .af-stage { grid-column: 1; grid-row: 1 / span 5; position: relative; display: grid; place-items: center; height: var(--sh); border-radius: 32px; overflow: hidden; background: radial-gradient(60% 55% at 62% 42%, oklch(0.5 0.16 28 / 0.55), transparent 75%), var(--ink); }
+  .aiflow .af-stage .clip { width: auto; height: calc(100% - 36px); margin: 0; border-radius: 20px; box-shadow: 0 18px 44px oklch(0 0 0 / 0.4); }
+  .aiflow .clip .cap { left: 16px; right: 16px; bottom: 50px; }
+  .aiflow .clip .cap .price { font-size: 24px; }
+  .aiflow .clip .cap .title { font-size: 16px; }
+  .aiflow .clip .dur { left: 16px; bottom: 16px; }
+  body.flowpage.aiflow .step[data-step="m"] > h1 { grid-row: 1; display: flex; align-items: center; gap: 14px; }
+  .aiflow .step[data-step="m"] > h1::before { content: ""; flex: none; width: 1.1em; height: 1.1em; border-radius: 50%; background: var(--ok) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 60% no-repeat; }
+  .aiflow .af-facts { display: block; grid-row: 2; margin-top: 8px; }
+  .af-facts > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: var(--fr); border-bottom: 1px solid var(--line); font-size: var(--f-md); }
+  .af-facts dt { display: flex; align-items: center; gap: 14px; }
+  .af-facts dt svg { width: 20px; height: 20px; }
+  .af-facts dd { font-weight: 500; }
+  .aiflow .step[data-step="m"] .clipside { grid-row: 3; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 14px; }
+  .aiflow .step[data-step="m"] .clipside > div { display: none; }
+  .aiflow .clipside .af-rep, .aiflow .clipside .chipbtn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: var(--ob); margin: 0; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--line); font-size: var(--f-md); font-weight: 700; transition: background 0.2s var(--ease); }
+  .aiflow .clipside .af-rep:hover, .aiflow .clipside .chipbtn:hover { background: var(--s1); }
+  .aiflow .clipside .af-rep svg, .aiflow .clipside .chipbtn svg { width: 20px; height: 20px; color: var(--text); }
+  .aiflow .step[data-step="m"] > .mpanel { grid-row: 4; margin-top: 14px; padding: 14px 16px; border-radius: 20px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  .aiflow .step[data-step="m"] .mlabel { font-size: var(--f-md); color: var(--text); }
+  .aiflow .step[data-step="m"] .mlabel svg { color: var(--hot-ink); }
+  .aiflow .step[data-step="m"] .segc.sm { background: var(--s1); }
+  .aiflow .step[data-step="m"] .segc.sm button { height: 34px; }
+  .aiflow .enhrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .aiflow .enhrow .ph { flex: 1 1 calc((100% - 40px) / 5); max-width: calc((100% - 30px) / 4); aspect-ratio: auto; height: var(--th2); border-radius: 12px; }
+  .aiflow .step[data-step="m"] .mpanel .from { margin-top: 8px; }
+  .af-making h2 { margin: 0; font: 700 var(--f-h2)/1.15 var(--display); letter-spacing: -0.02em; }
+  .af-vtasks { display: grid; gap: var(--tg2); margin: 22px 0 0; padding: 0; list-style: none; font-size: var(--f-chk); }
+  .af-vtasks li { display: flex; align-items: center; gap: 16px; }
+  .af-dot { flex: none; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; box-shadow: inset 0 0 0 2.5px var(--line); color: transparent; }
+  .af-dot svg { width: 26px; height: 26px; stroke-width: 3.2; }
+  .af-vtasks li.af-run .af-dot { box-shadow: inset 0 0 0 2.5px var(--hot); }
+  .af-vtasks li.af-ok .af-dot { box-shadow: none; color: var(--hot-ink); }
+  .af-bar { display: flex; align-items: center; gap: 18px; margin-top: 30px; }
+  .af-track { flex: 1; height: 18px; border-radius: 999px; background: var(--s2); overflow: hidden; }
+  .af-track i { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--hot); transition: width 0.12s linear; }
+  .af-bar b { min-width: 2.8em; font-size: var(--f-pct); font-weight: 700; text-align: right; }
+  .af-fan { position: absolute; inset: 0; }
+  .af-fan img { position: absolute; top: 46%; left: 50%; width: 34%; max-width: none; aspect-ratio: 5 / 6; object-fit: cover; border: 6px solid var(--card); border-radius: 22px; box-shadow: 0 16px 40px oklch(0 0 0 / 0.4); transform: translate(-50%, -50%) rotate(-4deg); z-index: 2; }
+  .af-fan img:first-child:not(:only-child) { transform: translate(-128%, -54%) rotate(-8deg); z-index: 3; }
+  .af-fan img:nth-child(3), .af-fan img:nth-child(2):last-child { transform: translate(28%, -50%) rotate(6deg); z-index: 1; }
+  .af-build .af-pl { top: -8%; width: 15%; z-index: 4; }
+  .af-ctl { position: absolute; left: 6%; right: 6%; bottom: 6%; display: flex; align-items: center; gap: 16px; padding-bottom: 14px; border-bottom: 3px solid oklch(1 0 0 / 0.28); color: #fff; font-size: var(--f-md); }
+  .af-ctl svg { width: 22px; height: 22px; }
+  .af-ctl svg:first-child { fill: #fff; }
+  .af-ctl svg:nth-of-type(2) { margin-left: auto; }
+  body.flowpage.aiflow.vbuild .step[data-step="m"].on { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: center; }
+  body.flowpage.aiflow.vbuild .af-build { display: block; position: absolute; inset: 0; }
+  body.flowpage.aiflow.vbuild .af-making { display: block; grid-row: 1 / span 5; }
+  body.flowpage.aiflow.vbuild .af-stage .clip, body.flowpage.aiflow.vbuild .step[data-step="m"] > h1, body.flowpage.aiflow.vbuild .af-facts, body.flowpage.aiflow.vbuild .step[data-step="m"] .clipside, body.flowpage.aiflow.vbuild .step[data-step="m"] > .mpanel:not(:has(.clip)), body.flowpage.aiflow.vbuild .actions { display: none; }
+
+  /* 6. публікація: картка-підсумок, зелена плашка, дві кнопки на всю ширину */
+  body.flowpage.aiflow .step[data-step="3"].on { margin-top: calc(16px + var(--xs)); }
+  body.flowpage.aiflow .step[data-step="3"] > h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .aiflow .step[data-step="3"] > .hint { display: none; }
+  .aiflow .review { display: grid; grid-template-columns: var(--rw) minmax(0, 1fr); gap: 0 var(--rgap); align-items: center; margin: 0; padding: var(--rp); border: 1.5px solid var(--line); border-radius: 26px; background: var(--card); }
+  .aiflow .review .card.cv { border: 0; border-radius: 0; background: none; }
+  .aiflow .review .card.cv .frame { aspect-ratio: auto; height: var(--rh); border-radius: 18px; }
+  .aiflow .review .card.cv .cap, .aiflow .review .vmark { display: none; }
+  .aiflow .af-vtime { display: inline-flex; align-items: center; gap: 8px; position: absolute; z-index: 2; right: 12px; bottom: 12px; height: 34px; padding: 0 12px; border-radius: 12px; background: oklch(0.17 0.02 300 / 0.82); color: #fff; font-size: var(--f-sm); font-weight: 600; }
+  .aiflow .af-vtime svg { width: 14px; height: 14px; fill: #fff; }
+  .aiflow .af-sum { display: block; min-width: 0; }
+  .af-stt { font: 700 var(--f-h2)/1.15 var(--display); letter-spacing: -0.02em; }
+  .af-spr { margin-top: 6px; color: var(--hot-ink); font: 700 var(--f-h1)/1.08 var(--display); letter-spacing: -0.02em; }
+  .af-sum .pchips { gap: 8px; margin-top: 12px; }
+  .af-sum .pchips span { height: var(--ch); padding: 0 16px; background: var(--s1); box-shadow: none; font-size: var(--f-sm); font-weight: 600; }
+  .af-sds { margin-top: 12px; font-size: var(--f-lg); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .aiflow .review .sum { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 28px; margin-top: var(--rp); padding-top: 14px; border-top: 1px solid var(--line); }
+  .aiflow .review .sum div { display: flex; align-items: baseline; gap: 8px; padding: 0; border: 0; }
+  .aiflow .review .sum div:nth-child(2) { display: none; }
+  .aiflow .review .sum dt { font-size: var(--f-xs); }
+  .aiflow .review .sum dd { margin: 0; font-size: var(--f-xs); font-weight: 600; }
+  .aiflow .af-ready { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 14px; padding: var(--bp) 24px; border: 1px solid oklch(0.86 0.06 150); border-radius: 22px; background: oklch(0.935 0.04 150); }
+  .af-ready svg { flex: none; width: var(--ri); height: var(--ri); stroke-width: 1.8; color: var(--ok); }
+  .af-ready b { display: block; font: 700 var(--f-rb)/1.2 var(--display); letter-spacing: -0.01em; }
+  .af-ready span { display: block; margin-top: 2px; font-size: var(--f-rs); }
+
+  /* кнопки внизу аркуша */
+  body.flowpage.aiflow .actions { position: sticky; bottom: 10px; left: auto; transform: none; flex-wrap: nowrap; align-items: center; gap: 12px; width: var(--cw); max-width: calc(100% - 2 * var(--sp)); margin: 0 auto; padding: 14px 0 18px; border-top: 0; background: var(--bg); box-shadow: 0 -14px 14px -10px var(--bg); }
+  .aiflow .actions .whynot { order: 2; flex: 1 1 auto; margin: 0; font-size: var(--f-sm); text-align: right; }
+  .aiflow .actions #back { order: 1; height: var(--ab); padding: 0 28px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--line); }
+  .aiflow .actions #back:hover { background: var(--s1); }
+  .aiflow .actions #next { order: 3; flex: 0 0 auto; min-width: 240px; height: var(--ab); margin-left: auto; font-size: var(--f-btn); }
+  body.flowpage.aiflow:has(.step[data-step="3"].on) .actions { position: static; flex-wrap: wrap; justify-content: center; padding-top: 16px; }
+  .aiflow:has(.step[data-step="3"].on) .actions #next { order: 1; flex: 1 1 100%; height: var(--bh); gap: 12px; }
+  .aiflow:has(.step[data-step="3"].on) .actions #next svg { width: 26px; height: 26px; }
+  .aiflow:has(.step[data-step="3"].on) .actions .af-draft { display: inline-flex; order: 2; flex: 1 1 100%; gap: 12px; height: calc(var(--bh) - 4px); background: var(--card); box-shadow: inset 0 0 0 1.5px var(--text); font-size: var(--f-btn); font-weight: 700; }
+  .aiflow:has(.step[data-step="3"].on) .actions .af-draft:hover { background: var(--s1); }
+  .aiflow:has(.step[data-step="3"].on) .actions .af-draft svg { width: 24px; height: 24px; }
+  .aiflow:has(.step[data-step="3"].on) .actions #back { order: 3; height: 36px; padding: 0 14px; background: none; box-shadow: none; font-size: var(--f-sm); color: var(--text-2); }
+
+  /* опубліковано: колонка по центру аркуша */
+  body.flowpage.aiflow .step.done.on { max-width: 580px; margin: 0 auto; padding: 18px 0 20px; }
+  body.flowpage.aiflow .done.hasshare h1 { margin-top: 14px; }
+  .aiflow .sharebox { background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  .aiflow .sharebox .btn.ghost { background: var(--s1); }
+  .aiflow .donelinks a { background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  .aiflow .donelinks a:hover { background: var(--s1); }
+
+  /* вікна (вихід, колір, способи зв'язку) — по центру */
+  body.flowpage.aiflow .sheet { bottom: 50%; transform: translate(-50%, 50%) scale(0.96); opacity: 0; pointer-events: none; border-radius: 24px; transition: opacity 0.25s var(--ease), transform 0.25s var(--ease); }
+  body.flowpage.aiflow.sheet-on .sheet { transform: translate(-50%, 50%); opacity: 1; pointer-events: auto; }
+  body.flowpage.aiflow .sheet-head::before { display: none; }
+  body.flowpage.aiflow .toast { bottom: 40px; z-index: 40; }
 }
-.stepper, .aiwhat { display: none; }
-@media (min-width: 900px) {
-  body.flowpage .ai-step.on .hint { color: oklch(1 0 0 / 0.7); }
-  body.flowpage .ai-step.on .task { color: oklch(1 0 0 / 0.55); }
-  body.flowpage .ai-step.on .task.ok, body.flowpage .ai-step.on .task.run { color: var(--on-ink); }
-  body.flowpage .ai-step.on .task:not(.ok):not(.run) .st { background: oklch(1 0 0 / 0.14); }
-  body.flowpage .ai-step.on .scan { border-radius: 18px; box-shadow: 0 0 0 2px var(--hot), 0 0 44px oklch(0.7 0.19 30 / 0.45); }
+@media (min-width: 1280px) and (min-height: 860px) {
+  body.flowpage.aiflow {
+    --sp: 56px; --cg: 48px;
+    --f-h1: 52px; --f-h2: 36px; --f-sub: 20px; --f-zt: 30px; --f-lg: 20px; --f-chk: 22px; --f-md: 18px; --f-sm: 16px; --f-xs: 14px; --f-step: 20px; --f-fld: 16px; --f-btn: 20px; --f-ai: 36px; --f-pct: 28px; --f-rb: 28px; --f-rs: 18px;
+    --xs: clamp(0px, calc((100vh - 900px) * 0.13), 16px);
+    --dot: 44px; --dotc: 52px; --bh: 64px; --ab: 56px; --fh: 44px; --rg: clamp(6px, calc((100vh - 860px) * 0.1), 12px); --dh: clamp(62px, calc(100vh - 830px), 92px); --aiw: 29%; --ai-ic: 60px; --aig: 22px;
+    --zh: clamp(340px, calc(100vh - 574px - 2 * var(--xs)), 450px); --zi: 76px; --th: clamp(96px, calc(100vh - 884px), 140px); --th2: 88px;
+    --ph: clamp(520px, calc(100vh - 300px), 730px); --sh: clamp(480px, calc(100vh - 322px - 2.6 * var(--xs)), 680px); --gh: clamp(280px, calc(100vh - 432px - 2.6 * var(--xs)), 500px);
+    --gi: 140px; --tg: 16px; --tg2: 26px; --fr: 46px; --ob: 52px;
+    --rw: 36%; --rh: clamp(170px, calc(100vh - 700px), 300px); --rgap: 40px; --rp: 20px; --ch: 40px; --bp: 12px; --ri: 48px;
+  }
 }
+@media (min-width: 1480px) and (min-height: 1000px) {
+  /* найбільший рівень — вікно як на рисунках (1536 x 1024) і великі монітори */
+  body.flowpage.aiflow {
+    --sp: 60px; --cg: 60px;
+    --f-sub: 22px; --f-zt: 36px; --f-lg: 22px; --f-chk: 24px; --f-md: 20px; --f-sm: 18px; --f-xs: 16px; --f-step: 22px; --f-fld: 18px; --f-btn: 24px; --f-ai: 52px; --f-pct: 30px; --f-rb: 30px; --f-rs: 22px;
+    --dot: 48px; --dotc: 58px; --bh: 70px; --ab: 60px; --fh: 50px; --rg: 9px; --dh: 84px; --aiw: 31%; --ai-ic: 72px; --aig: 26px;
+    --zh: clamp(372px, calc(100vh - 586px), 450px); --zi: 84px; --th: clamp(110px, calc(100vh - 884px), 140px); --th2: 104px;
+    --ph: clamp(560px, calc(100vh - 314px), 720px); --sh: clamp(520px, calc(100vh - 380px), 680px); --gh: clamp(300px, calc(100vh - 500px), 500px);
+    --gi: 150px; --tg: 18px; --tg2: 32px; --fr: 56px; --ob: 60px;
+    --rw: 33%; --rh: clamp(190px, calc(100vh - 780px), 300px); --rgap: 48px; --rp: 30px; --ch: 44px; --bp: 16px; --ri: 64px;
+  }
+}
+/* ---- кінець кроку 3 ---- */
 .lrow .ph { flex: none; width: 48px; height: 48px; border-radius: 14px; overflow: hidden; background: var(--s1); }
 .lrow .ph img { width: 100%; height: 100%; object-fit: cover; }
 #root .lrow:has(.ph) { min-height: 68px; font-weight: 600; }
