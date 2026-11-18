@@ -204,7 +204,7 @@
       + '<p>Додайте фото — AI заповнить оголошення і збере з них відео.</p>'
       + '<a class="btn primary" href="create-ai.html">Продати з AI<i data-lucide="arrow-right"></i></a>'
       + '<div class="hart" aria-hidden="true"><img src="assets/hero-ai.webp" alt="">'
-      + '<ul class="hvis"><li><i data-lucide="sparkles"></i>Розпізнає товар</li><li><i data-lucide="file-text"></i>Заповнить опис</li><li><i data-lucide="tag"></i>Підкаже ціну</li><li><i data-lucide="clapperboard"></i>Збере відео з фото</li></ul></div></div></section>'), main.firstChild);
+      + '<ul class="hvis"><li><i data-lucide="sparkles"></i>Розпізнає товар</li><li><i data-lucide="file-text"></i>Заповнить опис</li><li><i data-lucide="tag"></i>Підкаже ціну</li><li><i data-lucide="clapperboard"></i>Збере відео з фото</li></ul></div><span class="hhand" aria-hidden="true"><img src="assets/hero-hand.webp" alt=""></span></div></section>'), main.firstChild);
     catsNav.before(el('<div class="catshead"><h2>Розділи</h2><a class="allcat" href="category.html?browse=1">Дивитися всі<i data-lucide="arrow-right"></i></a></div>'));
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);

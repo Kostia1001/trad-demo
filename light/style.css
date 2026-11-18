@@ -1126,8 +1126,13 @@ textarea { resize: none; }
   body.home header.top .dot { box-shadow: 0 0 0 2px var(--ink); }
   body.home .hero { margin: 0; padding: 8px 16px 36px; border-radius: 0; }
   body.home .hero::after { content: ""; position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; height: 22px; border-radius: 22px 22px 0 0; background: var(--bg); }
-  body.home .hero .hart { top: 36px; }
+  body.home .hero .hart { display: none; }
+  body.home .hero .hhand { display: block; position: absolute; right: -26px; bottom: 4px; height: 178px; aspect-ratio: 844 / 914; pointer-events: none; }
+  body.home .hero .hhand img { display: block; width: 100%; height: 100%; }
+  body.home .hero h1 { max-width: 250px; }
+  body.home .hero p { max-width: 250px; }
 }
+.hero .hhand { display: none; }
 @media (min-width: 900px) {
   body.wide header.top { background: var(--ink); color: var(--on-ink); box-shadow: -1280px 0 0 var(--ink), 1280px 0 0 var(--ink); }
   body.wide header.top .search { background: oklch(1 0 0 / 0.1); }
