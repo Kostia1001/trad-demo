@@ -196,7 +196,7 @@
        Телефон: сітка 4 x 2 — перші вісім розділів, «Усі категорії» посиланням біля заголовка. Комп'ютер: вісім рівних колонок. */
     /* телефон: на головній перші вісім розділів, решта — за «Усі категорії»; комп'ютер: усі розділи, по вісім у ряд */
     var catsNav = el('<nav class="cats" aria-label="Розділи">' + (wide.matches ? CATS : CATS.slice(0, 8)).map(function (c) {
-      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="lb">' + (c[1] === 'bags' ? c[4] : c[0]) + '</span></a>';
+      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2].replace('cat-', 'obj-') + '" alt=""></span><span class="lb">' + (c[1] === 'bags' ? c[4] : c[0]) + '</span></a>';
     }).join('') + '</nav>');
     main.insertBefore(catsNav, head);
     /* обкладинка головної: що робить TRAD для продавця — фото, а решту заповнює AI */
@@ -204,7 +204,7 @@
       + '<p>Додайте фото — AI заповнить оголошення і збере з них відео.</p>'
       + '<a class="btn primary" href="create-ai.html">Продати з AI<i data-lucide="arrow-right"></i></a>'
       + '<div class="hart" aria-hidden="true"><img src="assets/hero-ai.webp" alt="">'
-      + '<ul class="hvis"><li><i data-lucide="sparkles"></i>Розпізнає товар</li><li><i data-lucide="file-text"></i>Заповнить опис</li><li><i data-lucide="clapperboard"></i>Збере відео з фото</li></ul></div></div></section>'), main.firstChild);
+      + '<ul class="hvis"><li><i data-lucide="sparkles"></i>Розпізнає товар</li><li><i data-lucide="file-text"></i>Заповнить опис</li><li><i data-lucide="tag"></i>Підкаже ціну</li><li><i data-lucide="clapperboard"></i>Збере відео з фото</li></ul></div></div></section>'), main.firstChild);
     catsNav.before(el('<div class="catshead"><h2>Розділи</h2><a class="allcat" href="category.html?browse=1">Усі категорії<i data-lucide="chevron-right"></i></a></div>'));
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
@@ -420,6 +420,11 @@
      Відео є в кожного оголошення (його склеєно з фото), тому на фото лише маленький значок відтворення.
      Сторінки збирають різні скрипти з розміткою «текст поверх фото» — до одного вигляду їх приводимо тут.
      Стіну оголошень на вході й заглушки завантаження не чіпаємо. */
+  /* каталог на комп'ютері: кількість оголошень стоїть поруч із назвою розділу */
+  (function () {
+    var h = $('h1.cat'), n = $('#n');
+    if (h && n && wide.matches) { var w = el('<div class="cathead"></div>'); h.before(w); w.appendChild(h); w.appendChild(n); }
+  })();
   function cardfix(c) {
     if (c.classList.contains('cv') || c.classList.contains('skel') || c.closest('.authwall')) return;
     var f = $('.frame', c), cap = $('.cap', c); if (!f || !cap) return;
