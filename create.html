@@ -23,23 +23,23 @@
   <div class="progress" id="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 </header>
 
-<aside class="pv" id="pv" aria-label="Попередній перегляд"><p class="pvt">Так оголошення побачать покупці</p><div class="card"><div class="frame"><img src="assets/jeans-1.jpg" alt=""><span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i><i></i></span><span class="dur"><i data-lucide="play"></i>0:31</span><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div></div></div><div class="meta">Одеса · щойно</div></div></aside>
+<aside class="pv" id="pv" aria-label="Попередній перегляд"><p class="pvt">Так оголошення побачать покупці</p><div class="card"><div class="frame"><img src="assets/jeans-1.jpg" alt=""><span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i><i></i></span><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div></div></div><div class="meta">Одеса · щойно</div></div></aside>
 <main class="flow">
   <section class="step" data-step="1">
     <h1>Покажіть товар</h1>
-    <p class="hint">До 10 фото і одне відео до 60 секунд. Перше фото стане обкладинкою.</p>
+    <p class="hint">До 10 фото. Перше стане обкладинкою, а відео ми зберемо з них самі.</p>
     <div class="shoot">
       <button type="button" class="main"><i data-lucide="camera"></i>Зняти</button>
       <button type="button"><i data-lucide="images"></i>Обрати з галереї</button>
     </div>
     <div class="mgrid">
-      <div class="mi"><img src="assets/jeans-1.jpg" alt="Відео"><span class="tag v"><i data-lucide="play"></i>0:31</span><button class="rm" type="button" aria-label="Прибрати відео"><i data-lucide="x"></i></button></div>
-      <div class="mi"><img src="assets/jeans-2.jpg" alt="Фото 1"><span class="tag">Обкладинка</span><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
+      <div class="mi"><img src="assets/jeans-1.jpg" alt="Фото 1"><span class="tag">Обкладинка</span><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
+      <div class="mi"><img src="assets/jeans-2.jpg" alt="Фото 2"><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
       <div class="mi"><img src="assets/jeans-3.jpg" alt="Фото 2"><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
       <div class="mi"><img src="assets/jeans-4.jpg" alt="Фото 3"><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button></div>
       <button class="mi add" type="button" aria-label="Додати фото"><i data-lucide="plus"></i></button>
     </div>
-    <p class="count" id="mcount">3 фото з 10 · відео додано</p>
+    <p class="count" id="mcount">4 фото з 10</p>
   </section>
 
   <section class="step" data-step="2">
@@ -63,7 +63,7 @@
     <div class="field"><span class="lbl">Колір</span>
       <button class="rowbtn" type="button"><span>Синій</span><i data-lucide="chevron-right"></i></button></div>
     <div class="field"><label for="f-desc">Опис</label>
-      <textarea class="input" id="f-desc" placeholder="Стан, заміри, чому продаєте">Носила пів року. Колір не вицвів, потертостей і плям немає — усе видно на відео. Продаю, бо стали завеликі.</textarea></div>
+      <textarea class="input" id="f-desc" placeholder="Стан, заміри, чому продаєте">Носила пів року. Колір не вицвів, потертостей і плям немає — усе видно на фото. Продаю, бо стали завеликі.</textarea></div>
   </section>
 
   <section class="step" data-step="3">
@@ -87,7 +87,7 @@
     <p class="hint">Так його побачать покупці.</p>
     <div class="review">
       <div class="card"><div class="frame"><img src="assets/jeans-1.jpg" alt="">
-        <span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i><i></i></span><span class="dur"><i data-lucide="play"></i>0:31</span>
+        <span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i><i></i></span>
         <div class="cap"><div class="price num">900&nbsp;грн</div><div class="title">Джинси Levi’s 501, W32 L32</div></div></div></div>
       <dl class="sum">
         <div><dt>Категорія</dt><dd>Жіночий одяг · Джинси</dd></div>
@@ -171,12 +171,6 @@
       d.placeholder = 'Стан екрана й корпусу, акумулятор, комплект';
       d.value = 'Купував новим у 2023 році. Екран без подряпин, акумулятор тримає день. У комплекті коробка й кабель.';
     }
-    if (p.get('novideo') === '1') {
-      var v = document.querySelector('.mgrid .mi');
-      v.outerHTML = '<button class="mi add vid" type="button" id="addvid" aria-label="Додати відео"><i data-lucide="video"></i><span>Додати відео</span></button>';
-      document.getElementById('mcount').textContent = '3 фото з 10 · відео ще немає';
-      lucide.createIcons();
-    }
   })();
 
   (function () {
@@ -194,13 +188,11 @@
 
   (function () {
     var grid = document.querySelector('.mgrid'), cnt = document.getElementById('mcount'), POOL = ['jeans-3.jpg', 'jeans-4.jpg', 'jeans-2.jpg', 'jeans-1.jpg'], k = 0;
-    var VIDEO = '<div class="mi"><img src="assets/jeans-1.jpg" alt="Відео"><span class="tag v"><i data-lucide="play"></i>0:31</span><button class="rm" type="button" aria-label="Прибрати відео"><i data-lucide="x"></i></button></div>';
-    var ADDVID = '<button class="mi add vid" type="button" id="addvid" aria-label="Додати відео"><i data-lucide="video"></i><span>Додати відео</span></button>';
     function photos() { return [].slice.call(grid.querySelectorAll('.mi:not(.add)')).filter(function (m) { return !m.querySelector('.tag.v'); }); }
     function sync() {
-      var ph = photos(), hasV = !!grid.querySelector('.tag.v');
+      var ph = photos();
       ph.forEach(function (m, i) { var tg = m.querySelector('.tag'); if (i === 0 && !tg) { tg = document.createElement('span'); tg.className = 'tag'; tg.textContent = 'Обкладинка'; m.insertBefore(tg, m.querySelector('.rm')); } else if (i > 0 && tg) tg.remove(); m.querySelector('img').alt = 'Фото ' + (i + 1); });
-      cnt.textContent = ph.length + ' фото з 10 · ' + (hasV ? 'відео додано' : 'відео ще немає');
+      cnt.textContent = ph.length + ' фото з 10';
       grid.querySelector('.mi.add:not(.vid)').hidden = ph.length >= 10;
       lucide.createIcons();
     }
@@ -210,14 +202,13 @@
       d.innerHTML = '<img src="assets/' + POOL[k++ % POOL.length] + '" alt=""><button class="rm" type="button" aria-label="Прибрати фото"><i data-lucide="x"></i></button>';
       grid.insertBefore(d, grid.querySelector('.mi.add:not(.vid)')); sync();
     }
-    function addVideo() { var a = document.getElementById('addvid'); if (a) a.outerHTML = VIDEO; else grid.insertAdjacentHTML('afterbegin', VIDEO); sync(); }
     grid.addEventListener('click', function (e) {
       var rm = e.target.closest('.rm'), add = e.target.closest('.mi.add');
-      if (rm) { var m = rm.closest('.mi'); if (m.querySelector('.tag.v')) m.outerHTML = ADDVID; else m.remove(); sync(); }
-      else if (add) { if (add.classList.contains('vid')) addVideo(); else addPhoto(); }
+      if (rm) { rm.closest('.mi').remove(); sync(); }
+      else if (add) addPhoto();
     });
     var shoot = document.querySelectorAll('.shoot button');
-    shoot[0].addEventListener('click', function () { if (grid.querySelector('.tag.v')) addPhoto(); else addVideo(); });
+    shoot[0].addEventListener('click', addPhoto);
     shoot[1].addEventListener('click', addPhoto);
   })();
   (function () {   // поля з вибором зі списку: колір, модель

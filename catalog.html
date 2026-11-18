@@ -47,7 +47,6 @@
       <div class="opts"><button class="opt" type="button" aria-pressed="false">XS</button><button class="opt" type="button" aria-pressed="false">S</button><button class="opt" type="button" aria-pressed="false">M</button><button class="opt" type="button" aria-pressed="false">L</button><button class="opt" type="button" aria-pressed="false">XL</button></div></div>
     <div class="fgroup"><span class="lbl">Місто</span>
       <a class="rowbtn" href="city.html"><span>Вся Україна</span><i data-lucide="chevron-right"></i></a></div>
-    <div class="fgroup"><div class="swrow">Тільки з відео<button class="sw" type="button" role="switch" aria-checked="false" aria-label="Тільки з відео"></button></div></div>
   </aside>
   <main>
     <h1 class="cat">Жіночий одяг</h1>
@@ -143,7 +142,6 @@
       <div class="opts"><button class="opt" type="button" aria-pressed="false">XS</button><button class="opt" type="button" aria-pressed="false">S</button><button class="opt" type="button" aria-pressed="false">M</button><button class="opt" type="button" aria-pressed="false">L</button><button class="opt" type="button" aria-pressed="false">XL</button></div></div>
     <div class="fgroup"><span class="lbl">Місто</span>
       <a class="rowbtn" href="city.html"><span>Вся Україна</span><i data-lucide="chevron-right"></i></a></div>
-    <div class="fgroup"><div class="swrow">Тільки з відео<button class="sw" type="button" role="switch" aria-checked="false" aria-label="Тільки з відео"></button></div></div>
   </div>
   <div class="sheet-foot"><button class="btn ghost" type="button" id="resetf">Скинути</button><button class="btn primary" type="button" id="apply">Показати 128 оголошень</button></div>
 </section>
@@ -243,7 +241,7 @@
     var has = p.get('applied') === '1' || p.get('follow') === '1' || p.get('empty') === '1';
     // на телефоні фільтри у вікні знизу, на комп'ютері — у колонці ліворуч; читаємо ту панель, яку видно
     function ctl(root) {
-      return { from: root.querySelector('[aria-label="Ціна від"]'), to: root.querySelector('[aria-label="Ціна до"]'), vid: root.querySelector('.sw'),
+      return { from: root.querySelector('[aria-label="Ціна від"]'), to: root.querySelector('[aria-label="Ціна до"]'), 
                cond: [].slice.call(root.querySelectorAll('.opts[data-single] .opt')), sizes: [].slice.call(root.querySelectorAll('.opts:not([data-single]) .opt')) };
     }
     var panels = [sh, side].filter(Boolean).map(ctl);
@@ -251,7 +249,7 @@
     function cur() { return side && mq.matches ? panels[1] : panels[0]; }
     function clear() {
       panels.forEach(function (c) {
-        c.from.value = c.to.value = ''; if (c.vid) c.vid.setAttribute('aria-checked', 'false');
+        c.from.value = c.to.value = '';
         c.cond.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === 0)); });
         c.sizes.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
       });
@@ -262,7 +260,6 @@
       if (c.to.value.trim()) a.push(['до ' + c.to.value.trim() + ' грн', function () { c.to.value = ''; }]);
       c.cond.forEach(function (b, i) { if (i && b.getAttribute('aria-pressed') === 'true') a.push([b.textContent, function () { b.setAttribute('aria-pressed', 'false'); c.cond[0].setAttribute('aria-pressed', 'true'); }]); });
       c.sizes.forEach(function (b) { if (b.getAttribute('aria-pressed') === 'true') a.push(['Розмір ' + b.textContent, function () { b.setAttribute('aria-pressed', 'false'); }]); });
-      if (c.vid && c.vid.getAttribute('aria-checked') === 'true') a.push(['Тільки з відео', function () { c.vid.setAttribute('aria-checked', 'false'); }]);
       return a;
     }
     function foot() { apply.textContent = 'Показати ' + (list().length ? '46' : '128') + ' оголошень'; }

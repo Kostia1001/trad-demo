@@ -1,5 +1,5 @@
 /* Навігація й полки вітрини (17 листопада 2026, після незалежної оцінки макета):
-   меню профілю й рядок розділів у шапці, плитки категорій і полка «З відео» на головній, шлях, швидкі фільтри,
+   меню профілю й рядок розділів у шапці, рядок розділів на головній, шлях, швидкі фільтри,
    мініатюри й лічильник у галереї, «Схожі оголошення». Підключає build_shop.py; розмітку сторінок не переписує,
    а доповнює під час відкриття, тому всі попередні кнопки й стани працюють як раніше. */
 (function () {
@@ -157,15 +157,6 @@
     main.insertBefore(el('<section class="cats" aria-label="Категорії"><a class="chip allcat" href="category.html?browse=1"><i data-lucide="layout-grid"></i>Усі категорії</a>' + CATS.map(function (c) {
       return '<a class="chip" href="catalog.html?cat=' + c[1] + '">' + c[0] + '</a>';
     }).join('') + '</section>'), head);
-    var shelf = el('<section class="shelf" aria-label="Оголошення з відео"><div class="head"><h2>З відео</h2><a class="morelink" href="catalog.html?video=1">Показати всі<i data-lucide="chevron-right"></i></a></div><p class="shelfnote">На відео видно стан, колір і розмір, а не лише вдалий кадр</p><div class="row"></div></section>');
-    $('.row', shelf).appendChild(el('<a class="vpromo" href="catalog.html?video=1"><span class="pl"><i data-lucide="play"></i></span><b>Товар у русі</b><span>На відео видно стан, колір і розмір, а не лише вдалий кадр</span></a>'));
-    $$('.card', grid).filter(function (c) { return $('.dur', c); }).forEach(function (c) { $('.row', shelf).appendChild(c.cloneNode(true)); });
-    main.insertBefore(shelf, head);
-    shelf.addEventListener('click', function (e) {
-      var f = e.target.closest('.fav'); if (!f) return;
-      e.preventDefault(); var on = f.getAttribute('aria-pressed') === 'true';
-      f.setAttribute('aria-pressed', String(!on)); f.setAttribute('aria-label', on ? 'Додати в обране' : 'Прибрати з обраного');
-    });
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     var order0 = $$('.card', grid);
@@ -196,7 +187,7 @@
     if (h1) h1.before(el('<nav class="crumbs" aria-label="Шлях"><a href="home.html">Головна</a><i data-lucide="chevron-right"></i><span>' + h1.textContent + '</span></nav>'));
     var sheet = $('#sheet'), side = $('aside.side'), apply = $('#apply');
     if (tools && sheet && apply) {
-      var quick = el('<div class="qflt" aria-label="Швидкі фільтри"><button class="qchip" type="button" data-q="video" aria-pressed="false"><i data-lucide="play"></i>Тільки з відео</button>'
+      var quick = el('<div class="qflt" aria-label="Швидкі фільтри">'
         + '<button class="qchip" type="button" data-q="size">Розмір<i data-lucide="chevron-down"></i></button><button class="qchip" type="button" data-q="1" aria-pressed="false">Нове</button><button class="qchip" type="button" data-q="2" aria-pressed="false">Вживане</button>'
         + '<button class="qchip" type="button" data-q="price">Ціна<i data-lucide="chevron-down"></i></button></div>');
       tools.after(quick);
@@ -205,8 +196,7 @@
         var p = panel(), cond = $$('.opts[data-single] .opt', p), sw = $('.sw', p);
         $$('.qchip', quick).forEach(function (b) {
           var k = b.dataset.q;
-          if (k === 'video') b.setAttribute('aria-pressed', String(!!sw && sw.getAttribute('aria-checked') === 'true'));
-          else if (k === 'size') { var ss = $$('.opts:not([data-single]) .opt[aria-pressed="true"]', p).map(function (x) { return x.textContent; }); b.firstChild.textContent = ss.length ? 'Розмір ' + ss.join(', ') : 'Розмір'; b.classList.toggle('set', !!ss.length); }
+          if (k === 'size') { var ss = $$('.opts:not([data-single]) .opt[aria-pressed="true"]', p).map(function (x) { return x.textContent; }); b.firstChild.textContent = ss.length ? 'Розмір ' + ss.join(', ') : 'Розмір'; b.classList.toggle('set', !!ss.length); }
           else if (k !== 'price') b.setAttribute('aria-pressed', String(!!cond[+k] && cond[+k].getAttribute('aria-pressed') === 'true'));
         });
       };
@@ -214,8 +204,7 @@
         var b = e.target.closest('.qchip'); if (!b) return;
         var k = b.dataset.q, p = panel(), cond = $$('.opts[data-single] .opt', p);
         if (k === 'price' || k === 'size') { e.stopPropagation(); if (!(wide.matches && document.body.classList.contains('fopen'))) $('#openf').click(); var inp = $('[aria-label="Ціна до"]', p); if (inp && k === 'price') setTimeout(function () { inp.focus(); }, 350); return; }
-        if (k === 'video') $('.sw', p).click();
-        else (cond[+k].getAttribute('aria-pressed') === 'true' ? cond[0] : cond[+k]).click();
+        (cond[+k].getAttribute('aria-pressed') === 'true' ? cond[0] : cond[+k]).click();
         if (p === sheet) apply.click();
       });
       document.addEventListener('click', function () { setTimeout(sync, 60); });
@@ -225,7 +214,6 @@
       $('#more').addEventListener('click', function (e) { e.stopPropagation(); cards0.forEach(function (c) { cgrid.appendChild(c.cloneNode(true)); }); extra++; shownText(); });
       document.addEventListener('click', function () { setTimeout(shownText, 90); }); setTimeout(shownText, 120);
       var hometab = $('nav.tabs .tab'); if (hometab) hometab.setAttribute('aria-current', 'page');
-      if (q.get('video') === '1') setTimeout(function () { $('[data-q="video"]', quick).click(); }, 0);
       setTimeout(sync, 80);
     }
   }
@@ -269,8 +257,8 @@
     if (foot && q.get('own') !== '1') {
       var SIM = [['jeans-light.jpg', '750&nbsp;грн', 'Джинси мом, W30 L30', '0:20'], ['jeans-black.jpg', '1&nbsp;100&nbsp;грн', 'Джинси чорні слім, W32 L34', '0:15'], ['jeans-grey.jpg', '600&nbsp;грн', 'Джинси сірі прямі, W31 L32', ''], ['jeans-2.jpg', '1&nbsp;200&nbsp;грн', 'Джинси прямі, W28 L30', '0:22'], ['jeans-3.jpg', '700&nbsp;грн', 'Джинси сині, W30 L32', '']];
       foot.before(el('<section class="block"><h2>Схожі оголошення</h2><div class="more" id="similar">' + SIM.map(function (s) {
-        return '<a class="card" href="product.html"><div class="frame"><img src="assets/' + s[0] + '" alt=""><span class="segs" aria-hidden="true"><i class="' + (s[3] ? 'video' : 'on') + '"></i><i></i><i></i></span>'
-          + (s[3] ? '<span class="dur"><i data-lucide="play"></i>' + s[3] + '</span>' : '') + '<div class="cap"><div class="price num">' + s[1] + '</div><div class="title">' + s[2] + '</div></div></div></a>';
+        return '<a class="card" href="product.html"><div class="frame"><img src="assets/' + s[0] + '" alt=""><span class="segs" aria-hidden="true"><i class="video"></i><i></i><i></i></span>'
+          + '<div class="cap"><div class="price num">' + s[1] + '</div><div class="title">' + s[2] + '</div></div></div></a>';
       }).join('') + '</div><a class="morelink under" href="catalog.html?cat=women">Усі джинси<i data-lucide="chevron-right"></i></a></section>'));
     }
   }
@@ -288,9 +276,12 @@
     var lg = page === 'home.html' ? $('main > .grid') : $('#grid');
     if (lg) { lg.innerHTML = new Array(9).join('<div class="card skel" aria-hidden="true"><div class="frame"></div><div class="meta"></div></div>'); lg.setAttribute('aria-busy', 'true'); var sh = $('.shelf'); if (sh) sh.hidden = true; var mb = $('.morebox'); if (mb) mb.hidden = true; }
   }
-  /* ---------- картки з відео: однаковий значок тривалості ---------- */
-  $$('.card .frame').forEach(function (f, i) {
-    if ($('.segs i.video', f) && !$('.dur', f)) $('.segs', f).after(el('<span class="dur"><i data-lucide="play"></i>0:' + (18 + (i * 7) % 20) + '</span>'));
+  /* ---------- картки: відео є в кожного оголошення (його склеєно з фото), тому значка тривалості немає,
+     а перша смужка вгорі картки — відео. Сторінки, які збирають інші скрипти, приводимо до цього тут. ---------- */
+  $$('.card .frame').forEach(function (f) {
+    var d = $('.dur', f), first = $('.segs i', f);
+    if (d) d.remove();
+    if (first) first.className = 'video';
   });
   /* ---------- картки в стрічках: рядок «стан · розмір» під назвою ---------- */
   $$('.card .title').forEach(function (t) {

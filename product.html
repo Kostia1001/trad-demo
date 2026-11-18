@@ -36,7 +36,7 @@
   <div class="gallery" id="gallery">
     <div class="slide"><img src="assets/jeans-1.jpg" alt="Джинси, пояс спереду">
       <button class="play" type="button" aria-label="Дивитися відео"><i data-lucide="play"></i></button>
-      <span class="dur"><i data-lucide="play"></i>Відео · 0:31</span>
+      <span class="dur"><i data-lucide="play"></i>Відео · 0:12</span>
     </div>
     <div class="slide"><img src="assets/jeans-2.jpg" alt="Джинси, ґудзик і кишеня"></div>
     <div class="slide"><img src="assets/jeans-3.jpg" alt="Джинси, кишеня"></div>
@@ -77,7 +77,7 @@
 
   <section class="block">
     <h2>Опис</h2>
-    <p class="desc">Носила пів року. Колір не вицвів, потертостей і плям немає — усе видно на відео. Продаю, бо стали завеликі.</p>
+    <p class="desc">Носила пів року. Колір не вицвів, потертостей і плям немає — усе видно на фото. Продаю, бо стали завеликі.</p>
     <p class="desc">Заміри: пояс 42 см, довжина 104 см. Можна приміряти в центрі міста.</p>
   </section>
 
@@ -228,8 +228,8 @@
   document.querySelector('.media-bar [aria-label="Поділитися"]').addEventListener('click', function () { say('Посилання скопійовано'); });
   (function () {   // показ відтворення відео: справжнього ролика в макеті немає, тому кадр повільно наближається
     var media = document.querySelector('.media'), slide = media.querySelector('.slide'), btn = slide.querySelector('.play'), dur = slide.querySelector('.dur');
-    var t = 0, timer = null, TOTAL = 31;
-    function label() { dur.innerHTML = '<i data-lucide="' + (timer ? 'pause' : 'play') + '"></i>' + (t ? '0:' + ('0' + t).slice(-2) + ' / 0:31' : 'Відео · 0:31'); lucide.createIcons(); }
+    var t = 0, timer = null, TOTAL = 12;
+    function label() { dur.innerHTML = '<i data-lucide="' + (timer ? 'pause' : 'play') + '"></i>' + (t ? '0:' + ('0' + t).slice(-2) + ' / 0:12' : 'Відео · 0:12'); lucide.createIcons(); }
     function stop(reset) {
       clearInterval(timer); timer = null;
       if (reset) { t = 0; slide.classList.remove('playing', 'paused'); media.classList.remove('vplaying', 'vpaused'); btn.setAttribute('aria-label', 'Дивитися відео'); }
