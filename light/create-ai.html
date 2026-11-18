@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11182241">
+<link rel="stylesheet" href="style.css?v=11182251">
 </head>
 <body class="flowpage">
 
@@ -21,13 +21,14 @@
     <span class="stepno num" id="stepno">1 з 4</span>
   </div>
   <div class="progress" id="progress" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <ol class="stepper" id="stepper" aria-hidden="true"><li>Фото</li><li>AI аналіз</li><li>Деталі</li><li>Відео</li><li>Публікація</li></ol>
 </header>
 
-<aside class="pv" id="pv" aria-label="Попередній перегляд"><p class="pvt">Так оголошення побачать покупці</p><div class="card cv"><div class="frame"><img id="pvimg" src="assets/jeans-1.jpg" alt=""><span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span></div><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div><div class="attrs">Одеса</div></div></div></aside>
+<aside class="pv" id="pv" aria-label="Попередній перегляд"><div class="aiwhat"><p class="h"><span class="b">AI</span>Що зробить AI</p><ul><li><i data-lucide="check"></i>Розпізнає товар</li><li><i data-lucide="check"></i>Заповнить назву, опис і характеристики</li><li><i data-lucide="check"></i>Підкаже ціну</li><li><i data-lucide="check"></i>Покращить фото</li><li><i data-lucide="check"></i>Збере відео з фото</li></ul></div><p class="pvt">Так оголошення побачать покупці</p><div class="card cv"><div class="frame"><img id="pvimg" src="assets/jeans-1.jpg" alt=""><span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span></div><div class="cap"><div class="price num" id="pvprice"></div><div class="title" id="pvtitle"></div><div class="attrs">Одеса</div></div></div></aside>
 
 <main class="flow">
   <section class="step" data-step="1">
-    <h1>Покажіть товар</h1>
+    <h1>Створити оголошення з AI</h1>
     <p class="hint">До 10 фото. AI збере з них відео й сам заповнить оголошення.</p>
     <div class="shoot">
       <button type="button" class="main"><i data-lucide="camera"></i>Зняти</button>
@@ -262,6 +263,8 @@
     var id = order[pos], n = NUM[id];
     steps.forEach(function (s) { s.classList.toggle('on', s.dataset.step === id); });
     bars.forEach(function (b, i) { b.classList.toggle('on', i < (n || 4)); });
+    var SI = { '1': 0, 'ai': 1, '2': 2, 'm': 3, '3': 4, '5': 5 }[id];
+    document.querySelectorAll('#stepper li').forEach(function (l, i) { l.className = i < SI ? 'sdone' : i === SI ? 'scur' : ''; });
     $('stepno').textContent = (id === 'ai' || !n) ? '' : n + ' з 4';
     back.hidden = id === '1';
     next.textContent = id === '3' ? 'Опублікувати' : 'Далі';

@@ -37,7 +37,7 @@
   if (desk) {
     /* комп'ютер: поруч зі знаком — головні шляхи сайту */
     var wm = $('header.top .wordmark');
-    if (wm && !$('.topnav')) wm.after(el('<nav class="topnav" aria-label="Головне меню"><a href="catalog.html">Купити</a><a href="create-ai.html">Продати</a><a href="help.html">Про TRAD</a></nav>'));
+    if (wm && !$('.topnav')) wm.after(el('<nav class="topnav" aria-label="Головне меню"><a href="help.html">Про TRAD</a></nav>'));
     var prof = $('[aria-label="Профіль"]', desk);
     if (q.get('guest') === '1') {
       $$('.icon-btn', desk).forEach(function (b) { b.remove(); });

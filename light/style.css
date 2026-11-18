@@ -1186,7 +1186,11 @@ textarea { resize: none; }
   body.wide .tools { position: relative; z-index: 1; justify-content: flex-end; margin-bottom: -50px; pointer-events: none; }
   body.wide .tools > * { pointer-events: auto; }
   body.wide .qflt { padding-right: 360px; }
-  body.wide .catnav { margin-top: 8px; }
+  /* компактна шапка 68 px і без рядка розділів під нею — як на рисунках; у каталог веде «Купити» */
+  body.wide .catnav { display: none !important; }
+  body.wide .top { padding-block: 12px !important; }
+  body.wide header.top .search, body.wide header.top .cta { height: 44px; }
+  body.wide header.top .icon-btn { width: 40px; height: 40px; }
   body.wide .chip:not([aria-current="true"]), body.wide .sortsel, body.wide .tools .pill, body.wide .tools .follow, body.wide .qchip { background-color: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
   body.wide .pwrap { max-width: 1280px; grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr); gap: 14px 40px; }
   body.wide .pwrap > .crumbs { grid-column: 1 / -1; }
@@ -1212,7 +1216,7 @@ textarea { resize: none; }
   body.wide .pwrap main > .block:has(.seller) { order: 1; padding-top: 0; }
   body.wide .pwrap main > .block:has(.seller) > h2 { display: none; }
   body.wide .pwrap main > .block:has(.specs) { order: 3; }
-  body.wide .pwrap main > .contact:not(#ownbar) { position: sticky; top: 84px; bottom: auto; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; max-width: none; margin-top: 8px; padding: 8px 0; border: 0; border-radius: 0; background: var(--bg); box-shadow: none; }
+  body.wide .pwrap main > .contact:not(#ownbar) { position: sticky; top: 68px; bottom: auto; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; max-width: none; margin-top: 8px; padding: 8px 0; border: 0; border-radius: 0; background: var(--bg); box-shadow: none; }
   body.wide .pwrap main > .contact:not(#ownbar) .write { order: 1; flex: 1 1 240px; height: 56px; }
   body.wide .pwrap main > .contact:not(#ownbar) .offerbtn { order: 2; flex: none; height: 56px; margin: 0; padding: 0 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); font-size: 16px; }
   body.wide .pwrap main > .contact:not(#ownbar)::after { content: "Або в месенджері:"; order: 3; margin-right: -2px; font-size: 14px; color: var(--text-2); }
@@ -1240,13 +1244,39 @@ textarea { resize: none; }
 /* ---- крок 3: створення оголошення на комп'ютері — темне тло, світлий аркуш; крок «AI працює» темний (refs/trad-gpt-create-flow.png) ---- */
 @media (min-width: 900px) {
   body.flowpage { background: var(--ink); }
-  body.flowpage::before { content: ""; position: fixed; z-index: -1; top: 86px; bottom: 0; left: 50%; width: 1000px; margin-left: -500px; border-radius: 28px 28px 0 0; background: var(--bg); }
+  body.flowpage::before { content: ""; position: fixed; z-index: -1; top: 142px; bottom: 0; left: 50%; width: 1000px; margin-left: -500px; border-radius: 28px 28px 0 0; background: var(--bg); }
   body.flowpage .flow-top { background: var(--ink); color: var(--on-ink); }
   body.flowpage .flow-top .x { color: var(--on-ink); }
-  body.flowpage .flow-top .stepno { color: oklch(1 0 0 / 0.62); }
+  body.flowpage .flow-top .stepno, body.flowpage .flow-top .progress { display: none; }
+  body.flowpage .stepper { display: flex; width: 620px; max-width: 100%; margin: 4px auto 0; padding: 0 0 12px; list-style: none; counter-reset: st; }
+  body.flowpage .stepper li { position: relative; flex: 1; display: grid; justify-items: center; gap: 6px; counter-increment: st; font-size: 13px; font-weight: 500; color: oklch(1 0 0 / 0.6); }
+  body.flowpage .stepper li::before { content: counter(st); position: relative; z-index: 1; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: oklch(0.32 0.02 300); color: var(--on-ink); font-size: 14px; font-weight: 700; }
+  body.flowpage .stepper li:not(:first-child)::after { content: ""; position: absolute; top: 13px; left: calc(-50% + 14px); right: calc(50% + 14px); height: 2px; background: oklch(1 0 0 / 0.16); }
+  body.flowpage .stepper li.sdone::before { content: "✓"; background: var(--hot); color: var(--on-hot); }
+  body.flowpage .stepper li.scur::before { background: var(--hot); color: var(--on-hot); }
+  body.flowpage .stepper li.sdone, body.flowpage .stepper li.scur { color: var(--on-ink); }
+  body.flowpage .stepper li.sdone::after, body.flowpage .stepper li.scur::after { background: var(--hot); }
+  body.flowpage.donepage .stepper { display: none; }
+  body.flowpage .pv { margin-top: 56px; }
+  body.flowpage .flow-row { position: relative; }
+  body.flowpage .flow-row .ttl { position: absolute; left: 50%; transform: translateX(-50%); }
+  body.flowpage:has(.step[data-step="1"].on) #pv > :not(.aiwhat) { display: none; }
+  body.flowpage:has(.step[data-step="1"].on) #pv .aiwhat { display: block; padding: 20px; border-radius: 20px; background: oklch(0.95 0.03 30); }
+  .aiwhat .h { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
+  .aiwhat .b { padding: 3px 7px; border: 2px solid var(--hot-ink); border-radius: 8px; color: var(--hot-ink); font: 700 14px/1 var(--display); }
+  .aiwhat ul { display: grid; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .aiwhat li { display: flex; align-items: center; gap: 10px; }
+  .aiwhat li svg { flex: none; width: 18px; height: 18px; color: var(--hot-ink); }
   body.flowpage:has(.ai-step.on)::before { background: none; }
   body.flowpage:has(.ai-step.on) #pv { display: none; }
   body.flowpage .ai-step.on { color: var(--on-ink); }
+  body.flowpage:has(.ai-step.on) main.flow { transform: translateX(200px); }
+  body.flowpage .ai-step.on { text-align: center; }
+  body.flowpage .ai-step.on .scan { margin-inline: auto; }
+  body.flowpage .ai-step.on .tasks { width: fit-content; margin-inline: auto; text-align: left; }
+}
+.stepper, .aiwhat { display: none; }
+@media (min-width: 900px) {
   body.flowpage .ai-step.on .hint { color: oklch(1 0 0 / 0.7); }
   body.flowpage .ai-step.on .task { color: oklch(1 0 0 / 0.55); }
   body.flowpage .ai-step.on .task.ok, body.flowpage .ai-step.on .task.run { color: var(--on-ink); }
