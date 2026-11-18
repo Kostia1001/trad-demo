@@ -480,6 +480,15 @@
   /* ---------- нижнє меню на телефоні: їде разом зі сторінкою, а не «стрибає» ----------
      Гортаємо вниз — меню з'їжджає за край рівно настільки, наскільки прогорнули; гортаємо вгору — так само повертається.
      Зупинилися — плавно стає на місце (так поводиться меню на сайті OLX). Якщо людина просила менше руху, меню не рухається. */
+  /* нижнє меню телефона: другий пункт — «Категорії» (обраний власником варіант меню); «Обране» лишається в профілі */
+  (function () {
+    var ft = $('nav.tabs a.tab[href="favorites.html"]');
+    if (!ft) return;
+    ft.setAttribute('href', 'category.html?browse=1');
+    ft.innerHTML = '<i data-lucide="layout-grid"></i>Категорії';
+    if (page === 'category.html') ft.setAttribute('aria-current', 'page'); else ft.removeAttribute('aria-current');
+    if (window.lucide) lucide.createIcons();
+  })();
   var tabsNav = $('nav.tabs');
   if (tabsNav && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     var navOff = 0, navY = Math.max(0, window.scrollY), navEnd, navRaf = 0;

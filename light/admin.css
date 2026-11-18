@@ -1,15 +1,16 @@
-/* TRAD · макет · адмінка (тільки поверх style.css: ті самі кольори, шрифти й кадр оголошення) */
-/* Адмінка лишається темною: тут колишні кольори вітрини (вітрина з 18 листопада 2026 світла) */
-html { color-scheme: dark; }
-:root { --bg: oklch(0.17 0.025 305); --s1: oklch(0.225 0.03 305); --s2: oklch(0.28 0.035 305); --line: oklch(0.31 0.03 305);
-  --text: oklch(0.96 0.012 85); --text-2: oklch(0.8 0.022 305); --hot: oklch(0.72 0.185 30); --hot-deep: oklch(0.64 0.2 30);
-  --hot-ink: oklch(0.72 0.185 30); --danger: oklch(0.7 0.19 22); --ok: oklch(0.78 0.15 155); }
+/* TRAD · макет · адмінка (поверх style.css) */
+/* Адмінка — робочий інструмент: нейтральні кольори, системний шрифт, щільні таблиці. Фірмового стилю вітрини тут навмисно немає. */
+html { color-scheme: light; }
+:root { --bg: #F3F4F6; --s1: #FFFFFF; --s2: #E9EBEF; --line: #D3D7DE; --text: #1A1E25; --text-2: #5B6472;
+  --hot: #2557D6; --hot-deep: #1D47B3; --hot-ink: #2557D6; --on-hot: #FFFFFF; --danger: oklch(0.52 0.19 27); --ok: oklch(0.5 0.13 150);
+  --ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --display: var(--ui);
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
 :root {
-  --inset: oklch(0.145 0.022 305);
-  --hair: oklch(1 0 0 / 0.07);
-  --c1: oklch(0.64 0.2 30);
-  --c2: oklch(0.62 0.13 290);
-  --sold: oklch(0.7 0.12 290);
+  --inset: #FFFFFF;
+  --hair: #E6E8EC;
+  --c1: #2557D6;
+  --c2: #8A93A3;
+  --sold: #6B7280;
 }
 body.adm { max-width: none; margin: 0; display: grid; grid-template-columns: 232px minmax(0, 1fr); font-size: 14px; }
 body.adm svg.lucide { width: 18px; height: 18px; }
@@ -238,3 +239,118 @@ dialog.dlg .dopts input:focus-visible { border-radius: 50%; }
 .kpi.total dt { color: var(--text); font-weight: 600; }
 .kpis .kpi dd b { white-space: nowrap; }
 @media (max-width: 899px) { .src.fun .row { grid-template-columns: 124px minmax(0, 1fr) 84px; } }
+
+/* ================= Технічний вигляд (19 листопада 2026) ================= */
+body.adm { background: var(--bg); color: var(--text); font: 400 13px/1.45 var(--ui); }
+body.adm svg.lucide { width: 16px; height: 16px; }
+.aside { border-right-color: var(--line); }
+.aside .brand { align-items: baseline; gap: 8px; }
+body.adm .aside .brand .wordmark, body.adm .aside .brand .hw, body.adm .aside .brand .tagx { all: unset !important; }
+body.adm .aside .brand .wordmark::before, body.adm .aside .brand .wordmark::after, body.adm .aside .brand .hw::before, body.adm .aside .brand .hw::after,
+body.adm .aside .brand .tagx::before, body.adm .aside .brand .tagx::after { content: none !important; }
+body.adm .aside .brand .wordmark { font: 700 15px/1 var(--mono) !important; letter-spacing: 0.04em !important; color: var(--text) !important; cursor: pointer !important; }
+.aside .brand > span { font-size: 12px; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.anav a { height: 32px; padding: 0 10px; border-radius: 6px; font-size: 13px; }
+.anav a:hover { background: var(--s2); }
+.anav a[aria-current="page"] { background: var(--s2); box-shadow: inset 2px 0 0 var(--hot); }
+.anav .cnt { min-width: 20px; height: 18px; padding: 0 5px; border-radius: 4px; background: var(--text); color: #fff; font: 600 12px/1 var(--mono); }
+.aside .awho { border-top-color: var(--line); }
+.aside .awho .me small, .aside .awho .links { font-size: 12px; }
+.aava { width: 28px; height: 28px; border-radius: 6px; font: 600 12px/1 var(--mono); color: var(--text-2); }
+.aava.big { width: 36px; height: 36px; font-size: 13px; }
+.case-user .aava.big { width: 44px; height: 44px; font-size: 14px; }
+
+.ahead { min-height: 32px; margin-bottom: 12px; }
+.ahead h1 { font: 600 18px/1.2 var(--ui); letter-spacing: 0; }
+.atools { gap: 8px; margin-bottom: 10px; }
+.seg { padding: 2px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--line); }
+.seg button { height: 26px; padding: 0 10px; border-radius: 4px; font-size: 13px; }
+.seg .num { font: 500 12px/1 var(--mono); }
+.afield { height: 30px; width: 300px; padding: 0 10px; border-radius: 6px; }
+.afield input { font: 400 13px var(--ui); }
+.abtn { height: 30px; padding: 0 12px; border-radius: 6px; font-size: 13px; font-weight: 500; }
+.abtn.pri { color: #fff; }
+.abtn.sec { background: var(--s1); box-shadow: inset 0 0 0 1px var(--line); }
+.abtn.sec:hover, .abtn.ghost:hover { background: var(--s2); }
+.abtn.dng { box-shadow: inset 0 0 0 1px oklch(0.55 0.19 27 / 0.5); }
+.abtn.dng:hover { background: oklch(0.55 0.19 27 / 0.08); }
+.abtn.sm { height: 26px; padding: 0 9px; font-size: 12px; }
+.abtn svg.lucide { width: 14px; height: 14px; }
+.alink { color: var(--hot); }
+.alink:hover { color: var(--hot-deep); text-decoration: underline; }
+
+.ast { height: 20px; padding: 0 7px; gap: 0; border-radius: 4px; color: var(--text-2); font-size: 12px; font-weight: 600; }
+.ast::before { display: none; }
+.ast.ok { background: oklch(0.94 0.05 150); color: oklch(0.4 0.11 150); }
+.ast.bad { background: oklch(0.94 0.04 25); color: oklch(0.48 0.18 27); }
+.ast.sold { background: oklch(0.94 0.02 260); color: oklch(0.42 0.05 260); }
+.sub { margin-top: 2px; font-size: 12px; }
+
+.tblwrap { border-color: var(--line); border-radius: 8px; background: var(--s1); }
+.tbl th { height: 32px; padding: 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; background: oklch(0.975 0.003 260); border-bottom-color: var(--line); }
+.tbl td { height: 44px; padding: 5px 12px; }
+.tbl tbody tr:hover { background: oklch(0.97 0.012 255); }
+.lc, .uc { gap: 10px; }
+.lc img { width: 32px; height: 32px; border-radius: 4px; }
+.lc small, .uc small { margin-top: 1px; font: 400 12px/1.3 var(--mono); }
+.iconb { width: 26px; height: 26px; border-radius: 6px; }
+.iconb:hover { background: var(--s2); }
+.pager { margin-top: 10px; font-size: 12px; }
+.none b { font: 600 16px/1.3 var(--ui); }
+
+.qrow { gap: 10px; padding: 8px 10px; border-radius: 6px; }
+.qrow:hover { background: var(--s2); }
+.qrow[aria-current="true"] { box-shadow: inset 2px 0 0 var(--hot); }
+.qrow img { width: 36px; height: 36px; border-radius: 4px; }
+.qrow .why, .qrow .m { font-size: 12px; }
+.case { border-color: var(--line); border-radius: 8px; }
+.case-top .frame { border-radius: 6px; }
+.case h2 { font: 600 16px/1.3 var(--ui); letter-spacing: 0; }
+.case .lmeta, .case .csel small, .rep .by { font-size: 12px; }
+.case .adesc { font-size: 13px; }
+.case .albl { letter-spacing: 0.04em; }
+.case-acts .abtn { height: 32px; padding: 0 14px; font-size: 13px; }
+
+dialog.dlg { padding: 20px; border-radius: 10px; box-shadow: 0 16px 48px oklch(0.2 0.02 260 / 0.25); }
+dialog.dlg::backdrop { background: oklch(0.2 0.02 260 / 0.45); }
+dialog.dlg h2 { font: 600 16px/1.3 var(--ui); letter-spacing: 0; }
+dialog.dlg .what { font-size: 13px; }
+dialog.dlg .dopts label { min-height: 34px; border-radius: 6px; }
+dialog.dlg textarea { border-radius: 6px; font: 400 13px/1.45 var(--ui); }
+dialog.dlg .dfoot .abtn { height: 32px; }
+
+.panel { border-color: var(--line); border-radius: 8px; }
+/* клас .hero є й на обкладинці вітрини (style.css) — тут скидаємо її поля, колір і обрізання */
+.panel.hero { margin: 0; overflow: visible; color: var(--text); }
+.panel.hero p { max-width: none; margin-top: 4px; font-size: 12px; line-height: 1.45; color: var(--text-2); }
+.panel h2 { font-size: 13px; }
+.panel .note { font-size: 12px; }
+.hero-num { font: 700 36px/1 var(--ui); letter-spacing: -0.02em; }
+.hbar .l { font-size: 13px; }
+.hbar .tr { height: 14px; border-radius: 0 2px 2px 0; background: var(--s2); }
+.hbar .tr i, .src .row .tr i { border-radius: 0 2px 2px 0; }
+.kpi { padding: 11px 0; }
+.kpi dt { font-size: 13px; }
+.kpi dt small, .delta, .legend, .src.fun .row b small { font-size: 12px; }
+.kpi dd b { font: 600 18px/1 var(--ui); letter-spacing: 0; }
+.chart .endl { font: 600 12px var(--ui); }
+.tip { border-radius: 6px; background: var(--s1); box-shadow: 0 6px 18px oklch(0.2 0.02 260 / 0.16); font-size: 12px; }
+.astable .tblwrap { border-radius: 6px; }
+.astable .tbl td { height: 30px; }
+.astable .tbl th { background: oklch(0.975 0.003 260); }
+.src .row { font-size: 13px; }
+.src .row .tr { height: 12px; }
+
+@media (min-width: 900px) {
+  body.adm { grid-template-columns: 208px minmax(0, 1fr); }
+  .aside { padding: 16px 10px 12px; }
+  .aside .brand { padding: 0 10px 16px; }
+  .amain { padding: 18px 24px 40px; }
+  .cases { grid-template-columns: 340px minmax(0, 1fr); gap: 16px; }
+  .case-top { grid-template-columns: 132px minmax(0, 1fr); gap: 18px; padding: 16px 18px; }
+  .case-reports { padding: 14px 18px; }
+  .case-acts { padding: 12px 18px; }
+  .case-user { padding: 16px 18px; }
+  .stats { gap: 16px; }
+  .panel { padding: 16px 18px; }
+}
