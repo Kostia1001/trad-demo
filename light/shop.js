@@ -77,6 +77,8 @@
       });
       sec.insertBefore(el('<a class="lrow allrow" href="catalog.html?cat=' + c[1] + '"><span class="t">Усе в розділі</span></a>'), sec.firstChild);
     });
+    /* у списку розділів — та сама картинка, що й на головній */
+    $$('#root .lrow').forEach(function (r) { var c = CATS[+r.dataset.open]; if (c && !$('.ph', r)) r.insertBefore(el('<span class="ph"><img src="assets/' + c[2] + '" alt=""></span>'), r.firstChild); });
     document.addEventListener('click', function () { setTimeout(ctitle, 0); });
     ctitle();
   }
@@ -96,7 +98,8 @@
     var ph1 = $('.step[data-step="1"] .phone');
     if (ph1) ph1.before(el('<span class="flabel">Номер телефону</span>'));
   }
-  if (page === 'my.html') $$('[data-panel="active"] .mrow').forEach(function (r) { var m = $('.more', r); if (m && !$('.edit', r)) m.before(el('<a class="edit" href="create.html?step=2" aria-label="Редагувати"><i data-lucide="pencil"></i></a>')); });
+  /* мої оголошення: у рядку одне меню «⋮»; «Редагувати» в ньому веде до форми */
+  if (page === 'my.html') { var actEdit = $$('#acts .lrow').filter(function (x) { return /Редагувати/.test(x.textContent); })[0]; if (actEdit) actEdit.addEventListener('click', function () { location.href = 'create.html?step=2'; }); }
 
   /* ---------- пошук: явна дія «Шукати …» і область пошуку в підказках ---------- */
   if (page === 'search.html') {
