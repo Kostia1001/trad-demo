@@ -493,7 +493,8 @@
         navOff = m === 'none' ? 0 : parseFloat(m.split(',')[5]) || 0;
         tabsNav.classList.add('moving');
       }
-      navOff = Math.min(Math.max(navOff + dy, 0), tabsNav.offsetHeight + 16);
+      /* меню плаває над краєм екрана: ховаємо його повністю — на висоту, відступ знизу й тінь */
+      navOff = Math.min(Math.max(navOff + dy, 0), tabsNav.offsetHeight + (parseFloat(getComputedStyle(tabsNav).bottom) || 0) + 44);
       if (!navRaf) navRaf = requestAnimationFrame(navPaint);
       clearTimeout(navEnd);
       navEnd = setTimeout(function () { tabsNav.classList.remove('moving'); navOff = 0; navPaint(); }, 380);
