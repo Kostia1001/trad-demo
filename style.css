@@ -90,17 +90,19 @@ svg.lucide { width: 22px; height: 22px; stroke-width: 1.9; flex: none; }
 /* ---------- Нижнє меню ---------- */
 /* меню притиснуте до нижнього краю, як заведено на сайтах («парна» панель на iPhone стрибала: слово власника 18.11.2026);
    «Створити» — коралова плитка зі знаком-биркою з ескізу моделі */
-.tabs { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 430px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; background: var(--bg); border-top: 1px solid var(--line); padding: 8px 6px calc(8px + env(safe-area-inset-bottom)); transition: transform 0.25s var(--ease); }
-.tabs.away { transform: translate(-50%, calc(100% + 16px)); }
-@media (prefers-reduced-motion: reduce) { .tabs { transition: none; } }
-.tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3px; min-height: 48px; font-size: 12px; font-weight: 500; color: var(--text-2); }
-.tab svg { width: 24px; height: 24px; }
-.tab[aria-current="page"] { color: var(--hot); font-weight: 600; }
-.tab .count { position: absolute; top: 0; left: calc(50% + 4px); min-width: 17px; height: 17px; padding: 0 4px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font-size: 12px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--bg); }
-.tab.create { justify-content: center; gap: 3px; width: 66px; height: 64px; margin: -16px auto 0; border-radius: 20px; background: linear-gradient(155deg, oklch(0.76 0.17 34), var(--hot) 45%, var(--hot-deep)); color: #fff; font-weight: 500; box-shadow: 0 0 0 5px var(--bg); transition: transform 0.25s var(--ease); }
+.tabs { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 430px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; height: calc(52px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 1px solid var(--line); padding: 0 6px env(safe-area-inset-bottom); }
+/* меню їде разом зі сторінкою (зсув задає shop.js), а на місце повертається м'яко, без відскоку */
+.tabs { transform: translate(-50%, var(--nav-off, 0px)); transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1); }
+.tabs.moving { transition: none; will-change: transform; }
+/* розміри — за порадою моделі (pick-nav-size.json): меню 52 px, як на сайтах; значки 20, підписи 12/14, зона натиску 78×52 */
+.tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 4px; height: 52px; padding-top: 6px; font-size: 12px; line-height: 14px; font-weight: 500; color: var(--text-2); }
+.tab svg { width: 20px; height: 20px; }
+.tab[aria-current="page"] { color: var(--hot); }
+.tab .count { position: absolute; top: 2px; left: calc(50% + 4px); min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font-size: 12px; font-weight: 700; display: grid; place-items: center; box-shadow: 0 0 0 2px var(--bg); }
+.tab.create { width: 66px; height: 52px; margin: -4px auto 0; padding-top: 10px; border-radius: 16px; background: linear-gradient(155deg, oklch(0.76 0.17 34), var(--hot) 45%, var(--hot-deep)); color: #fff; box-shadow: 0 0 0 4px var(--bg); transition: transform 0.25s var(--ease); }
 .tab.create .plus { display: grid; place-items: center; }
 .tab.create:active { transform: scale(0.95); }
-.tab.create .plus svg { width: 26px; height: 26px; stroke-width: 2; transform: rotate(90deg); }
+.tab.create .plus svg { width: 20px; height: 20px; stroke-width: 2; transform: rotate(90deg); }
 
 /* ---------- Картка товару ---------- */
 .media { position: relative; background: var(--s1); }

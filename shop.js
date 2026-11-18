@@ -291,15 +291,26 @@
     if (m) t.textContent = s.replace(m[0], '').replace(/,\s*$/, '').trim();
     t.after(el('<div class="attrs">' + cond + (size ? ' · ' + size : '') + '</div>'));
   });
-  /* ---------- нижнє меню на телефоні: поки гортаємо вниз, воно з'їжджає за край і не заважає;
-     зупинилися або гортаємо вгору — повертається (так само поводиться меню на сайті OLX) ---------- */
+  /* ---------- нижнє меню на телефоні: їде разом зі сторінкою, а не «стрибає» ----------
+     Гортаємо вниз — меню з'їжджає за край рівно настільки, наскільки прогорнули; гортаємо вгору — так само повертається.
+     Зупинилися — плавно стає на місце (так поводиться меню на сайті OLX). Якщо людина просила менше руху, меню не рухається. */
   var tabsNav = $('nav.tabs');
-  if (tabsNav) {
-    var lastY = window.scrollY, backT;
+  if (tabsNav && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var navOff = 0, navY = Math.max(0, window.scrollY), navEnd, navRaf = 0;
+    var navPaint = function () { navRaf = 0; tabsNav.style.setProperty('--nav-off', navOff + 'px'); };
     window.addEventListener('scroll', function () {
-      var y = window.scrollY;
-      if (y > lastY + 4 && y > 60) tabsNav.classList.add('away'); else if (y < lastY - 2) tabsNav.classList.remove('away');
-      lastY = y; clearTimeout(backT); backT = setTimeout(function () { tabsNav.classList.remove('away'); }, 450);
+      var max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      var y = Math.min(Math.max(window.scrollY, 0), max), dy = y - navY;       /* без «гумового» відскоку iOS за краями сторінки */
+      navY = y; if (!dy) return;
+      if (!tabsNav.classList.contains('moving')) {                              /* підхоплюємо меню там, де воно зараз, навіть посеред повернення */
+        var m = getComputedStyle(tabsNav).transform;
+        navOff = m === 'none' ? 0 : parseFloat(m.split(',')[5]) || 0;
+        tabsNav.classList.add('moving');
+      }
+      navOff = Math.min(Math.max(navOff + dy, 0), tabsNav.offsetHeight + 16);
+      if (!navRaf) navRaf = requestAnimationFrame(navPaint);
+      clearTimeout(navEnd);
+      navEnd = setTimeout(function () { tabsNav.classList.remove('moving'); navOff = 0; navPaint(); }, 380);
     }, { passive: true });
   }
   icons();
