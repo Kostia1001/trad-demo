@@ -35,6 +35,9 @@
   /* ---------- шапка на комп'ютері: меню профілю або «Увійти» для гостя ---------- */
   var desk = $('header.top nav.desk');
   if (desk) {
+    /* комп'ютер: поруч зі знаком — головні шляхи сайту */
+    var wm = $('header.top .wordmark');
+    if (wm && !$('.topnav')) wm.after(el('<nav class="topnav" aria-label="Головне меню"><a href="catalog.html">Купити</a><a href="create-ai.html">Продати</a><a href="help.html">Про TRAD</a></nav>'));
     var prof = $('[aria-label="Профіль"]', desk);
     if (q.get('guest') === '1') {
       $$('.icon-btn', desk).forEach(function (b) { b.remove(); });
@@ -193,9 +196,15 @@
        Телефон: сітка 4 x 2 — перші вісім розділів, «Усі категорії» посиланням біля заголовка. Комп'ютер: вісім рівних колонок. */
     /* телефон: на головній перші вісім розділів, решта — за «Усі категорії»; комп'ютер: усі розділи, по вісім у ряд */
     var catsNav = el('<nav class="cats" aria-label="Розділи">' + (wide.matches ? CATS : CATS.slice(0, 8)).map(function (c) {
-      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="lb">' + c[0] + '</span></a>';
+      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="lb">' + (c[1] === 'bags' ? c[4] : c[0]) + '</span></a>';
     }).join('') + '</nav>');
     main.insertBefore(catsNav, head);
+    /* обкладинка головної: що робить TRAD для продавця — фото, а решту заповнює AI */
+    main.insertBefore(el('<section class="hero" aria-label="Про TRAD"><div class="hin"><h1>Сфотографуйте. <b>AI</b> зробить решту.</h1>'
+      + '<p>Додайте фото — AI заповнить оголошення і збере з них відео.</p>'
+      + '<a class="btn primary" href="create-ai.html">Продати з AI<i data-lucide="arrow-right"></i></a>'
+      + '<div class="hart" aria-hidden="true"><img src="assets/hero-ai.webp" alt="">'
+      + '<ul class="hvis"><li><i data-lucide="sparkles"></i>Розпізнає товар</li><li><i data-lucide="file-text"></i>Заповнить опис</li><li><i data-lucide="clapperboard"></i>Збере відео з фото</li></ul></div></div></section>'), main.firstChild);
     catsNav.before(el('<div class="catshead"><h2>Розділи</h2><a class="allcat" href="category.html?browse=1">Усі категорії<i data-lucide="chevron-right"></i></a></div>'));
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
@@ -420,7 +429,6 @@
       meta.textContent = meta.textContent.split('·').map(function (x) { return x.trim().replace(/,\s*\d{1,2}:\d{2}$/, ''); }).join(' · ');
       cap.appendChild(meta);
     }
-    if (fav) cap.insertBefore(fav, title);
     f.after(cap);
     f.appendChild(el('<span class="vmark" aria-hidden="true"><i data-lucide="play"></i></span>'));
     c.classList.add('cv');
@@ -430,7 +438,7 @@
   $$('#grid, main .grid').forEach(function (g) { $$('.card', g).filter(function (c) { return $('.state', c); }).forEach(function (c) { g.appendChild(c); }); });
   /* наступні оголошення підвантажуються самі, коли людина догортала; кнопка «Показати ще» лишається запасною */
   var moreBtn = $('#more');
-  if (moreBtn && 'IntersectionObserver' in window) new IntersectionObserver(function (es) { if (es[0].isIntersecting && !moreBtn.hidden) moreBtn.click(); }, { rootMargin: '0px 0px 500px 0px' }).observe(moreBtn);
+  if (moreBtn && 'IntersectionObserver' in window) new IntersectionObserver(function (es) { if (es[0].isIntersecting && !moreBtn.hidden) moreBtn.click(); }, { rootMargin: '0px 0px 300px 0px' }).observe(moreBtn);
   /* ---------- нижнє меню на телефоні: їде разом зі сторінкою, а не «стрибає» ----------
      Гортаємо вниз — меню з'їжджає за край рівно настільки, наскільки прогорнули; гортаємо вгору — так само повертається.
      Зупинилися — плавно стає на місце (так поводиться меню на сайті OLX). Якщо людина просила менше руху, меню не рухається. */
