@@ -188,27 +188,14 @@
     /* розділи — картинки з підписом (як у OLX і Kleinanzeigen); перша плитка — «Усі категорії», вона завжди на виду.
        Телефон: один ряд, що гортається вбік, коли розділів стане більше п'яти; плитка веде на екран з усіма розділами.
        Комп'ютер: той самий ряд замість текстового рядка розділів у шапці; «Усі категорії» розкриває повний список. */
-    var allTile = wide.matches ? '' : '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a>';
-    var catsNav = el('<nav class="cats" aria-label="Розділи">' + allTile + CATS.map(function (c, i) {
-      return '<a href="catalog.html?cat=' + c[1] + '" data-i="' + i + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span>' + c[0] + '</a>';
+    /* розділи на головній: заголовок «Розділи» і картинки з підписами; натиск одразу відкриває оголошення розділу
+       (панелі з підрозділами немає: при 3–5 підрозділах це зайвий крок, підрозділи видно рядком у самому розділі).
+       Телефон: сітка 4 x 2 — перші вісім розділів, «Усі категорії» посиланням біля заголовка. Комп'ютер: вісім рівних колонок. */
+    var catsNav = el('<nav class="cats" aria-label="Розділи">' + CATS.slice(0, 8).map(function (c) {
+      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="lb">' + c[0] + '</span></a>';
     }).join('') + '</nav>');
     main.insertBefore(catsNav, head);
-    /* комп'ютер — як на головній OLX: заголовок «Розділи», плитки; натиск на розділ розкриває під рядом панель
-       із посиланням на всі оголошення розділу й підрозділами в чотири колонки, повторний натиск її закриває */
-    if (wide.matches) {
-      catsNav.before(el('<h2 class="catsh">Розділи</h2>'));
-      var cpanel = el('<div class="catpanel" hidden></div>'); catsNav.after(cpanel);
-      catsNav.addEventListener('click', function (e) {
-        var t = e.target.closest('a[data-i]'); if (!t) return; e.preventDefault();
-        var c = CATS[+t.dataset.i], was = t.getAttribute('aria-expanded') === 'true';
-        $$('a[data-i]', catsNav).forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
-        if (was) { cpanel.hidden = true; return; }
-        t.setAttribute('aria-expanded', 'true');
-        cpanel.innerHTML = '<a class="call" href="catalog.html?cat=' + c[1] + '">Переглянути всі оголошення в розділі «' + c[0] + '»<i data-lucide="chevron-right"></i></a><div class="csubs">'
-          + c[3].map(function (x) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(x) + '">' + x + '</a>'; }).join('') + '</div>';
-        cpanel.hidden = false; icons();
-      });
-    }
+    catsNav.before(el('<div class="catshead"><h2>Розділи</h2><a class="allcat" href="category.html?browse=1">Усі категорії<i data-lucide="chevron-right"></i></a></div>'));
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     /* телефон: регіон і фільтри — у рядку заголовка; сортування на головній немає, воно у фільтрах каталогу */
