@@ -50,12 +50,35 @@
   var SHOP = ['home.html', 'catalog.html', 'product.html', 'seller.html', 'favorites.html', 'search.html'];
   var top = $('header.top');
   if (top && SHOP.indexOf(page) >= 0) {
-    var nav = el('<nav class="catnav" aria-label="Розділи">' + CATS.map(function (c) {
+    /* «Усі категорії» — повний список розділів із підкатегоріями; у рядку далі лише головні розділи (до восьми) */
+    var nav = el('<nav class="catnav" aria-label="Розділи"><div class="ca"><button class="cb allc" type="button" aria-haspopup="true" aria-expanded="false"><i data-lucide="layout-grid"></i>Усі категорії</button><div class="drop mega" role="menu">'
+      + CATS.map(function (c) {
+        return '<div class="mcol"><a class="all" href="catalog.html?cat=' + c[1] + '">' + c[0] + '</a>'
+          + c[3].map(function (s) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(s) + '">' + s + '</a>'; }).join('') + '</div>';
+      }).join('') + '</div></div>' + CATS.map(function (c) {
       return '<div class="ci"><button class="cb" type="button" aria-haspopup="true" aria-expanded="false">' + c[0] + '<i data-lucide="chevron-down"></i></button><div class="drop" role="menu"><a class="all" href="catalog.html?cat=' + c[1] + '">Усе в розділі</a>'
         + c[3].map(function (s) { return '<a href="catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(s) + '">' + s + '</a>'; }).join('') + '</div></div>';
     }).join('') + '</nav>');
     top.after(nav);
-    $$('.ci', nav).forEach(function (h) { holder(h, true); });
+    $$('.ci, .ca', nav).forEach(function (h) { holder(h, true); });
+  }
+
+  /* ---------- «Усі категорії» на телефоні: той самий список, що й під час створення, але веде в каталог ---------- */
+  if (page === 'category.html' && q.get('browse') === '1') {
+    var cttl = $('#ttl'), croot = $('#root'), cback = $('#back');
+    var ctitle = function () { if (croot && !croot.hidden && cttl) cttl.textContent = 'Усі категорії'; };
+    if (cback) cback.setAttribute('href', 'home.html');
+    $$('[data-level]').forEach(function (sec) {
+      var c = CATS[+sec.dataset.level]; if (!c) return;
+      $$('a.lrow', sec).forEach(function (a) {
+        var t = a.textContent.trim();
+        if (c[3].indexOf(t) < 0) { a.remove(); return; }
+        a.setAttribute('href', 'catalog.html?cat=' + c[1] + '&sub=' + encodeURIComponent(t));
+      });
+      sec.insertBefore(el('<a class="lrow allrow" href="catalog.html?cat=' + c[1] + '"><span class="t">Усе в розділі</span></a>'), sec.firstChild);
+    });
+    document.addEventListener('click', function () { setTimeout(ctitle, 0); });
+    ctitle();
   }
 
   /* ---------- вхід: шлях назад до оголошень; кабінет: швидке редагування ---------- */
@@ -130,8 +153,9 @@
     var chips = $('nav.chips'); if (chips) chips.remove();
     var main = $('main'), head = $('.head', main), grid = $('.grid', main);
     top.after(el('<a class="cityrow" href="city.html"><i data-lucide="map-pin"></i><span>Вся Україна</span><i data-lucide="chevron-right"></i></a>'));
-    main.insertBefore(el('<section class="cats" aria-label="Категорії">' + CATS.map(function (c) {
-      return '<a class="cat-tile" href="catalog.html?cat=' + c[1] + '"><img src="assets/' + c[2] + '" alt=""><span>' + c[0] + '</span></a>';
+    /* телефон: розділи одним рядком, що гортається; на комп'ютері їх показує рядок розділів у шапці */
+    main.insertBefore(el('<section class="cats" aria-label="Категорії"><a class="chip allcat" href="category.html?browse=1"><i data-lucide="layout-grid"></i>Усі категорії</a>' + CATS.map(function (c) {
+      return '<a class="chip" href="catalog.html?cat=' + c[1] + '">' + c[0] + '</a>';
     }).join('') + '</section>'), head);
     var shelf = el('<section class="shelf" aria-label="Оголошення з відео"><div class="head"><h2>З відео</h2><a class="morelink" href="catalog.html?video=1">Показати всі<i data-lucide="chevron-right"></i></a></div><p class="shelfnote">На відео видно стан, колір і розмір, а не лише вдалий кадр</p><div class="row"></div></section>');
     $('.row', shelf).appendChild(el('<a class="vpromo" href="catalog.html?video=1"><span class="pl"><i data-lucide="play"></i></span><b>Товар у русі</b><span>На відео видно стан, колір і розмір, а не лише вдалий кадр</span></a>'));

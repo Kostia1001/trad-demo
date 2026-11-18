@@ -826,22 +826,6 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .srcstrip small { margin-left: 6px; font-size: 13px; color: var(--text-2); }
 #f-def { margin-top: 10px; min-height: 76px; }
 
-/* ---------- Знак: бирка ---------- */
-.hw { display: inline-block; font-size: 0.72em; vertical-align: middle; }
-.tagx { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 5.86em; height: 1.887em; padding-right: 0.46em; background: url(assets/tag.png) center / 100% 100% no-repeat; color: var(--on-hot); font: 700 1em/1 var(--display); letter-spacing: -0.02em; transform: rotate(6deg); filter: drop-shadow(0.12em 0.2em 0.22em oklch(0.05 0.02 305 / 0.6)); transition: transform 0.7s var(--ease); }
-.wordmark:hover .tagx { transform: rotate(1deg); }
-/* в адмінці підпис «Адмінка» має свої стилі для span — знак їх не успадковує */
-.aside .brand .wordmark .hw { font-size: 14px; }
-.aside .brand .wordmark .tagx { font-size: 1em; font-weight: 700; letter-spacing: -0.02em; text-transform: none; color: var(--on-hot); }
-@media (min-width: 900px) {
-  /* вхід із комп'ютера: знак маленький, ліворуч угорі сторінки, як у шапці сайту (так роблять Airbnb, Stripe,
-     Figma — приклади в docs/design/refs/login-modern/). Жодних шнурків і кілець: вони відволікали від форми. */
-  body.auth .authbrand { position: fixed; z-index: 3; left: 48px; top: 30px; }
-  body.auth .authbrand .wordmark { font-size: 28px; }
-}
-/* стрілка на головній кнопці входу */
-.login .btn.primary svg { width: 20px; height: 20px; stroke-width: 2.4; }
-
 /* ---------- Показ: фільтри каталогу на комп'ютері відкриваються кнопкою ---------- */
 @media (min-width: 900px) {
   body.wide .shop { grid-template-columns: 1fr; }
@@ -874,17 +858,18 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .drop .who small { margin: 0; font-size: 13px; }
 .drop a.all { font-weight: 600; }
 
-/* головна: шапка в один рядок на телефоні, місто, плитки категорій, полка «З відео», сортування */
+/* головна: шапка в один рядок на телефоні, місто, рядок розділів, полка «З відео», сортування */
 .cityrow { display: flex; align-items: center; gap: 8px; height: 44px; margin: 10px 16px 0; padding: 0 12px 0 14px; border-radius: 14px; background: var(--s1); font-size: 14px; font-weight: 500; }
 .cityrow span { flex: 1; }
 .cityrow svg { width: 16px; height: 16px; color: var(--text-2); }
 .cityrow svg:first-child { color: var(--hot); }
-.cats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 16px 0; }
-.cat-tile { position: relative; height: 84px; border-radius: 16px; overflow: hidden; background: var(--s1); }
-.cat-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
-.cat-tile:hover img { transform: scale(1.05); }
-.cat-tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, oklch(0.12 0.03 305 / 0.82), oklch(0.12 0.03 305 / 0.15) 75%); }
-.cat-tile span { position: absolute; z-index: 1; left: 12px; right: 12px; bottom: 10px; font-size: 14px; font-weight: 600; line-height: 1.25; }
+.cats { display: flex; gap: 8px; padding: 12px 16px 0; overflow-x: auto; scrollbar-width: none; }
+.cats::-webkit-scrollbar { display: none; }
+.cats::after { content: ""; flex: none; width: 8px; }
+.cats .chip { height: 44px; box-shadow: inset 0 0 0 1px var(--line); }
+.cats .allcat { gap: 8px; background: transparent; box-shadow: inset 0 0 0 1px var(--text-2); font-weight: 600; }
+.cats .allcat svg { width: 18px; height: 18px; }
+.alist .allrow .t { font-weight: 600; }
 .shelf .head { padding-bottom: 4px; }
 .shelfnote { padding: 0 16px 12px; font-size: 13px; color: var(--text-2); }
 .shelf .title, .shelf .attrs { font-size: 12px; }
@@ -1011,15 +996,20 @@ body.home .site-foot { margin-top: 0; }
   .toshop { position: fixed; top: 34px; right: 48px; }
   body.wide .favflt { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
   body.wide .catnav { display: flex; gap: 4px; max-width: 1280px; margin: 0 auto; padding: 0 20px; }
-  .catnav .ci { position: relative; }
+  .catnav .ci, .catnav .ca { position: relative; }
+  .catnav .allc { margin-right: 8px; font-weight: 600; box-shadow: inset 0 0 0 1px var(--line); }
+  .catnav .allc svg { color: var(--text); }
+  .catnav .drop.mega { width: min(920px, calc(100vw - 40px)); padding: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px 8px; }
+  .catnav .open > .drop.mega { display: grid; }
+  .mega .mcol a { min-height: 40px; font-size: 14px; color: var(--text-2); }
+  .mega .mcol a.all { min-height: 46px; font-size: 16px; color: var(--text); }
   .catnav .cb { display: flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px; border-radius: 999px; font-size: 16px; font-weight: 500; transition: background 0.2s var(--ease); }
   .catnav .cb:hover, .catnav .open > .cb { background: var(--s1); }
   .catnav .cb svg { width: 16px; height: 16px; color: var(--text-2); }
   .catnav .drop { left: 0; top: 100%; width: 260px; }
-  body.wide .cats, body.wide .shelf, body.wide .morebox { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
-  body.wide .cats { grid-template-columns: repeat(4, 1fr); gap: 16px; padding-top: 16px; }
-  body.wide .cat-tile { height: 150px; border-radius: 20px; }
-  body.wide .cat-tile span { left: 18px; bottom: 16px; font-size: 18px; }
+  body.wide .shelf, body.wide .morebox { max-width: 1280px; margin-inline: auto; padding-inline: 32px; }
+  body.wide .cats { display: none; }
+  body.wide.home .shelf { padding-top: 8px; }
   body.wide .shelf .head { padding-inline: 0; }
   body.wide .shelf .row { padding: 0; gap: 16px; display: grid; grid-template-columns: repeat(6, 1fr); overflow: visible; }
   body.wide .shelf .card, body.wide .vpromo { width: auto; }
@@ -1051,6 +1041,22 @@ body.home .site-foot { margin-top: 0; }
   .garrow.next { right: 12px; }
   .stage:hover .garrow, .garrow:focus-visible { opacity: 1; }
 }
+
+/* ---------- Знак: бирка ---------- */
+.hw { display: inline-block; font-size: 0.72em; vertical-align: middle; }
+.tagx { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 5.86em; height: 1.887em; padding-right: 0.46em; background: url(assets/tag.png) center / 100% 100% no-repeat; color: var(--on-hot); font: 700 1em/1 var(--display); letter-spacing: -0.02em; transform: rotate(6deg); filter: drop-shadow(0.12em 0.2em 0.22em oklch(0.05 0.02 305 / 0.6)); transition: transform 0.7s var(--ease); }
+.wordmark:hover .tagx { transform: rotate(1deg); }
+/* в адмінці підпис «Адмінка» має свої стилі для span — знак їх не успадковує */
+.aside .brand .wordmark .hw { font-size: 14px; }
+.aside .brand .wordmark .tagx { font-size: 1em; font-weight: 700; letter-spacing: -0.02em; text-transform: none; color: var(--on-hot); }
+@media (min-width: 900px) {
+  /* вхід із комп'ютера: знак маленький, ліворуч угорі сторінки, як у шапці сайту (так роблять Airbnb, Stripe,
+     Figma — приклади в docs/design/refs/login-modern/). Жодних шнурків і кілець: вони відволікали від форми. */
+  body.auth .authbrand { position: fixed; z-index: 3; left: 48px; top: 30px; }
+  body.auth .authbrand .wordmark { font-size: 28px; }
+}
+/* стрілка на головній кнопці входу */
+.login .btn.primary svg { width: 20px; height: 20px; stroke-width: 2.4; }
 
 /* ---------- Службові сторінки: правила, допомога, 404, помилка ---------- */
 .doc { padding-top: 4px; }
