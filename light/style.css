@@ -1188,10 +1188,49 @@ textarea { resize: none; }
   body.wide .qflt { padding-right: 360px; }
   body.wide .catnav { margin-top: 8px; }
   body.wide .chip:not([aria-current="true"]), body.wide .sortsel, body.wide .tools .pill, body.wide .tools .follow, body.wide .qchip { background-color: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
-  body.wide .pwrap { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 40px; }
-  body.wide .media.hasthumbs { display: grid; grid-template-columns: 76px minmax(0, 1fr); gap: 12px; align-items: start; }
-  body.wide .media.hasthumbs .thumbs { order: -1; flex-direction: column; padding: 0; overflow: visible; }
-  body.wide .media.hasthumbs .thumbs button { width: 76px; height: 76px; border-radius: 14px; }
+  body.wide .pwrap { max-width: 1280px; grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr); gap: 14px 40px; }
+  body.wide .pwrap > .crumbs { grid-column: 1 / -1; }
+  body.wide .media.hasthumbs { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 14px; align-items: start; }
+  body.wide .media.hasthumbs .gallery { aspect-ratio: 4 / 3; }
+  body.wide .media.hasthumbs .thumbs { order: -1; flex-direction: column; gap: 10px; padding: 0; overflow: visible; }
+  body.wide .media.hasthumbs .thumbs button { width: 100px; height: 64px; border-radius: 12px; opacity: 1; }
+  body.wide .media.hasthumbs .thumbs button:nth-child(n+7) { display: none; }
+  body.wide .media.hasthumbs .thumbs button:nth-child(6)::after { content: "+3"; position: absolute; inset: 0; display: grid; place-items: center; background: oklch(0.2 0.02 300 / 0.72); color: #fff; font: 700 20px/1 var(--display); }
+  body.wide .media .safebar { grid-column: 1 / -1; display: flex; align-items: center; gap: 14px; margin: 2px 0 0; padding: 16px 20px; border-radius: 16px; background: oklch(0.95 0.03 30); font-size: 14px; line-height: 1.45; color: var(--text); }
+  body.wide .media .safebar svg { width: 24px; height: 24px; margin: 0; color: var(--hot-ink); }
+  body.wide .pbelow { max-width: 1280px !important; padding-inline: 32px !important; }
+  body.wide .pbelow .block { position: relative; }
+  body.wide .pbelow .block h2 { font: 700 28px/1.2 var(--display); }
+  body.wide .pbelow .more { display: grid !important; grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 16px; overflow: visible; }
+  body.wide .pbelow .more .card { width: auto !important; min-width: 0; flex: none; }
+  body.wide .pbelow .morelink.under { position: absolute; top: 30px; right: 0; margin: 0; font-size: 14px; font-weight: 600; color: var(--text); }
+  body.wide .media .facts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+  body.wide .media .facts span { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 18px; border-radius: 14px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); font-size: 14px; font-weight: 500; color: var(--text); }
+  body.wide .media .facts svg { width: 18px; height: 18px; }
+  body.wide .pwrap main { display: flex; flex-direction: column; }
+  body.wide .pwrap main > .block { order: 2; }
+  body.wide .pwrap main > .block:has(.seller) { order: 1; padding-top: 0; }
+  body.wide .pwrap main > .block:has(.seller) > h2 { display: none; }
+  body.wide .pwrap main > .block:has(.specs) { order: 3; }
+  body.wide .pwrap main > .contact:not(#ownbar) { position: sticky; top: 84px; bottom: auto; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; max-width: none; margin-top: 8px; padding: 8px 0; border: 0; border-radius: 0; background: var(--bg); box-shadow: none; }
+  body.wide .pwrap main > .contact:not(#ownbar) .write { order: 1; flex: 1 1 240px; height: 56px; }
+  body.wide .pwrap main > .contact:not(#ownbar) .offerbtn { order: 2; flex: none; height: 56px; margin: 0; padding: 0 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); font-size: 16px; }
+  body.wide .pwrap main > .contact:not(#ownbar)::after { content: "Або в месенджері:"; order: 3; margin-right: -2px; font-size: 14px; color: var(--text-2); }
+  body.wide .pwrap main > .contact:not(#ownbar) .msgr { order: 4; width: 40px; height: 40px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  body.wide .pwrap main > .contact:not(#ownbar) .msgr img { width: 20px; height: 20px; filter: brightness(0); opacity: 0.7; }
+  body.wide .pwrap .block { padding-top: 22px; }
+  body.wide .pwrap .safeline { margin-top: 10px; }
+  /* шапка за рисунком: поле пошуку окремо, місто — окремим посиланням праворуч від нього */
+  body.wide header.top .search { position: relative; background: none; }
+  body.wide header.top .search::before { content: ""; position: absolute; z-index: -1; inset: 0 158px 0 0; border-radius: 999px; background: oklch(1 0 0 / 0.1); }
+  body.wide header.top .search .where { flex: none; width: 146px; margin-left: 12px; padding-left: 0; border-left: 0; justify-content: flex-start; font-weight: 600; color: var(--on-ink); }
+  body.wide .pwrap .specs { grid-template-columns: 1fr; gap: 6px; }
+  body.wide .pwrap .specs > div { display: grid; grid-template-columns: 190px minmax(0, 1fr); align-items: center; }
+  body.wide .pwrap .specs dt { display: flex; align-items: center; gap: 14px; font-size: 16px; color: var(--text); }
+  body.wide .pwrap .specs dt svg { width: 20px; height: 20px; }
+  body.wide .pwrap .specs dd { margin: 0; font-size: 16px; font-weight: 600; }
+  body.wide .pchips span { height: 38px; padding: 0 18px; font-weight: 600; }
+  body.wide .pchips span[hidden] { display: none; }
   body.wide .info { display: flex; flex-direction: column; align-items: flex-start; }
   body.wide .info > * { max-width: 100%; }
   body.wide .info h1 { order: -1; margin: 0 0 10px; font-weight: 700; }

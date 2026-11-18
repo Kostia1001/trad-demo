@@ -304,7 +304,23 @@
     var specs = $$('.specs dd'), sblock = specs.length ? specs[0].closest('.block') : null, facts = $('.facts', info);
     if (specs.length && specs.length <= 4 && facts) {
       facts.before(el('<div class="pchips" aria-label="Характеристики">' + specs.map(function (d) { return '<span>' + d.textContent + '</span>'; }).join('') + '</div>'));
-      sblock.classList.add('folded');
+      if (!wide.matches) sblock.classList.add('folded');
+    }
+    /* комп'ютер, за рисунком: шлях над усією сторінкою, місто й дата — плашками під фото, характеристики — списком зі значками */
+    if (wide.matches) {
+      var pw = $('.pwrap'), cr = $('.crumbs', pmain);
+      if (pw && cr) { cr.insertBefore(el('<i data-lucide="chevron-right"></i>'), cr.firstChild); cr.insertBefore(el('<a href="home.html">Головна</a>'), cr.firstChild); pw.insertBefore(cr, pw.firstChild); }
+      if (facts && media) setTimeout(function () { media.appendChild(facts); }, 0);
+      /* кнопки зв'язку: головна «Написати в чат», поруч спокійна «Запропонувати ціну», месенджери — малими значками нижче */
+      setTimeout(function () {
+        var ct = $$('aside.contact').filter(function (a) { return a.id !== 'ownbar'; })[0], ob = $('.offerbtn');
+        if (ct && ob) ct.appendChild(ob);
+        var sl = $('.safeline'); if (sl && media) { sl.classList.add('safebar'); media.appendChild(sl); }
+        var ml = $('.pbelow .morelink.under'); if (ml) ml.firstChild.textContent = 'Дивитися всі';
+      }, 0);   /* після того, як фото загорнуто в .stage */
+      var SI = { 'Стан': 'sparkles', 'Бренд': 'tag', 'Розмір': 'ruler', 'Колір': 'palette' };
+      $$('.specs dt').forEach(function (t) { t.insertBefore(el('<i data-lucide="' + (SI[t.textContent.trim()] || 'circle') + '"></i>'), t.firstChild); });
+      $$('.pchips span', info).forEach(function (x, i) { if (i !== 0 && i !== 2) x.hidden = true; });
     }
     var sname = $('.seller .name');
     if (sname) sname.after(el('<span class="vbadge"><i data-lucide="shield-check"></i>Телефон підтверджено</span>'));
