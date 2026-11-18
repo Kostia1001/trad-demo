@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffdfd">
+<title>TRAD — Немає з’єднання</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11181732">
+</head>
+<body class="wide bare">
+<header class="top"><div class="top-row"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a></div></header>
+<main class="oops"><div>
+<div class="ico"><i data-lucide="wifi-off"></i></div>
+<h1>Немає з’єднання</h1><p>Перевірте інтернет і спробуйте ще раз.</p>
+<div class="do"><button class="btn primary" type="button" id="retry">Спробувати ще раз</button></div>
+</div></main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  var Q = new URLSearchParams(location.search);
+  var b = document.getElementById('retry'), t = document.getElementById('toast');
+  b.addEventListener('click', function () {
+    b.disabled = true; b.textContent = 'Перевіряємо…';
+    setTimeout(function () { b.disabled = false; b.textContent = 'Спробувати ще раз'; t.textContent = 'З’єднання досі немає'; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 2200); }, 1200);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffdfd">
+<title>TRAD — Місто</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11181732">
+</head>
+<body class="wide has-bar keepbar pickpage">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar" style="padding-left:6px">
+  <a class="x" href="home.html" id="back" aria-label="Назад"><i data-lucide="arrow-left"></i></a>
+  <form class="search" role="search" onsubmit="return false"><i data-lucide="search"></i><input type="search" id="q" placeholder="Місто" aria-label="Пошук міста" autocomplete="off"></form>
+</div>
+<main>
+  <section class="listsec" style="padding-top:8px">
+    <a class="lrow" href="home.html" data-all><i data-lucide="map"></i><span class="t">Вся Україна</span><i class="ok" data-lucide="check"></i></a>
+    <a class="lrow" href="home.html" data-city="київ"><i data-lucide="map-pin"></i><span class="t">Київ</span></a>
+    <a class="lrow" href="home.html" data-city="харків"><i data-lucide="map-pin"></i><span class="t">Харків</span></a>
+    <a class="lrow" href="home.html" data-city="одеса"><i data-lucide="map-pin"></i><span class="t">Одеса</span></a>
+    <a class="lrow" href="home.html" data-city="дніпро"><i data-lucide="map-pin"></i><span class="t">Дніпро</span></a>
+    <a class="lrow" href="home.html" data-city="львів"><i data-lucide="map-pin"></i><span class="t">Львів</span></a>
+    <a class="lrow" href="home.html" data-city="запоріжжя"><i data-lucide="map-pin"></i><span class="t">Запоріжжя</span></a>
+    <a class="lrow" href="home.html" data-city="кривий ріг"><i data-lucide="map-pin"></i><span class="t">Кривий Ріг</span></a>
+    <a class="lrow" href="home.html" data-city="миколаїв"><i data-lucide="map-pin"></i><span class="t">Миколаїв</span></a>
+    <a class="lrow" href="home.html" data-city="вінниця"><i data-lucide="map-pin"></i><span class="t">Вінниця</span></a>
+    <a class="lrow" href="home.html" data-city="полтава"><i data-lucide="map-pin"></i><span class="t">Полтава</span></a>
+    <a class="lrow" href="home.html" data-city="чернігів"><i data-lucide="map-pin"></i><span class="t">Чернігів</span></a>
+    <a class="lrow" href="home.html" data-city="черкаси"><i data-lucide="map-pin"></i><span class="t">Черкаси</span></a>
+    <a class="lrow" href="home.html" data-city="житомир"><i data-lucide="map-pin"></i><span class="t">Житомир</span></a>
+    <a class="lrow" href="home.html" data-city="суми"><i data-lucide="map-pin"></i><span class="t">Суми</span></a>
+    <a class="lrow" href="home.html" data-city="івано-франківськ"><i data-lucide="map-pin"></i><span class="t">Івано-Франківськ</span></a>
+    <a class="lrow" href="home.html" data-city="тернопіль"><i data-lucide="map-pin"></i><span class="t">Тернопіль</span></a>
+    <a class="lrow" href="home.html" data-city="луцьк"><i data-lucide="map-pin"></i><span class="t">Луцьк</span></a>
+    <a class="lrow" href="home.html" data-city="ужгород"><i data-lucide="map-pin"></i><span class="t">Ужгород</span></a>
+  </section>
+  <div class="empty" id="none" hidden style="padding-top:48px"><h2>Такого міста не знайшли</h2><p>Перевірте назву або оберіть «Вся Україна».</p></div>
+</main>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+
+  var q = document.getElementById('q');
+  q.addEventListener('input', function () {
+    var v = q.value.trim().toLowerCase(), n = 0;
+    document.querySelectorAll('[data-city]').forEach(function (r) { var on = r.dataset.city.indexOf(v) === 0; r.hidden = !on; if (on) n++; });
+    document.querySelector('[data-all]').hidden = v.length > 0;
+    document.getElementById('none').hidden = n > 0;
+  });
+  document.getElementById('back').addEventListener('click', function (e) { if (history.length > 1) { e.preventDefault(); history.back(); } });
+</script>
+<script src="shop.js?v=11181732"></script>
+</body>
+</html>

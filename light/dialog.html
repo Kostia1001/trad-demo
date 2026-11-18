@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffdfd">
+<title>TRAD — Олена</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11181732">
+</head>
+<body>
+
+<header class="dtop">
+  <div class="r1"><a class="x" style="margin-left:0" href="chat.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a>
+    <a class="ava sm" href="seller.html"><img src="assets/avatar.jpg" alt=""></a><a class="nm" href="seller.html">Олена</a>
+    <button class="x" style="margin:0" type="button" data-sheet="dmenu" aria-label="Ще"><i data-lucide="ellipsis-vertical"></i></button></div>
+  <a class="ditem" href="product.html"><img src="assets/jeans-1.jpg" alt=""><span class="t">Джинси Levi’s 501, W32 L32<span class="p num">900&nbsp;грн</span></span><i data-lucide="chevron-right"></i></a>
+</header>
+<main class="msgs" id="msgs">
+  <div class="safety"><i data-lucide="shield-alert"></i><span>Не надсилайте передоплату незнайомим продавцям. Краще оглянути товар під час зустрічі.</span></div>
+  <span class="daysep old">Сьогодні</span>
+  <div class="msg out old">Доброго дня! Ще актуально?<span class="mt num">14:20<i data-lucide="check-check"></i></span></div>
+  <div class="msg in old">Так, ще актуально. Можу показати сьогодні<span class="mt num">14:31</span></div>
+  <div class="msg in photo old"><img src="assets/jeans-3.jpg" alt="Фото від продавця"></div>
+  <div class="msg in old">Ось ще фото кишені<span class="mt num">14:32</span></div>
+</main>
+<div class="cbox">
+  <div class="quick" id="quick"><button type="button">Ще актуально?</button><button type="button">Чи можливий торг?</button><button type="button">Де можна подивитися?</button></div>
+  <form class="composer" id="form">
+    <button class="act" type="button" aria-label="Додати фото"><i data-lucide="image"></i></button>
+    <textarea id="text" rows="1" placeholder="Повідомлення" aria-label="Повідомлення"></textarea>
+    <button class="act send" id="send" type="submit" aria-label="Надіслати" disabled><i data-lucide="arrow-up"></i></button>
+  </form>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<div class="scrim"></div>
+<section class="sheet" id="dmenu" role="dialog" aria-modal="true" aria-label="Розмова з Оленою">
+  <div class="sheet-head"><h2>Розмова з Оленою</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body alist"><button class="lrow" type="button" data-close data-toast="Дякуємо, ми перевіримо розмову"><i data-lucide="flag"></i><span class="t">Поскаржитись</span></button><button class="lrow danger" type="button" data-close data-toast="Користувача заблоковано"><i data-lucide="ban"></i><span class="t">Заблокувати користувача</span></button></div>
+</section>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  function sheet(id, on) {
+    document.querySelectorAll('.sheet').forEach(function (s) { s.style.display = (!on || s.id === id) ? '' : 'none'; });
+    document.body.classList.toggle('sheet-on', on);
+  }
+  document.querySelectorAll('[data-sheet]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); sheet(b.dataset.sheet, true); }); });
+  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(t) { if (!toastEl || !t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2200); }
+  document.querySelectorAll('[data-toast]').forEach(function (b) { b.addEventListener('click', function () { toast(b.dataset.toast); }); });
+
+  if (window.self !== window.top) document.body.classList.add('embedded');
+  var text = document.getElementById('text'), send = document.getElementById('send'), msgs = document.getElementById('msgs'), quick = document.getElementById('quick');
+  var isNew = new URLSearchParams(location.search).get('new') === '1';
+  if (isNew) document.querySelectorAll('.old').forEach(function (m) { m.remove(); }); else quick.hidden = true;
+  function sync() { send.disabled = !text.value.trim(); }
+  function post(t) {
+    var m = document.createElement('div'); m.className = 'msg out'; m.textContent = t;
+    var s = document.createElement('span'); s.className = 'mt num'; s.textContent = 'щойно'; m.appendChild(s);
+    msgs.appendChild(m); quick.hidden = true; text.value = ''; sync(); window.scrollTo(0, document.body.scrollHeight);
+  }
+  text.addEventListener('input', sync);
+  document.getElementById('form').addEventListener('submit', function (e) { e.preventDefault(); if (text.value.trim()) post(text.value.trim()); });
+  quick.querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { post(b.textContent); }); });
+  window.scrollTo(0, document.body.scrollHeight);
+
+  document.querySelector('.composer .act[aria-label="Додати фото"]').addEventListener('click', function () {
+    var m = document.createElement('div'); m.className = 'msg out photo'; m.innerHTML = '<img src="assets/jeans-2.jpg" alt="Ваше фото">';
+    msgs.appendChild(m); quick.hidden = true; window.scrollTo(0, document.body.scrollHeight);
+  });
+</script>
+<!-- demo -->
+<script src="shop.js?v=11181732"></script>
+</body>
+</html>

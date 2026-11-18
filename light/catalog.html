@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffdfd">
+<title>TRAD — Жіночий одяг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11181732">
+</head>
+<body class="wide has-bar">
+<header class="top">
+  <div class="top-row">
+    <a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a>
+    <nav class="desk" aria-label="Меню">
+      <a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a>
+      <a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a>
+      <a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a>
+      <a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a>
+      <a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a>
+    </nav>
+  </div>
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" placeholder="Що шукаєте?" aria-label="Пошук оголошень">
+    <a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a>
+  </form>
+</header>
+
+<div class="bar">
+  <a class="x" href="home.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a>
+  <a class="search" href="search.html"><i data-lucide="search"></i><span style="flex:1">Жіночий одяг</span><span class="where"><i data-lucide="map-pin"></i>Вся Україна</span></a>
+</div>
+
+<div class="shop">
+  <aside class="side" aria-label="Фільтри">
+    <h2>Фільтри</h2>
+    <div class="fgroup"><span class="lbl">Ціна, грн</span>
+      <div class="range"><label>від<input inputmode="numeric" aria-label="Ціна від"></label><label>до<input inputmode="numeric" value="2 000" aria-label="Ціна до"></label></div></div>
+    <div class="fgroup"><span class="lbl">Стан</span>
+      <div class="opts" data-single><button class="opt" type="button" aria-pressed="false">Будь-який</button><button class="opt" type="button" aria-pressed="false">Нове</button><button class="opt" type="button" aria-pressed="true">Вживане</button></div></div>
+    <div class="fgroup"><span class="lbl">Розмір</span>
+      <div class="opts"><button class="opt" type="button" aria-pressed="false">XS</button><button class="opt" type="button" aria-pressed="false">S</button><button class="opt" type="button" aria-pressed="false">M</button><button class="opt" type="button" aria-pressed="false">L</button><button class="opt" type="button" aria-pressed="false">XL</button></div></div>
+    <div class="fgroup"><span class="lbl">Місто</span>
+      <a class="rowbtn" href="city.html"><span>Вся Україна</span><i data-lucide="chevron-right"></i></a></div>
+  </aside>
+  <main>
+    <h1 class="cat">Жіночий одяг</h1>
+    <nav class="chips" aria-label="Підкатегорії">
+      <a class="chip" href="#" aria-current="true">Усе</a><a class="chip" href="#">Куртки й пальта</a><a class="chip" href="#">Джинси</a><a class="chip" href="#">Худі та світшоти</a><a class="chip" href="#">Футболки</a><a class="chip" href="#">Сукні</a>
+    </nav>
+    <p class="didyou" id="didyou" hidden>Показуємо оголошення за запитом «джинси». <a href="catalog.html?q=джынсы">Шукати «джынсы»</a></p>
+    <div class="tools">
+      <span class="n num" id="n">128 оголошень</span>
+      <select class="sortsel" aria-label="Сортування"><option>Спочатку нові</option><option>Спочатку дешевші</option><option>Спочатку дорожчі</option></select>
+      <button class="icon-btn follow" id="follow" type="button" aria-pressed="false" aria-label="Стежити за цим пошуком" title="Стежити за цим пошуком"><i data-lucide="bell-plus"></i></button>
+      <button class="pill" id="openf" type="button"><i data-lucide="sliders-horizontal"></i>Фільтри<span class="badge num">2</span></button>
+    </div>
+    <div class="applied" id="applied">
+      <button type="button">до 2 000 грн<i data-lucide="x"></i></button><button type="button">Вживане<i data-lucide="x"></i></button><button class="reset" type="button" id="reset">Скинути все</button>
+    </div>
+    <div class="grid tight" id="grid">
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/puffer.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i></span><span class="state">Заброньовано</span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">1&nbsp;900&nbsp;грн</div><div class="title">Пуховик жіночий, розмір M</div></div>
+      </div>
+      <div class="meta">Харків · вчора, 19:12</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/jeans-1.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="dur"><i data-lucide="play"></i>0:31</span><button class="fav" type="button" aria-pressed="true" aria-label="Прибрати з обраного"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">900&nbsp;грн</div><div class="title">Джинси Levi’s 501, W32 L32</div></div>
+      </div>
+      <div class="meta">Одеса · сьогодні, 11:40</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/hoodie.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i></span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">650&nbsp;грн</div><div class="title">Худі сіре, розмір L</div></div>
+      </div>
+      <div class="meta">Київ · вчора, 12:30</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/puffer-green.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i></span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">1&nbsp;700&nbsp;грн</div><div class="title">Пуховик зелений, розмір S</div></div>
+      </div>
+      <div class="meta">Харків · 11 листопада</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/jeans-3.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="dur"><i data-lucide="play"></i>0:15</span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">700&nbsp;грн</div><div class="title">Джинси сині, W30 L32</div></div>
+      </div>
+      <div class="meta">Львів · 10 листопада</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/tshirt.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i></span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">250&nbsp;грн</div><div class="title">Футболка з принтом, розмір M</div></div>
+      </div>
+      <div class="meta">Одеса · 11 листопада</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/bag.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="video"></i><i class=""></i><i class=""></i><i class=""></i></span><span class="dur"><i data-lucide="play"></i>0:24</span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">1&nbsp;100&nbsp;грн</div><div class="title">Сумка шкіряна, коричнева</div></div>
+      </div>
+      <div class="meta">Київ · сьогодні, 14:20</div>
+    </a>
+    <a class="card" href="product.html">
+      <div class="frame"><img src="assets/jeans-2.jpg" alt="">
+        <span class="segs" aria-hidden="true"><i class="on"></i><i class=""></i><i class=""></i></span><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>
+        <div class="cap"><div class="price num">1&nbsp;200&nbsp;грн</div><div class="title">Джинси прямі, W28 L30</div></div>
+      </div>
+      <div class="meta">Дніпро · 9 листопада</div>
+    </a>
+    </div>
+    <div class="empty" id="empty" hidden>
+      <div class="ico"><i data-lucide="search-x"></i></div>
+      <h2>Нічого не знайшли</h2>
+      <p>Спробуйте інший запит або приберіть частину фільтрів.</p>
+      <button class="btn ghost" type="button" id="reset2">Скинути фільтри</button>
+    </div>
+  </main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<section class="sheet" id="sheet" aria-label="Фільтри" role="dialog" aria-modal="true">
+  <div class="sheet-head"><h2>Фільтри</h2><button class="x" id="closef" type="button" aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <div class="fgroup"><span class="lbl">Ціна, грн</span>
+      <div class="range"><label>від<input inputmode="numeric" aria-label="Ціна від"></label><label>до<input inputmode="numeric" value="2 000" aria-label="Ціна до"></label></div></div>
+    <div class="fgroup"><span class="lbl">Стан</span>
+      <div class="opts" data-single><button class="opt" type="button" aria-pressed="false">Будь-який</button><button class="opt" type="button" aria-pressed="false">Нове</button><button class="opt" type="button" aria-pressed="true">Вживане</button></div></div>
+    <div class="fgroup"><span class="lbl">Розмір</span>
+      <div class="opts"><button class="opt" type="button" aria-pressed="false">XS</button><button class="opt" type="button" aria-pressed="false">S</button><button class="opt" type="button" aria-pressed="false">M</button><button class="opt" type="button" aria-pressed="false">L</button><button class="opt" type="button" aria-pressed="false">XL</button></div></div>
+    <div class="fgroup"><span class="lbl">Місто</span>
+      <a class="rowbtn" href="city.html"><span>Вся Україна</span><i data-lucide="chevron-right"></i></a></div>
+  </div>
+  <div class="sheet-foot"><button class="btn ghost" type="button" id="resetf">Скинути</button><button class="btn primary" type="button" id="apply">Показати 128 оголошень</button></div>
+</section>
+
+<nav class="tabs" aria-label="Головне меню">
+  <a class="tab" href="home.html"><i data-lucide="house"></i>Головна</a>
+  <a class="tab" href="favorites.html"><i data-lucide="heart"></i>Обране</a>
+  <a class="tab create" href="create-ai.html"><span class="plus"><i data-lucide="tag"></i></span>Створити</a>
+  <a class="tab" href="chat.html"><i data-lucide="message-circle"></i><span class="count num">2</span>Чат</a>
+  <a class="tab" href="profile.html"><i data-lucide="user"></i>Профіль</a>
+</nav>
+
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  document.querySelectorAll('.fav').forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.preventDefault(); e.stopPropagation();
+      var on = b.getAttribute('aria-pressed') === 'true';
+      b.setAttribute('aria-pressed', String(!on));
+      b.setAttribute('aria-label', on ? 'Додати в обране' : 'Прибрати з обраного');
+    });
+  });
+  var q = new URLSearchParams(location.search), body = document.body;
+  function sheet(on) { body.classList.toggle('sheet-on', on); }
+  document.getElementById('openf').addEventListener('click', function () { sheet(true); });
+  ['closef', 'scrim', 'apply'].forEach(function (id) { document.getElementById(id).addEventListener('click', function () { sheet(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet(false); });
+  document.querySelectorAll('.opts').forEach(function (g) {
+    g.querySelectorAll('.opt').forEach(function (o) {
+      o.addEventListener('click', function () {
+        if (g.hasAttribute('data-single')) g.querySelectorAll('.opt').forEach(function (x) { x.setAttribute('aria-pressed', String(x === o)); });
+        else o.setAttribute('aria-pressed', String(o.getAttribute('aria-pressed') !== 'true'));
+      });
+    });
+  });
+  document.querySelectorAll('.sw').forEach(function (s) { s.addEventListener('click', function () { s.setAttribute('aria-checked', String(s.getAttribute('aria-checked') !== 'true')); }); });
+  function empty(on) {
+    document.getElementById('grid').hidden = on; document.getElementById('empty').hidden = !on;
+    document.getElementById('n').textContent = on ? '0 оголошень' : '128 оголошень';
+  }
+  function reset() { document.getElementById('applied').hidden = true; var b = document.querySelector('#openf .badge'); if (b) b.remove(); empty(false); sheet(false); }
+  ['reset', 'reset2', 'resetf'].forEach(function (id) { document.getElementById(id).addEventListener('click', reset); });
+  document.querySelectorAll('#applied button:not(.reset)').forEach(function (b) { b.addEventListener('click', function () { b.remove(); if (!document.querySelector('#applied button:not(.reset)')) reset(); }); });
+  if (q.get('filters') === '1') sheet(true);
+  if (q.get('empty') === '1') empty(true);
+
+  (function () {
+    var tEl = document.getElementById('toast'), tT;
+    if (!tEl) { tEl = document.createElement('div'); tEl.className = 'toast'; tEl.id = 'toast'; tEl.setAttribute('role', 'status'); document.body.appendChild(tEl); }
+    function say(m) { tEl.textContent = m; tEl.classList.add('on'); clearTimeout(tT); tT = setTimeout(function () { tEl.classList.remove('on'); }, 2400); }
+    var p = new URLSearchParams(location.search), f = document.getElementById('follow');
+    function setF(on, quiet) {
+      f.setAttribute('aria-pressed', String(on));
+      f.setAttribute('aria-label', on ? 'Не стежити за цим пошуком' : 'Стежити за цим пошуком'); f.title = f.getAttribute('aria-label');
+      f.innerHTML = '<i data-lucide="' + (on ? 'bell-ring' : 'bell-plus') + '"></i>'; lucide.createIcons();
+      if (!quiet) say(on ? 'Повідомимо про нові оголошення за цим пошуком' : 'Більше не стежимо за цим пошуком');
+    }
+    f.addEventListener('click', function () { setF(f.getAttribute('aria-pressed') !== 'true'); });
+    if (p.get('follow') === '1') setF(true, true);
+    if (p.get('fix') === '1') { document.getElementById('didyou').hidden = false; var qs = document.querySelector('.bar .search span'); if (qs) qs.textContent = 'джинси'; }
+  })();
+
+
+
+
+
+
+
+  /* demo:start */
+  (function () {
+    var CATS = {
+      women: ['Жіночий одяг', ['Куртки й пальта', 'Джинси', 'Худі та світшоти', 'Футболки', 'Сукні']],
+      men: ['Чоловічий одяг', ['Куртки й пальта', 'Джинси', 'Худі та світшоти', 'Футболки']],
+      shoes: ['Взуття', ['Кросівки', 'Черевики', 'Туфлі']],
+      phones: ['Смартфони', ['Apple', 'Samsung', 'Xiaomi', 'Google']]
+    };
+    var p = new URLSearchParams(location.search), c = CATS[p.get('cat')], nav = document.querySelector('.shop .chips, nav.chips');
+    if (c && !p.get('q') && p.get('fix') !== '1') {
+      document.querySelector('h1.cat').textContent = c[0];
+      var bar = document.querySelector('.bar .search span'); if (bar) bar.textContent = c[0];
+      document.title = 'TRAD — ' + c[0];
+      nav.innerHTML = '<a class="chip" href="#" aria-current="true">Усе</a>' + c[1].map(function (n) { return '<a class="chip" href="#">' + n + '</a>'; }).join('');
+    }
+    nav.addEventListener('click', function (e) {
+      var a = e.target.closest('.chip'); if (!a) return;
+      e.preventDefault();
+      nav.querySelectorAll('.chip').forEach(function (x) { if (x === a) x.setAttribute('aria-current', 'true'); else x.removeAttribute('aria-current'); });
+      var n = document.getElementById('n'); if (n) n.textContent = a.textContent === 'Усе' ? '128 оголошень' : '34 оголошення';
+    });
+  })();
+  // Фільтри: категорія відкривається без фільтрів; вибрані з'являються після «Показати».
+  // Уже з фільтрами сторінка відкривається лише зі збереженого пошуку (?follow=1), за ?applied=1 і в стані «нічого не знайдено».
+  (function () {
+    var p = new URLSearchParams(location.search), box = document.getElementById('applied'), sh = document.getElementById('sheet'), n = document.getElementById('n');
+    var side = document.querySelector('aside.side'), openf = document.getElementById('openf'), apply = document.getElementById('apply');
+    var has = p.get('applied') === '1' || p.get('follow') === '1' || p.get('empty') === '1';
+    // на телефоні фільтри у вікні знизу, на комп'ютері — у колонці ліворуч; читаємо ту панель, яку видно
+    function ctl(root) {
+      return { from: root.querySelector('[aria-label="Ціна від"]'), to: root.querySelector('[aria-label="Ціна до"]'), 
+               cond: [].slice.call(root.querySelectorAll('.opts[data-single] .opt')), sizes: [].slice.call(root.querySelectorAll('.opts:not([data-single]) .opt')) };
+    }
+    var panels = [sh, side].filter(Boolean).map(ctl);
+    var mq = window.matchMedia('(min-width: 900px)');
+    function cur() { return side && mq.matches ? panels[1] : panels[0]; }
+    function clear() {
+      panels.forEach(function (c) {
+        c.from.value = c.to.value = '';
+        c.cond.forEach(function (b, i) { b.setAttribute('aria-pressed', String(i === 0)); });
+        c.sizes.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+      });
+    }
+    function list() {
+      var a = [], c = cur();
+      if (c.from.value.trim()) a.push(['від ' + c.from.value.trim() + ' грн', function () { c.from.value = ''; }]);
+      if (c.to.value.trim()) a.push(['до ' + c.to.value.trim() + ' грн', function () { c.to.value = ''; }]);
+      c.cond.forEach(function (b, i) { if (i && b.getAttribute('aria-pressed') === 'true') a.push([b.textContent, function () { b.setAttribute('aria-pressed', 'false'); c.cond[0].setAttribute('aria-pressed', 'true'); }]); });
+      c.sizes.forEach(function (b) { if (b.getAttribute('aria-pressed') === 'true') a.push(['Розмір ' + b.textContent, function () { b.setAttribute('aria-pressed', 'false'); }]); });
+      return a;
+    }
+    function foot() { apply.textContent = 'Показати ' + (list().length ? '46' : '128') + ' оголошень'; }
+    function render(keepCount) {
+      var a = list(), badge = openf.querySelector('.badge');
+      box.innerHTML = ''; box.hidden = !a.length;
+      a.forEach(function (x) {
+        var b = document.createElement('button'); b.type = 'button'; b.innerHTML = x[0] + '<i data-lucide="x"></i>';
+        b.addEventListener('click', function () { x[1](); render(); }); box.appendChild(b);
+      });
+      if (a.length) {
+        var r = document.createElement('button'); r.type = 'button'; r.className = 'reset'; r.id = 'reset'; r.textContent = 'Скинути все';
+        r.addEventListener('click', function () { clear(); render(); if (typeof empty === 'function') empty(false); }); box.appendChild(r);
+        if (!badge) { badge = document.createElement('span'); badge.className = 'badge num'; openf.appendChild(badge); }
+        badge.textContent = a.length;
+      } else if (badge) badge.remove();
+      if (!keepCount) n.textContent = a.length ? '46 оголошень' : '128 оголошень';
+      lucide.createIcons(); foot();
+    }
+    sh.addEventListener('click', function () { setTimeout(foot, 0); }); sh.addEventListener('input', foot);
+    if (side) { side.addEventListener('click', function (e) { if (e.target.closest('button')) setTimeout(render, 0); }); side.addEventListener('input', function () { render(); }); }
+    apply.addEventListener('click', function () { render(); });
+    ['reset2', 'resetf'].forEach(function (id) { var e = document.getElementById(id); if (e) e.addEventListener('click', function () { clear(); render(); }); });
+    if (!has) clear();
+    render(true);
+    // комп'ютер: колонка фільтрів закрита, поки людина не натисне «Фільтри»; вікно знизу тут не відкриваємо
+    function column(on) { document.body.classList.toggle('fopen', on); openf.setAttribute('aria-pressed', String(on)); }
+    document.addEventListener('click', function (e) {
+      if (!mq.matches || !e.target.closest('#openf')) return;
+      e.stopPropagation(); column(!document.body.classList.contains('fopen'));
+    }, true);
+    if (mq.matches && document.body.classList.contains('sheet-on')) { document.body.classList.remove('sheet-on'); column(true); }
+    mq.addEventListener('change', function () { document.body.classList.remove('sheet-on'); });
+  })();
+  /* demo:end */
+</script>
+<!-- block3 -->
+<script src="shop.js?v=11181732"></script>
+<!-- demo -->
+</body>
+</html>

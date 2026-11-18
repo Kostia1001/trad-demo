@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a1420">
+<title>TRAD — Адмінка: Показники</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11181732">
+<link rel="stylesheet" href="admin.css?v=11181732">
+</head>
+<body class="adm">
+<aside class="aside">
+  <div class="brand"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><span>Адмінка</span></div>
+  <nav class="anav" aria-label="Розділи адмінки">
+    <a href="admin.html"><i data-lucide="flag"></i>Скарги<span class="cnt num" id="navcnt">5</span></a>
+    <a href="admin-listings.html"><i data-lucide="layout-grid"></i>Оголошення</a>
+    <a href="admin-users.html"><i data-lucide="users"></i>Користувачі</a>
+    <a href="admin-stats.html" aria-current="page"><i data-lucide="chart-line"></i>Показники</a>
+    <a href="admin-log.html"><i data-lucide="history"></i>Журнал дій</a>
+  </nav>
+  <div class="awho">
+    <div class="me"><span class="aava">ОК</span><div><b>Олена К.</b><small>Адміністратор</small></div></div>
+    <div class="links"><a href="home.html"><i data-lucide="external-link"></i>На сайт</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></div>
+  </div>
+</aside>
+<main class="amain">
+<div class="ahead"><h1>Показники</h1><div class="seg" role="tablist" id="tabs"><button type="button" role="tab" aria-selected="false" data-tab="7">7 днів</button><button type="button" role="tab" aria-selected="true" data-tab="30">30 днів</button><button type="button" role="tab" aria-selected="false" data-tab="all">Увесь час</button></div></div>
+<div class="stats">
+  <section class="panel hero" aria-labelledby="h-hero">
+    <h2 id="h-hero">Оголошення, на які відгукнулися покупці</h2>
+    <p class="note">Покупець натиснув кнопку зв’язку або написав у чат. <span id="heroNote"></span>.</p>
+    <div class="hero-num" id="hero"></div>
+    <div class="hbars">
+      <div class="hbar key"><div class="l"><span>Продавець поділився в соцмережах · <span class="muted" id="videoN"></span></span><b id="videoV"></b></div><div class="tr"><i id="videoB"></i></div></div>
+      <div class="hbar"><div class="l"><span>Не ділився · <span class="muted" id="plainN"></span></span><b id="plainV"></b></div><div class="tr"><i id="plainB"></i></div></div>
+    </div>
+  </section>
+  <section class="panel" aria-labelledby="h-kpi">
+    <h2 id="h-kpi"></h2><p class="note" id="cmp"></p>
+    <dl class="kpis" style="margin-top:14px">
+      <div class="kpi"><dt>Реєстрації</dt><dd><span class="delta up" id="regD"></span><b id="reg"></b></dd></div>
+      <div class="kpi"><dt>Нові оголошення</dt><dd><span class="delta up" id="lstD"></span><b id="lst"></b></dd></div>
+      <div class="kpi"><dt>Час до публікації<small>половина продавців публікує швидше</small></dt><dd><span class="delta up" id="medD"></span><b id="med"></b></dd></div>
+      <div class="kpi"><dt>Створили оголошення<small id="madeN"></small></dt><dd><span class="delta up" id="madeD"></span><b id="made"></b></dd></div>
+      <div class="kpi"><dt>Продавці, що повернулися<small>опублікували ще одне оголошення</small></dt><dd><span class="delta up" id="retD"></span><b id="ret"></b></dd></div>
+    </dl>
+  </section>
+  <section class="panel span2" aria-labelledby="h-line">
+    <div class="aphead"><div><h2 id="h-line">Нові оголошення та реєстрації</h2><p class="note" id="unit"></p></div>
+      <div class="legend"><span><i style="background:var(--c1)"></i>Нові оголошення</span><span><i style="background:var(--c2)"></i>Реєстрації</span></div></div>
+    <div class="chart" id="chart"><svg id="svg" role="img" aria-labelledby="h-line"></svg><div class="tip" id="tip"></div></div>
+    <details class="astable"><summary>Показати таблицею</summary><div class="tblwrap"><table class="tbl"><thead><tr><th>Дата</th><th class="r">Нові оголошення</th><th class="r">Реєстрації</th></tr></thead><tbody id="ttable"></tbody></table></div></details>
+  </section>
+  <section class="panel" aria-labelledby="h-fun">
+    <h2 id="h-fun">На якому кроці кидають створення оголошення</h2><p class="note">Скільки продавців дійшло до кожного кроку і частка від тих, хто почав</p>
+    <div class="src fun" id="fun"></div>
+  </section>
+  <section class="panel" aria-labelledby="h-cost">
+    <h2 id="h-cost">Витрати на роботу сервісу</h2><p class="note">За обраний період</p>
+    <dl class="kpis" id="costs" style="margin-top:14px"></dl>
+    <p class="note" id="per" style="margin-top:12px"></p>
+  </section>
+  <section class="panel span2" aria-labelledby="h-src">
+    <h2 id="h-src">Звідки приходять відвідувачі</h2><p class="note">Частка відвідувань за обраний період</p>
+    <div class="src" id="src"></div>
+  </section>
+</div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+
+  lucide.createIcons();
+  var Q = new URLSearchParams(location.search);
+  var toastEl = document.getElementById('toast'), toastT;
+  function toast(msg, undo) {
+    toastEl.textContent = msg;
+    if (undo) {
+      var b = document.createElement('button'); b.type = 'button'; b.textContent = 'Скасувати';
+      b.addEventListener('click', function () { toastEl.classList.remove('on'); undo(); });
+      toastEl.appendChild(b);
+    }
+    toastEl.classList.add('on'); clearTimeout(toastT);
+    toastT = setTimeout(function () { toastEl.classList.remove('on'); }, undo ? 6000 : 2800);
+  }
+  function syncOk(d) {
+    var ok = d.querySelector('[data-ok]'); if (!ok) return;
+    var need = !!d.querySelector('.dopts') && !d.querySelector('.dopts input:checked');
+    ok.disabled = need; ok.title = need ? 'Оберіть причину' : '';
+  }
+  function openDlg(id, pre) {
+    var d = document.getElementById(id);
+    d.querySelectorAll('.dopts input').forEach(function (r) { r.checked = r.value === pre; });
+    var ta = d.querySelector('textarea'); if (ta) ta.value = '';
+    syncOk(d); d.showModal(); return d;
+  }
+  function reasonOf(d) { var r = d.querySelector('.dopts input:checked'); return r ? r.value : ''; }
+  document.querySelectorAll('dialog.dlg').forEach(function (d) {
+    d.addEventListener('change', function () { syncOk(d); });
+    d.querySelectorAll('[data-cancel]').forEach(function (b) { b.addEventListener('click', function () { d.close(); }); });
+    d.addEventListener('click', function (e) {
+      var r = d.getBoundingClientRect();
+      if (e.target === d && (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom)) d.close();
+    });
+  });
+  function segs(root, fn) {
+    root.querySelectorAll('button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        root.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+        fn(b.dataset.tab);
+      });
+    });
+  }
+
+  var S = {"7": {"title": "За 7 днів", "cmp": "Зміна проти попередніх 7 днів", "hero": "34%", "heroNote": "48 зі 141 нового оголошення", "video": 45, "videoN": "58 оголошень", "plain": 26, "plainN": "83 оголошення", "reg": "84", "regD": "+12%", "lst": "141", "lstD": "+6%", "med": "2 хв 35 с", "medD": "−15 с", "ret": "36%", "retD": "+2 п. п.", "unit": "за день", "labels": ["9 лист.", "10 лист.", "11 лист.", "12 лист.", "13 лист.", "14 лист.", "15 лист."], "a": [17, 19, 16, 20, 22, 25, 22], "b": [10, 11, 9, 12, 13, 15, 14], "src": [["Прямі переходи", 36, "1 240"], ["Пошук Google", 22, "760"], ["Instagram", 18, "620"], ["TikTok", 13, "450"], ["Telegram", 7, "240"], ["Інше", 4, "140"]], "made": "43%", "madeD": "+3 п. п.", "madeN": "36 із 84 нових користувачів", "funnel": [["Почали створювати", 198], ["Додали фото", 181], ["Заповнили опис", 160], ["Вказали ціну і зв’язок", 148], ["Опублікували", 141]], "costs": [["SMS-коди для входу", "104 коди", "108 грн"], ["Зберігання фото й відео", "11 ГБ", "69 грн"], ["Збирання відео з фото", "141 відео", "49 грн"]], "total": "226 грн", "per": "1,60 грн"}, "30": {"title": "За 30 днів", "cmp": "Зміна проти попередніх 30 днів", "hero": "34%", "heroNote": "186 із 540 нових оголошень", "video": 46, "videoN": "212 оголошень", "plain": 27, "plainN": "328 оголошень", "reg": "312", "regD": "+18%", "lst": "540", "lstD": "+9%", "med": "2 хв 40 с", "medD": "−20 с", "ret": "38%", "retD": "+4 п. п.", "unit": "за день", "labels": ["17 жовт.", "18 жовт.", "19 жовт.", "20 жовт.", "21 жовт.", "22 жовт.", "23 жовт.", "24 жовт.", "25 жовт.", "26 жовт.", "27 жовт.", "28 жовт.", "29 жовт.", "30 жовт.", "31 жовт.", "1 лист.", "2 лист.", "3 лист.", "4 лист.", "5 лист.", "6 лист.", "7 лист.", "8 лист.", "9 лист.", "10 лист.", "11 лист.", "12 лист.", "13 лист.", "14 лист.", "15 лист."], "a": [11, 13, 10, 14, 16, 20, 22, 14, 13, 16, 15, 17, 22, 24, 16, 15, 18, 17, 19, 26, 27, 18, 16, 17, 19, 16, 20, 22, 25, 22], "b": [6, 7, 5, 8, 9, 12, 13, 8, 7, 9, 8, 10, 13, 14, 9, 8, 10, 9, 11, 14, 15, 10, 13, 10, 11, 9, 12, 13, 15, 14], "src": [["Прямі переходи", 38, "5 320"], ["Пошук Google", 24, "3 360"], ["Instagram", 16, "2 240"], ["TikTok", 11, "1 540"], ["Telegram", 7, "980"], ["Інше", 4, "560"]], "made": "41%", "madeD": "+5 п. п.", "madeN": "128 із 312 нових користувачів", "funnel": [["Почали створювати", 760], ["Додали фото", 690], ["Заповнили опис", 610], ["Вказали ціну і зв’язок", 566], ["Опублікували", 540]], "costs": [["SMS-коди для входу", "398 кодів", "412 грн"], ["Зберігання фото й відео", "41 ГБ", "265 грн"], ["Збирання відео з фото", "540 відео", "180 грн"]], "total": "857 грн", "per": "1,59 грн"}, "all": {"title": "За весь час", "cmp": "З дня запуску, 24 серпня 2026", "hero": "31%", "heroNote": "1 010 із 3 284 оголошень", "video": 44, "videoN": "1 214 оголошень", "plain": 23, "plainN": "2 070 оголошень", "reg": "1 906", "regD": "", "lst": "3 284", "lstD": "", "med": "2 хв 50 с", "medD": "", "ret": "41%", "retD": "", "unit": "за тиждень", "labels": ["24 серп.", "31 серп.", "7 вер.", "14 вер.", "21 вер.", "28 вер.", "5 жовт.", "12 жовт.", "19 жовт.", "26 жовт.", "2 лист.", "9 лист."], "a": [76, 130, 184, 227, 260, 284, 308, 325, 344, 363, 381, 402], "b": [64, 90, 117, 136, 148, 159, 173, 180, 193, 202, 217, 227], "src": [["Прямі переходи", 41, "18 900"], ["Пошук Google", 25, "11 500"], ["Instagram", 14, "6 450"], ["TikTok", 9, "4 150"], ["Telegram", 7, "3 230"], ["Інше", 4, "1 840"]], "made": "39%", "madeD": "", "madeN": "743 із 1 906 користувачів", "funnel": [["Почали створювати", 4710], ["Додали фото", 4260], ["Заповнили опис", 3730], ["Вказали ціну і зв’язок", 3450], ["Опублікували", 3284]], "costs": [["SMS-коди для входу", "2 480 кодів", "2 570 грн"], ["Зберігання фото й відео", "246 ГБ", "1 590 грн"], ["Збирання відео з фото", "3 284 відео", "1 030 грн"]], "total": "5 190 грн", "per": "1,58 грн"}};
+
+  var period = Q.get('p') || '30', chart = document.getElementById('chart'), svg = document.getElementById('svg'), tip = document.getElementById('tip');
+  function set(id, v) { document.getElementById(id).textContent = v; }
+  function delta(id, v, icon) {
+    var el = document.getElementById(id); el.hidden = !v;
+    el.innerHTML = v ? '<i data-lucide="' + icon + '"></i>' + v : '';
+  }
+  function nice(m) { var p = Math.pow(10, Math.floor(Math.log10(m))), f = m / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 4 ? 4 : f <= 5 ? 5 : 10) * p; }
+  function line() {
+    var d = S[period], n = d.labels.length, W = Math.max(chart.clientWidth, 300), H = 250, L = 34, R = 44, T = 14, B = 26;
+    var top = nice(Math.max.apply(null, d.a.concat(d.b)));
+    function x(i) { return L + (W - L - R) * i / (n - 1); }
+    function y(v) { return T + (H - T - B) * (1 - v / top); }
+    var h = '';
+    for (var g = 0; g <= 4; g++) { var v = top * g / 4; h += '<line class="grid-l" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '"/><text class="ax" x="' + (L - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '</text>'; }
+    var every = Math.ceil(n / (W < 560 ? 4 : 8));
+    for (var i = n - 1; i >= 0; i -= every) h += '<text class="ax" x="' + x(i) + '" y="' + (H - 6) + '" text-anchor="' + (i === n - 1 ? 'end' : 'middle') + '">' + d.labels[i] + '</text>';
+    function path(a) { return a.map(function (v, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(v).toFixed(1); }).join(' '); }
+    h += '<path class="ln" stroke="var(--c2)" d="' + path(d.b) + '"/><path class="ln" stroke="var(--c1)" d="' + path(d.a) + '"/>';
+    var ya = y(d.a[n - 1]), yb = y(d.b[n - 1]), la = ya + 4, lb = yb + 4;
+    if (Math.abs(la - lb) < 15) { if (la < lb) { la -= 4; lb = la + 15; } else { lb -= 4; la = lb + 15; } }
+    h += '<circle class="end" r="5" fill="var(--c2)" cx="' + x(n - 1) + '" cy="' + yb + '"/><circle class="end" r="5" fill="var(--c1)" cx="' + x(n - 1) + '" cy="' + ya + '"/>';
+    h += '<text class="endl" x="' + (x(n - 1) + 11) + '" y="' + la + '">' + d.a[n - 1] + '</text><text class="endl" x="' + (x(n - 1) + 11) + '" y="' + lb + '">' + d.b[n - 1] + '</text>';
+    h += '<line class="cross" id="cross" y1="' + T + '" y2="' + (H - B) + '"/><circle class="hd" id="hb" r="5" fill="var(--c2)"/><circle class="hd" id="ha" r="5" fill="var(--c1)"/>';
+    h += '<rect id="hit" x="' + L + '" y="0" width="' + (W - L - R) + '" height="' + H + '" fill="transparent"/>';
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H); svg.innerHTML = h;
+    var hit = document.getElementById('hit');
+    function at(e) {
+      var r = svg.getBoundingClientRect(), px = (e.clientX - r.left) * W / r.width, i = Math.max(0, Math.min(n - 1, Math.round((px - L) / (W - L - R) * (n - 1))));
+      ['cross'].forEach(function (id) { var c = document.getElementById(id); c.setAttribute('x1', x(i)); c.setAttribute('x2', x(i)); });
+      document.getElementById('ha').setAttribute('cx', x(i)); document.getElementById('ha').setAttribute('cy', y(d.a[i]));
+      document.getElementById('hb').setAttribute('cx', x(i)); document.getElementById('hb').setAttribute('cy', y(d.b[i]));
+      tip.innerHTML = '<b>' + d.labels[i] + (period === 'all' ? ', тиждень' : '') + '</b><span><i style="background:var(--c1)"></i>Нові оголошення<em>' + d.a[i] + '</em></span><span><i style="background:var(--c2)"></i>Реєстрації<em>' + d.b[i] + '</em></span>';
+      var tx = x(i) * r.width / W + 14; if (tx + tip.offsetWidth > r.width) tx = x(i) * r.width / W - tip.offsetWidth - 14;
+      tip.style.transform = 'translate(' + Math.max(0, tx) + 'px, 8px)';
+      chart.classList.add('hov'); tip.classList.add('on');
+    }
+    hit.addEventListener('pointermove', at); hit.addEventListener('pointerdown', at);
+    hit.addEventListener('pointerleave', function () { chart.classList.remove('hov'); tip.classList.remove('on'); });
+    document.getElementById('ttable').innerHTML = d.labels.map(function (l, i) { return '<tr><td>' + l + '</td><td class="r">' + d.a[i] + '</td><td class="r">' + d.b[i] + '</td></tr>'; }).join('');
+  }
+  function draw() {
+    var d = S[period];
+    set('hero', d.hero); set('heroNote', d.heroNote); set('h-kpi', d.title); set('cmp', d.cmp);
+    set('videoV', d.video + '%'); set('videoN', d.videoN); set('plainV', d.plain + '%'); set('plainN', d.plainN);
+    document.getElementById('videoB').style.width = d.video + '%'; document.getElementById('plainB').style.width = d.plain + '%';
+    set('reg', d.reg); set('lst', d.lst); set('med', d.med); set('ret', d.ret);
+    set('made', d.made); set('madeN', d.madeN); delta('madeD', d.madeD, 'arrow-up');
+    var f0 = d.funnel[0][1];
+    document.getElementById('fun').innerHTML = d.funnel.map(function (s) { var pc = Math.round(s[1] / f0 * 100); return '<div class="row" title="' + s[0] + ': ' + s[1].toLocaleString('uk-UA') + ' (' + pc + '% від тих, хто почав)"><span>' + s[0] + '</span><div class="tr"><i style="width:' + (s[1] / f0 * 100) + '%"></i></div><b>' + s[1].toLocaleString('uk-UA') + '<small>' + pc + '%</small></b></div>'; }).join('');
+    document.getElementById('costs').innerHTML = d.costs.map(function (c) { return '<div class="kpi"><dt>' + c[0] + '<small>' + c[1] + '</small></dt><dd><b>' + c[2] + '</b></dd></div>'; }).join('') + '<div class="kpi total"><dt>Разом</dt><dd><b>' + d.total + '</b></dd></div>';
+    set('per', 'У середньому ' + d.per + ' на одне нове оголошення.');
+    delta('regD', d.regD, 'arrow-up'); delta('lstD', d.lstD, 'arrow-up'); delta('medD', d.medD, 'arrow-down'); delta('retD', d.retD, 'arrow-up');
+    set('unit', 'Кількість ' + d.unit);
+    var max = d.src[0][1];
+    document.getElementById('src').innerHTML = d.src.map(function (s) { return '<div class="row" title="' + s[0] + ': ' + s[2] + ' відвідувань"><span>' + s[0] + '</span><div class="tr"><i style="width:' + (s[1] / max * 100) + '%"></i></div><b>' + s[1] + '%</b></div>'; }).join('');
+    line(); lucide.createIcons();
+  }
+  segs(document.getElementById('tabs'), function (t) { period = t; draw(); });
+  document.querySelectorAll('#tabs button').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.tab === period)); });
+  var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(line, 120); });
+  draw();
+
+</script>
+</body>
+</html>

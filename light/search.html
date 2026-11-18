@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fffdfd">
+<title>TRAD — Пошук</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=11181732">
+</head>
+<body>
+
+<div class="bar" style="padding-left:12px">
+  <form class="search" role="search" action="catalog.html">
+    <i data-lucide="search"></i>
+    <input type="search" id="q" value="джин" aria-label="Пошук оголошень" autocomplete="off">
+    <button class="clear" type="button" id="clear" aria-label="Очистити"><i data-lucide="x"></i></button>
+  </form>
+  <a class="cancel" href="home.html">Скасувати</a>
+</div>
+<main>
+  <section class="listsec" id="sugg">
+    <a class="lrow" href="catalog.html"><i data-lucide="search"></i><span class="t"><b>джин</b>си<small>у категорії Жіночий одяг</small></span></a>
+    <a class="lrow" href="catalog.html"><i data-lucide="search"></i><span class="t"><b>джин</b>си<small>у категорії Чоловічий одяг</small></span></a>
+    <a class="lrow" href="catalog.html"><i data-lucide="search"></i><span class="t"><b>джин</b>сова куртка</span></a>
+    <a class="lrow" href="catalog.html"><i data-lucide="search"></i><span class="t"><b>джин</b>сові шорти</span></a>
+  </section>
+  <section class="listsec" id="recent" hidden>
+    <div class="lh"><span>Недавні пошуки</span><button class="textlink" type="button" id="wipe">Очистити все</button></div>
+    <div class="lrow"><i data-lucide="history"></i><a class="t" href="catalog.html">iphone 11</a><button class="rm" type="button" aria-label="Прибрати"><i data-lucide="x"></i></button></div>
+    <div class="lrow"><i data-lucide="history"></i><a class="t" href="catalog.html">пуховик жіночий</a><button class="rm" type="button" aria-label="Прибрати"><i data-lucide="x"></i></button></div>
+    <div class="lrow"><i data-lucide="history"></i><a class="t" href="catalog.html">кросівки 42</a><button class="rm" type="button" aria-label="Прибрати"><i data-lucide="x"></i></button></div>
+  </section>
+  <section class="listsec" id="cats" hidden>
+    <div class="lh"><span>Категорії</span></div>
+    <a class="lrow" href="catalog.html"><span class="t">Жіночий одяг</span><i data-lucide="chevron-right"></i></a>
+    <a class="lrow" href="catalog.html"><span class="t">Чоловічий одяг</span><i data-lucide="chevron-right"></i></a>
+    <a class="lrow" href="catalog.html"><span class="t">Взуття</span><i data-lucide="chevron-right"></i></a>
+    <a class="lrow" href="catalog.html"><span class="t">Смартфони</span><i data-lucide="chevron-right"></i></a>
+  </section>
+</main>
+<script src="assets/icons/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+  var q = document.getElementById('q');
+  function sync() {
+    var has = q.value.trim().length > 0;
+    document.getElementById('sugg').hidden = !has;
+    document.getElementById('recent').hidden = has; document.getElementById('cats').hidden = has;
+    document.getElementById('clear').style.visibility = has ? '' : 'hidden';
+  }
+  q.addEventListener('input', sync);
+  document.getElementById('clear').addEventListener('click', function () { q.value = ''; sync(); q.focus(); });
+  document.querySelectorAll('.rm').forEach(function (b) { b.addEventListener('click', function () { b.parentNode.remove(); }); });
+  document.getElementById('wipe').addEventListener('click', function () { document.getElementById('recent').remove(); });
+  if (new URLSearchParams(location.search).get('q') === '') q.value = '';
+  sync();
+</script>
+<script src="shop.js?v=11181732"></script>
+</body>
+</html>
