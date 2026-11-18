@@ -90,7 +90,9 @@ svg.lucide { width: 22px; height: 22px; stroke-width: 1.9; flex: none; }
 /* ---------- Нижнє меню ---------- */
 /* меню притиснуте до нижнього краю, як заведено на сайтах («парна» панель на iPhone стрибала: слово власника 18.11.2026);
    «Створити» — коралова плитка зі знаком-биркою з ескізу моделі */
-.tabs { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 430px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; background: var(--bg); border-top: 1px solid var(--line); padding: 8px 6px calc(8px + env(safe-area-inset-bottom)); }
+.tabs { position: fixed; left: 50%; bottom: 0; transform: translateX(-50%); width: 100%; max-width: 430px; display: grid; grid-template-columns: repeat(5, 1fr); align-items: end; background: var(--bg); border-top: 1px solid var(--line); padding: 8px 6px calc(8px + env(safe-area-inset-bottom)); transition: transform 0.25s var(--ease); }
+.tabs.away { transform: translate(-50%, calc(100% + 16px)); }
+@media (prefers-reduced-motion: reduce) { .tabs { transition: none; } }
 .tab { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 3px; min-height: 48px; font-size: 12px; font-weight: 500; color: var(--text-2); }
 .tab svg { width: 24px; height: 24px; }
 .tab[aria-current="page"] { color: var(--hot); font-weight: 600; }

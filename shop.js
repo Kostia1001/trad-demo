@@ -291,5 +291,16 @@
     if (m) t.textContent = s.replace(m[0], '').replace(/,\s*$/, '').trim();
     t.after(el('<div class="attrs">' + cond + (size ? ' · ' + size : '') + '</div>'));
   });
+  /* ---------- нижнє меню на телефоні: поки гортаємо вниз, воно з'їжджає за край і не заважає;
+     зупинилися або гортаємо вгору — повертається (так само поводиться меню на сайті OLX) ---------- */
+  var tabsNav = $('nav.tabs');
+  if (tabsNav) {
+    var lastY = window.scrollY, backT;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      if (y > lastY + 4 && y > 60) tabsNav.classList.add('away'); else if (y < lastY - 2) tabsNav.classList.remove('away');
+      lastY = y; clearTimeout(backT); backT = setTimeout(function () { tabsNav.classList.remove('away'); }, 450);
+    }, { passive: true });
+  }
   icons();
 })();
