@@ -205,7 +205,7 @@
       + '<a class="btn primary" href="create-ai.html">Продати з AI<i data-lucide="arrow-right"></i></a>'
       + '<div class="hart" aria-hidden="true"><img src="assets/hero-ai.webp" alt="">'
       + '<ul class="hvis"><li><i data-lucide="sparkles"></i>Розпізнає товар</li><li><i data-lucide="file-text"></i>Заповнить опис</li><li><i data-lucide="tag"></i>Підкаже ціну</li><li><i data-lucide="clapperboard"></i>Збере відео з фото</li></ul></div></div></section>'), main.firstChild);
-    catsNav.before(el('<div class="catshead"><h2>Розділи</h2><a class="allcat" href="category.html?browse=1">Усі категорії<i data-lucide="chevron-right"></i></a></div>'));
+    catsNav.before(el('<div class="catshead"><h2>Розділи</h2><a class="allcat" href="category.html?browse=1">Дивитися всі<i data-lucide="arrow-right"></i></a></div>'));
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     /* телефон: регіон і фільтри — у рядку заголовка; сортування на головній немає, воно у фільтрах каталогу */
@@ -441,6 +441,22 @@
     var h = $('h1.cat'), n = $('#n');
     if (h && n && wide.matches) { var w = el('<div class="cathead"></div>'); h.before(w); w.appendChild(h); w.appendChild(n); }
   })();
+  (function () {
+    var hs = $('#hsort');
+    if (!hs || !wide.matches || hs.options.length < 2) return;
+    var seg = el('<div class="segsort" role="group" aria-label="Сортування"></div>');
+    [].slice.call(hs.options, 0, 3).forEach(function (o, i) {
+      var t = o.textContent.replace(/^Спочатку\s+/, ''); t = t.charAt(0).toUpperCase() + t.slice(1);
+      var b = el('<button type="button"' + (i === hs.selectedIndex ? ' aria-pressed="true"' : ' aria-pressed="false"') + '>' + t + '</button>');
+      b.addEventListener('click', function () {
+        hs.selectedIndex = i; hs.dispatchEvent(new Event('change', { bubbles: true }));
+        $$('button', seg).forEach(function (x, k) { x.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+      });
+      seg.appendChild(b);
+    });
+    hs.addEventListener('change', function () { $$('button', seg).forEach(function (x, k) { x.setAttribute('aria-pressed', k === hs.selectedIndex ? 'true' : 'false'); }); });
+    hs.before(seg); hs.classList.add('segged');
+  })();
   function cardfix(c) {
     if (c.classList.contains('cv') || c.classList.contains('skel') || c.closest('.authwall')) return;
     var f = $('.frame', c), cap = $('.cap', c); if (!f || !cap) return;
@@ -448,6 +464,7 @@
     if (d) d.remove(); if (segs) segs.remove();
     if (meta) {                                   /* «Київ · сьогодні, 14:20» → «Київ · сьогодні»: година в стрічці зайва */
       meta.textContent = meta.textContent.split('·').map(function (x) { return x.trim().replace(/,\s*\d{1,2}:\d{2}$/, ''); }).join(' · ');
+      meta.insertBefore(el('<i data-lucide="map-pin"></i>'), meta.firstChild);
       cap.appendChild(meta);
     }
     f.after(cap);

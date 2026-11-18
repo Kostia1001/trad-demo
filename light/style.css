@@ -1237,6 +1237,33 @@ textarea { resize: none; }
   body.wide .info .price { font-size: 36px; }
   body.wide .pwrap .block h2 { font-size: 22px; }
 }
+/* ---- крок 4: зміст майже на всю ширину вікна, більші плитки й підписи карток (накладання на refs/trad-gpt-home-desk.png) ---- */
+.card.cv .meta { display: flex; align-items: center; gap: 5px; }
+.card.cv .meta svg { flex: none; width: 13px; height: 13px; }
+.segsort { display: none; }
+@media (min-width: 900px) {
+  body.wide .top, body.wide .chips, body.wide .head, body.wide .grid, body.wide .site-foot, body.wide .shop, body.wide .hero .hin, body.wide .catshead, body.wide .cats,
+  body.wide .shelf, body.wide .morebox, body.wide .favflt, body.wide .pwrap, body.wide .pbelow, body.wide .srows, body.wide .tline.full, body.wide .chatwrap,
+  body.wide.chatpage .bar, body.sellerpage.keepbar .bar, body.sellerpage main > .phead { max-width: 1488px !important; }
+  body.acctpage { --ax: max(32px, calc(50% - 712px)); }
+  body.acctpage .acct { top: 88px; }
+  body.wide .catshead .allcat { gap: 8px; font-size: 16px; font-weight: 600; }
+  body.wide .catshead .allcat svg { width: 20px; height: 20px; }
+  body.wide .cats > a { padding: 10px 10px 14px; font-size: 16px; line-height: 20px; }
+  body.wide .cats .lb { font-size: 16px; line-height: 20px; font-weight: 700; }
+  body.wide .hero p { font-size: 20px; }
+  body.wide header.top .mebtn { gap: 0; padding: 0; background: none; font-size: 0; }
+  body.wide header.top .mebtn > :not(img) { display: none; }
+  body.wide header.top .mebtn img { width: 40px; height: 40px; }
+  body.wide main > .grid .card.cv .title, body.wide #grid .card.cv .title { font-size: 18px; line-height: 24px; font-weight: 700; }
+  body.wide main > .grid .card.cv .attrs, body.wide main > .grid .card.cv .meta, body.wide #grid .card.cv .attrs, body.wide #grid .card.cv .meta { font-size: 14px; line-height: 20px; }
+  body.wide .card.cv .meta svg { width: 15px; height: 15px; }
+  body.wide .hero .btn { height: 56px; padding: 0 28px; font-size: 18px; }
+  body.wide .sortsel.segged { position: absolute; width: 1px; height: 1px; padding: 0; opacity: 0; pointer-events: none; }
+  body.wide .segsort { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+  body.wide .segsort button { height: 36px; padding: 0 18px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--text); }
+  body.wide .segsort button[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+}
 /* ---- крок 3: створення оголошення на комп'ютері за рисунками refs/create-big/step-1…6.png. create-ai.html (клас aiflow):
    шапка як на сайті, світлий аркуш на темному тлі, шлях, лінійка кроків в аркуші, шість екранів. Розміри двох рівнів:
    звичайний і великий (вікно від 1280 x 860) — змінні на body. Ручна форма create.html: темний рядок із хрестиком і той самий аркуш.
@@ -1651,7 +1678,7 @@ body.home .site-foot { margin-top: 0; }
   /* комп'ютер, головна: усі розділи — ряд картинок під шапкою (як «Головні рубрики» в OLX); текстового рядка розділів на головній немає */
   body.wide.home .catnav { display: none; }
   body.wide .catshead { max-width: 1280px; margin: 4px auto 0; padding: 0 32px; }
-  body.wide .catshead h2 { font-size: 20px; }
+  body.wide .catshead h2 { font-size: 28px; }
   body.wide .catshead .allcat { color: var(--text); }
   body.wide .cats { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; max-width: 1280px; margin-inline: auto; padding: 12px 32px 8px; }
   body.wide .cats > a { gap: 8px; padding: 8px 8px 12px; border-radius: 20px; background: var(--s1); font-size: 14px; line-height: 18px; font-weight: 600; color: var(--text); transition: transform 0.2s var(--ease); }
