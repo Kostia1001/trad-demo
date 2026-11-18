@@ -83,7 +83,8 @@
 
   /* ---------- вхід: шлях назад до оголошень; кабінет: швидке редагування ---------- */
   if (page === 'login.html') {
-    document.body.appendChild(el('<a class="toshop" href="home.html">Дивитися без входу<i data-lucide="x"></i></a>'));
+    var toshop = el('<a class="toshop" href="home.html">Дивитися без входу<i data-lucide="x"></i></a>'), send1 = $('.step[data-step="1"] #send');
+    if (!wide.matches && send1) { toshop.classList.add('inform'); send1.after(toshop); } else document.body.appendChild(toshop);
     /* телефон: знак-бирка прив'язана шнурком до кута картки з формою (на комп'ютері знак лишається ліворуч угорі сторінки) */
     var lgn = $('main.login'), wm0 = $('.authbrand .wordmark');
     if (lgn && wm0) {
@@ -137,7 +138,7 @@
   /* ---------- продавець: підтверджений телефон і вихід до всіх оголошень; обране: лише доступні ---------- */
   if (page === 'seller.html') {
     var pn = $('.phead .sub'); if (pn) pn.after(el('<span class="vbadge"><i data-lucide="shield-check"></i>Телефон підтверджено</span>'));
-    var sg = $('main .grid'); if (sg) { sg.classList.add('hasmore'); sg.after(el('<div class="morebox"><a class="btn ghost" href="home.html">Усі оголошення TRAD</a></div>')); }
+    var sg = $('main .grid'); if (sg) { sg.classList.add('hasmore'); sg.after(el('<div class="morebox"><a class="morelink" href="home.html">Усі оголошення TRAD<i data-lucide="chevron-right"></i></a></div>')); }
   }
   if (page === 'favorites.html') {
     var fg = $('main .grid'), ftools = $('#tools');
@@ -165,10 +166,11 @@
     document.body.classList.add('home');
     var chips = $('nav.chips'); if (chips) chips.remove();
     var main = $('main'), head = $('.head', main), grid = $('.grid', main);
-    /* телефон: розділи — вкладки під шапкою; на комп'ютері їх показує рядок розділів у шапці */
-    main.insertBefore(el('<nav class="cats" aria-label="Розділи"><a href="home.html" aria-current="page">Усі</a>' + CATS.map(function (c) {
-      return '<a href="catalog.html?cat=' + c[1] + '">' + c[4] + '</a>';
-    }).join('') + '</nav>'), head);
+    /* телефон: розділи — картинки з підписом одразу під шапкою (як у OLX і Kleinanzeigen), остання плитка — «Усі категорії».
+       Поки розділів чотири, усі видно без гортання; на комп'ютері розділи показує рядок у шапці */
+    main.insertBefore(el('<nav class="cats" aria-label="Розділи">' + CATS.map(function (c) {
+      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span>' + c[0] + '</a>';
+    }).join('') + '<a class="allcat" href="category.html?browse=1"><span class="ph"><i data-lucide="layout-grid"></i></span>Усі категорії</a></nav>'), head);
     var pill = $('.pill', head), box = el('<div class="headr"><select class="sortsel" id="hsort" aria-label="Сортування"><option value="new">Спочатку нові</option><option value="cheap">Спочатку дешевші</option><option value="dear">Спочатку дорожчі</option></select></div>');
     head.classList.add('wraps'); head.appendChild(box); box.appendChild(pill);
     /* телефон: регіон і фільтри — у рядку заголовка; сортування на головній немає, воно у фільтрах каталогу */

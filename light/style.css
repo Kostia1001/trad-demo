@@ -858,6 +858,9 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .chipbtn[hidden] { display: none; }
 .mpanel { margin-top: 16px; padding: 14px; border-radius: 22px; background: var(--s1); }
 .mpanel + .mpanel { margin-top: 10px; }
+.mpanel:has(.clip) { padding: 0; background: none; }
+.clip .dur svg { display: none; }
+.clip .dur { padding-left: 9px; }
 .mlabel { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--hot-ink); }
 .mlabel svg { width: 18px; height: 18px; }
 .clipwrap { display: block; }
@@ -947,16 +950,16 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .drop a.all { font-weight: 600; }
 
 /* головна: шапка в один рядок на телефоні, місто, рядок розділів, полка «З відео», сортування */
-/* телефон, головна: розділи — текстові вкладки одразу під шапкою, усі видно без гортання */
-.cats { display: flex; gap: 18px; padding: 10px 16px 0; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); }
-.cats::-webkit-scrollbar { display: none; }
-.cats::after { content: ""; flex: none; width: 1px; }
-.cats a { flex: none; height: 44px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; color: var(--text-2); }
-.cats a[aria-current="page"] { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px 0 var(--hot); }
+/* телефон, головна: розділи — картинки з підписом (розміри — critique/pick-home-catpics.json) */
+.cats { display: grid; grid-template-columns: repeat(5, 70px); justify-content: space-between; gap: 0 2px; padding: 14px 16px 0; }
+.cats a { display: flex; flex-direction: column; align-items: center; gap: 6px; min-height: 96px; font-size: 12px; line-height: 16px; font-weight: 500; text-align: center; }
+.cats .ph { flex: none; width: 58px; height: 58px; border-radius: 18px; overflow: hidden; display: grid; place-items: center; background: var(--s1); }
+.cats .ph img { width: 100%; height: 100%; object-fit: cover; }
+.cats .ph svg { width: 24px; height: 24px; }
 /* телефон, головна: у рядку заголовка — регіон і кнопка фільтрів (сортування — у фільтрах каталогу) */
 .head .hr { display: none; }
 @media (max-width: 899px) {
-  body.home .head.wraps { flex-wrap: nowrap; gap: 8px; padding: 14px 16px 6px; }
+  body.home .head.wraps { flex-wrap: nowrap; gap: 8px; padding: 12px 16px 6px; }
   body.home .head h2 { flex: none; }
   body.home .headr { display: none; }
   body.home .head .hr { display: flex; align-items: center; gap: 8px; min-width: 0; }
@@ -1075,6 +1078,13 @@ body.embedded .dtop .r1 { padding-left: 16px; }
 .viaapp a { position: relative; }
 .viaapp a::before { content: ""; position: absolute; inset: -6px; }
 textarea { resize: none; }
+.toshop.inform { position: static; display: flex; justify-content: center; width: 100%; height: 48px; margin-top: 8px; padding: 0; background: none; font-size: 16px; }
+.toshop.inform svg { display: none; }
+.morebox .morelink { justify-content: center; min-height: 44px; }
+.nrow { gap: 12px; }
+.nrow .ic { width: 36px; height: 36px; }
+.nrow .ic svg { width: 18px; height: 18px; }
+.nrow.new::after { top: 18px; }
 @media (max-width: 899px) {
   .media.hasthumbs .thumbs { display: none; }      /* на телефоні фото гортають пальцем, лічильник «1 / 4» лишається */
 }
