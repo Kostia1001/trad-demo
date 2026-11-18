@@ -1248,6 +1248,7 @@ textarea { resize: none; }
   body.wide.chatpage .bar, body.sellerpage.keepbar .bar, body.sellerpage main > .phead { max-width: 1488px !important; }
   body.acctpage { --ax: max(32px, calc(50% - 712px)); }
   body.acctpage .acct { top: 88px; }
+  body.acctpage.keepbar .bar, body.acctpage .tline, body.acctpage .page { max-width: 920px; }
   body.wide .catshead .allcat { gap: 8px; font-size: 16px; font-weight: 600; }
   body.wide .catshead .allcat svg { width: 20px; height: 20px; }
   body.wide .cats > a { padding: 10px 10px 14px; font-size: 16px; line-height: 20px; }
