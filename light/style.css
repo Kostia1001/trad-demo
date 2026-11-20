@@ -1977,7 +1977,7 @@ body.is-free .offerbtn { display: none !important; }
 .crowin .ic.ph { background: var(--ink); color: var(--on-ink); }
 /* каталог: порожня видача з діями, додаткові фільтри */
 .empty .eacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
-.empty .eacts .btn { margin: 0; }
+.empty .eacts .btn { flex: none; margin: 0; }
 .empty .enote { margin-top: 12px; font-size: 13px; color: var(--text-2); }
 #efollow[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
 .fgroup .xopt { margin-top: 10px; }
@@ -2004,6 +2004,7 @@ details.tk .tk-h { cursor: pointer; }
   body.wide .pwrap aside.contact { margin-inline: 16px; }
   body.wide .pwrap main > .contact:not(#ownbar)::after { content: "Або інакше:"; }   /* поруч із месенджерами тепер і дзвінок */
   body.wide .shop .empty { padding-top: 40px; }
+  .empty .eacts .btn { width: auto; }
   body.wide .info .ownsplit { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; }
   body.wide .info .ownsplit .t { grid-column: 1 / -1; }
   /* кабінет: списки не розтягуються на всю ширину — лічильники й час стоять поруч із текстом */
