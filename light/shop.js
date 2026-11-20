@@ -263,13 +263,13 @@
       bags: [['it-backpack.jpg', '700', 'Рюкзак міський сірий', 'Вживане', 'Львів · сьогодні'], ['it-crossbody.jpg', '850', 'Сумка через плече, чорна', 'Вживане', 'Одеса · сьогодні'], ['it-belt.jpg', '300', 'Ремінь шкіряний', 'Вживане · 105 см', 'Дніпро · вчора'], ['it-scarf.jpg', '250', 'Шарф вовняний', 'Нове', 'Харків · 11 листопада']],
       kids: [['it-kids-jacket.jpg', '450', 'Дощовик дитячий жовтий', 'Вживане · 104 см', 'Київ · сьогодні'], ['it-kids-shoes.jpg', '350', 'Кросівки дитячі', 'Вживане · 24', 'Львів · сьогодні'], ['it-kids-toy.jpg', '400', 'Потяг дерев’яний', 'Вживане', 'Одеса · вчора'], ['it-stroller.jpg', '3 200', 'Візочок прогулянковий', 'Вживане', 'Харків · вчора']],
       tech: [['it-laptop.jpg', '14 500', 'Ноутбук 14″, сірий', 'Вживане · 256 ГБ', 'Київ · сьогодні'], ['it-headphones.jpg', '1 800', 'Навушники накладні з чохлом', 'Вживане', 'Львів · сьогодні'], ['it-tablet.jpg', '5 400', 'Планшет 10″ з чохлом', 'Вживане · 64 ГБ', 'Дніпро · вчора'], ['it-camera.jpg', '3 900', 'Фотоапарат компактний', 'Вживане', 'Одеса · вчора']],
-      home: [['it-lamp.jpg', '450', 'Лампа настільна біла', 'Вживане', 'Київ · сьогодні'], ['it-plates.jpg', '600', 'Набір тарілок, 8 предметів', 'Вживане', 'Харків · сьогодні'], ['it-chair.jpg', '900', 'Стілець дерев’яний', 'Вживане', 'Львів · вчора'], ['it-plant.jpg', '200', 'Вазон у горщику', 'Нове', 'Вінниця · вчора']]
+      home: [['it-lamp.jpg', '450', 'Лампа настільна біла', 'Вживане', 'Київ · сьогодні'], ['it-plates.jpg', '600', 'Набір тарілок, 8 предметів', 'Вживане', 'Харків · сьогодні'], ['it-chair.jpg', '900', 'Стілець дерев’яний', 'Вживане', 'Львів · вчора'], ['it-plant.jpg', '0', 'Вазон у горщику', 'Вживане', 'Вінниця · вчора']]
     };
     var citems = !q.get('q') && q.get('empty') !== '1' && CITEMS[q.get('cat')], cg0 = $('#grid');
     if (citems && cg0) {
       cg0.innerHTML = citems.map(function (x) {
         return '<a class="card" href="product.html"><div class="frame"><img src="assets/' + x[0] + '" alt=""><button class="fav" type="button" aria-pressed="false" aria-label="Додати в обране"><i data-lucide="heart"></i></button>'
-          + '<div class="cap"><div class="price num">' + x[1].replace(/ /g, '&nbsp;') + '&nbsp;грн</div><div class="title">' + x[2] + '</div><div class="attrs">' + x[3] + '</div></div></div><div class="meta">' + x[4] + '</div></a>';
+          + '<div class="cap"><div class="price num">' + (x[1] === '0' ? 'Безкоштовно' : x[1].replace(/ /g, '&nbsp;') + '&nbsp;грн') + '</div><div class="title">' + x[2] + '</div><div class="attrs">' + x[3] + '</div></div></div><div class="meta">' + x[4] + '</div></a>';
       }).join('');
       cg0.addEventListener('click', function (e) { var f = e.target.closest('.fav'); if (!f) return; e.preventDefault(); f.setAttribute('aria-pressed', String(f.getAttribute('aria-pressed') !== 'true')); });
       var cn0 = $('#n'); if (cn0) cn0.textContent = citems.length + (citems.length < 5 ? ' оголошення' : ' оголошень');
@@ -561,5 +561,168 @@
       navEnd = setTimeout(function () { tabsNav.classList.remove('moving'); navOff = 0; navPaint(); }, 380);
     }, { passive: true });
   }
+
+  /* ================= функції після оцінки повноти (20 листопада 2026) ================= */
+  (function () {
+  var say = function (t) { if (typeof window.toast === 'function') window.toast(t); };
+
+  /* ---------- 1 і 9. Розмова очима продавця (?as=seller): відповідь на пропозицію ціни, швидкі відповіді ---------- */
+  if (page === 'chat.html') $$('.crow[data-kind="sell"]').forEach(function (a) { a.setAttribute('href', 'dialog.html?as=seller'); });
+  if (page === 'dialog.html' && q.get('as') === 'seller') {
+    document.body.classList.add('asseller');
+    var sn = $('.dtop .nm'), sav = $('.dtop .ava'), sit = $('.dtop .ditem'), sms = $('#msgs'), smh = $('#dmenu h2');
+    if (sn) { sn.textContent = 'Максим'; sn.removeAttribute('href'); }
+    if (sav) { sav.innerHTML = '<span class="ltr">М</span>'; sav.removeAttribute('href'); }
+    if (smh) smh.textContent = 'Розмова з Максимом';
+    if (sit) { sit.setAttribute('href', 'product.html?own=1'); sit.innerHTML = '<img src="assets/bag.jpg" alt=""><span class="t">Сумка шкіряна, коричнева<span class="p num">1&nbsp;100&nbsp;грн</span></span><i data-lucide="chevron-right"></i>'; }
+    if (sms) {
+      sms.innerHTML = '<div class="safety"><i data-lucide="shield-alert"></i><span>Нікому не повідомляйте коди з SMS і дані картки. Гроші беріть під час зустрічі.</span></div>'
+        + '<span class="daysep old">Сьогодні</span>'
+        + '<div class="msg in old">Доброго дня! Сумка ще в продажу?<span class="mt num">12:03</span></div>'
+        + '<div class="offer in" id="offer"><div class="of-h"><i data-lucide="hand-coins"></i>Максим пропонує свою ціну</div>'
+        + '<div class="of-sum num"><b>950&nbsp;грн</b><s>1&nbsp;100&nbsp;грн</s></div>'
+        + '<div class="of-acts"><button class="btn primary" type="button" data-of="ok">Прийняти</button><button class="btn ghost" type="button" data-of="own">Своя ціна</button><button class="btn ghost" type="button" data-of="no">Відхилити</button></div>'
+        + '<form class="of-own" hidden><div class="pricebox"><input class="num" inputmode="numeric" value="1 000" aria-label="Ваша ціна"><span>грн</span></div><button class="btn primary" type="submit">Надіслати</button></form>'
+        + '<p class="of-res" hidden></p></div>';
+      var ofc = $('#offer'), ofa = $('.of-acts', ofc), ofo = $('.of-own', ofc), ofr = $('.of-res', ofc);
+      var ofdone = function (cls, t) { ofa.hidden = true; ofo.hidden = true; ofr.hidden = false; ofr.textContent = t; ofc.classList.add(cls); };
+      ofa.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-of]'); if (!b) return;
+        if (b.dataset.of === 'ok') ofdone('ok', 'Ви погодилися на 950\u00a0грн. Домовтеся про зустріч.');
+        else if (b.dataset.of === 'no') ofdone('no', 'Ви відхилили пропозицію. Ціна лишається 1\u00a0100\u00a0грн.');
+        else { ofa.hidden = true; ofo.hidden = false; $('input', ofo).focus(); }
+      });
+      ofo.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var v = $('input', ofo).value.replace(/\D/g, ''); if (!v) return;
+        ofdone('own', 'Ви запропонували ' + v.replace(/\B(?=(\d{3})+$)/g, '\u00a0') + '\u00a0грн. Чекаємо відповіді покупця.');
+      });
+    }
+    var sq = ['Так, ще в продажу', 'Можу показати сьогодні', 'Можу відправити поштою'];
+    $$('#quick button').forEach(function (b, i) { if (sq[i]) b.textContent = sq[i]; });
+    var sqb = $('#quick'); if (sqb) sqb.hidden = false;
+  }
+  /* покупець бачить свою пропозицію й відповідь продавця (?offer=750&ans=ok|no|own) */
+  if (page === 'dialog.html' && +q.get('offer') > 0 && q.get('as') !== 'seller') {
+    var bo = String(+q.get('offer')).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0грн', ba = q.get('ans'), blast = $$('.msg').pop();
+    var bres = ba === 'ok' ? 'Продавець погодився. Домовтеся про зустріч.' : ba === 'no' ? 'Продавець не погодився. Ціна лишається 900\u00a0грн.' : ba === 'own' ? 'Продавець пропонує 800\u00a0грн.' : 'Очікує відповіді продавця';
+    if (blast) blast.after(el('<div class="offer out' + (ba ? ' ' + ba : '') + '"><div class="of-h"><i data-lucide="hand-coins"></i>Ваша пропозиція</div><div class="of-sum num"><b>' + bo + '</b><s>900&nbsp;грн</s></div><p class="of-res">' + bres + '</p>'
+      + (ba === 'own' ? '<div class="of-acts"><button class="btn primary" type="button" data-say="Ви погодилися на 800\u00a0грн">Погодитися</button><button class="btn ghost" type="button" data-say="Ви відмовилися">Відмовитися</button></div>' : '') + '</div>'));
+    $$('.offer [data-say]').forEach(function (b) { b.addEventListener('click', function () { var o = b.closest('.offer'); $('.of-acts', o).hidden = true; $('.of-res', o).textContent = b.dataset.say + '.'; }); });
+  }
+  /* повідомлення не пішло (?fail=1): видно, що продавець його не отримав, і можна надіслати ще раз */
+  if (page === 'dialog.html' && q.get('fail') === '1') {
+    var fl = $$('.msg').pop();
+    if (fl) {
+      fl.after(el('<div class="msg out failed">Можна подивитися сьогодні о 18:00?<span class="mt"><i data-lucide="circle-alert"></i>Не надіслано<button type="button" class="retry">Надіслати ще раз</button></span></div>'));
+      $('.msg.failed .retry').addEventListener('click', function () { var m = $('.msg.failed'); m.classList.remove('failed'); $('.mt', m).innerHTML = 'щойно'; $('.mt', m).classList.add('num'); });
+    }
+  }
+
+  /* ---------- 2. Створення оголошення: ті самі вісім розділів, що й на вітрині ---------- */
+  if (page === 'category.html' && q.get('browse') !== '1' && typeof window.show === 'function' && window.names) {
+    var cr0 = $('#root'), cback2 = q.get('from') === 'ai' ? 'create-ai.html?step=2' : 'create.html?step=2';
+    CATS.slice($$('#root [data-open]').length).forEach(function (c) {
+      var i = window.names.length; window.names.push(c[0]);
+      var b = el('<button class="lrow" type="button" data-open="' + i + '"><span class="t">' + c[0] + '</span><i data-lucide="chevron-right"></i></button>');
+      b.addEventListener('click', function () { window.show(i); });
+      cr0.appendChild(b);
+      cr0.parentNode.appendChild(el('<section class="listsec alist" data-level="' + i + '" hidden style="padding-top:8px">'
+        + c[3].concat(['Інше']).map(function (n) { return '<a class="lrow" href="' + cback2 + '"><span class="t">' + n + '</span></a>'; }).join('') + '</section>'));
+    });
+  }
+
+  /* ---------- 4, 5, 7. Сторінка оголошення: «Відправка поштою», «Показати номер», «Безкоштовно» ---------- */
+  if (page === 'product.html') {
+    var pf = $('.info .facts') || $('.facts');
+    if (pf && !$('.ship', pf)) pf.appendChild(el('<span class="ship"><i data-lucide="package"></i>Відправка поштою</span>'));
+    if (q.get('free') === '1') {
+      document.body.classList.add('is-free');
+      $$('.info .price').forEach(function (x) { x.textContent = 'Безкоштовно'; });
+    }
+    var pc = $$('aside.contact').filter(function (a) { return a.id !== 'ownbar'; })[0];
+    if (pc && !$('.msgr.ph', pc)) {
+      var pw = $('.msgr.wa', pc), pb = el('<button class="msgr ph" type="button" aria-label="Показати номер телефону"><i data-lucide="phone"></i></button>');
+      if (pw) pw.after(pb); else pc.insertBefore(pb, pc.firstChild);
+      var csh = el('<section class="sheet" id="callsh" role="dialog" aria-modal="true" aria-label="Номер продавця"><div class="sheet-head"><h2>Номер продавця</h2><button class="x" type="button" aria-label="Закрити"><i data-lucide="x"></i></button></div>'
+        + '<div class="sheet-body callbody"><a class="callnum num" href="tel:+380671234567">+380 67 123 45 67</a><p>Олена · дзвінки з 9:00 до 21:00</p>'
+        + '<a class="btn primary wide" href="tel:+380671234567"><i data-lucide="phone"></i>Подзвонити</a>'
+        + '<p class="callnote"><i data-lucide="shield-alert"></i>Не переказуйте передоплату й не називайте коди з SMS.</p></div></section>');
+      document.body.appendChild(csh);
+      pb.addEventListener('click', function () {
+        if (q.get('guest') === '1') { location.href = 'login.html?next=product'; return; }
+        if (typeof window.openSheet === 'function') window.openSheet('callsh');
+      });
+      $('.x', csh).addEventListener('click', function () { if (typeof window.closeSheet === 'function') window.closeSheet(); });
+    }
+  }
+  if (page === 'contacts.html') {
+    var cw = $('.ways'), cch = cw && $('.ic.ch', cw);
+    if (cw && !$('#ph', cw)) {
+      var prow = el('<div class="crowin"><span class="ic ph"><i data-lucide="phone"></i></span><div class="f"><label for="ph">Дзвінки</label><input id="ph" class="num" inputmode="tel" value="+380 67 123 45 67" placeholder="Не показувати номер"></div></div>');
+      if (cch) cch.closest('.crowin').before(prow); else cw.appendChild(prow);
+    }
+  }
+
+  /* ---------- 4, 6, 7. Каталог: фільтри «З відправкою поштою» й «Віддають безкоштовно»; порожня видача ---------- */
+  if (page === 'catalog.html') {
+    $$('#sheet .fgroup, aside.side .fgroup').forEach(function (g) {
+      var lb = $('.lbl', g); if (!lb || $('.xopt', g)) return;
+      var t = lb.textContent.trim().indexOf('Ціна') === 0 ? 'Віддають безкоштовно' : lb.textContent.trim() === 'Місто' ? 'З відправкою поштою' : '';
+      if (!t) return;
+      var xb = el('<button class="opt xopt" type="button" aria-pressed="false">' + t + '</button>');
+      xb.addEventListener('click', function () { xb.setAttribute('aria-pressed', String(xb.getAttribute('aria-pressed') !== 'true')); });
+      g.appendChild(xb);
+    });
+    var em = $('#empty'), er = $('#reset2');
+    if (em && er && !$('#efollow')) {
+      var ecity = q.get('city'), eh = $('h2', em), ep = $('p', em), eact = el('<div class="eacts"></div>');
+      er.before(eact);
+      if (ecity) {
+        if (eh) eh.textContent = 'У місті ' + ecity + ' нічого не знайшли';
+        if (ep) ep.textContent = 'Пошукайте в інших містах: багато продавців відправляють поштою.';
+        eact.appendChild(el('<a class="btn primary" href="catalog.html?cat=women">Шукати по всій Україні</a>'));
+      }
+      eact.appendChild(er);
+      var ef = el('<button class="btn ghost" type="button" id="efollow"><i data-lucide="bell-plus"></i><span>Стежити за пошуком</span></button>');
+      eact.appendChild(ef);
+      em.appendChild(el('<p class="enote">Повідомимо, щойно з’явиться оголошення за цим пошуком.</p>'));
+      ef.addEventListener('click', function () {
+        var on = ef.getAttribute('aria-pressed') !== 'true'; ef.setAttribute('aria-pressed', String(on));
+        $('span', ef).textContent = on ? 'Стежите за пошуком' : 'Стежити за пошуком';
+      });
+    }
+  }
+
+  /* ---------- 8. Мої оголошення: продане можна повернути в продаж ---------- */
+  if (page === 'my.html') $$('[data-panel="sold"] .mrow .b').forEach(function (b) {
+    if ($('.backsale', b)) return;
+    var bs = el('<button class="mini backsale" type="button">Повернути у продаж</button>');
+    bs.addEventListener('click', function () { var r = bs.closest('.mrow'); if (r) r.hidden = true; say('Оголошення знову в продажу'); });
+    b.appendChild(bs);
+  });
+
+  /* ---------- 10. Підтримка: після надсилання видно номер звернення, статус і куди прийде відповідь ---------- */
+  if (page === 'help.html') {
+    var hb = $('.helpbox'), ss = $('#supsend');
+    var tickets = function (fresh) {
+      if ($('#tickets') || !hb) return;
+      hb.after(el('<section class="tickets" id="tickets"><h2>Мої звернення</h2>'
+        + (fresh ? '<div class="tk"><div class="tk-h"><b>№ 48 213 · ' + fresh + '</b><span class="tk-s wait">Очікує відповіді</span></div><p>Надіслано щойно. Відповімо протягом дня — у «Сповіщеннях» і повідомленням на +380 67 123 45 67.</p></div>' : '')
+        + '<details class="tk"><summary class="tk-h"><b>№ 47 902 · Оголошення зняли</b><span class="tk-s ok">Відповіли 12 листопада</span></summary><p>Оголошення «Навушники бездротові» зняли через неправдиву назву моделі. Виправте назву й опублікуйте знову — перевірка триває до години.</p></details></section>'));
+    };
+    if (ss) ss.addEventListener('click', function () {
+      setTimeout(function () {
+        if (document.body.classList.contains('sheet-on')) return;      /* форму не надіслано: поле порожнє */
+        var tp = $('#suptopic .opt[aria-pressed="true"]');
+        var old = $('#tickets'); if (old) old.remove();
+        tickets(tp ? tp.textContent.trim() : 'Звернення');
+        var tk = $('#tickets'); if (tk) tk.scrollIntoView({ block: 'center' });
+        icons();
+      }, 0);
+    });
+    if (q.get('tickets') === '1') tickets('Не можу увійти');
+  }
+  })();
   icons();
 })();

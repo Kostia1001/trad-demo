@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11201500">
+<link rel="stylesheet" href="style.css?v=11201538">
 </head>
 <body class="flowpage">
 
@@ -69,7 +69,10 @@
   <section class="step" data-step="3">
     <h1>Ціна і зв’язок</h1>
     <div class="field"><label for="f-price">Ціна</label>
-      <div class="pricebox"><input id="f-price" class="num" inputmode="numeric" value="900"><span>грн</span></div><p class="fhint bad" id="phint" hidden>Вкажіть ціну</p></div>
+      <div class="pricebox"><input id="f-price" class="num" inputmode="numeric" value="900"><span>грн</span></div>
+      <button class="chipbtn freebtn" type="button" id="freebtn" aria-pressed="false"><i data-lucide="gift"></i>Віддам безкоштовно</button><p class="fhint bad" id="phint" hidden>Вкажіть ціну</p></div>
+    <div class="field"><span class="lbl">Передача</span>
+      <div class="swrow"><span class="swt"><b>Можу відправити поштою</b><small>Покупці з інших міст побачать позначку «Відправка поштою».</small></span><button class="sw" type="button" role="switch" aria-checked="true" id="f-ship" aria-label="Можу відправити поштою"></button></div></div>
     <div class="field"><span class="lbl">Місто</span>
       <a class="rowbtn" href="city.html"><span>Одеса, Приморський район</span><i data-lucide="chevron-right"></i></a></div>
     <div class="field"><span class="lbl">Як покупці можуть вам написати</span>
@@ -145,6 +148,15 @@
   ['scrim', 'xclose', 'xstay'].forEach(function (id) { document.getElementById(id).addEventListener('click', function () { xs(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') xs(false); });
   var price = document.getElementById('f-price');
+  (function () {   /* «Віддам безкоштовно» і «Можу відправити поштою» */
+    var fb = document.getElementById('freebtn'), keep = '';   /* перемикач «поштою» перемикає спільний обробник .sw */
+    fb.addEventListener('click', function () {
+      var on = fb.getAttribute('aria-pressed') !== 'true';
+      fb.setAttribute('aria-pressed', String(on));
+      if (on) { keep = price.value; price.value = '0'; } else price.value = keep || '900';
+      price.disabled = on; price.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  })();
   function need() {
     var on = document.querySelector('.step.on'), bad = on && on.dataset.step === '3' && !price.value.trim();
     next.disabled = !!bad; document.getElementById('phint').hidden = !bad;

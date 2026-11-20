@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11201500">
+<link rel="stylesheet" href="style.css?v=11201538">
 </head>
 <body class="flowpage aiflow">
 
@@ -119,9 +119,12 @@
       <button class="chipbtn" type="button" id="rewrite"><i data-lucide="sparkles"></i>Переписати інакше</button></div>
     <div class="field af-price"><label for="f-price">Ціна</label>
       <div class="pricebox"><input id="f-price" class="num" inputmode="numeric" value="900"><span>грн</span></div>
+      <button class="chipbtn freebtn" type="button" id="freebtn" aria-pressed="false"><i data-lucide="gift"></i>Віддам безкоштовно</button>
       <p class="from" id="pfrom">Схожі джинси продають за 750–1 100 грн. Ціну вирішуєте ви.</p><p class="fhint bad" id="phint" hidden>Вкажіть ціну</p></div>
     <div class="field af-city"><span class="lbl">Місто</span>
       <a class="rowbtn" href="city.html"><span>Одеса, Приморський район</span><i data-lucide="chevron-right"></i></a></div>
+    <div class="field af-ship"><span class="lbl">Передача</span>
+      <div class="swrow"><span class="swt"><b>Можу відправити поштою</b><small>Покупці з інших міст побачать позначку «Відправка поштою».</small></span><button class="sw" type="button" role="switch" aria-checked="true" id="f-ship" aria-label="Можу відправити поштою"></button></div></div>
     <div class="field af-ways"><span class="lbl"><span class="af-m">Як покупці можуть вам написати</span><span class="af-d">Зв’язок</span></span>
       <button class="rowbtn" type="button" id="waysbtn"><span id="wayssum">Telegram, Viber, чат TRAD</span><i data-lucide="chevron-right"></i></button>
       <p class="from">Місто й способи зв’язку взято з вашого профілю.</p></div>
@@ -179,6 +182,7 @@
         <div><dt>Дефекти</dt><dd id="rvdef">Немає</dd></div>
         <div><dt>Відео і фото</dt><dd id="rvmedia">Відео з фото 0:12 · фото покращені</dd></div>
         <div><dt>Місто</dt><dd>Одеса</dd></div>
+        <div><dt>Передача</dt><dd id="rvship">Зустріч або пошта</dd></div>
         <div><dt>Зв’язок</dt><dd id="rvways">Telegram, Viber, чат TRAD</dd></div>
       </dl>
     </div>
@@ -199,6 +203,11 @@
       <button class="btn primary wide" type="button" id="sharebtn"><i data-lucide="share-2"></i><span id="sharelbl">Поділитися</span></button>
       <button class="btn ghost wide" type="button" id="copylink"><i data-lucide="link"></i><span id="copylbl">Копіювати посилання</span></button>
       <p class="sharehint" id="sharehint"></p>
+    </div>
+    <div class="notifybox" id="notifybox">
+      <span class="nb-i"><i data-lucide="bell-ring"></i></span>
+      <div class="nb-t"><b id="nb-h">Не пропустіть покупця</b><span id="nb-s">Коли вам напишуть, повідомимо в Telegram — навіть якщо TRAD закрито.</span></div>
+      <button class="btn ghost" type="button" id="nb-on">Увімкнути</button>
     </div>
     <div class="donelinks">
       <a href="product.html?own=1"><i data-lucide="eye"></i><span>Переглянути оголошення</span><i data-lucide="chevron-right"></i></a>
@@ -253,7 +262,7 @@
   if (order[pos] === 'm' || order[pos] === '3' || order[pos] === '5' || q.get('defs') === '0') document.querySelector('#defs button').setAttribute('aria-pressed', 'true');
   if (q.get('unsure') === '1') { size.value = ''; size.classList.add('need'); size.placeholder = 'Вкажіть самі'; }
 
-  function money(v) { var d = v.replace(/\D/g, ''); return d ? d.replace(/\B(?=(\d{3})+$)/g, ' ') + ' грн' : ''; }
+  function money(v) { var d = v.replace(/\D/g, ''); if (d && +d === 0) return 'Безкоштовно'; return d ? d.replace(/\B(?=(\d{3})+$)/g, ' ') + ' грн' : ''; }
   // відео в оголошенні склеюється з фото: до п'яти кадрів, по три секунди на кадр
   function vinfo() { return { dur: '0:' + ('0' + Math.min(5, photos().length) * 3).slice(-2) }; }
   function runAi() {
@@ -449,6 +458,26 @@
 
   // ---- лише комп'ютер (від 900 px): галерея біля форми, картка-підсумок, «AI створює відео», вихід через шапку.
   // На телефоні ці блоки сховані стилями, а функції нижче не викликаються.
+  // ---- «Віддам безкоштовно», «Можу відправити поштою», сповіщення після публікації
+  (function () {
+    var fb = $('freebtn'), sh = $('f-ship'), nb = $('nb-on'), keep = '';
+    if (fb) fb.addEventListener('click', function () {
+      var on = fb.getAttribute('aria-pressed') !== 'true';
+      fb.setAttribute('aria-pressed', String(on));
+      if (on) { keep = price.value; price.value = '0'; } else price.value = keep || '900';
+      price.disabled = on; $('pfrom').hidden = on;
+      price.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    // сам перемикач уже перемикає спільний обробник усіх .sw — тут лише оновлюємо рядок «Передача»
+    if (sh) sh.addEventListener('click', function () {
+      setTimeout(function () { $('rvship').textContent = sh.getAttribute('aria-checked') === 'true' ? 'Зустріч або пошта' : 'Лише зустріч'; }, 0);
+    });
+    if (nb) nb.addEventListener('click', function () {
+      $('notifybox').classList.add('on'); nb.hidden = true;
+      $('nb-h').textContent = 'Сповіщення в Telegram увімкнено';
+      $('nb-s').innerHTML = 'Змінити можна в <a class="textlink" href="notify.html">налаштуваннях сповіщень</a>.';
+    });
+  })();
   function deskSync(cover, vi) {
     $('af-aiimg').src = cover;
     $('af-rvt').textContent = title.value.trim(); $('af-rvp').textContent = money(price.value);

@@ -1884,6 +1884,14 @@ body.home .site-foot { margin-top: 0; }
   .cbox .quick { flex-wrap: wrap; overflow: visible; }
   body.dk .pwrap .thumbs button { opacity: 1; }
 
+  /* смуга зв'язку: чотири тихі кнопки й «Написати в чат» в один рядок */
+  body.dk aside.contact:not(#ownbar) { gap: 8px; }
+  body.dk aside.contact:not(#ownbar) .msgr { width: 44px; height: 44px; }
+  body.dk aside.contact:not(#ownbar) .write { white-space: nowrap; }
+  .empty .eacts { flex-direction: column; align-items: center; }
+  .empty .eacts .btn { width: min(100%, 280px); }
+  body.asseller .cbox .quick { display: flex; }
+
   /* мої оголошення: відповіді опитування переносяться, «Поновити» стоїть одразу під статусом */
   .qcard .opts { flex-wrap: wrap; }
   .mrow .b .mini { display: flex; width: fit-content; }
@@ -1917,12 +1925,84 @@ body.nochats nav.tabs .count { display: none; }             /* розмов не
 .info .ownsplit { margin: 8px 0 0; }
 .cbox .viaapp a { filter: grayscale(1); opacity: 0.72; }   /* месенджери в рядку відповіді — тихо, як на сторінці оголошення */
 
+/* ===== функції після оцінки повноти (20 листопада 2026) ===== */
+/* пропозиція ціни в розмові: продавець відповідає, покупець бачить відповідь */
+.offer { align-self: flex-start; width: min(100%, 300px); padding: 12px 14px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.offer.out { align-self: flex-end; }
+.offer .of-h { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-2); }
+.offer .of-h svg { width: 16px; height: 16px; color: var(--hot-ink); }
+.offer .of-sum { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+.offer .of-sum b { font: 700 24px/1.1 var(--display); letter-spacing: -0.02em; }
+.offer .of-sum s { font-size: 14px; color: var(--text-2); }
+.offer .of-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.offer .of-acts .btn, .offer .of-own .btn { height: 44px; padding: 0 16px; font-size: 14px; }
+.offer .of-own { display: flex; gap: 8px; margin-top: 12px; }
+.offer .of-own[hidden], .offer .of-acts[hidden] { display: none; }
+.offer .of-own .pricebox { flex: 1; min-width: 0; height: 44px; }
+.offer .of-res { margin-top: 10px; font-size: 14px; line-height: 1.4; color: var(--text-2); }
+.offer.ok { border-color: oklch(0.72 0.12 150); background: oklch(0.96 0.04 150); }
+.offer.ok .of-res { color: oklch(0.36 0.1 150); font-weight: 600; }
+.msg.failed { background: oklch(0.95 0.03 25); color: var(--text); }
+.msg.failed .mt { display: flex; align-items: center; gap: 6px; color: oklch(0.5 0.18 27); font-weight: 600; }
+.msg.failed .mt svg { width: 14px; height: 14px; }
+.msg.failed .retry { min-height: 32px; margin-left: 4px; color: var(--text); font-weight: 600; text-decoration: underline; }
+body.asseller .viaapp { display: none; }
+.dtop .ava .ltr { display: grid; place-items: center; width: 100%; height: 100%; border-radius: 50%; background: var(--s2); font-weight: 600; }
+/* створення: «Віддам безкоштовно», «Можу відправити поштою», сповіщення після публікації */
+.freebtn { margin-top: 10px; }
+.freebtn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.pricebox input:disabled { opacity: 0.45; }
+.swrow { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 56px; padding: 10px 14px 10px 16px; border-radius: 16px; background: var(--s1); }
+.swrow .swt { display: grid; gap: 2px; min-width: 0; }
+.swrow .swt b { font-size: 16px; font-weight: 500; }
+.swrow .swt small { font-size: 13px; line-height: 1.35; color: var(--text-2); }
+.notifybox { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); text-align: left; }
+.notifybox .nb-i { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: oklch(0.93 0.05 30); color: var(--hot-ink); }
+.notifybox .nb-i svg { width: 20px; height: 20px; }
+.notifybox .nb-t { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.notifybox .nb-t b { font-size: 14px; font-weight: 600; }
+.notifybox .nb-t span { font-size: 13px; line-height: 1.4; color: var(--text-2); }
+.notifybox .btn { flex: none; height: 40px; padding: 0 14px; background: var(--ink); color: var(--on-ink); font-size: 14px; }
+.notifybox.on .nb-i { background: oklch(0.93 0.06 150); color: oklch(0.42 0.12 150); }
+/* сторінка оголошення: «Показати номер», «Безкоштовно» */
+body.is-free .offerbtn { display: none !important; }
+.callbody { padding-bottom: 20px; text-align: center; }
+.callnum { display: block; color: var(--text); font: 700 28px/1.2 var(--display); letter-spacing: -0.01em; }
+.callbody > p { margin-top: 4px; font-size: 14px; color: var(--text-2); }
+.callbody .btn { margin-top: 16px; }
+.callbody .callnote { display: flex; align-items: flex-start; gap: 8px; margin-top: 14px; text-align: left; font-size: 13px; line-height: 1.4; }
+.callnote svg { flex: none; width: 16px; height: 16px; margin-top: 1px; }
+.contact .msgr.ph { color: var(--text); }
+.contact .msgr.ph svg { width: 20px; height: 20px; }
+.crowin .ic.ph { background: var(--ink); color: var(--on-ink); }
+/* каталог: порожня видача з діями, додаткові фільтри */
+.empty .eacts { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 24px; }
+.empty .eacts .btn { margin: 0; }
+.empty .enote { margin-top: 12px; font-size: 13px; color: var(--text-2); }
+#efollow[aria-pressed="true"] { background: var(--ink); color: var(--on-ink); }
+.fgroup .xopt { margin-top: 10px; }
+/* мої оголошення: «Повернути у продаж»; підтримка: мої звернення */
+.mrow .b .backsale { display: flex; width: fit-content; margin-top: 10px; }
+.tickets { margin-top: 28px; }
+.tickets h2 { margin-bottom: 10px; font: 700 20px/1.2 var(--display); }
+.tk { padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+.tk + .tk { margin-top: 10px; }
+.tk .tk-h { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; list-style: none; }
+details.tk .tk-h { cursor: pointer; }
+.tk .tk-h::-webkit-details-marker { display: none; }
+.tk .tk-h b { font-size: 14px; font-weight: 600; }
+.tk .tk-s { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.tk .tk-s.wait { background: oklch(0.93 0.05 80); color: oklch(0.42 0.09 70); }
+.tk .tk-s.ok { background: oklch(0.93 0.06 150); color: oklch(0.38 0.11 150); }
+.tk p { margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--text-2); }
+
 /* ===== комп'ютер ===== */
 @media (min-width: 900px) {
   /* «Обране»: вкладки й фільтри на одній лівій лінії із заголовком і картками */
   body.wide .shop .tline.full, body.wide .shop .favflt { padding-inline: 0; }
   /* сторінка оголошення: блок зв'язку тієї ж ширини, що й картка продавця під ним */
   body.wide .pwrap aside.contact { margin-inline: 16px; }
+  body.wide .pwrap main > .contact:not(#ownbar)::after { content: "Або інакше:"; }   /* поруч із месенджерами тепер і дзвінок */
   body.wide .shop .empty { padding-top: 40px; }
   body.wide .info .ownsplit { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; }
   body.wide .info .ownsplit .t { grid-column: 1 / -1; }
