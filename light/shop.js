@@ -80,6 +80,10 @@
     if (dkw && !$('.top-row > .icon-btn', top)) dkw.after(el('<a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i><span class="dot"></span></a>'));
   }
 
+  if (page === 'product.html' && q.get('sold') === '1') document.body.classList.add('is-sold');
+  if (page === 'favorites.html' && q.get('empty') === '1') { var fnum = $('.tline [data-tab="items"] .num'); if (fnum) fnum.textContent = '0'; }
+  if (page === 'chat.html' && q.get('empty') === '1') document.body.classList.add('nochats');
+
   /* ---------- «Усі категорії» на телефоні: той самий список, що й під час створення, але веде в каталог ---------- */
   if (page === 'category.html' && q.get('browse') === '1') {
     var cttl = $('#ttl'), croot = $('#root'), cback = $('#back');
@@ -270,7 +274,12 @@
       cg0.addEventListener('click', function (e) { var f = e.target.closest('.fav'); if (!f) return; e.preventDefault(); f.setAttribute('aria-pressed', String(f.getAttribute('aria-pressed') !== 'true')); });
       var cn0 = $('#n'); if (cn0) cn0.textContent = citems.length + (citems.length < 5 ? ' оголошення' : ' оголошень');
     }
-    if (h1) h1.before(el('<nav class="crumbs" aria-label="Шлях"><a href="home.html">Головна</a><i data-lucide="chevron-right"></i><span>' + h1.textContent + '</span></nav>'));
+    var sq = (q.get('q') || '').trim();
+    if (sq && h1) {                                 /* пошук: запит видно в полі й у заголовку */
+      h1.textContent = 'Пошук: «' + sq + '»';
+      $$('header.top .search input').forEach(function (i) { i.value = sq; });
+    }
+    if (h1) h1.before(el('<nav class="crumbs" aria-label="Шлях"><a href="home.html">Головна</a><i data-lucide="chevron-right"></i><span>' + (sq ? 'Пошук' : h1.textContent) + '</span></nav>'));
     var sheet = $('#sheet'), side = $('aside.side'), apply = $('#apply');
     if (tools && sheet && apply) {
       var quick = el('<div class="qflt" aria-label="Швидкі фільтри">'

@@ -1843,11 +1843,11 @@ body.home .site-foot { margin-top: 0; }
   body.dk .shop nav.chips { padding-top: 12px; }
   /* рядок фільтрів гортається вбік (край розмито — видно, що далі є ще); сортування — в рядку «Стежити за пошуком» */
   body.dk .shop .crumbs .n { margin-left: auto; font-size: 13px; color: var(--text-2); }
-  body.dk .qflt { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-top: 8px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 20px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 20px), transparent); }
+  body.dk .qflt { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-top: 8px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 12px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 12px), transparent); }
   body.dk .qflt::-webkit-scrollbar { display: none; }
   body.dk .qflt > * { flex: none; }
   body.dk .qflt::after { content: ""; flex: none; width: 28px; }
-  body.dk .shop nav.chips { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 20px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 20px), transparent); }
+  body.dk .shop nav.chips { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 12px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 12px), transparent); }
   body.dk .cline { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 16px 0; }
   body.dk .cline .sortsel { flex: none; width: auto; height: 44px; padding: 0 22px 0 0; border: 0; box-shadow: none; background-color: transparent; background-position: right 2px center; font-weight: 600; text-align: right; text-align-last: right; }
 
@@ -1879,6 +1879,11 @@ body.home .site-foot { margin-top: 0; }
   /* пошук: «Скасувати» на одній лінії з полем і не впирається в край */
   .bar .cancel { display: grid; place-items: center; flex: none; height: 46px; padding: 0 4px; font-size: 14px; }
 
+  /* порожня видача й нова розмова: без провалів і обрізаних підказок */
+  .shop .empty { padding-top: 28px; }
+  .cbox .quick { flex-wrap: wrap; overflow: visible; }
+  body.dk .pwrap .thumbs button { opacity: 1; }
+
   /* мої оголошення: відповіді опитування переносяться, «Поновити» стоїть одразу під статусом */
   .qcard .opts { flex-wrap: wrap; }
   .mrow .b .mini { display: flex; width: fit-content; }
@@ -1900,7 +1905,16 @@ body.home .site-foot { margin-top: 0; }
 
 /* ===== спільне ===== */
 .mrow .b br { display: none; }                      /* «Поновити» одразу під статусом, без порожнього рядка */
-.favflt .qchip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.favflt .qchip[aria-pressed="true"], .qflt .qchip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+body.is-sold .offerbtn { display: none !important; }      /* продане: торг не пропонуємо */
+body.nochats nav.tabs .count { display: none; }             /* розмов немає — немає й лічильника */
+.shop main:has(#empty:not([hidden])) .morebox { display: none; }   /* нічого не знайшли: «Показано 0 зі 0» зайве, повідомлення одразу під фільтрами */
+.skel .frame { aspect-ratio: 4 / 3; }                       /* заглушка тієї ж форми, що й картка */
+.aiflow .ai-step .stack { display: grid; gap: 10px; }
+/* власне оголошення: ціна одразу під назвою, показники — нижче й на всю ширину колонки */
+.info .ownstats, .info .ownsplit { order: 5; align-self: stretch; }
+.info .ownstats { margin: 16px 0 0; }
+.info .ownsplit { margin: 8px 0 0; }
 .cbox .viaapp a { filter: grayscale(1); opacity: 0.72; }   /* месенджери в рядку відповіді — тихо, як на сторінці оголошення */
 
 /* ===== комп'ютер ===== */
@@ -1908,7 +1922,10 @@ body.home .site-foot { margin-top: 0; }
   /* «Обране»: вкладки й фільтри на одній лівій лінії із заголовком і картками */
   body.wide .shop .tline.full, body.wide .shop .favflt { padding-inline: 0; }
   /* сторінка оголошення: блок зв'язку тієї ж ширини, що й картка продавця під ним */
-  body.wide .pwrap aside.contact:not(#ownbar) { margin-inline: 16px; }
+  body.wide .pwrap aside.contact { margin-inline: 16px; }
+  body.wide .shop .empty { padding-top: 40px; }
+  body.wide .info .ownsplit { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; }
+  body.wide .info .ownsplit .t { grid-column: 1 / -1; }
   /* кабінет: списки не розтягуються на всю ширину — лічильники й час стоять поруч із текстом */
   body.acctpage.keepbar .bar, body.acctpage .tline, body.acctpage .page { max-width: 760px; }
   /* розмова: ширша колонка, щоб короткі відповіді не ламалися на два рядки */
