@@ -72,6 +72,14 @@
     $$('.ci, .ca', nav).forEach(function (h) { holder(h, true); });
   }
 
+  /* ---------- телефон: темний верх зі знаком, пошуком і дзвіночком — як на головній — у каталозі й на сторінці оголошення ---------- */
+  if (top && (page === 'catalog.html' || page === 'product.html' || page === '404.html')) {
+    document.body.classList.add('dk');
+    if (page === 'catalog.html') document.body.classList.add('dkfix');
+    var dkw = $('.top-row .wordmark', top);
+    if (dkw && !$('.top-row > .icon-btn', top)) dkw.after(el('<a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i><span class="dot"></span></a>'));
+  }
+
   /* ---------- «Усі категорії» на телефоні: той самий список, що й під час створення, але веде в каталог ---------- */
   if (page === 'category.html' && q.get('browse') === '1') {
     var cttl = $('#ttl'), croot = $('#root'), cback = $('#back');
@@ -87,15 +95,22 @@
       sec.insertBefore(el('<a class="lrow allrow" href="catalog.html?cat=' + c[1] + '"><span class="t">Усе в розділі</span></a>'), sec.firstChild);
     });
     /* у списку розділів — та сама картинка, що й на головній */
-    $$('#root .lrow').forEach(function (r) { var c = CATS[+r.dataset.open]; if (c && !$('.ph', r)) r.insertBefore(el('<span class="ph"><img src="assets/' + c[2] + '" alt=""></span>'), r.firstChild); });
+    $$('#root .lrow').forEach(function (r) { var c = CATS[+r.dataset.open]; if (c && !$('.ph', r)) r.insertBefore(el('<span class="ph"><img src="assets/' + c[2].replace('cat-', 'obj-') + '" alt=""></span>'), r.firstChild); });
     /* розділи, яких немає в розмітці сторінки, ведуть одразу в каталог: підкатегорії там рядком угорі */
     CATS.slice($$('#root .lrow').length).forEach(function (c) {
-      croot.appendChild(el('<a class="lrow" href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2] + '" alt=""></span><span class="t">' + c[0] + '</span><i data-lucide="chevron-right"></i></a>'));
+      croot.appendChild(el('<a class="lrow" href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2].replace('cat-', 'obj-') + '" alt=""></span><span class="t">' + c[0] + '</span><i data-lucide="chevron-right"></i></a>'));
     });
     var CNT = { women: 128, men: 6 };
     $$('#root .lrow').forEach(function (r, i) { var c = CATS[i], t = $('.t', r); if (!c || !t || $('small', t)) return; var k = CNT[c[1]] || 4; t.appendChild(el('<small>' + k + (k < 5 ? ' оголошення' : ' оголошень') + '</small>')); });
     document.addEventListener('click', function () { setTimeout(ctitle, 0); });
     ctitle();
+    /* сюди приходять із пункту «Категорії» нижнього меню — меню лишається на місці */
+    if (!$('nav.tabs')) {
+      document.body.appendChild(el('<nav class="tabs" aria-label="Головне меню"><a class="tab" href="home.html"><i data-lucide="house"></i>Головна</a><a class="tab" href="favorites.html"><i data-lucide="heart"></i>Обране</a>'
+        + '<a class="tab create" href="create-ai.html"><span class="plus"><i data-lucide="tag"></i></span>Створити</a><a class="tab" href="chat.html"><i data-lucide="message-circle"></i><span class="count num">2</span>Чат</a>'
+        + '<a class="tab" href="profile.html"><i data-lucide="user"></i>Профіль</a></nav>'));
+      document.body.classList.add('browse');
+    }
   }
 
   /* ---------- вхід: шлях назад до оголошень; кабінет: швидке редагування ---------- */
@@ -195,8 +210,9 @@
        (панелі з підрозділами немає: при 3–5 підрозділах це зайвий крок, підрозділи видно рядком у самому розділі).
        Телефон: сітка 4 x 2 — перші вісім розділів, «Усі категорії» посиланням біля заголовка. Комп'ютер: вісім рівних колонок. */
     /* телефон: на головній перші вісім розділів, решта — за «Усі категорії»; комп'ютер: усі розділи, по вісім у ряд */
+    var TSHORT = { women: 'Жінкам', men: 'Чоловікам' };   /* телефон: підпис плитки в один рядок */
     var catsNav = el('<nav class="cats" aria-label="Розділи">' + (wide.matches ? CATS : CATS.slice(0, 8)).map(function (c) {
-      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2].replace('cat-', 'obj-') + '" alt=""></span><span class="lb">' + (c[1] === 'bags' ? c[4] : c[0]) + '</span></a>';
+      return '<a href="catalog.html?cat=' + c[1] + '"><span class="ph"><img src="assets/' + c[2].replace('cat-', 'obj-') + '" alt=""></span><span class="lb">' + ((!wide.matches && TSHORT[c[1]]) || (c[1] === 'bags' ? c[4] : c[0])) + '</span></a>';
     }).join('') + '</nav>');
     main.insertBefore(catsNav, head);
     /* обкладинка головної: що робить TRAD для продавця — фото, а решту заповнює AI */
@@ -440,6 +456,15 @@
   (function () {
     var h = $('h1.cat'), n = $('#n');
     if (h && n && wide.matches) { var w = el('<div class="cathead"></div>'); h.before(w); w.appendChild(h); w.appendChild(n); }
+    else if (h && page === 'catalog.html') {        /* телефон: заголовок розділу і місто в одному рядку, «назад» — на початку шляху */
+      var w2 = el('<div class="cathead"></div>'); h.before(w2); w2.appendChild(h);
+      w2.appendChild(el('<a class="ccity" href="city.html"><i data-lucide="map-pin"></i>Вся Україна<i data-lucide="chevron-down"></i></a>'));
+      var cr2 = $('.shop .crumbs'); if (cr2) cr2.insertBefore(el('<a class="cback" href="home.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a>'), cr2.firstChild);
+      /* кількість оголошень — у рядку шляху; сортування — поруч зі «Стежити за пошуком»: рядок фільтрів лишається для самих фільтрів */
+      var cl2 = $('.cline'), ss2 = $('.qflt .sortsel');
+      if (cr2 && n) cr2.appendChild(n);
+      if (cl2 && ss2) cl2.appendChild(ss2);
+    }
   })();
   (function () {
     var hs = $('#hsort');
@@ -472,6 +497,23 @@
     c.classList.add('cv');
   }
   $$('.card').forEach(cardfix);
+  /* рамка фото в картці горизонтальна (4:3), а фото товарів вертикальні: беремо горизонтальний кадр «-w», де річ видно цілою */
+  function widePhotos() {
+    $$('.card.cv .frame img').forEach(function (im) {
+      var src = im.getAttribute('src') || '', base = im.dataset.base || src;
+      if (im.dataset.nowide || !/assets\/[a-z0-9-]+\.jpg$/.test(base) || /assets\/jeans-\d/.test(base)) return;
+      im.dataset.base = base;
+      var want = base.replace(/\.jpg$/, '-w.jpg');
+      if (src === want) return;
+      im.onerror = function () { im.onerror = null; im.dataset.nowide = '1'; im.src = base; };
+      im.src = want;
+    });
+  }
+  widePhotos();
+  if ('MutationObserver' in window) {
+    var wpT = 0;
+    new MutationObserver(function () { if (!wpT) wpT = requestAnimationFrame(function () { wpT = 0; widePhotos(); }); }).observe(document.body, { childList: true, subtree: true });
+  }
   /* доступні оголошення — першими: заброньовані й продані не мають стояти на початку стрічки */
   $$('#grid, main .grid').forEach(function (g) { $$('.card', g).filter(function (c) { return $('.state', c); }).forEach(function (c) { g.appendChild(c); }); });
   /* наступні оголошення підвантажуються самі, коли людина догортала; кнопка «Показати ще» лишається запасною */
@@ -486,7 +528,8 @@
     if (!ft) return;
     ft.setAttribute('href', 'category.html?browse=1');
     ft.innerHTML = '<i data-lucide="layout-grid"></i>Категорії';
-    if (page === 'category.html') ft.setAttribute('aria-current', 'page'); else ft.removeAttribute('aria-current');
+    if (page === 'category.html' || page === 'catalog.html') ft.setAttribute('aria-current', 'page'); else ft.removeAttribute('aria-current');
+    var hometab = $('nav.tabs a.tab[href="home.html"]'); if (hometab && page === 'catalog.html') hometab.removeAttribute('aria-current');
     if (window.lucide) lucide.createIcons();
   })();
   var tabsNav = $('nav.tabs');

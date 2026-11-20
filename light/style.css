@@ -1794,6 +1794,133 @@ body.home .site-foot { margin-top: 0; }
   .garrow.next { right: 12px; }
   .stage:hover .garrow, .garrow:focus-visible { opacity: 1; }
 }
+/* ---- крок 7: шліфування за оцінкою Codex і рисунками власника для телефона (refs/phone2). Цей файл дописує build_shop.py. ---- */
+
+/* ===== телефон ===== */
+@media (max-width: 899px) {
+  /* картки: широке фото 4:3, як на рисунках, — у стрічці видно більше оголошень; річ у кадрі ціла (фото «-w») */
+  .card.cv .frame { aspect-ratio: 4 / 3; }
+  .card.cv .fav { top: 6px; right: 6px; width: 34px; height: 34px; }
+  .card.cv .fav svg { width: 18px; height: 18px; }
+  .card.cv .vmark { right: 8px; bottom: 8px; }
+
+  /* головна: нижчі плитки розділів — перший ряд оголошень видно на першому екрані разом із ціною і назвою */
+  body.home .catshead { padding-top: 2px; }
+  body.home .cats { gap: 8px; }
+  body.home .cats a { padding: 6px 4px 8px; gap: 4px; justify-content: flex-start; }
+  body.home .cats .ph { aspect-ratio: 5 / 3; }
+  body.home .cats .lb { white-space: nowrap; }
+
+  /* темний верх зі знаком — як на головній — у каталозі й на сторінці оголошення */
+  body.dk > .bar { display: none; }
+  body.dk header.top { display: flex; align-items: center; gap: 8px; position: relative; z-index: 30; padding: 12px 16px 10px; background: var(--ink); color: var(--on-ink); }
+  body.dk.dkfix header.top { position: sticky; top: 0; }
+  body.dk .top-row { display: contents; }
+  body.dk .top-row .wordmark { order: 1; flex: none; font-size: 18px; }
+  body.dk .top .search { order: 2; flex: 1; min-width: 0; height: 48px; margin-top: 0; border-radius: 999px; background: oklch(1 0 0 / 0.1); }
+  body.dk .top .search .where { display: none; }
+  body.dk .top .search input { color: var(--on-ink); }
+  body.dk .top .search input::placeholder, body.dk .top .search > svg { color: oklch(1 0 0 / 0.62); }
+  body.dk .top-row > .icon-btn { order: 3; flex: none; display: grid; background: oklch(1 0 0 / 0.1); color: var(--on-ink); }
+  body.dk .top .dot { box-shadow: 0 0 0 2px var(--ink); }
+  body.dk .top nav.desk, body.dk .top .topnav { display: none; }
+  /* світлий аркуш під темним верхом: заокруглені кути тримаються за шапку й під час прокрутки */
+  body.dk header.top::before, body.dk header.top::after { content: ""; position: absolute; top: calc(100% - 0.5px); width: 22px; height: 22px; pointer-events: none; }
+  body.dk header.top::before { left: 0; background: radial-gradient(circle at 100% 100%, transparent 21.5px, var(--ink) 22px); }
+  body.dk header.top::after { right: 0; background: radial-gradient(circle at 0 100%, transparent 21.5px, var(--ink) 22px); }
+
+  /* каталог */
+  body.dk .shop .crumbs { display: flex; align-items: center; gap: 4px 6px; padding: 14px 16px 0; font-size: 13px; color: var(--text-2); }
+  body.dk .shop .crumbs svg { width: 14px; height: 14px; }
+  .crumbs .cback { display: grid; place-items: center; width: 32px; height: 32px; margin: -6px 0 -6px -8px; border-radius: 50%; color: var(--text); }
+  body.dk .shop .crumbs .cback svg { width: 20px; height: 20px; }
+  body.dk .cathead { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 16px 0; }
+  body.dk h1.cat { display: block; min-width: 0; margin: 0; padding: 0; font: 700 24px/1.2 var(--display); letter-spacing: -0.015em; }
+  .ccity { display: inline-flex; flex: none; align-items: center; gap: 4px; height: 36px; font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; }
+  .ccity svg { width: 16px; height: 16px; color: var(--text-2); }
+  .ccity svg:first-child { color: var(--hot-ink); }
+  body.dk .shop nav.chips { padding-top: 12px; }
+  /* рядок фільтрів гортається вбік (край розмито — видно, що далі є ще); сортування — в рядку «Стежити за пошуком» */
+  body.dk .shop .crumbs .n { margin-left: auto; font-size: 13px; color: var(--text-2); }
+  body.dk .qflt { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-top: 8px; -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); }
+  body.dk .qflt::-webkit-scrollbar { display: none; }
+  body.dk .qflt > * { flex: none; }
+  body.dk .qflt::after { content: ""; flex: none; width: 28px; }
+  body.dk .shop nav.chips { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent); }
+  body.dk .cline { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 2px 16px 0; }
+  body.dk .cline .sortsel { flex: none; width: auto; height: 44px; padding: 0 22px 0 0; border: 0; box-shadow: none; background-color: transparent; background-position: right 2px center; font-weight: 600; }
+
+  /* сторінка оголошення: фото в аркуші, 3:2 — назва й ціна на першому екрані */
+  body.dk .pwrap .media.hasthumbs { overflow: visible; border-radius: 0; }
+  body.dk .pwrap .stage { position: relative; margin: 14px 16px 0; border-radius: 20px; overflow: hidden; }
+  body.dk .media.hasthumbs .gallery { aspect-ratio: 3 / 2; }
+  body.dk .pwrap .media-bar { top: 22px; left: 24px; right: 24px; padding: 0; }
+  body.dk .pwrap .media-bar .round { width: 40px; height: 40px; }
+  body.dk .pwrap .thumbs { display: flex; gap: 8px; padding: 10px 16px 0; overflow-x: auto; scrollbar-width: none; }
+  body.dk .pwrap .thumbs::-webkit-scrollbar { display: none; }
+  body.dk .pwrap .thumbs button { flex: none; width: 56px; height: 56px; border-radius: 12px; }
+  body.dk .pwrap .info { padding-top: 10px; }
+  body.dk .pwrap a.seller .who { flex: 1; min-width: 0; }
+  body.dk .pwrap a.seller img { width: 48px; height: 48px; }
+
+  /* створення оголошення й вибір розділу: темний верх і світлий аркуш, як на рисунку */
+  body.flowpage:not(.donepage) .flow-top, body.flowpick .flow-top { background: var(--ink); color: var(--on-ink); padding-bottom: 14px; }
+  body.flowpage:not(.donepage) .flow-top .x, body.flowpick .flow-top .x, body.flowpick .flow-top a { color: var(--on-ink); }
+  body.flowpage:not(.donepage) .flow-top .stepno { color: oklch(1 0 0 / 0.62); }
+  body.flowpage:not(.donepage) .progress i:not(.on) { background: oklch(1 0 0 / 0.16); }
+  body.flowpage:not(.donepage) .flow-top::before, body.flowpage:not(.donepage) .flow-top::after,
+  body.flowpick .flow-top::before, body.flowpick .flow-top::after { content: ""; position: absolute; top: calc(100% - 0.5px); width: 22px; height: 22px; pointer-events: none; }
+  body.flowpage:not(.donepage) .flow-top::before, body.flowpick .flow-top::before { left: 0; background: radial-gradient(circle at 100% 100%, transparent 21.5px, var(--ink) 22px); }
+  body.flowpage:not(.donepage) .flow-top::after, body.flowpick .flow-top::after { right: 0; background: radial-gradient(circle at 0 100%, transparent 21.5px, var(--ink) 22px); }
+  body.flowpage:not(.donepage) main.flow { padding-top: 10px; }
+  body.browse main, body.browse #root { padding-bottom: 96px; }
+
+  /* пошук: «Скасувати» на одній лінії з полем і не впирається в край */
+  .bar .cancel { display: grid; place-items: center; flex: none; height: 46px; padding: 0 4px; font-size: 14px; }
+
+  /* мої оголошення: відповіді опитування переносяться, «Поновити» стоїть одразу під статусом */
+  .qcard .opts { flex-wrap: wrap; }
+  .mrow .b .mini { display: flex; width: fit-content; }
+
+  /* створення: щільніша форма, менше відео, підсумок перед публікацією без обрізаної назви */
+  .aiflow .step[data-step="2"] .field { margin-top: 18px; }
+  .aiflow .clip { width: 166px; }
+  .aiflow .step[data-step="3"] .review { grid-template-columns: 150px minmax(0, 1fr); gap: 16px 14px; align-items: start; }
+  .aiflow .step[data-step="3"] .af-sum { display: block; min-width: 0; }
+  .aiflow .step[data-step="3"] .af-sum .af-spr, .aiflow .step[data-step="3"] .af-sum .pchips { display: none; }
+  .aiflow .step[data-step="3"] .af-stt { font: 600 16px/1.3 var(--ui); letter-spacing: 0; }
+  .aiflow .step[data-step="3"] .af-sds { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 7; overflow: hidden; margin-top: 6px; font-size: 14px; line-height: 1.45; color: var(--text-2); }
+  .aiflow .step[data-step="3"] dl.sum { grid-column: 1 / -1; }
+  .aiflow .step[data-step="3"] dl.sum > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; }
+  .aiflow .step[data-step="3"] dl.sum dd { text-align: right; }
+  .sharebox .btn { height: 48px; }
+  .sharebox .sharehint { display: none; }
+}
+
+/* ===== спільне ===== */
+.mrow .b br { display: none; }                      /* «Поновити» одразу під статусом, без порожнього рядка */
+.favflt .qchip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--on-ink); }
+.cbox .viaapp a { filter: grayscale(1); opacity: 0.72; }   /* месенджери в рядку відповіді — тихо, як на сторінці оголошення */
+
+/* ===== комп'ютер ===== */
+@media (min-width: 900px) {
+  /* «Обране»: вкладки й фільтри на одній лівій лінії із заголовком і картками */
+  body.wide .shop .tline.full, body.wide .shop .favflt { padding-inline: 0; }
+  /* сторінка оголошення: блок зв'язку тієї ж ширини, що й картка продавця під ним */
+  body.wide .pwrap aside.contact:not(#ownbar) { margin-inline: 16px; }
+  /* кабінет: списки не розтягуються на всю ширину — лічильники й час стоять поруч із текстом */
+  body.acctpage.keepbar .bar, body.acctpage .tline, body.acctpage .page { max-width: 760px; }
+  /* розмова: ширша колонка, щоб короткі відповіді не ламалися на два рядки */
+  body:has(> #msgs) { max-width: 600px; }
+  body:has(> #msgs) .cbox { max-width: 600px; }
+  /* сторінка продавця: посилання «Усі оголошення» стоїть під картками, а не посередині порожнього поля */
+  body.sellerpage .morebox { text-align: left; }
+}
+@media (min-width: 1180px) {
+  /* обкладинка головної: малюнок ближче до тексту, без порожнього поля посередині */
+  body.wide .hero .hart { right: 154px; }
+  body.wide .hero .hvis { margin-left: 0; }   /* було 110px: табличка зсунута разом із малюнком */
+}
 
 /* ---------- Знак: бирка ---------- */
 .hw { display: inline-block; font-size: 0.72em; vertical-align: middle; }

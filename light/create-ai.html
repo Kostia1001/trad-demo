@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11190125">
+<link rel="stylesheet" href="style.css?v=11201436">
 </head>
 <body class="flowpage aiflow">
 
@@ -306,7 +306,7 @@
     $('clprice').textContent = money(price.value); $('cltitle').textContent = title.value.trim();
     if (id === '5') post();
     $('pv').hidden = id === '3' || id === '5';
-    if (big.matches) deskSync(cover, vi);
+    deskSync(cover, vi);   // назва й опис у підсумку потрібні й на телефоні
   }
   function show() {
     var id = order[pos], n = NUM[id];
