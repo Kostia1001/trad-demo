@@ -24,7 +24,8 @@
   /* комп'ютер (22.11.2026, огляд усіх екранів): пошук — у шапці, тому окрема сторінка пошуку веде в каталог;
      «Усі категорії», вибір розділу й розмова отримують шапку сайту замість вигляду телефона */
   if (wide.matches && page === 'search.html') { location.replace('catalog.html' + (q.get('q') ? '?q=' + encodeURIComponent(q.get('q')) : '')); return; }
-  if (wide.matches && (page === 'category.html' || page === 'dialog.html') && !$('header.top')) {
+  /* у «Чаті» на комп'ютері розмова відкрита віконцем справа (iframe) — там шапка не потрібна */
+  if (wide.matches && (page === 'category.html' || page === 'dialog.html') && !$('header.top') && window.self === window.top) {
     document.body.classList.add('wide', 'deskhead');
     document.body.insertBefore(el('<header class="top"><div class="top-row"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><nav class="desk" aria-label="Меню"><a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a><a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a><a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a><a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a><a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a></nav></div><form class="search" role="search" action="catalog.html"><i data-lucide="search"></i><input type="search" name="q" placeholder="Що шукаєте?" aria-label="Пошук оголошень"><a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a></form></header>'), document.body.firstChild);
   }
