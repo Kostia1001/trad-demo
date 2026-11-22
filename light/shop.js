@@ -724,5 +724,20 @@
     if (q.get('tickets') === '1') tickets('Не можу увійти');
   }
   })();
+  /* ---- AI-студія (22 листопада 2026): входи з «Моїх оголошень» і сповіщення «Відео готове». Сторінка — studio.html, стилі — tools/studio.css ---- */
+  (function () {
+    if (page === 'my.html') {
+      var rows = $$('[data-panel="active"] .mrow');
+      var row = function (re) { return rows.filter(function (r) { var n = $('.nm', r); return n && re.test(n.textContent); })[0]; };
+      var jr = row(/Levi/), br = row(/Сумка/);
+      if (jr && !$('.mvid', jr)) jr.appendChild(el('<a class="mvid res" href="studio.html?video=ready&amp;push=0"><i data-lucide="clapperboard"></i><span><b>120 переходів за посиланням з відео</b><small>за 3 дні · 2 з них написали вам</small></span><i data-lucide="chevron-right"></i></a>'));
+      if (br && !$('.mvid', br)) br.appendChild(el('<a class="mvid" href="studio.html?item=bag"><i data-lucide="clapperboard"></i><span><b>Зробити відео для соцмереж</b></span><i data-lucide="chevron-right"></i></a>'));
+      if (q.get('video') === 'making') { var t = $('#toast'); if (t) { t.textContent = 'AI робить відео. Повідомимо, коли буде готове'; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 3200); } }
+    }
+    if (page === 'notifications.html') {
+      var first = $('#list .nrow') || $('.nrow');
+      if (first && !$('#nvid')) first.before(el('<div class="nrow new" id="nvid"><span class="ic"><i data-lucide="clapperboard"></i></span><div class="b"><div class="tt">Відео для соцмереж готове</div><div class="tx">«Джинси Levi’s 501, W32 L32» — можна завантажувати й ділитися.</div><a class="mini" href="studio.html?video=ready&amp;push=0">Відкрити відео</a><div class="tm">щойно</div></div></div>'));
+    }
+  })();
   icons();
 })();
