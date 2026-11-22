@@ -1728,7 +1728,7 @@ body.home .site-foot { margin-top: 0; }
 .vbadge svg { width: 14px; height: 14px; }
 
 @media (min-width: 900px) {
-  .loginbtn { display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border-radius: 999px; background: var(--s1); font-size: 16px; font-weight: 600; }
+  .loginbtn { display: inline-flex; align-items: center; height: 44px; padding: 0 18px; border-radius: 999px; background: var(--s1); color: var(--text); font-size: 16px; font-weight: 600; }
   .pmenu { display: block; position: relative; }
   .mebtn { display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 12px 0 4px; border-radius: 999px; background: var(--s1); font-size: 14px; font-weight: 600; transition: background 0.2s var(--ease); }
   .mebtn:hover, .pmenu.open .mebtn { background: var(--s2); }
@@ -2025,6 +2025,33 @@ details.tk .tk-h { cursor: pointer; }
   body.wide .hero .hart { right: 154px; }
   body.wide .hero .hvis { margin-left: 0; }   /* було 110px: табличка зсунута разом із малюнком */
 }
+/* телефонне меню на комп'ютері не показуємо ніде (огляд усіх екранів 22.11.2026) */
+@media (min-width: 900px) {
+  nav.tabs { display: none !important; }
+  /* «Усі категорії» й вибір розділу: заголовок сторінки над списком, усе по центру під шапкою */
+  body.deskhead.flowpick .bar { display: flex; max-width: 500px; margin: 24px auto 0; padding-inline: 0; }
+  body.deskhead.flowpick main { margin-inline: auto; }
+  /* розмова: сторінка лишається колонкою 600 px, шапка — на всю ширину вікна */
+  body.deskhead:not(.flowpick) .top { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); padding-inline: max(32px, calc((100vw - 1280px) / 2 + 32px)); }
+  body.deskhead .dtop { top: 84px; }
+}
+/* ---- огляд Codex 22.11 — картки, меню, дрібниці ---- */
+/* назва в картці — до двох рядків: колір і модель не обрізаються («Сумка шкіряна, коричнева») */
+.card.cv .title { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; min-height: 36px; text-overflow: clip; }
+@media (min-width: 900px) {
+  body.wide #grid .card.cv .title { min-height: 44px; }
+  body.wide main > .grid .card.cv .title, body.wide #grid .card.cv .title { min-height: 48px; }
+}
+/* лічильник на «Чат» не закриває значок */
+.tab .count { left: calc(50% + 7px); top: -1px; }
+/* хрестик «прибрати фото»: більша зона для пальця */
+.mi .rm::after { content: ""; position: absolute; inset: -8px; }
+/* «Дефекти»: обидва варіанти видно як кнопки ще до вибору */
+#defs button[aria-pressed="false"] { box-shadow: inset 0 0 0 1px var(--line); color: var(--text); background: var(--card); }
+/* ряди, що гортаються вбік, плавно зникають біля краю — видно, що є продовження */
+@media (max-width: 899px) {
+  .chips, .qflt { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
+}
 
 /* ---- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026, TRAD Everywhere з ТЗ).
    Сторінка studio.html (писана руками; ?item=bag, ?video=making|ready). Входи: кнопка в «Поділіться оголошенням» на кроці
@@ -2042,7 +2069,7 @@ details.tk .tk-h { cursor: pointer; }
 .sd-side { display: grid; gap: 20px; align-content: start; }
 
 /* вертикальний кадр відео */
-.sd-frame { position: relative; width: 184px; aspect-ratio: 9 / 16; margin: 0 auto; border-radius: 24px; overflow: hidden; background: var(--s1);
+.sd-frame { position: relative; width: 164px; aspect-ratio: 9 / 16; margin: 0 auto; border-radius: 24px; overflow: hidden; background: var(--s1);
   box-shadow: 0 20px 40px -26px rgb(32 27 36 / 0.55); }
 .sd-frame > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .sd-frame .blur { filter: blur(16px) brightness(0.9) saturate(0.9); transform: scale(1.2); opacity: 0; transition: opacity 0.4s; }
@@ -2063,7 +2090,7 @@ details.tk .tk-h { cursor: pointer; }
 .sd-ov { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px 14px 24%; color: #fff;
   background: linear-gradient(transparent 38%, rgb(23 18 28 / 0.78) 78%, rgb(23 18 28 / 0.55)); opacity: 0; transition: opacity 0.5s var(--ease); }
 .sd-ov b { font: 800 22px/1.1 var(--display); }
-.sd-ov span { margin-top: 4px; font-size: 13px; font-weight: 600; color: rgb(255 255 255 / 0.9); }
+.sd-ov span { margin-top: 4px; font-size: 12px; font-weight: 600; color: rgb(255 255 255 / 0.9); white-space: nowrap; }
 .sd-ov.on, [data-state="ready"] .sd-ov, [data-state="start"] .sd-ov { opacity: 1; }
 .sd-aip { position: absolute; z-index: 2; left: 10px; top: 16px; display: none; padding: 3px 8px; border-radius: 999px; background: rgb(23 18 28 / 0.55); color: #fff; font-size: 12px; font-weight: 600; }
 .sd-bars { position: absolute; z-index: 2; left: 10px; right: 10px; top: 7px; display: none; gap: 3px; }
@@ -2115,6 +2142,18 @@ details.tk .tk-h { cursor: pointer; }
 .sd-why button { min-height: 48px; padding: 0 16px; border-radius: 14px; background: var(--s1); font-size: 16px; text-align: left; }
 .sd-why button[aria-checked="true"] { background: var(--text); color: var(--bg); font-weight: 600; }
 .sd-sh .btn:disabled { opacity: 0.45; }
+.sd-apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+.sd-apps[hidden] { display: none; }
+.sd-apps button { display: grid; justify-items: center; gap: 6px; padding: 10px 0 8px; border-radius: 16px; background: var(--card); box-shadow: 0 0 0 1px var(--line); font-size: 13px; font-weight: 600; color: var(--text); transition: box-shadow 0.15s, transform 0.12s; }
+.sd-apps button:hover { box-shadow: 0 0 0 1px var(--text-2); }
+.sd-apps button:active { transform: scale(0.97); }
+.sd-apps .ai { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; }
+.sd-apps .ai img { width: 22px; height: 22px; }
+.sd-apps .ai svg { width: 20px; height: 20px; }
+.sd-apps .tt { background: #111; }
+.sd-apps .ig { background: #E4405F; }
+.sd-apps .tg { background: var(--tg); }
+.sd-apps .more { background: var(--s1); color: var(--text); }
 .sd-bad { min-height: 44px; margin-top: 4px; padding: 0 4px; font-size: 14px; font-weight: 500; color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .sd-bad:hover { color: var(--hot-ink); }
 
@@ -2197,6 +2236,7 @@ details.tk .tk-h { cursor: pointer; }
   [data-state="making"] .sd-grid { align-items: center; }
   .sd-s { text-align: left; }
   .sd-s h2 { font-size: 28px; line-height: 1.2; }
+  .sd-s small, .sd-row small, .sd-s .sd-link, .sd-s .sd-mus { font-size: 14px; }
   .sd-s .btn { display: flex; width: 100%; }
   .sd-line { max-width: none; margin: 0 0 18px; }
   .sd-orig { justify-content: flex-start; }

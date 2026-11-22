@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11222107">
+<link rel="stylesheet" href="style.css?v=11222146">
 </head>
 <!-- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026). Стилі — tools/studio.css. -->
 <body class="acctpage wide has-bar keepbar aispage">
@@ -51,42 +51,46 @@
     <div class="sd-side">
       <section class="sd-s sd-start">
         <h2>Відео для TikTok та Reels</h2>
-        <p>5–8 секунд з ваших фото, з музикою, ціною й кодом TRAD. AI оживляє кадри рухом камери, саму річ не перемальовує.</p>
-        <p class="sd-few" id="sd-few" hidden><i data-lucide="camera"></i><span>Додайте фото бирки й деталей — відео буде переконливішим. <a href="create.html?step=1">Додати фото</a></span></p>
+        <p>Відео на 5–8 секунд із ваших фото, з музикою, ціною й кодом TRAD. Камера рухається, річ лишається такою, як на фото.</p>
+        <p class="sd-few" id="sd-few" hidden><i data-lucide="camera"></i><span>Додайте фото деталей і етикетки. <a href="create.html?step=1">Додати фото</a></span></p>
         <button class="btn primary wide" type="button" id="sd-make">Створити відео</button>
         <small>Перше відео — безкоштовно</small>
       </section>
 
       <section class="sd-s sd-making">
         <div class="sd-line"><i id="sd-line"></i></div>
-        <h2 class="sd-stt" id="sd-stt" aria-live="polite">Вибираю найкращі кадри</h2>
-        <p>Зазвичай це до 2 хвилин. Можна закрити — повідомимо, коли буде готове, і відео чекатиме в «Моїх оголошеннях».</p>
+        <h2 class="sd-stt" id="sd-stt" aria-live="polite">Добираємо фото</h2>
+        <p>Зазвичай до 2 хвилин. Можете закрити студію — повідомимо, коли відео буде готове. Воно з’явиться в «Моїх оголошеннях».</p>
         <a class="btn ghost wide" href="my.html?video=making" id="sd-close">Закрити</a>
       </section>
 
       <section class="sd-s sd-fail">
-        <h2>Не вийшло зробити відео</h2>
-        <p>Безкоштовну спробу не витрачено. Спробуйте ще раз — або додайте ще фото речі.</p>
+        <h2>Не вдалося створити відео</h2>
+        <p>Ваша безкоштовна спроба ще доступна.</p>
         <button class="btn primary wide" type="button" id="sd-retry">Спробувати ще раз</button>
         <a class="btn ghost wide" href="my.html">Закрити</a>
       </section>
 
       <section class="sd-s sd-ready">
         <div class="sd-check">
-          <p class="sd-chk">Річ на відео та сама, що на ваших фото?</p>
+          <p class="sd-chk">Річ виглядає так само, як на фото?</p>
           <div class="sd-orig" id="sd-orig"></div>
-          <button class="sd-bad" type="button" id="sd-bad" data-sheet="sd-why">Ні, відео спотворило річ</button>
+          <button class="sd-bad" type="button" id="sd-bad" data-sheet="sd-why">Річ виглядає інакше</button>
         </div>
-        <button class="btn primary wide" type="button" id="sd-share"><i data-lucide="share-2"></i><span>Поділитися</span></button>
+        <div class="sd-apps" id="sd-apps" aria-label="Відкрити в соцмережі">
+          <button type="button" data-app="TikTok"><span class="ai tt"><img src="assets/icons/tiktok-white.svg" alt=""></span>TikTok</button>
+          <button type="button" data-app="Instagram"><span class="ai ig"><img src="assets/icons/instagram-white.svg" alt=""></span>Instagram</button>
+          <button type="button" data-app="Telegram"><span class="ai tg"><img src="assets/icons/telegram-white.svg" alt=""></span>Telegram</button>
+          <button type="button" data-app="more"><span class="ai more"><i data-lucide="share-2"></i></span>Ще</button>
+        </div>
+        <button class="btn primary wide" type="button" id="sd-share"><i data-lucide="download"></i><span>Завантажити відео</span></button>
         <button class="btn ghost wide" type="button" id="sd-dl"><i data-lucide="download"></i>Зберегти відео</button>
         <div class="sd-capbox"><p id="sd-captxt"></p><button class="sd-copy" type="button" id="sd-cap" aria-label="Скопіювати підпис"><i data-lucide="copy"></i></button></div>
-        <p class="sd-link"><i data-lucide="info"></i>У Reels посилання в підписі не відкривається — додайте його в сторіс або в шапку профілю.</p>
-        <p class="sd-mus"><i data-lucide="music-2"></i>З музикою від AI · у соцмережі можна замінити</p>
       </section>
 
       <div class="sd-more">
-        <button class="sd-row" type="button" data-sheet="sd-photo"><img class="th" id="sd-storyth" src="assets/jeans-story.jpg" alt=""><span><b>Рекламне фото</b><small>Річ на чистому фоні, для сторіс</small></span><i data-lucide="chevron-right"></i></button>
-        <button class="sd-row" type="button" data-sheet="sd-texts"><span class="ic"><i data-lucide="type"></i></span><span><b>Тексти для соцмереж</b><small>Instagram · Facebook · Telegram</small></span><i data-lucide="chevron-right"></i></button>
+        <button class="sd-row" type="button" data-sheet="sd-photo"><img class="th" id="sd-storyth" src="assets/jeans-story.jpg" alt=""><span><b>Рекламне фото</b><small>Річ на чистому фоні</small></span><i data-lucide="chevron-right"></i></button>
+        <button class="sd-row" type="button" data-sheet="sd-texts"><span class="ic"><i data-lucide="type"></i></span><span><b>Тексти для соцмереж</b></span><i data-lucide="chevron-right"></i></button>
       </div>
     </div>
   </div>
@@ -98,7 +102,7 @@
   <div class="sheet-head"><h2>Рекламне фото</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
   <div class="sheet-body sd-sh">
     <div class="sd-story"><img id="sd-story" src="assets/jeans-story.jpg" alt="Річ на чистому фоні"><span class="pt num" id="sd-storyp">900&nbsp;грн</span><svg class="tg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF6F5B" d="M8 16h34l16 16-16 16H8a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z"/><circle cx="44" cy="32" r="4" fill="#120D18"/><path fill="#1B0A08" d="M12 25h16v5h-5.2v13h-5.6V30H12z"/></svg></div>
-    <p class="sd-note">Річ вирізав AI, сама вона не змінена: колір, стан і деталі — як на вашому фото.</p>
+    <p class="sd-note">AI прибрав фон. Колір, стан і деталі речі — як на вашому фото.</p>
     <button class="btn primary wide" type="button" data-close data-toast="Фото збережено в галерею"><i data-lucide="download"></i>Зберегти фото</button>
   </div>
 </section>
@@ -111,17 +115,17 @@
   </div>
 </section>
 <section class="sheet" id="sd-cmp" role="dialog" aria-modal="true" aria-label="Порівняння з фото">
-  <div class="sheet-head"><h2>Порівняйте</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-head"><h2>Порівняйте фото й кадр</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
   <div class="sheet-body sd-sh">
     <div class="sd-pair"><figure><img id="sd-cmpa" src="assets/jeans-1.jpg" alt=""><figcaption>Ваше фото</figcaption></figure><figure><img id="sd-cmpb" src="assets/jeans-1.jpg" alt=""><figcaption>Кадр відео</figcaption></figure></div>
-    <p class="sd-note">Колір, форма, бирки й дефекти мають збігатися.</p>
+    <p class="sd-note">Звірте колір, форму, етикетки й дефекти.</p>
     <button class="btn ghost wide" type="button" data-close>Усе збігається</button>
   </div>
 </section>
 <section class="sheet" id="sd-why" role="dialog" aria-modal="true" aria-label="Що не так з відео">
   <div class="sheet-head"><h2>Що не так?</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
   <div class="sheet-body sd-sh">
-    <div class="sd-why" role="radiogroup" aria-label="Що не так"><button type="button" role="radio" aria-checked="false">Змінився колір</button><button type="button" role="radio" aria-checked="false">Інша форма або деталі</button><button type="button" role="radio" aria-checked="false">Зникли дефекти чи бирка</button><button type="button" role="radio" aria-checked="false">Інше</button></div>
+    <div class="sd-why" role="radiogroup" aria-label="Що не так"><button type="button" role="radio" aria-checked="false">Змінився колір</button><button type="button" role="radio" aria-checked="false">Змінилася форма або деталі</button><button type="button" role="radio" aria-checked="false">Зникли дефекти або етикетка</button><button type="button" role="radio" aria-checked="false">Інше</button></div>
     <button class="btn primary wide" type="button" id="sd-redo" disabled>Переробити безкоштовно</button>
   </div>
 </section>
@@ -142,7 +146,7 @@
   // дані оголошення; тексти беруться лише з оголошення — AI не вигадує характеристик
   var ITEMS = {
     jeans: { name: 'Джинси Levi’s 501, W32 L32', short: 'Джинси Levi’s 501', price: '900', code: '4821', cover: 'jeans-v.jpg', story: 'jeans-story.jpg',
-      photos: ['jeans-1.jpg', 'jeans-2.jpg', 'jeans-3.jpg', 'jeans-4.jpg'], line: 'Вживані, без дефектів, прямий крій', tags: '#levis #джинси #одеса' },
+      photos: ['jeans-1.jpg', 'jeans-2.jpg', 'jeans-3.jpg', 'jeans-4.jpg'], line: 'Вживані, прямого крою, без дефектів', tags: '#levis #джинси #одеса' },
     bag: { name: 'Сумка шкіряна, коричнева', short: 'Сумка шкіряна', price: '1 100', code: '5307', cover: 'bag.jpg', story: 'bag-story.jpg',
       photos: ['bag.jpg', 'bag-w.jpg'], line: 'Вживана, натуральна шкіра', tags: '#сумка #шкіра #одеса', few: true }
   };
@@ -165,7 +169,7 @@
     fb: 'Продаю: ' + it.name + ' — ' + P + '.\n' + it.line + '. Одеса, можу відправити поштою.\nФото й деталі — за посиланням.',
     tg: it.name + ' — ' + P + '\n' + it.line + ' · Одеса · відправлю поштою'
   };
-  $('sd-captxt').textContent = it.name + ' — ' + P + '. ' + it.line + '. Пишіть у TRAD: код ' + it.code + '.';
+  $('sd-captxt').textContent = it.name + ' — ' + P + '. ' + it.line + '. Шукайте в TRAD за кодом ' + it.code + '.';
   function post(n) { $('sd-post').innerHTML = ''; $('sd-post').textContent = TX[n]; $('sd-post').insertAdjacentHTML('beforeend', '<span class="lk"><i data-lucide="link"></i>і посилання на оголошення</span>'); lucide.createIcons(); }
   document.querySelectorAll('[data-net]').forEach(function (b) {
     b.addEventListener('click', function () { document.querySelectorAll('[data-net]').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); }); post(b.dataset.net); });
@@ -202,7 +206,7 @@
     main.classList.add('sd-reset'); main.dataset.state = state;
     cards.classList.remove('gone'); cardEls.forEach(function (c) { c.classList.remove('in'); }); ov.classList.remove('on');
     frs.forEach(function (f) { f.classList.remove('cam'); }); bars.forEach(function (b) { b.style.transform = 'scaleX(0)'; });
-    line.style.transform = 'scaleX(0)'; stt.textContent = 'Вибираю найкращі кадри';
+    line.style.transform = 'scaleX(0)'; stt.textContent = 'Добираємо фото';
     void main.offsetWidth; main.classList.remove('sd-reset');
     if (state === 'start') show(0);
     if (state === 'making') making();
@@ -213,9 +217,8 @@
     show(-1);
     at(0.2, function () { line.style.transition = 'transform 9s linear'; line.style.transform = 'scaleX(1)'; });
     [0.4, 1.0, 1.6, 2.2].forEach(function (t, i) { at(t, function () { cardEls[i].classList.add('in'); }); });
-    at(3.2, function () { cards.classList.add('gone'); frs[0].classList.add('cam'); show(0); say('Оживляю кадри'); });
-    at(6.4, function () { ov.classList.add('on'); say('Додаю ціну, код і музику'); });
-    at(8.6, function () { say('Майже готово'); });
+    at(3.2, function () { cards.classList.add('gone'); frs[0].classList.add('cam'); show(0); say('Додаємо рух камери'); });
+    at(6.4, function () { ov.classList.add('on'); say('Додаємо ціну, код і музику'); });
     at(9.4, function () { url('ready'); set('ready'); });
   }
   function ready() {
@@ -230,8 +233,12 @@
   }
   $('sd-make').addEventListener('click', function () { url('making'); set('making'); });
   var wide = window.matchMedia('(min-width: 900px)').matches;
-  if (wide) { $('sd-share').innerHTML = '<i data-lucide="download"></i><span>Завантажити відео</span>'; $('sd-dl').hidden = true; lucide.createIcons(); }
-  $('sd-share').addEventListener('click', function () { toast(wide ? 'Відео завантажено' : 'Відкриваємо меню «Поділитися»: відео й підпис уже додані', 3000); });
+  // телефон: одразу в потрібну соцмережу (відео й підпис уже додані); компʼютер: завантажити файл
+  $('sd-apps').hidden = wide; $('sd-share').hidden = !wide; $('sd-dl').hidden = wide;
+  document.querySelectorAll('#sd-apps [data-app]').forEach(function (b) {
+    b.addEventListener('click', function () { var a = b.dataset.app; toast(a === 'more' ? 'Відкриваємо меню «Поділитися»' : 'Відкриваємо ' + a + ' — відео й підпис уже додані', 3000); });
+  });
+  $('sd-share').addEventListener('click', function () { toast('Відео завантажено'); });
   $('sd-dl').addEventListener('click', function () { toast('Відео збережено в галерею'); });
   $('sd-cap').addEventListener('click', function () { toast('Підпис скопійовано'); });
   document.querySelectorAll('#sd-orig [data-ph]').forEach(function (b) {
@@ -246,6 +253,6 @@
   set(v === 'making' || v === 'ready' || v === 'fail' ? v : 'start');
 })();
 </script>
-<script src="shop.js?v=11222107"></script>
+<script src="shop.js?v=11222146"></script>
 </body>
 </html>

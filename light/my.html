@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11222107">
+<link rel="stylesheet" href="style.css?v=11222146">
 </head>
 <body class="acctpage wide has-bar keepbar">
 <header class="top">
@@ -41,11 +41,6 @@
 <aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html" aria-current="page"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
 <main class="page">
   <section data-panel="active">
-    <div class="qcard" id="qcard">
-      <h2>Були звернення щодо «Сумка шкіряна, коричнева»?</h2>
-      <p>Ви опублікували її вчора.</p>
-      <div class="opts"><button class="opt" type="button" data-sheet="sold" id="qsold">Так, уже продано</button><button class="opt" type="button" data-q="Дякуємо за відповідь">Були, ще продаю</button><button class="opt" type="button" data-q="Дякуємо за відповідь">Не було</button></div>
-    </div>
     <div class="mrow">
       <a class="th" href="product.html?own=1"><img src="assets/jeans-1.jpg" alt=""></a>
       <div class="b"><a class="nm" href="product.html?own=1">Джинси Levi’s 501, W32 L32</a><div class="pr num">900&nbsp;грн</div><div class="st num"><span><i data-lucide="eye"></i>124</span><span><i data-lucide="message-circle"></i>6</span><span><i data-lucide="heart"></i>9</span></div><div class="note">Активне до 12 грудня</div></div>
@@ -122,7 +117,6 @@
       document.querySelectorAll('[data-panel]').forEach(function (p) { p.hidden = p.dataset.panel !== t.dataset.tab; });
     });
   });
-  document.querySelectorAll('[data-q]').forEach(function (b) { b.addEventListener('click', function () { document.getElementById('qcard').hidden = true; toast(b.dataset.q); }); });
   var tab = new URLSearchParams(location.search).get('tab'); if (tab) { var el = document.querySelector('[data-tab="' + tab + '"]'); if (el) el.click(); }
 
   (function () {
@@ -136,12 +130,11 @@
       if (r) { r.remove(); toast('Бронь знято'); }
       else { r = document.createElement('div'); r.className = 'rsv'; r.textContent = 'Заброньовано'; cur.querySelector('.note').before(r); toast('Заброньовано. Покупці бачать позначку'); }
     });
-    document.getElementById('qsold').addEventListener('click', function () { document.getElementById('qcard').hidden = true; });
     var p = new URLSearchParams(location.search).get('sheet'); if (p) sheet(p, true);
   })();
 </script>
 <!-- block2 -->
 <!-- desk -->
-<script src="shop.js?v=11222107"></script>
+<script src="shop.js?v=11222146"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11222107">
+<link rel="stylesheet" href="style.css?v=11222146">
 </head>
 <body class="flowpage aiflow">
 
@@ -202,7 +202,7 @@
       </div>
       <button class="btn primary wide" type="button" id="sharebtn"><i data-lucide="share-2"></i><span id="sharelbl">Поділитися</span></button>
       <button class="btn ghost wide" type="button" id="copylink"><i data-lucide="link"></i><span id="copylbl">Копіювати посилання</span></button>
-      <a class="studio-in" href="studio.html"><span class="vth"><img src="assets/jeans-v.jpg" alt=""><i data-lucide="play"></i></span><span class="t"><b>Відео для TikTok та Reels</b><small>AI зробить за 2 хвилини · перше безкоштовно</small></span><i data-lucide="chevron-right"></i></a>
+      <a class="studio-in" href="studio.html"><span class="vth"><img src="assets/jeans-v.jpg" alt=""><i data-lucide="play"></i></span><span class="t"><b>Відео для TikTok та Reels</b><small>Перше відео безкоштовне</small></span><i data-lucide="chevron-right"></i></a>
       <p class="sharehint" id="sharehint"></p>
     </div>
     <div class="notifybox" id="notifybox">
@@ -261,7 +261,7 @@
   var big = window.matchMedia('(min-width: 900px)'), fwd = false, gsel = 0, addMore = null, vbT = [];   /* лише для комп'ютера */
   var title = $('f-title'), price = $('f-price'), size = $('f-size'), desc = $('f-desc'), grid = document.querySelector('.mgrid');
   if (order[pos] === 'm' || order[pos] === '3' || order[pos] === '5' || q.get('defs') === '0') document.querySelector('#defs button').setAttribute('aria-pressed', 'true');
-  if (q.get('unsure') === '1') { size.value = ''; size.classList.add('need'); size.placeholder = 'Вкажіть самі'; }
+  if (q.get('unsure') === '1') { size.value = ''; size.classList.add('need'); size.placeholder = 'Вкажіть самі'; title.value = 'Джинси Levi’s 501'; $('f-desc').value = $('f-desc').value.replace(/,? розмір W32 L32/, ''); }
 
   function money(v) { var d = v.replace(/\D/g, ''); if (d && +d === 0) return 'Безкоштовно'; return d ? d.replace(/\B(?=(\d{3})+$)/g, ' ') + ' грн' : ''; }
   // відео в оголошенні склеюється з фото: до п'яти кадрів, по три секунди на кадр
@@ -294,7 +294,7 @@
     next.disabled = bad;
     var why = '';                                   /* чому «Далі» неактивна — поруч із кнопкою, а не лише біля поля вище */
     if (bad && id === '1') why = 'Додайте хоча б одне фото';
-    if (bad && id === '2') why = nt ? 'Вкажіть назву' : np ? 'Вкажіть ціну' : ns ? 'Вкажіть розмір' : 'Оберіть, чи є дефекти';
+    if (bad && id === '2') why = nt ? 'Вкажіть назву' : np ? 'Вкажіть ціну' : ns && nd ? 'Вкажіть розмір і позначте, чи є дефекти' : ns ? 'Вкажіть розмір' : 'Оберіть, чи є дефекти';
     $('whynot').textContent = why; $('whynot').hidden = !why;
   }
   function sync() {

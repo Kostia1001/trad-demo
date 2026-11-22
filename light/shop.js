@@ -21,6 +21,13 @@
   function el(html) { var t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstChild; }
   function $(s, r) { return (r || document).querySelector(s); }
   function $$(s, r) { return [].slice.call((r || document).querySelectorAll(s)); }
+  /* комп'ютер (22.11.2026, огляд усіх екранів): пошук — у шапці, тому окрема сторінка пошуку веде в каталог;
+     «Усі категорії», вибір розділу й розмова отримують шапку сайту замість вигляду телефона */
+  if (wide.matches && page === 'search.html') { location.replace('catalog.html' + (q.get('q') ? '?q=' + encodeURIComponent(q.get('q')) : '')); return; }
+  if (wide.matches && (page === 'category.html' || page === 'dialog.html') && !$('header.top')) {
+    document.body.classList.add('wide', 'deskhead');
+    document.body.insertBefore(el('<header class="top"><div class="top-row"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><nav class="desk" aria-label="Меню"><a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a><a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a><a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a><a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a><a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a></nav></div><form class="search" role="search" action="catalog.html"><i data-lucide="search"></i><input type="search" name="q" placeholder="Що шукаєте?" aria-label="Пошук оголошень"><a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a></form></header>'), document.body.firstChild);
+  }
   var holders = [];
   function shut(except) { holders.forEach(function (h) { if (h !== except) { h.classList.remove('open'); var b = $('button', h); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
   function holder(h, hover) {
@@ -109,7 +116,7 @@
     document.addEventListener('click', function () { setTimeout(ctitle, 0); });
     ctitle();
     /* сюди приходять із пункту «Категорії» нижнього меню — меню лишається на місці */
-    if (!$('nav.tabs')) {
+    if (!$('nav.tabs') && !wide.matches) {
       document.body.appendChild(el('<nav class="tabs" aria-label="Головне меню"><a class="tab" href="home.html"><i data-lucide="house"></i>Головна</a><a class="tab" href="favorites.html"><i data-lucide="heart"></i>Обране</a>'
         + '<a class="tab create" href="create-ai.html"><span class="plus"><i data-lucide="tag"></i></span>Створити</a><a class="tab" href="chat.html"><i data-lucide="message-circle"></i><span class="count num">2</span>Чат</a>'
         + '<a class="tab" href="profile.html"><i data-lucide="user"></i>Профіль</a></nav>'));
@@ -644,7 +651,7 @@
     if (pc && !$('.msgr.ph', pc)) {
       var pw = $('.msgr.wa', pc), pb = el('<button class="msgr ph" type="button" aria-label="Показати номер телефону"><i data-lucide="phone"></i></button>');
       if (pw) pw.after(pb); else pc.insertBefore(pb, pc.firstChild);
-      var csh = el('<section class="sheet" id="callsh" role="dialog" aria-modal="true" aria-label="Номер продавця"><div class="sheet-head"><h2>Номер продавця</h2><button class="x" type="button" aria-label="Закрити"><i data-lucide="x"></i></button></div>'
+      var csh = el('<section class="sheet" id="callsh" style="display:none" role="dialog" aria-modal="true" aria-label="Номер продавця"><div class="sheet-head"><h2>Номер продавця</h2><button class="x" type="button" aria-label="Закрити"><i data-lucide="x"></i></button></div>'
         + '<div class="sheet-body callbody"><a class="callnum num" href="tel:+380671234567">+380 67 123 45 67</a><p>Олена · дзвінки з 9:00 до 21:00</p>'
         + '<a class="btn primary wide" href="tel:+380671234567"><i data-lucide="phone"></i>Подзвонити</a>'
         + '<p class="callnote"><i data-lucide="shield-alert"></i>Не переказуйте передоплату й не називайте коди з SMS.</p></div></section>');
@@ -730,13 +737,13 @@
       var rows = $$('[data-panel="active"] .mrow');
       var row = function (re) { return rows.filter(function (r) { var n = $('.nm', r); return n && re.test(n.textContent); })[0]; };
       var jr = row(/Levi/), br = row(/Сумка/);
-      if (jr && !$('.mvid', jr)) jr.appendChild(el('<a class="mvid res" href="studio.html?video=ready&amp;push=0"><i data-lucide="clapperboard"></i><span><b>120 переходів за посиланням з відео</b><small>за 3 дні · 2 з них написали вам</small></span><i data-lucide="chevron-right"></i></a>'));
-      if (br && !$('.mvid', br)) br.appendChild(el('<a class="mvid" href="studio.html?item=bag"><i data-lucide="clapperboard"></i><span><b>Зробити відео для соцмереж</b></span><i data-lucide="chevron-right"></i></a>'));
+      if (jr && !$('.mvid', jr)) jr.appendChild(el('<a class="mvid res" href="studio.html?video=ready&amp;push=0"><i data-lucide="clapperboard"></i><span><b>120 переходів із відео за 3 дні</b><small>2 людини з тих, хто перейшов, написали вам</small></span><i data-lucide="chevron-right"></i></a>'));
+      if (br && !$('.mvid', br)) br.appendChild(el('<a class="mvid" href="studio.html?item=bag"><i data-lucide="clapperboard"></i><span><b>Створити відео для соцмереж</b></span><i data-lucide="chevron-right"></i></a>'));
       if (q.get('video') === 'making') {
         var t = $('#toast'); if (t) { t.textContent = 'AI робить відео. Повідомимо, коли буде готове'; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 3200); }
         setTimeout(function () {   /* відео готове, поки людина в іншому розділі — сповіщення зверху */
           if ($('#sdpush')) return;
-          var pu = el('<a class="sd-push" id="sdpush" href="studio.html?video=ready"><span class="ap"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF6F5B" d="M8 16h34l16 16-16 16H8a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z"/><circle cx="44" cy="32" r="4" fill="#120D18"/><path fill="#1B0A08" d="M12 25h16v5h-5.2v13h-5.6V30H12z"/></svg></span><span><b>Відео готове</b><small>Джинси Levi’s 501 — можна завантажувати</small></span><em>зараз</em></a>');
+          var pu = el('<a class="sd-push" id="sdpush" href="studio.html?video=ready"><span class="ap"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF6F5B" d="M8 16h34l16 16-16 16H8a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z"/><circle cx="44" cy="32" r="4" fill="#120D18"/><path fill="#1B0A08" d="M12 25h16v5h-5.2v13h-5.6V30H12z"/></svg></span><span><b>Відео готове</b><small>Джинси Levi’s 501</small></span><em>зараз</em></a>');
           document.body.appendChild(pu); void pu.offsetWidth; pu.classList.add('on');
           setTimeout(function () { pu.classList.remove('on'); }, 6000);
         }, 9500);
@@ -744,7 +751,7 @@
     }
     if (page === 'notifications.html') {
       var first = $('#list .nrow') || $('.nrow');
-      if (first && !$('#nvid')) first.before(el('<div class="nrow new" id="nvid"><span class="ic"><i data-lucide="clapperboard"></i></span><div class="b"><div class="tt">Відео для соцмереж готове</div><div class="tx">«Джинси Levi’s 501, W32 L32» — можна завантажувати й ділитися.</div><a class="mini" href="studio.html?video=ready&amp;push=0">Відкрити відео</a><div class="tm">щойно</div></div></div>'));
+      if (first && !$('#nvid')) first.before(el('<div class="nrow new" id="nvid"><span class="ic"><i data-lucide="clapperboard"></i></span><div class="b"><div class="tt">Відео готове</div><div class="tx">Джинси Levi’s 501, W32 L32</div><a class="mini" href="studio.html?video=ready&amp;push=0">Відкрити відео</a><div class="tm">щойно</div></div></div>'));
     }
   })();
   icons();
