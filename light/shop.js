@@ -732,7 +732,15 @@
       var jr = row(/Levi/), br = row(/Сумка/);
       if (jr && !$('.mvid', jr)) jr.appendChild(el('<a class="mvid res" href="studio.html?video=ready&amp;push=0"><i data-lucide="clapperboard"></i><span><b>120 переходів за посиланням з відео</b><small>за 3 дні · 2 з них написали вам</small></span><i data-lucide="chevron-right"></i></a>'));
       if (br && !$('.mvid', br)) br.appendChild(el('<a class="mvid" href="studio.html?item=bag"><i data-lucide="clapperboard"></i><span><b>Зробити відео для соцмереж</b></span><i data-lucide="chevron-right"></i></a>'));
-      if (q.get('video') === 'making') { var t = $('#toast'); if (t) { t.textContent = 'AI робить відео. Повідомимо, коли буде готове'; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 3200); } }
+      if (q.get('video') === 'making') {
+        var t = $('#toast'); if (t) { t.textContent = 'AI робить відео. Повідомимо, коли буде готове'; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 3200); }
+        setTimeout(function () {   /* відео готове, поки людина в іншому розділі — сповіщення зверху */
+          if ($('#sdpush')) return;
+          var pu = el('<a class="sd-push" id="sdpush" href="studio.html?video=ready"><span class="ap"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF6F5B" d="M8 16h34l16 16-16 16H8a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z"/><circle cx="44" cy="32" r="4" fill="#120D18"/><path fill="#1B0A08" d="M12 25h16v5h-5.2v13h-5.6V30H12z"/></svg></span><span><b>Відео готове</b><small>Джинси Levi’s 501 — можна завантажувати</small></span><em>зараз</em></a>');
+          document.body.appendChild(pu); void pu.offsetWidth; pu.classList.add('on');
+          setTimeout(function () { pu.classList.remove('on'); }, 6000);
+        }, 9500);
+      }
     }
     if (page === 'notifications.html') {
       var first = $('#list .nrow') || $('.nrow');
