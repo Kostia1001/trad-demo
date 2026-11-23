@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11231346">
+<link rel="stylesheet" href="style.css?v=11231351">
 </head>
 <!-- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026). Стилі — tools/studio.css. -->
 <body class="acctpage wide has-bar keepbar aispage">
@@ -177,7 +177,8 @@
   $('sd-thumb').src = A + it.photos[0]; $('sd-name').textContent = it.name; $('sd-meta').textContent = P + ' · Одеса';
   $('sd-blur').src = A + it.cover;
   $('sd-ovp').textContent = P; $('sd-ovc').textContent = 'Шукайте в TRAD: ' + it.code;
-  var PIC = { orig: A + it.photos[0], clean: A + key + '-clean.jpg', blur: A + key + '-blur.jpg' };
+  /* превʼю — у форматі картки стрічки (4:3), як обкладинку побачить покупець; річ у кадрі цілком */
+  var PIC = { orig: A + (key === 'jeans' ? 'jeans-1.jpg' : key + '-w.jpg'), clean: A + key + '-clean-w.jpg', blur: A + key + '-blur-w.jpg' };
   $('sd-o-orig').src = PIC.orig; $('sd-o-clean').src = PIC.clean; $('sd-o-blur').src = PIC.blur; $('sd-storyth').src = PIC.clean;
   var LINK = 'trad.ua/' + it.code;   /* коротке посилання на оголошення: за ним рахуємо переходи (домен — приклад) */
   $('sd-few').hidden = !it.few;
@@ -323,6 +324,6 @@
   if (q.get('tool') === 'photo' || q.get('tool') === 'texts') sheet('sd-' + q.get('tool'), true);   /* з головної студії: одразу потрібний інструмент */
 })();
 </script>
-<script src="shop.js?v=11231346"></script>
+<script src="shop.js?v=11231351"></script>
 </body>
 </html>
