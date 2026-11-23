@@ -2052,6 +2052,10 @@ details.tk .tk-h { cursor: pointer; }
 @media (max-width: 899px) {
   .chips, .qflt { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent); }
 }
+/* обкладинка головної (23.11.2026): нова картинка без старої картки — лівий край мʼяко переходить у фон шапки */
+@media (min-width: 900px) {
+  body.wide .hero .hart img { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 82%, transparent 99%); mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 82%, transparent 99%); }
+}
 
 /* ---- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026, TRAD Everywhere з ТЗ).
    Сторінка studio.html (писана руками; ?item=bag, ?video=making|ready). Входи: кнопка в «Поділіться оголошенням» на кроці
