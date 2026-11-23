@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11231155">
+<link rel="stylesheet" href="style.css?v=11231219">
 </head>
 <!-- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026). Стилі — tools/studio.css. -->
 <body class="acctpage wide has-bar keepbar aispage">
@@ -32,8 +32,8 @@
   </form>
 </header>
 
-<div class="bar" style="padding-left:6px"><a class="x" href="my.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><div class="bt"><nav class="sd-crumbs" aria-label="Шлях"><a href="my.html">Мої оголошення</a><i data-lucide="chevron-right"></i><span>AI-студія</span></nav><h1>AI-студія</h1></div></div>
-<aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html" aria-current="page"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
+<div class="bar" style="padding-left:6px"><a class="x" href="ai-studio.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><div class="bt"><nav class="sd-crumbs" aria-label="Шлях"><a href="ai-studio.html">AI-студія</a><i data-lucide="chevron-right"></i><span id="sd-crumb">Джинси Levi’s 501</span></nav><h1>AI-студія</h1></div></div>
+<aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
 
 <main class="page sdp" id="sdp" data-state="start">
   <a class="sd-item" href="product.html?own=1"><img id="sd-thumb" src="assets/jeans-1.jpg" alt=""><span class="b"><b id="sd-name">Джинси Levi’s 501, W32 L32</b><small id="sd-meta">900&nbsp;грн · Одеса</small></span><i data-lucide="chevron-right"></i></a>
@@ -60,15 +60,15 @@
       <section class="sd-s sd-making">
         <div class="sd-line"><i id="sd-line"></i></div>
         <h2 class="sd-stt" id="sd-stt" aria-live="polite">Добираємо фото</h2>
-        <p>Зазвичай до 2 хвилин. Можете закрити студію — повідомимо, коли відео буде готове. Воно з’явиться в «Моїх оголошеннях».</p>
-        <a class="btn ghost wide" href="my.html?video=making" id="sd-close">Закрити</a>
+        <p>Зазвичай це займає до 2 хвилин. Можете закрити студію — повідомимо, коли відео з’явиться в розділі «Мої матеріали».</p>
+        <a class="btn ghost wide" href="ai-studio.html?video=making" id="sd-close">Закрити</a>
       </section>
 
       <section class="sd-s sd-fail">
         <h2>Не вдалося створити відео</h2>
         <p>Ваша безкоштовна спроба ще доступна.</p>
         <button class="btn primary wide" type="button" id="sd-retry">Спробувати ще раз</button>
-        <a class="btn ghost wide" href="my.html">Закрити</a>
+        <a class="btn ghost wide" href="ai-studio.html">Закрити</a>
       </section>
 
       <section class="sd-s sd-ready">
@@ -148,9 +148,12 @@
     jeans: { name: 'Джинси Levi’s 501, W32 L32', short: 'Джинси Levi’s 501', price: '900', code: '4821', cover: 'jeans-v.jpg', story: 'jeans-story.jpg',
       photos: ['jeans-1.jpg', 'jeans-2.jpg', 'jeans-3.jpg', 'jeans-4.jpg'], line: 'Вживані, прямого крою, без дефектів', tags: '#levis #джинси #одеса' },
     bag: { name: 'Сумка шкіряна, коричнева', short: 'Сумка шкіряна', price: '1 100', code: '5307', cover: 'bag.jpg', story: 'bag-story.jpg',
-      photos: ['bag.jpg', 'bag-w.jpg'], line: 'Вживана, натуральна шкіра', tags: '#сумка #шкіра #одеса', few: true }
+      photos: ['bag.jpg', 'bag-w.jpg'], line: 'Вживана, натуральна шкіра', tags: '#сумка #шкіра #одеса', few: true },
+    hoodie: { name: 'Худі сіре, розмір L', short: 'Худі сіре', price: '650', code: '6142', cover: 'hoodie.jpg', story: 'hoodie.jpg',
+      photos: ['hoodie.jpg', 'hoodie-w.jpg'], line: 'Вживане, розмір L', tags: '#худі #одеса', few: true }
   };
-  var it = ITEMS[q.get('item')] || ITEMS.jeans, A = 'assets/', P = it.price.replace(' ', NB) + NB + 'грн';
+  var key = ITEMS[q.get('item')] ? q.get('item') : 'jeans', it = ITEMS[key], A = 'assets/', P = it.price.replace(' ', NB) + NB + 'грн';
+  $('sd-crumb').textContent = it.short; $('sd-close').href = 'ai-studio.html?video=making&item=' + key;   /* студія — окремий розділ: назад і «Закрити» ведуть у неї */
 
   $('sd-thumb').src = A + it.photos[0]; $('sd-name').textContent = it.name; $('sd-meta').textContent = P + ' · Одеса';
   $('sd-blur').src = A + it.cover;
@@ -251,8 +254,9 @@
   $('sd-retry').addEventListener('click', function () { url('making'); set('making'); });
   var v = q.get('video');
   set(v === 'making' || v === 'ready' || v === 'fail' ? v : 'start');
+  if (q.get('tool') === 'photo' || q.get('tool') === 'texts') sheet('sd-' + q.get('tool'), true);   /* з головної студії: одразу потрібний інструмент */
 })();
 </script>
-<script src="shop.js?v=11231155"></script>
+<script src="shop.js?v=11231219"></script>
 </body>
 </html>

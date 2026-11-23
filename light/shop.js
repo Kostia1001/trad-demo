@@ -54,6 +54,7 @@
       var me = el('<div class="pmenu" id="me"><button class="mebtn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Меню профілю"><img src="assets/avatar.jpg" alt="">Олена<i data-lucide="chevron-down"></i></button>'
         + '<div class="drop" role="menu"><a class="who" href="profile.html"><img src="assets/avatar.jpg" alt=""><span><b>Олена</b><small>+380 67 123 45 67 · Одеса</small></span></a>'
         + '<a href="my.html"><i data-lucide="layout-list"></i>Мої оголошення<small>3 активні</small></a>'
+        + '<a href="ai-studio.html"><i data-lucide="sparkles"></i>AI-студія</a>'
         + '<a href="favorites.html"><i data-lucide="heart"></i>Обране<small>4</small></a>'
         + '<a href="chat.html"><i data-lucide="message-circle"></i>Чат<small>2 нових</small></a><hr>'
         + '<a href="profile.html"><i data-lucide="settings"></i>Профіль і налаштування</a>'
@@ -732,27 +733,22 @@
     if (q.get('tickets') === '1') tickets('Не можу увійти');
   }
   })();
-  /* ---- AI-студія (22 листопада 2026): входи з «Моїх оголошень» і сповіщення «Відео готове». Сторінка — studio.html, стилі — tools/studio.css ---- */
+  /* ---- AI-студія — окремий розділ кабінету (22–23 листопада 2026): головна ai-studio.html, сторінка оголошення studio.html,
+          стилі — tools/studio.css. Входи: меню кабінету й аватара, «Профіль» на телефоні, «⋮ → Відкрити в AI-студії», сповіщення ---- */
   (function () {
-    if (page === 'my.html') {
-      var rows = $$('[data-panel="active"] .mrow');
-      var row = function (re) { return rows.filter(function (r) { var n = $('.nm', r); return n && re.test(n.textContent); })[0]; };
-      var jr = row(/Levi/), br = row(/Сумка/);
-      if (jr && !$('.mvid', jr)) jr.appendChild(el('<a class="mvid res" href="studio.html?video=ready&amp;push=0"><i data-lucide="clapperboard"></i><span><b>120 переходів із відео за 3 дні</b><small>2 людини з тих, хто перейшов, написали вам</small></span><i data-lucide="chevron-right"></i></a>'));
-      if (br && !$('.mvid', br)) br.appendChild(el('<a class="mvid" href="studio.html?item=bag"><i data-lucide="clapperboard"></i><span><b>Створити відео для соцмереж</b></span><i data-lucide="chevron-right"></i></a>'));
-      if (q.get('video') === 'making') {
-        var t = $('#toast'); if (t) { t.textContent = 'AI робить відео. Повідомимо, коли буде готове'; t.classList.add('on'); setTimeout(function () { t.classList.remove('on'); }, 3200); }
-        setTimeout(function () {   /* відео готове, поки людина в іншому розділі — сповіщення зверху */
-          if ($('#sdpush')) return;
-          var pu = el('<a class="sd-push" id="sdpush" href="studio.html?video=ready"><span class="ap"><svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF6F5B" d="M8 16h34l16 16-16 16H8a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z"/><circle cx="44" cy="32" r="4" fill="#120D18"/><path fill="#1B0A08" d="M12 25h16v5h-5.2v13h-5.6V30H12z"/></svg></span><span><b>Відео готове</b><small>Джинси Levi’s 501</small></span><em>зараз</em></a>');
-          document.body.appendChild(pu); void pu.offsetWidth; pu.classList.add('on');
-          setTimeout(function () { pu.classList.remove('on'); }, 6000);
-        }, 9500);
-      }
+    var inStudio = page === 'ai-studio.html' || page === 'studio.html';
+    $$('aside.acct nav').forEach(function (nav) {
+      var my = $('a[href="my.html"]', nav);
+      if (my && !$('a[href="ai-studio.html"]', nav)) my.after(el('<a href="ai-studio.html"><i data-lucide="sparkles"></i>AI-студія</a>'));
+      if (inStudio) $$('a', nav).forEach(function (x) { if (x.getAttribute('href') === 'ai-studio.html') x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current'); });
+    });
+    if (page === 'profile.html') {
+      var mr = $('main .group a[href="my.html"]');
+      if (mr && !$('#aiprof')) mr.after(el('<a class="lrow" id="aiprof" href="ai-studio.html"><i data-lucide="sparkles"></i><span class="t">AI-студія</span><i data-lucide="chevron-right"></i></a>'));
     }
     if (page === 'notifications.html') {
       var first = $('#list .nrow') || $('.nrow');
-      if (first && !$('#nvid')) first.before(el('<div class="nrow new" id="nvid"><span class="ic"><i data-lucide="clapperboard"></i></span><div class="b"><div class="tt">Відео готове</div><div class="tx">Джинси Levi’s 501, W32 L32</div><a class="mini" href="studio.html?video=ready&amp;push=0">Відкрити відео</a><div class="tm">щойно</div></div></div>'));
+      if (first && !$('#nvid')) first.before(el('<div class="nrow new" id="nvid"><span class="ic"><i data-lucide="clapperboard"></i></span><div class="b"><div class="tt">Відео готове</div><div class="tx">Джинси Levi’s 501, W32 L32</div><a class="mini" href="studio.html?video=ready&amp;push=0">Переглянути</a><div class="tm">щойно</div></div></div>'));
     }
   })();
   /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23 листопада 2026). Стилі — tools/trust.css,
@@ -924,11 +920,13 @@
       if (acts && !$('#prrow')) {
         var pr = el('<a class="lrow" id="prrow" href="promote.html?item=jeans"><i data-lucide="arrow-up"></i><span class="t">Підняти за 39 грн</span></a>');
         acts.insertBefore(pr, acts.firstChild);
+        var ai = el('<a class="lrow" id="airow" href="studio.html?item=jeans"><i data-lucide="sparkles"></i><span class="t">Відкрити в AI-студії</span></a>');
+        pr.after(ai);
         $$('.mrow .more').forEach(function (b) {
           b.addEventListener('click', function () {
             var r = b.closest('.mrow'), act = !!r.closest('[data-panel="active"]'), key = KEY(r);
-            pr.hidden = !act || !key; pr.style.display = pr.hidden ? 'none' : '';
-            if (key) pr.setAttribute('href', 'promote.html?item=' + key);
+            pr.hidden = ai.hidden = !act || !key; pr.style.display = ai.style.display = pr.hidden ? 'none' : '';
+            if (key) { pr.setAttribute('href', 'promote.html?item=' + key); ai.setAttribute('href', 'studio.html?item=' + key); }
           }, true);
         });
       }
