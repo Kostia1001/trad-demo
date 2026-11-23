@@ -31,27 +31,30 @@
   }
   /* ---- Обкладинка «на чистому фоні» з AI-студії (23.11.2026). Стан — у sessionStorage лише для показу (?cover=jeans додає).
           Фото міняємо до того, як сторінку дооформлять: картки, рядки «Моїх оголошень», перший кадр оголошення ---- */
-  var CLEAN = { jeans: ['jeans-1.jpg', 'jeans-clean.jpg', 'jeans-clean-w.jpg'], bag: ['bag.jpg', 'bag-clean.jpg', 'bag-clean-w.jpg'], hoodie: ['hoodie.jpg', 'hoodie-clean.jpg', 'hoodie-clean-w.jpg'] };
+  var CLEAN = { jeans: 'jeans-1.jpg', bag: 'bag.jpg', hoodie: 'hoodie.jpg' };   /* оригінал обкладинки; варіанти — <річ>-clean|blur(-w).jpg */
+  var CVTAG = { clean: 'Фон прибрано', blur: 'Фон розмито' };
   var covers = (function () {
-    var a = []; try { a = JSON.parse(sessionStorage.getItem('trad-covers') || '[]'); } catch (e) { a = []; }
-    var c = q.get('cover'); if (CLEAN[c] && a.indexOf(c) < 0) a.push(c);
-    var save = function () { try { sessionStorage.setItem('trad-covers', JSON.stringify(a)); } catch (e) {} };
+    var c = {}; try { c = JSON.parse(sessionStorage.getItem('trad-covers') || '{}'); } catch (e) { c = {}; }
+    if (Array.isArray(c)) { var o = {}; c.forEach(function (k) { o[k] = 'clean'; }); c = o; }
+    var qc = (q.get('cover') || '').split('-');   /* ?cover=jeans або ?cover=jeans-blur */
+    if (CLEAN[qc[0]]) c[qc[0]] = qc[1] === 'blur' ? 'blur' : 'clean';
+    var save = function () { try { sessionStorage.setItem('trad-covers', JSON.stringify(c)); } catch (e) {} };
     save();
-    return { has: function (k) { return a.indexOf(k) >= 0; }, list: function () { return a.slice(); },
-      remove: function (k) { a = a.filter(function (x) { return x !== k; }); save(); } };
+    return { get: function (k) { return c[k]; }, has: function (k) { return !!c[k]; }, list: function () { return Object.keys(c); },
+      remove: function (k) { delete c[k]; save(); } };
   })();
   var isSrc = function (im, f) { var s0 = im.getAttribute('src') || ''; return s0.slice(-f.length - 1) === '/' + f; };
   covers.list().forEach(function (k) {
-    var c = CLEAN[k];
-    $$('.card .frame img').forEach(function (im) { if (isSrc(im, c[0])) { im.src = 'assets/' + c[2]; im.dataset.nowide = '1'; } });
-    $$('.mrow .th img').forEach(function (im) { if (isSrc(im, c[0])) im.src = 'assets/' + c[1]; });
+    var st = covers.get(k);
+    $$('.card .frame img').forEach(function (im) { if (isSrc(im, CLEAN[k])) { im.src = 'assets/' + k + '-' + st + '-w.jpg'; im.dataset.nowide = '1'; } });
+    $$('.mrow .th img').forEach(function (im) { if (isSrc(im, CLEAN[k])) im.src = 'assets/' + k + '-' + st + '.jpg'; });
   });
   if (page === 'product.html' && covers.has('jeans')) {
     var cg0 = $('#gallery .slide');
     if (cg0 && !$('.cv-chip')) {
       cg0.after(el('<div class="slide"><img src="assets/jeans-1.jpg" alt="Джинси, пояс спереду — фото продавця"></div>'));
-      $('img', cg0).src = 'assets/jeans-clean.jpg';
-      cg0.appendChild(el('<span class="cv-chip">Фон прибрано</span>'));
+      $('img', cg0).src = 'assets/jeans-' + covers.get('jeans') + '.jpg';
+      cg0.appendChild(el('<span class="cv-chip">' + CVTAG[covers.get('jeans')] + '</span>'));
     }
   }
   var holders = [];
@@ -770,7 +773,13 @@
     if (page === 'ai-studio.html') {
       var NMC = { jeans: 'Джинси Levi’s 501', bag: 'Сумка шкіряна', hoodie: 'Худі сіре' }, mn = $('#ah-mine');
       covers.list().forEach(function (k) {
-        if (mn && !$('#ahc-' + k)) mn.appendChild(el('<a class="ah-row" id="ahc-' + k + '" href="studio.html?item=' + k + '&amp;tool=photo"><span class="ah-vth ah-ph"><img src="assets/' + CLEAN[k][1] + '" alt=""></span><span class="ah-t"><b>Фото · ' + NMC[k] + '</b><small>Обкладинка оголошення</small></span><i class="ah-chev" data-lucide="chevron-right"></i></a>'));
+        if (mn && !$('#ahc-' + k)) mn.appendChild(el('<a class="ah-row" id="ahc-' + k + '" href="studio.html?item=' + k + '&amp;tool=photo"><span class="ah-vth ah-ph"><img src="assets/' + k + '-' + covers.get(k) + '.jpg" alt=""></span><span class="ah-t"><b>Фото · ' + NMC[k] + '</b><small>Обкладинка оголошення</small></span><i class="ah-chev" data-lucide="chevron-right"></i></a>'));
+      });
+      var SCN = { studio: 'Студія', interior: 'Кімната', street: 'Вулиця' }, scs = {};
+      try { scs = JSON.parse(sessionStorage.getItem('trad-scenes') || '{}'); } catch (e) { scs = {}; }
+      Object.keys(scs).forEach(function (k) {
+        var v = String(scs[k]), sc = v.split('-')[0];
+        if (mn && NMC[k] && !$('#ahs-' + k)) mn.appendChild(el('<a class="ah-row" id="ahs-' + k + '" href="studio.html?item=' + k + '&amp;tool=photo"><span class="ah-vth ah-sq"><img src="assets/' + k + '-sc-' + v + '.jpg" alt=""></span><span class="ah-t"><b>Фото для соцмереж · ' + NMC[k] + '</b><small>' + (SCN[sc] || '') + ' · Створено AI</small></span><i class="ah-chev" data-lucide="chevron-right"></i></a>'));
       });
     }
     if (page === 'profile.html') {

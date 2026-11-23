@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11231252">
+<link rel="stylesheet" href="style.css?v=11231346">
 </head>
 <!-- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026). Стилі — tools/studio.css. -->
 <body class="acctpage wide has-bar keepbar aispage">
@@ -89,7 +89,7 @@
       </section>
 
       <div class="sd-more">
-        <button class="sd-row" type="button" data-sheet="sd-photo"><img class="th" id="sd-storyth" src="assets/jeans-clean.jpg" alt=""><span><b>Фото на чистому фоні</b><small id="sd-cvst">Для обкладинки або соцмереж</small></span><i data-lucide="chevron-right"></i></button>
+        <button class="sd-row" type="button" data-sheet="sd-photo"><img class="th" id="sd-storyth" src="assets/jeans-clean.jpg" alt=""><span><b>Фото</b><small id="sd-cvst">Обкладинка або фото для соцмереж</small></span><i data-lucide="chevron-right"></i></button>
         <button class="sd-row" type="button" data-sheet="sd-texts"><span class="ic"><i data-lucide="type"></i></span><span><b>Тексти для соцмереж</b></span><i data-lucide="chevron-right"></i></button>
       </div>
     </div>
@@ -98,19 +98,30 @@
 
 <div class="toast" id="toast" role="status"></div>
 <div class="scrim"></div>
-<section class="sheet" id="sd-photo" role="dialog" aria-modal="true" aria-label="Фото на чистому фоні">
-  <div class="sheet-head"><h2>Фото на чистому фоні</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+<section class="sheet" id="sd-photo" role="dialog" aria-modal="true" aria-label="Фото товару">
+  <div class="sheet-head"><h2>Фото товару</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
   <div class="sheet-body sd-sh">
-    <div class="sd-ba"><figure><img id="sd-bef" src="assets/jeans-1.jpg" alt="Ваше фото"><figcaption>Ваше фото</figcaption></figure><figure><img id="sd-aft" src="assets/jeans-clean.jpg" alt="Фото без фону"><figcaption>Фото без фону</figcaption></figure></div>
-    <p class="sd-note">AI прибрав лише фон. Колір, стан і деталі речі збережено.</p>
-    <div class="sd-cv" id="sd-cvoff">
-      <button class="btn primary wide" type="button" id="sd-cover"><i data-lucide="image"></i>Зробити обкладинкою</button>
-      <button class="btn ghost wide" type="button" data-close data-toast="Фото збережено в галерею"><i data-lucide="download"></i>Зберегти на телефон</button>
+    <div class="sd-nets sd-mode" role="tablist" aria-label="Для чого фото"><button type="button" role="tab" data-pm="cover" aria-selected="true">Обкладинка</button><button type="button" role="tab" data-pm="social" aria-selected="false">Для соцмереж</button></div>
+    <div class="sd-pm" data-pm="cover">
+      <div class="sd-pv"><img id="sd-pvimg" src="assets/jeans-clean.jpg" alt="Обкладинка"></div>
+      <div class="sd-opts" role="radiogroup" aria-label="Вигляд обкладинки">
+        <button type="button" role="radio" data-cv="orig" aria-checked="false"><img id="sd-o-orig" src="assets/jeans-1.jpg" alt=""><span>Як є</span></button>
+        <button type="button" role="radio" data-cv="clean" aria-checked="true"><img id="sd-o-clean" src="assets/jeans-clean.jpg" alt=""><span>Чистий фон</span></button>
+        <button type="button" role="radio" data-cv="blur" aria-checked="false"><img id="sd-o-blur" src="assets/jeans-blur.jpg" alt=""><span>Розмитий фон</span></button>
+      </div>
+      <p class="sd-note" id="sd-cvnote">AI прибрав лише фон.</p>
+      <div class="sd-cv" id="sd-cvoff"><button class="btn primary wide" type="button" id="sd-cover"><i data-lucide="image"></i>Зробити обкладинкою</button></div>
+      <div class="sd-cv" id="sd-cvon" hidden>
+        <p class="sd-cvok"><i data-lucide="circle-check"></i>Обкладинку змінено. Ваше фото — наступне в оголошенні.</p>
+        <a class="btn primary wide" id="sd-cvview" href="product.html?own=1">Переглянути оголошення</a>
+        <button class="btn ghost wide" type="button" id="sd-cvback">Повернути попередню обкладинку</button>
+      </div>
     </div>
-    <div class="sd-cv" id="sd-cvon" hidden>
-      <p class="sd-cvok"><i data-lucide="circle-check"></i>Обкладинку змінено. Ваше фото — наступне в оголошенні.</p>
-      <a class="btn primary wide" id="sd-cvview" href="product.html?own=1">Переглянути оголошення</a>
-      <button class="btn ghost wide" type="button" id="sd-cvback">Повернути попередню обкладинку</button>
+    <div class="sd-pm" data-pm="social" hidden>
+      <div class="sd-pv sq" id="sd-scpv"><img id="sd-scimg" src="assets/jeans-sc-studio-1.jpg" alt="Фото для соцмереж"><span class="sd-aip">Створено AI</span><span class="sd-scload" aria-hidden="true"></span></div>
+      <div class="sd-scn" role="radiogroup" aria-label="Сцена"><button type="button" role="radio" data-sc="studio" aria-checked="true">Студія</button><button type="button" role="radio" data-sc="interior" aria-checked="false">Кімната</button><button type="button" role="radio" data-sc="street" aria-checked="false">Вулиця</button></div>
+      <p class="sd-note">AI намалював лише фон. Річ — з вашого фото. Це фото лише для соцмереж.</p>
+      <div class="sd-cv"><button class="btn primary wide" type="button" id="sd-scsave"><i data-lucide="download"></i>Зберегти на телефон</button><button class="btn ghost wide" type="button" id="sd-scmore"><i data-lucide="refresh-cw"></i>Інший фон</button></div>
     </div>
   </div>
 </section>
@@ -166,7 +177,8 @@
   $('sd-thumb').src = A + it.photos[0]; $('sd-name').textContent = it.name; $('sd-meta').textContent = P + ' · Одеса';
   $('sd-blur').src = A + it.cover;
   $('sd-ovp').textContent = P; $('sd-ovc').textContent = 'Шукайте в TRAD: ' + it.code;
-  $('sd-bef').src = A + it.photos[0]; $('sd-aft').src = $('sd-storyth').src = A + it.clean;
+  var PIC = { orig: A + it.photos[0], clean: A + key + '-clean.jpg', blur: A + key + '-blur.jpg' };
+  $('sd-o-orig').src = PIC.orig; $('sd-o-clean').src = PIC.clean; $('sd-o-blur').src = PIC.blur; $('sd-storyth').src = PIC.clean;
   var LINK = 'trad.ua/' + it.code;   /* коротке посилання на оголошення: за ним рахуємо переходи (домен — приклад) */
   $('sd-few').hidden = !it.few;
   var pics = it.photos.slice(); while (pics.length < 4) pics.push(it.photos[pics.length % it.photos.length]);
@@ -263,20 +275,54 @@
   $('sd-retry').addEventListener('click', function () { url('making'); set('making'); });
   var v = q.get('video');
   set(v === 'making' || v === 'ready' || v === 'fail' ? v : 'start');
-  function covers() { try { return JSON.parse(sessionStorage.getItem('trad-covers') || '[]'); } catch (e) { return []; } }
-  function setCovers(a) { try { sessionStorage.setItem('trad-covers', JSON.stringify(a)); } catch (e) {} }
-  function coverUI() {
-    var on = covers().indexOf(key) >= 0;
-    $('sd-cvoff').hidden = on; $('sd-cvon').hidden = !on;
-    $('sd-cvst').textContent = on ? 'Обкладинка оголошення' : 'Для обкладинки або соцмереж';
+  // обкладинка: стиль у sessionStorage {річ: 'clean'|'blur'} — той самий ключ читає shop.js на інших сторінках
+  function covers() { try { var c = JSON.parse(sessionStorage.getItem('trad-covers') || '{}'); if (Array.isArray(c)) { var o = {}; c.forEach(function (k) { o[k] = 'clean'; }); c = o; } return c; } catch (e) { return {}; } }
+  function setCovers(c) { try { sessionStorage.setItem('trad-covers', JSON.stringify(c)); } catch (e) {} }
+  var TAG = { clean: 'Фон прибрано', blur: 'Фон розмито' }, NOTE = { orig: '', clean: 'AI прибрав лише фон.', blur: 'AI розмив лише фон.' };
+  var pick = 'clean';
+  function choose(v) {
+    pick = v;
+    [].forEach.call(document.querySelectorAll('[data-cv]'), function (b) { b.setAttribute('aria-checked', String(b.dataset.cv === v)); });
+    $('sd-pvimg').src = PIC[v]; $('sd-cvnote').textContent = NOTE[v]; $('sd-cvnote').hidden = !NOTE[v];   /* вибраний варіант видно під превʼю — мітку на превʼю не дублюємо */
+    var cur = covers()[key] || 'orig'; $('sd-cover').disabled = v === cur;
   }
+  function coverUI() {
+    var cur = covers()[key];
+    $('sd-cvoff').hidden = !!cur; $('sd-cvon').hidden = !cur;
+    $('sd-cvst').textContent = cur ? 'Обкладинка оголошення' : 'Обкладинка або фото для соцмереж';
+    $('sd-storyth').src = cur ? PIC[cur] : PIC.clean;
+    choose(cur || (pick === 'orig' ? 'clean' : pick));
+  }
+  [].forEach.call(document.querySelectorAll('[data-cv]'), function (b) { b.addEventListener('click', function () { choose(b.dataset.cv); }); });
   $('sd-cvview').href = key === 'jeans' ? 'product.html?own=1' : 'my.html';
-  $('sd-cover').addEventListener('click', function () { var a = covers(); if (a.indexOf(key) < 0) a.push(key); setCovers(a); coverUI(); });
-  $('sd-cvback').addEventListener('click', function () { setCovers(covers().filter(function (x) { return x !== key; })); coverUI(); toast('Попередню обкладинку відновлено'); });
+  $('sd-cover').addEventListener('click', function () { if (pick === 'orig') return; var c = covers(); c[key] = pick; setCovers(c); coverUI(); });
+  $('sd-cvback').addEventListener('click', function () { var c = covers(); delete c[key]; setCovers(c); coverUI(); toast('Попередню обкладинку відновлено'); });
   coverUI();
+  // для соцмереж: сцену малює AI, річ — з фото продавця; «Ще варіант» — інший кадр тієї ж сцени
+  var scene = 'studio', variant = 1;
+  function scenePic() { $('sd-scimg').src = A + key + '-sc-' + scene + '-' + variant + '.jpg'; }
+  [].forEach.call(document.querySelectorAll('[data-sc]'), function (b) {
+    b.addEventListener('click', function () { scene = b.dataset.sc; variant = 1; [].forEach.call(document.querySelectorAll('[data-sc]'), function (x) { x.setAttribute('aria-checked', String(x === b)); }); scenePic(); });
+  });
+  $('sd-scmore').addEventListener('click', function () {
+    $('sd-scpv').classList.add('busy'); $('sd-scmore').disabled = true;
+    setTimeout(function () { variant = variant === 1 ? 2 : 1; scenePic(); $('sd-scpv').classList.remove('busy'); $('sd-scmore').disabled = false; }, RM ? 200 : 1100);   /* для показу: AI малює новий фон ~1 с */
+  });
+  $('sd-scsave').addEventListener('click', function () {
+    try { var m = JSON.parse(sessionStorage.getItem('trad-scenes') || '{}'); m[key] = scene + '-' + variant; sessionStorage.setItem('trad-scenes', JSON.stringify(m)); } catch (e) {}
+    toast('Фото збережено в галерею');
+  });
+  [].forEach.call(document.querySelectorAll('[data-pm]'), function (b) {
+    if (b.tagName !== 'BUTTON') return;
+    b.addEventListener('click', function () {
+      [].forEach.call(document.querySelectorAll('button[data-pm]'), function (x) { x.setAttribute('aria-selected', String(x === b)); });
+      [].forEach.call(document.querySelectorAll('.sd-pm'), function (x) { x.hidden = x.dataset.pm !== b.dataset.pm; });
+    });
+  });
+  scenePic();
   if (q.get('tool') === 'photo' || q.get('tool') === 'texts') sheet('sd-' + q.get('tool'), true);   /* з головної студії: одразу потрібний інструмент */
 })();
 </script>
-<script src="shop.js?v=11231252"></script>
+<script src="shop.js?v=11231346"></script>
 </body>
 </html>

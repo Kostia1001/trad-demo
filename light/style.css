@@ -2305,6 +2305,30 @@ details.tk .tk-h { cursor: pointer; }
 .ah-ph img { object-fit: contain; background: #F1EEE7; }
 @media (min-width: 900px) { body.wide .slide .cv-chip { top: 16px; left: 16px; } }
 
+/* ---- «Фото»: обкладинка (Як є / Чистий фон / Розмитий фон) і сцени для соцмереж (23.11.2026) ---- */
+.sd-mode { margin-bottom: 12px; }
+.sd-pm[hidden] { display: none; }
+.sd-pv { position: relative; overflow: hidden; border-radius: 18px; background: var(--s1); aspect-ratio: 3 / 2; }
+.sd-pv.sq { aspect-ratio: 1 / 1; max-height: 46vh; margin: 0 auto; }
+.sd-pv img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sd-pvtag { position: absolute; left: 10px; top: 10px; height: 26px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: rgb(23 18 28 / 0.62); color: #fff; font-size: 13px; font-weight: 600; }
+.sd-pvtag[hidden] { display: none; }
+.sd-pv .sd-aip { display: block; left: 10px; top: 10px; }
+.sd-scload { position: absolute; inset: 0; display: none; place-items: center; background: rgb(247 244 240 / 0.55); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.sd-scload::after { content: ""; width: 28px; height: 28px; border-radius: 50%; border: 3px solid rgb(32 27 36 / 0.2); border-top-color: var(--hot); animation: ah-sp 0.8s linear infinite; }
+.sd-pv.busy .sd-scload { display: grid; }
+.sd-opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+.sd-opts button { display: grid; gap: 6px; padding: 6px; border-radius: 14px; background: var(--card, #FFFEFC); box-shadow: inset 0 0 0 1.5px var(--line); font-size: 13px; font-weight: 600; text-align: center; transition: box-shadow 0.2s; }
+.sd-opts img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; }
+.sd-opts button[aria-checked="true"] { box-shadow: inset 0 0 0 2px var(--hot-ink); color: oklch(0.46 0.18 30); }
+.sd-scn { display: flex; gap: 8px; margin-top: 10px; }
+.sd-scn button { flex: 1; height: 40px; border-radius: 999px; background: var(--s1); font-size: 14px; font-weight: 600; transition: background 0.2s, box-shadow 0.2s; }
+.sd-scn button[aria-checked="true"] { background: oklch(0.93 0.05 30); color: oklch(0.46 0.18 30); box-shadow: inset 0 0 0 1.5px var(--hot-ink); }
+.sd-cv .btn[disabled] { opacity: 0.45; pointer-events: none; }
+.ah-sq { width: 56px; height: 56px; }
+.ah-sq img { object-fit: cover; }
+@media (prefers-reduced-motion: reduce) { .sd-scload::after { animation-duration: 2.4s; } }
+
 /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23.11.2026). Розмітку додає останній блок shop.js;
         сторінки promote.html і verify.html писані руками. Префікси: tr- (відгуки), pr- (підняття), vf- (перевірка особи) ---- */
 
