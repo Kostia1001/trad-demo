@@ -864,7 +864,7 @@
         msgs.appendChild(reqCard('jeans-1.jpg', 'Олена просить підтвердити покупку джинсів', 'Підтвердити покупку', 'Покупки не було', 'Покупку підтверджено', 'Ви відповіли, що покупки не було', function () { openS('trrate'); }));
         setTimeout(function () { window.scrollTo(0, document.body.scrollHeight); }, 50);
       } else if (item && !$('#trslot')) {
-        item.after(el('<div class="tr-slot" id="trslot"><button class="btn" type="button" id="trbuy"><i data-lucide="circle-check"></i>Підтвердити покупку</button>'
+        item.after(el('<div class="tr-slot" id="trslot"><button class="btn" type="button" id="trbuy"><i data-lucide="circle-check"></i>Позначити як куплене</button>'
           + '<div class="tr-wait" id="trwait" hidden><i data-lucide="clock"></i>Очікуємо підтвердження від Олени</div>'
           + '<button class="btn primary" type="button" id="trleave" hidden><i data-lucide="star"></i>Залишити відгук</button></div>'));
         $('#trbuy').addEventListener('click', function () {
@@ -949,11 +949,11 @@
     if (page === 'notifications.html') {
       var lst = $('#list');
       if (lst && !$('#nbuy')) {
-        var nbuy = el('<div class="nrow new" id="nbuy"><span class="ic"><i data-lucide="circle-check"></i></span><div class="b"><div class="tt">Олена просить підтвердити покупку</div><div class="tx">Джинси Levi’s 501, W32 L32. Після підтвердження можна залишити відгук.</div><a class="mini" href="dialog.html?sold=1">Підтвердити покупку</a><div class="tm">щойно</div></div></div>');
+        var nbuy = el('<div class="nrow new" id="nbuy"><span class="ic"><i data-lucide="circle-check"></i></span><div class="b"><div class="tt">Олена просить підтвердити покупку</div><div class="tx">Джинси Levi’s 501, W32 L32. Після підтвердження можна залишити відгук.</div><a class="mini hot" href="dialog.html?sold=1">Підтвердити покупку</a><div class="tm">щойно</div></div></div>');
         lst.insertBefore(nbuy, lst.firstChild);
         nbuy.after(el('<div class="nrow new" id="nconf"><span class="ic"><i data-lucide="handshake"></i></span><div class="b"><div class="tt">Максим просить підтвердити продаж</div><div class="tx">Сумка шкіряна, коричнева</div><a class="mini" href="dialog.html?as=seller&amp;confirm=1">Відкрити розмову</a><div class="tm">13:10</div></div></div>'));
         var exp = $$('.nrow', lst).filter(function (r) { return /завершується/.test(r.textContent); })[0];
-        var nup = el('<div class="nrow" id="nup"><span class="ic"><i data-lucide="arrow-up"></i></span><div class="b"><div class="tt">Підніміть оголошення про джинси</div><div class="tx">Оголошення стане першим у категорії «Жіночий одяг» за сортуванням «Спочатку нові».</div><a class="mini hot" href="promote.html?item=jeans">Підняти за 39 грн</a><div class="tm">вчора</div></div></div>');
+        var nup = el('<div class="nrow" id="nup"><span class="ic"><i data-lucide="arrow-up"></i></span><div class="b"><div class="tt">Підніміть оголошення про джинси</div><div class="tx">Оголошення стане першим у категорії «Жіночий одяг» за сортуванням «Спочатку нові».</div><a class="mini" href="promote.html?item=jeans">Підняти за 39 грн</a><div class="tm">вчора</div></div></div>');
         if (exp) exp.before(nup); else lst.appendChild(nup);
       }
     }
@@ -1005,6 +1005,19 @@
               { duration: me ? 900 : 700, delay: me ? 0 : 60, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
           });
         }, 900);
+      }
+    }
+  })();
+  /* ---- огляд 23.11 (2): активний розділ у шапці; «Поновити» — вторинна дія; «Написати в підтримку» вгорі «Допомоги» ---- */
+  (function () {
+    var cur = { 'favorites.html': 'favorites.html', 'chat.html': 'chat.html', 'notifications.html': 'notifications.html' }[page];
+    if (cur) $$('.desk .icon-btn[href="' + cur + '"]').forEach(function (a) { a.setAttribute('aria-current', 'page'); });
+    if (page === 'notifications.html') $$('#list .mini.hot').forEach(function (b) { if (/Поновити/.test(b.textContent)) b.classList.remove('hot'); });
+    if (page === 'help.html') {
+      var hm = $('main.page.doc'), sup = $('#support');
+      if (hm && sup && !$('#helptop')) {
+        hm.insertBefore(el('<a class="helplink" id="helptop" href="#support"><i data-lucide="message-circle"></i>Написати в підтримку</a>'), hm.firstChild);
+        $('#helptop').addEventListener('click', function (e) { e.preventDefault(); sup.scrollIntoView({ block: 'center', behavior: 'smooth' }); });
       }
     }
   })();
