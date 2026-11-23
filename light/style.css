@@ -2246,6 +2246,159 @@ details.tk .tk-h { cursor: pointer; }
   .sd-push.on { opacity: 1; transform: none; }
 }
 
+/* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23.11.2026). Розмітку додає останній блок shop.js;
+        сторінки promote.html і verify.html писані руками. Префікси: tr- (відгуки), pr- (підняття), vf- (перевірка особи) ---- */
+
+/* значок перевіреної особи (замість «Телефон підтверджено») */
+.tr-vf { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 600; color: var(--text); }
+.tr-vf svg { width: 16px; height: 16px; color: var(--hot-ink); }
+.tr-vchip { display: inline-flex; align-items: center; gap: 5px; height: 28px; margin-top: 6px; padding: 0 11px; border-radius: 999px; background: oklch(0.93 0.05 30); color: oklch(0.46 0.18 30); font-size: 13px; font-weight: 600; }
+.tr-vchip svg { width: 15px; height: 15px; }
+
+/* зірки в рядку */
+.tr-st { display: inline-flex; gap: 1px; vertical-align: -2px; }
+.tr-st svg { width: 14px; height: 14px; color: var(--hot); fill: var(--hot); }
+.tr-st svg.st-no { color: var(--s2); fill: var(--s2); }
+.tr-st .st-part { position: relative; display: inline-flex; }
+.tr-st .st-fill { position: absolute; inset: 0 auto 0 0; display: inline-flex; overflow: hidden; }
+
+/* блок продавця на сторінці оголошення */
+.seller .sub.tr-rt { display: flex; align-items: center; gap: 6px; margin-top: 4px; color: var(--text-2); }
+.seller .sub.tr-rt svg { width: 15px; height: 15px; flex: none; }
+.seller .sub.tr-rt b { color: var(--text); font-weight: 700; }
+.seller .sub.tr-rt.tr-rt-star svg { color: var(--hot); fill: var(--hot); }
+.seller .sub.tr-rt.tr-rt-vf { color: var(--text); font-weight: 600; }
+.seller .sub.tr-rt.tr-rt-vf svg { color: var(--hot-ink); }
+.tr-quote { display: block; margin-top: 10px; padding: 12px 14px; border-radius: 16px; background: var(--s1); font-size: 14px; line-height: 1.45; }
+.tr-quote small { display: block; margin-top: 4px; font-size: 13px; color: var(--text-2); }
+
+/* сторінка продавця: оцінка, вкладки, відгуки */
+.tr-score { display: flex; align-items: center; gap: 12px; margin: 14px 16px 0; padding: 14px 16px; border-radius: 18px; background: var(--card, #FFFEFC); box-shadow: 0 0 0 1px var(--line); }
+.tr-score .sc-n { font: 700 30px/1 var(--display); letter-spacing: -0.02em; }
+.tr-score .tr-st svg { width: 18px; height: 18px; }
+.tr-score .tr-st .st-fill svg { flex: none; }
+.tr-score small { display: block; margin-top: 3px; font-size: 13px; color: var(--text-2); }
+.tr-tabs { display: flex; gap: 22px; margin: 18px 16px 0; border-bottom: 1px solid var(--line); }
+.tr-tabs button { padding: 0 0 10px; font-size: 16px; color: var(--text-2); }
+.tr-tabs button[aria-selected="true"] { color: var(--text); font-weight: 700; box-shadow: inset 0 -2px 0 var(--hot); }
+.tr-new { margin-top: 4px; font-size: 14px; color: var(--text-2); }
+.tr-list { padding: 0 16px; }
+.tr-list[hidden] { display: none; }
+.tr-rv { padding: 16px 0; border-bottom: 1px solid var(--line); }
+.tr-rv .rv-h { display: flex; align-items: center; gap: 10px; }
+.tr-rv .rv-h .ava { width: 36px; height: 36px; font-size: 14px; }
+.tr-rv .rv-h b { display: block; font-size: 16px; }
+.tr-rv .rv-h time { margin-left: auto; font-size: 13px; color: var(--text-2); }
+.tr-rv p { margin-top: 8px; font-size: 16px; line-height: 1.45; }
+.tr-rv .rv-it { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 13px; color: var(--text-2); }
+.tr-rv .rv-it img { width: 28px; height: 28px; border-radius: 7px; object-fit: cover; }
+.tr-rv .rv-re { margin-top: 10px; padding: 10px 12px; border-radius: 14px; background: var(--s1); font-size: 14px; line-height: 1.4; }
+.tr-rv .rv-re b { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 600; color: var(--text-2); }
+
+/* розмова: запит підтвердити покупку / продаж */
+.tr-req { align-self: stretch; padding: 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card, #FFFEFC); }
+.tr-req .rq-top { display: flex; align-items: center; gap: 12px; }
+.tr-req .rq-top img { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; flex: none; }
+.tr-req .rq-top p { font-size: 16px; line-height: 1.4; font-weight: 600; }
+.tr-req .rq-acts { display: grid; gap: 8px; margin-top: 12px; }
+.tr-req .rq-acts .btn { height: 46px; font-size: 14px; }
+.tr-req .rq-acts[hidden] { display: none; }
+.tr-req .rq-res { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--ok); }
+.tr-req .rq-res svg { width: 18px; height: 18px; }
+.tr-req .rq-res.no { color: var(--text-2); }
+.tr-req .rq-res[hidden] { display: none; }
+.tr-req.rq-done .rq-top, .tr-req.rq-done .rq-acts { display: none; }
+.tr-req.rq-done .rq-res { margin-top: 0; }
+/* запасний шлях: покупець сам підтверджує покупку під карткою речі */
+.tr-slot { margin: -2px 16px 12px; }
+.tr-slot .btn { width: 100%; height: 42px; font-size: 14px; background: var(--card, #FFFEFC); box-shadow: inset 0 0 0 1.5px var(--line); }
+.tr-slot .btn svg { width: 17px; height: 17px; }
+.tr-slot .tr-wait { display: flex; align-items: center; justify-content: center; gap: 8px; height: 42px; font-size: 14px; color: var(--text-2); }
+.tr-slot .tr-wait svg { width: 16px; height: 16px; }
+.tr-slot [hidden] { display: none !important; }
+
+/* лист «Оцініть продавця» */
+.tr-rate { text-align: center; }
+.tr-rate .rt-who { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tr-rate .rt-who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; margin-bottom: 8px; }
+.tr-rate .rt-who b { font-size: 16px; }
+.tr-rate .rt-who small { font-size: 14px; color: var(--text-2); }
+.tr-stars { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+.tr-stars button { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 12px; }
+.tr-stars svg { width: 38px; height: 38px; color: var(--s2); fill: var(--s2); stroke-width: 1.5; transition: color 0.2s, fill 0.2s, transform 0.3s var(--ease); }
+.tr-stars button.lit svg { color: var(--hot); fill: var(--hot); }
+.tr-stars button.tr-pop svg { transform: scale(1.14); }
+.tr-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+.tr-chips button { height: 40px; padding: 0 14px; border-radius: 999px; background: var(--s1); font-size: 14px; font-weight: 500; transition: background 0.2s, box-shadow 0.2s, color 0.2s; }
+.tr-chips button[aria-pressed="true"] { background: oklch(0.93 0.05 30); color: oklch(0.46 0.18 30); box-shadow: inset 0 0 0 1.5px var(--hot-ink); }
+.tr-rate textarea { display: block; width: 100%; min-height: 76px; margin: 16px 0 14px; padding: 12px 14px; border: 0; border-radius: 14px; background: var(--s1); font: inherit; font-size: 16px; color: var(--text); resize: none; }
+.tr-rate textarea::placeholder { color: var(--text-2); }
+.tr-rate .btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+/* «Мої оголошення»: стан підняття в рядку */
+.mrow .note.pr-up { display: flex; align-items: center; gap: 6px; color: var(--text); font-weight: 600; }
+.mrow .note.pr-up svg { width: 15px; height: 15px; color: var(--ok); }
+.mrow .note.pr-up a { margin-left: 2px; color: var(--hot-ink); font-weight: 700; }
+
+/* своє оголошення: кнопка «Підняти» в нижній панелі */
+#ownbar .pr-own { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 52px; padding: 0 16px; border-radius: 999px; background: var(--s1); color: var(--text); font-size: 14px; font-weight: 700; }
+#ownbar .pr-own svg { width: 18px; height: 18px; }
+
+/* сторінки promote.html і verify.html */
+.prp, .vfp { display: flex; flex-direction: column; }
+.pr-pv { position: relative; width: 100%; max-width: 304px; margin: 4px auto 0; aspect-ratio: 4 / 3; border-radius: 22px; overflow: hidden; background: var(--s1); }
+.pr-pv img { width: 100%; height: 100%; object-fit: cover; }
+.pr-tag { position: relative; z-index: 2; align-self: center; display: inline-flex; align-items: center; height: 34px; margin: -20px auto 0; padding: 0 14px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 700 18px/1 var(--display); }
+.pr-pitch { margin-top: 18px; text-align: center; }
+.pr-pitch h2 { font: 700 22px/1.3 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+.pr-pitch p { margin: 8px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.45; color: var(--text-2); }
+.pr-pay { margin-top: 24px; }
+.pr-pay .btn { position: relative; width: 100%; }
+.pr-pay .btn .pr-ld, .pr-pay .btn .pr-okk { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; transition: opacity 0.2s; }
+.pr-pay .btn .pr-lbl { transition: opacity 0.2s; }
+.pr-pay .btn .pr-ld i { width: 20px; height: 20px; border-radius: 50%; border: 2.5px solid rgb(32 27 36 / 0.25); border-top-color: currentColor; animation: pr-sp 0.8s linear infinite; }
+.pr-pay .btn.pr-loading .pr-lbl, .pr-pay .btn.pr-paid .pr-lbl, .pr-pay .btn.pr-paid .pr-ld { opacity: 0; }
+.pr-pay .btn.pr-loading .pr-ld, .pr-pay .btn.pr-paid .pr-okk { opacity: 1; }
+.pr-pay .btn.pr-loading, .pr-pay .btn.pr-paid { pointer-events: none; }
+.pr-ways { display: flex; justify-content: center; gap: 18px; margin-top: 12px; font-size: 13px; color: var(--text-2); }
+@keyframes pr-sp { to { transform: rotate(360deg); } }
+
+.vf-intro h2 { font: 700 24px/1.25 var(--display); letter-spacing: -0.01em; }
+.vf-intro p { margin-top: 10px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.vf-opts { display: grid; gap: 10px; margin-top: 22px; }
+.vf-opt { display: flex; align-items: center; gap: 14px; width: 100%; height: 60px; padding: 0 16px; border-radius: 18px; background: var(--card, #FFFEFC); box-shadow: 0 0 0 1px var(--line); font-size: 16px; font-weight: 600; text-align: left; }
+.vf-opt svg { width: 22px; height: 22px; }
+.vf-opt .vf-chev { margin-left: auto; width: 18px; height: 18px; color: var(--text-2); }
+.vf-wait { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 50vh; color: var(--text-2); font-size: 14px; text-align: center; }
+.vf-wait i { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--s2); border-top-color: var(--hot); animation: pr-sp 0.8s linear infinite; }
+.vf-ok { padding-top: 40px; text-align: center; }
+.vf-ok .vf-c { width: 64px; height: 64px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; background: var(--hot); color: var(--on-hot); }
+.vf-ok .vf-c svg { width: 32px; height: 32px; stroke-width: 2.6; }
+.vf-ok h2 { margin-top: 16px; font: 700 22px/1.3 var(--display); }
+.vf-ok p { margin-top: 6px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.vf-prev { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding: 14px; border-radius: 18px; background: var(--card, #FFFEFC); box-shadow: 0 0 0 1px var(--line); text-align: left; }
+.vf-prev img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.vf-prev b { display: block; font-size: 16px; }
+.vf-ok .btn { margin-top: 22px; }
+.prp[data-state] > section[hidden], .vfp > section[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .tr-stars svg { transition: none; }
+  .tr-stars button.tr-pop svg { transform: none; }
+  .pr-pay .btn .pr-ld i, .vf-wait i { animation-duration: 2.4s; }
+}
+@media (min-width: 900px) {
+  /* «Підняти» і перевірка особи — під заголовком, по лівому краю, як решта кабінету */
+  body.wide .prp, body.wide .vfp { max-width: 520px; }
+  /* сторінка продавця: оцінка, вкладки й відгуки на одній лінії з профілем і сіткою (max 1488, поля 32) */
+  body.sellerpage .tr-score, body.sellerpage .tr-tabs, body.sellerpage .tr-list { margin-left: max(32px, calc((100% - 1488px) / 2 + 32px)); }
+  body.sellerpage .tr-score { display: inline-flex; padding-right: 24px; }
+  body.sellerpage .tr-tabs { margin-right: max(32px, calc((100% - 1488px) / 2 + 32px)); }
+  body.sellerpage .tr-list { max-width: 820px; padding: 0; }
+}
+/* «Хто купив?»: підказка над списком */
+.tr-hint { margin: 0 0 6px; font-size: 14px; line-height: 1.4; color: var(--text-2); }
+.pr-nm { display: block; margin-top: 10px; font-size: 16px; font-weight: 600; text-align: center; }
+
 /* ---------- Знак: бирка ---------- */
 .hw { display: inline-block; font-size: 0.72em; vertical-align: middle; }
 .tagx { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 5.86em; height: 1.887em; padding-right: 0.46em; background: url(assets/tag.png) center / 100% 100% no-repeat; color: var(--on-hot); font: 700 1em/1 var(--display); letter-spacing: -0.02em; transform: rotate(6deg); filter: drop-shadow(0.06em 0.1em 0.12em oklch(0.35 0.1 30 / 0.3)); transition: transform 0.7s var(--ease); }
