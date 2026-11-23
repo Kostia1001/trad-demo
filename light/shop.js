@@ -535,7 +535,7 @@
     if (d) d.remove(); if (segs) segs.remove();
     if (meta) {                                   /* «Київ · сьогодні, 14:20» → «Київ · сьогодні»: година в стрічці зайва */
       meta.textContent = meta.textContent.split('·').map(function (x) { return x.trim().replace(/,\s*\d{1,2}:\d{2}$/, ''); }).join(' · ');
-      meta.insertBefore(el('<i data-lucide="map-pin"></i>'), meta.firstChild);
+      meta.insertBefore(el('<i data-lucide="' + (meta.textContent.indexOf('·') >= 0 ? 'map-pin' : 'clock') + '"></i>'), meta.firstChild);   /* лише дата — годинник, не геомітка */
       cap.appendChild(meta);
     }
     f.after(cap);
@@ -1020,6 +1020,10 @@
         $('#helptop').addEventListener('click', function (e) { e.preventDefault(); sup.scrollIntoView({ block: 'center', behavior: 'smooth' }); });
       }
     }
+  })();
+  /* ---- огляд 23.11 (3): «Завершується…» в «Моїх оголошеннях» помітніше ---- */
+  (function () {
+    if (page === 'my.html') $$('.mrow .note').forEach(function (n) { if (/Завершується/.test(n.textContent)) n.classList.add('soon'); });
   })();
   icons();
 })();

@@ -2101,6 +2101,57 @@ body.profilepage .page > a.btn.ghost { margin-bottom: 10px; }
 .helplink { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 0 0 8px; font-size: 16px; font-weight: 600; color: var(--hot-ink); }
 .helplink svg { width: 18px; height: 18px; }
 
+/* ---- огляд 23.11 (3): решта порад Codex ---- */
+/* каталог на телефоні: швидкі фільтри щільніше, «Вживане» не тоне в згасанні краю */
+@media (max-width: 899px) { .qflt { gap: 6px; } .qflt .chip { padding-left: 12px; padding-right: 12px; } }
+/* полиці «Схожі» і «Ще від продавця»: гортання зупиняється на початку картки */
+div.more { scroll-snap-type: x proximity; }
+div.more > .card { scroll-snap-align: start; }
+/* пошук: перший рядок «Шукати «…»» — головна дія */
+.lrow.go .t { font-weight: 600; }
+.lrow.go > svg:last-child { color: var(--hot-ink); }
+/* обране: продане фото менш вибілене — річ видно */
+.card.cv .frame.off img { opacity: 0.72; }
+/* розмова: попередження компактніше */
+.safety { line-height: 18px; }
+/* профіль на компʼютері: «Мої оголошення» й «AI-студія» вже є в меню ліворуч — у списку не дублюємо */
+@media (min-width: 900px) { body.wide.profilepage .group a[href="my.html"], body.wide.profilepage #aiprof { display: none; } }
+/* редагування профілю: «Змінити» номер — окрема кнопка в рядку */
+.rowbtn .textlink { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 999px; background: var(--card, #FFFEFC); box-shadow: inset 0 0 0 1px var(--line); font-size: 14px; }
+/* способи звʼязку: порожнє поле кличе додати номер */
+.crowin input::placeholder { color: var(--hot-ink); opacity: 1; }
+/* «Мої оголошення»: «Завершується через 3 дні» помітніше за звичайну дату */
+.mrow .note.soon { color: var(--text); font-weight: 600; }
+/* 404: цифри менші, крапка — коралова */
+.oops .big { font-size: 52px; }
+.oops .big b { color: var(--hot); }
+/* сповіщення на телефоні: дата над заголовком, заголовку — вся ширина */
+@media (max-width: 899px) {
+  .nrow .b { display: flex; flex-direction: column; }
+  .nrow .tm { position: static; order: -1; margin: 0 0 2px; font-size: 12px; }
+}
+@media (min-width: 900px) {
+  /* «Чат»: ширший список розмов, назва речі читається */
+  body.wide .chatwrap { grid-template-columns: 440px 1fr; }
+  body.wide .crow .item { font-size: 14px; }
+  /* продавець: колонки займають усю ширину, скільки б оголошень не було */
+  body.sellerpage main > .grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+
+/* ---- огляд 23.11 (4) ---- */
+/* сповіщення: вторинні кнопки — за шириною підпису (після перестановки дати колонка розтягувала їх) */
+.nrow .b > .mini { align-self: flex-start; }
+/* розмова: менше порожнього над попередженням; поле повідомлення видно і порожнім */
+.safety { margin-top: 0; }
+.composer textarea { box-shadow: inset 0 0 0 1px var(--line); }
+/* 404: блок ближче до середини між шапкою й меню */
+.oops { padding-top: 56px; }
+@media (min-width: 900px) {
+  /* «Мої оголошення»: показники читаються */
+  body.wide .mrow .st { font-size: 14px; }
+  body.wide .mrow .st svg { width: 16px; height: 16px; }
+}
+
 /* ---- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026, TRAD Everywhere з ТЗ).
    Сторінка studio.html (писана руками; ?item=bag, ?video=making|ready). Входи: кнопка в «Поділіться оголошенням» на кроці
    «Опубліковано» (build_ai.py), рядки в «Моїх оголошеннях» і сповіщення «Відео готове» (shop.js). Живий зразок шляху —
@@ -2375,6 +2426,12 @@ body.profilepage .page > a.btn.ghost { margin-bottom: 10px; }
 .ah-sq { width: 56px; height: 56px; }
 .ah-sq img { object-fit: cover; }
 @media (prefers-reduced-motion: reduce) { .sd-scload::after { animation-duration: 2.4s; } }
+/* поки AI робить відео: «Створюємо відео» — заголовок, етап — під смужкою; кадр на телефоні менший (огляд 23.11) */
+.sd-mk { font: 700 20px/1.3 var(--display); letter-spacing: -0.01em; }
+p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text-2); }
+@media (max-width: 899px) { [data-state="making"] .sd-frame { width: 118px; } }
+/* поки AI робить відео: смужка не прилипає до заголовка (огляд 23.11) */
+[data-state="making"] .sd-line { margin-top: 10px; margin-bottom: 12px; }
 
 /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23.11.2026). Розмітку додає останній блок shop.js;
         сторінки promote.html і verify.html писані руками. Префікси: tr- (відгуки), pr- (підняття), vf- (перевірка особи) ---- */
@@ -2482,7 +2539,7 @@ body.profilepage .page > a.btn.ghost { margin-bottom: 10px; }
 .pr-pv img { width: 100%; height: 100%; object-fit: cover; }
 .pr-tag { position: relative; z-index: 2; align-self: center; display: inline-flex; align-items: center; height: 34px; margin: -20px auto 0; padding: 0 14px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 700 18px/1 var(--display); }
 .pr-pitch { margin-top: 18px; text-align: center; }
-.pr-pitch h2 { font: 700 20px/1.25 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+.pr-pitch h2 { font: 700 18px/1.3 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
 .pr-pitch p { margin: 8px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.45; color: var(--text-2); }
 .pr-pay { margin-top: 24px; }
 .pr-pay .btn { position: relative; width: 100%; }
@@ -2525,9 +2582,10 @@ body.profilepage .page > a.btn.ghost { margin-bottom: 10px; }
   body.wide .prp .pr-pv { grid-column: 1; grid-row: 1; margin: 4px 0 0; }
   body.wide .prp .pr-tag { grid-column: 1; grid-row: 2; }
   body.wide .prp .pr-nm { grid-column: 1; grid-row: 3; }
-  body.wide .prp .pr-pitch { grid-column: 2; grid-row: 1; margin-top: 24px; text-align: left; }
+  body.wide .prp .pr-pitch { grid-column: 2; grid-row: 1; align-self: center; margin-top: 0; text-align: left; }
+  body.wide .prp .pr-pitch h2 { font-size: 20px; }
   body.wide .prp .pr-pitch p { margin-left: 0; }
-  body.wide .prp .pr-pay { grid-column: 2; grid-row: 2 / span 2; margin-top: 8px; }
+  body.wide .prp .pr-pay { grid-column: 2; grid-row: 2 / span 2; align-self: start; margin-top: 24px; }
   /* сторінка продавця: оцінка, вкладки й відгуки на одній лінії з профілем і сіткою (max 1488, поля 32) */
   body.sellerpage .tr-score, body.sellerpage .tr-tabs, body.sellerpage .tr-list { margin-left: max(32px, calc((100% - 1488px) / 2 + 32px)); }
   body.sellerpage .tr-score { display: inline-flex; padding-right: 24px; }
@@ -2538,7 +2596,10 @@ body.profilepage .page > a.btn.ghost { margin-bottom: 10px; }
   .tr-score { margin: 12px 16px 0; padding: 0; background: none; box-shadow: none; gap: 10px; }
   .tr-score .sc-n { font-size: 22px; }
 }
-@media (min-width: 900px) { body.sellerpage .tr-tabs { max-width: 1100px; } }
+/* «Підняти»: умова сортування — окремим рядком під обіцянкою */
+.pr-cond { display: block; margin: 0 0 4px; font-weight: 600; color: var(--text); }
+/* розмова на компʼютері: «Позначити як куплене» — у рядку речі, ліворуч від стрілки */
+@media (min-width: 900px) { body .dtop { position: sticky; } body .dtop .tr-slot { position: absolute; right: 56px; top: 79px; margin: 0; } }
 /* «Хто купив?»: підказка над списком */
 .tr-hint { margin: 0 0 6px; font-size: 14px; line-height: 1.4; color: var(--text-2); }
 .pr-nm { display: block; margin-top: 10px; font-size: 16px; font-weight: 600; text-align: center; }
