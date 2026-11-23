@@ -2152,6 +2152,12 @@ div.more > .card { scroll-snap-align: start; }
   body.wide .mrow .st svg { width: 16px; height: 16px; }
 }
 
+/* «Ваше місто» у реєстрації: пошук над списком у віконці; обране місто — звичайним текстом */
+.cs-search { margin: 0 0 8px; }
+.cs-none { padding: 16px 4px; font-size: 14px; color: var(--text-2); }
+.cs-list .lrow[aria-current="true"] { font-weight: 600; }
+#mycity.chosen span { color: var(--text); }
+
 /* ---- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026, TRAD Everywhere з ТЗ).
    Сторінка studio.html (писана руками; ?item=bag, ?video=making|ready). Входи: кнопка в «Поділіться оголошенням» на кроці
    «Опубліковано» (build_ai.py), рядки в «Моїх оголошеннях» і сповіщення «Відео готове» (shop.js). Живий зразок шляху —

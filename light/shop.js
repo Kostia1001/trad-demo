@@ -1025,5 +1025,55 @@
   (function () {
     if (page === 'my.html') $$('.mrow .note').forEach(function (n) { if (/Завершується/.test(n.textContent)) n.classList.add('soon'); });
   })();
+  /* ---- Місто людини чи речі ≠ місто для пошуку (23.11.2026). Раніше реєстрація, профіль і створення оголошення
+          відкривали сторінку пошуку («Вся Україна») і після вибору викидали на головну — заповнене губилося ---- */
+  (function () {
+    var CITIES = ['Київ', 'Харків', 'Одеса', 'Дніпро', 'Львів', 'Запоріжжя', 'Кривий Ріг', 'Миколаїв', 'Вінниця', 'Полтава', 'Чернігів', 'Черкаси', 'Житомир', 'Суми', 'Івано-Франківськ', 'Тернопіль', 'Луцьк', 'Ужгород'];
+    /* реєстрація: місто — у віконці на тому ж кроці, імʼя й пароль не губляться */
+    if (page === 'login.html') {
+      var rb = $('[data-step="3"] a.rowbtn[href="city.html"]');
+      if (rb && !$('#mycity')) {
+        var cb = el('<button class="rowbtn" type="button" id="mycity" aria-haspopup="dialog"><span>Обрати місто</span><i data-lucide="chevron-right"></i></button>');
+        rb.replaceWith(cb);
+        if (!$('.scrim')) document.body.appendChild(el('<div class="scrim"></div>'));
+        var sh = el('<section class="sheet" id="citysh" role="dialog" aria-modal="true" aria-label="Оберіть місто"><div class="sheet-head"><h2>Оберіть місто</h2><button class="x" type="button" data-cityclose aria-label="Закрити"><i data-lucide="x"></i></button></div>'
+          + '<div class="sheet-body"><form class="search cs-search" role="search" onsubmit="return false"><i data-lucide="search"></i><input type="search" id="csq" placeholder="Введіть назву міста" aria-label="Пошук міста" autocomplete="off"></form>'
+          + '<div class="alist cs-list">' + CITIES.map(function (c) { return '<button class="lrow" type="button" data-c="' + c + '"><span class="t">' + c + '</span></button>'; }).join('') + '</div>'
+          + '<p class="cs-none" id="csnone" hidden>Збігів не знайдено</p></div></section>');
+        document.body.appendChild(sh);
+        var csOpen = function () { $$('.sheet').forEach(function (s) { s.style.display = s === sh ? '' : 'none'; }); document.body.classList.add('sheet-on'); setTimeout(function () { var i = $('#csq'); if (i && wide.matches) i.focus(); }, 300); };
+        var csClose = function () { document.body.classList.remove('sheet-on'); cb.focus(); };
+        cb.addEventListener('click', csOpen);
+        document.addEventListener('click', function (e) { if (e.target.closest('[data-cityclose]') || (e.target.classList.contains('scrim') && document.body.classList.contains('sheet-on'))) csClose(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('sheet-on')) csClose(); });
+        $('#csq').addEventListener('input', function () {
+          var v = this.value.trim().toLowerCase(), n = 0;
+          $$('[data-c]', sh).forEach(function (r) { var on = r.dataset.c.toLowerCase().indexOf(v) === 0; r.hidden = !on; r.style.display = on ? '' : 'none'; if (on) n++; });
+          $('#csnone').hidden = n > 0;
+        });
+        $$('[data-c]', sh).forEach(function (r) {
+          r.addEventListener('click', function () {
+            $('span', cb).textContent = r.dataset.c; cb.classList.add('chosen');
+            $$('[data-c]', sh).forEach(function (x) { x.setAttribute('aria-current', String(x === r)); });
+            csClose();
+          });
+        });
+      }
+    }
+    /* профіль: та сама сторінка міст, але «ваше місто» — без «Вся Україна», вибір повертає в профіль */
+    var BACK = { 'profile-edit.html': 'profile-edit.html' }[page];
+    if (BACK) {
+      $$('a.rowbtn[href="city.html"]').forEach(function (a) { a.setAttribute('href', 'city.html?for=me&back=' + encodeURIComponent(BACK)); });
+      var picked = q.get('city');
+      if (picked) $$('a.rowbtn[href^="city.html"] span').forEach(function (s) { s.textContent = picked; });
+    }
+    if (page === 'city.html' && q.get('for') === 'me') {
+      var bk = q.get('back') || 'profile.html', all = $('[data-all]');
+      if (all) { all.hidden = true; all.style.display = 'none'; }
+      $$('[data-city]').forEach(function (a) { var t = $('.t', a); a.setAttribute('href', bk + (bk.indexOf('?') >= 0 ? '&' : '?') + 'city=' + encodeURIComponent(t ? t.textContent : '')); });
+      var bx = $('#back'); if (bx) bx.setAttribute('href', bk);
+      var cq = $('#q'); if (cq) cq.setAttribute('placeholder', 'Введіть назву міста');
+    }
+  })();
   icons();
 })();
