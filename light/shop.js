@@ -29,6 +29,31 @@
     document.body.classList.add('wide', 'deskhead');
     document.body.insertBefore(el('<header class="top"><div class="top-row"><a class="wordmark" href="home.html"><span class="hw"><span class="tagx">TRAD</span></span></a><nav class="desk" aria-label="Меню"><a class="icon-btn" href="favorites.html" aria-label="Обране"><i data-lucide="heart"></i></a><a class="icon-btn" href="chat.html" aria-label="Чат"><i data-lucide="message-circle"></i><span class="dot"></span></a><a class="icon-btn" href="notifications.html" aria-label="Сповіщення"><i data-lucide="bell"></i></a><a class="icon-btn" href="profile.html" aria-label="Профіль"><i data-lucide="user"></i></a><a class="btn primary cta" href="create-ai.html"><i data-lucide="plus"></i>Додати оголошення</a></nav></div><form class="search" role="search" action="catalog.html"><i data-lucide="search"></i><input type="search" name="q" placeholder="Що шукаєте?" aria-label="Пошук оголошень"><a class="where" href="city.html"><i data-lucide="map-pin"></i>Вся Україна</a></form></header>'), document.body.firstChild);
   }
+  /* ---- Обкладинка «на чистому фоні» з AI-студії (23.11.2026). Стан — у sessionStorage лише для показу (?cover=jeans додає).
+          Фото міняємо до того, як сторінку дооформлять: картки, рядки «Моїх оголошень», перший кадр оголошення ---- */
+  var CLEAN = { jeans: ['jeans-1.jpg', 'jeans-clean.jpg', 'jeans-clean-w.jpg'], bag: ['bag.jpg', 'bag-clean.jpg', 'bag-clean-w.jpg'], hoodie: ['hoodie.jpg', 'hoodie-clean.jpg', 'hoodie-clean-w.jpg'] };
+  var covers = (function () {
+    var a = []; try { a = JSON.parse(sessionStorage.getItem('trad-covers') || '[]'); } catch (e) { a = []; }
+    var c = q.get('cover'); if (CLEAN[c] && a.indexOf(c) < 0) a.push(c);
+    var save = function () { try { sessionStorage.setItem('trad-covers', JSON.stringify(a)); } catch (e) {} };
+    save();
+    return { has: function (k) { return a.indexOf(k) >= 0; }, list: function () { return a.slice(); },
+      remove: function (k) { a = a.filter(function (x) { return x !== k; }); save(); } };
+  })();
+  var isSrc = function (im, f) { var s0 = im.getAttribute('src') || ''; return s0.slice(-f.length - 1) === '/' + f; };
+  covers.list().forEach(function (k) {
+    var c = CLEAN[k];
+    $$('.card .frame img').forEach(function (im) { if (isSrc(im, c[0])) { im.src = 'assets/' + c[2]; im.dataset.nowide = '1'; } });
+    $$('.mrow .th img').forEach(function (im) { if (isSrc(im, c[0])) im.src = 'assets/' + c[1]; });
+  });
+  if (page === 'product.html' && covers.has('jeans')) {
+    var cg0 = $('#gallery .slide');
+    if (cg0 && !$('.cv-chip')) {
+      cg0.after(el('<div class="slide"><img src="assets/jeans-1.jpg" alt="Джинси, пояс спереду — фото продавця"></div>'));
+      $('img', cg0).src = 'assets/jeans-clean.jpg';
+      cg0.appendChild(el('<span class="cv-chip">Фон прибрано</span>'));
+    }
+  }
   var holders = [];
   function shut(except) { holders.forEach(function (h) { if (h !== except) { h.classList.remove('open'); var b = $('button', h); if (b) b.setAttribute('aria-expanded', 'false'); } }); }
   function holder(h, hover) {
@@ -742,6 +767,12 @@
       if (my && !$('a[href="ai-studio.html"]', nav)) my.after(el('<a href="ai-studio.html"><i data-lucide="sparkles"></i>AI-студія</a>'));
       if (inStudio) $$('a', nav).forEach(function (x) { if (x.getAttribute('href') === 'ai-studio.html') x.setAttribute('aria-current', 'page'); else x.removeAttribute('aria-current'); });
     });
+    if (page === 'ai-studio.html') {
+      var NMC = { jeans: 'Джинси Levi’s 501', bag: 'Сумка шкіряна', hoodie: 'Худі сіре' }, mn = $('#ah-mine');
+      covers.list().forEach(function (k) {
+        if (mn && !$('#ahc-' + k)) mn.appendChild(el('<a class="ah-row" id="ahc-' + k + '" href="studio.html?item=' + k + '&amp;tool=photo"><span class="ah-vth ah-ph"><img src="assets/' + CLEAN[k][1] + '" alt=""></span><span class="ah-t"><b>Фото · ' + NMC[k] + '</b><small>Обкладинка оголошення</small></span><i class="ah-chev" data-lucide="chevron-right"></i></a>'));
+      });
+    }
     if (page === 'profile.html') {
       var mr = $('main .group a[href="my.html"]');
       if (mr && !$('#aiprof')) mr.after(el('<a class="lrow" id="aiprof" href="ai-studio.html"><i data-lucide="sparkles"></i><span class="t">AI-студія</span><i data-lucide="chevron-right"></i></a>'));
@@ -858,6 +889,11 @@
           + '<span class="sub tr-rt tr-rt-vf"><i data-lucide="badge-check"></i>Особу підтверджено</span>'
           + '<span class="sub tr-rt"><i data-lucide="clock"></i>Відповідає протягом години</span>';
         var sc = $('.seller'); if (sc && !isNew && !$('.tr-quote')) sc.after(el('<a class="tr-quote" href="seller.html?tab=reviews">«' + REVIEWS[0][4] + '»<small>' + REVIEWS[0][1] + ' · 10 листопада</small></a>'));
+      }
+      var ost = $('.info');   /* під галереєю (телефон) або вгорі колонки опису (компʼютер) */
+      if (q.get('own') === '1' && covers.has('jeans') && ost && !$('#cvown')) {
+        ost.insertBefore(el('<p class="cv-own" id="cvown"><button type="button" id="cvback"><i data-lucide="image"></i>Повернути попередню обкладинку</button></p>'), ost.firstChild);
+        $('#cvback').addEventListener('click', function () { covers.remove('jeans'); location.replace('product.html?own=1'); });
       }
       var ob = $('#ownbar'), om = $('#omore');
       if (ob && om && !$('.pr-own')) om.before(el('<a class="pr-own" href="promote.html?item=jeans"><i data-lucide="arrow-up"></i>Підняти</a>'));

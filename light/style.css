@@ -2288,6 +2288,23 @@ details.tk .tk-h { cursor: pointer; }
   body.wide .ah-mine { grid-template-columns: 1fr 1fr; }
 }
 
+/* ---- «Фото на чистому фоні» → обкладинка оголошення (23.11.2026) ---- */
+.sd-ba { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.sd-ba figure { margin: 0; }
+.sd-ba img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 16px; background: var(--s1); }
+.sd-ba figcaption { margin-top: 6px; font-size: 13px; color: var(--text-2); text-align: center; }
+.sd-cv { display: grid; gap: 8px; margin-top: 4px; }
+.sd-cv[hidden] { display: none; }
+.sd-cvok { display: flex; align-items: center; gap: 8px; padding: 4px 0 6px; font-size: 14px; font-weight: 600; color: var(--ok); }
+.sd-cvok svg { flex: none; width: 18px; height: 18px; }
+/* перший кадр оголошення: обкладинка без фону — чесна позначка */
+.slide .cv-chip { position: absolute; left: 14px; top: 64px; z-index: 2; height: 28px; display: inline-flex; align-items: center; padding: 0 10px; border-radius: 999px; background: rgb(23 18 28 / 0.62); color: #fff; font-size: 13px; font-weight: 600; pointer-events: none; }
+.cv-own { margin: 10px 0 0; }
+.cv-own button { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 999px; background: var(--s1); font-size: 14px; font-weight: 600; color: var(--text); }
+.cv-own svg { flex: none; width: 16px; height: 16px; color: var(--text-2); }
+.ah-ph img { object-fit: contain; background: #F1EEE7; }
+@media (min-width: 900px) { body.wide .slide .cv-chip { top: 16px; left: 16px; } }
+
 /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23.11.2026). Розмітку додає останній блок shop.js;
         сторінки promote.html і verify.html писані руками. Префікси: tr- (відгуки), pr- (підняття), vf- (перевірка особи) ---- */
 

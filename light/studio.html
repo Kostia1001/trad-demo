@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11231219">
+<link rel="stylesheet" href="style.css?v=11231252">
 </head>
 <!-- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026). Стилі — tools/studio.css. -->
 <body class="acctpage wide has-bar keepbar aispage">
@@ -89,7 +89,7 @@
       </section>
 
       <div class="sd-more">
-        <button class="sd-row" type="button" data-sheet="sd-photo"><img class="th" id="sd-storyth" src="assets/jeans-story.jpg" alt=""><span><b>Рекламне фото</b><small>Річ на чистому фоні</small></span><i data-lucide="chevron-right"></i></button>
+        <button class="sd-row" type="button" data-sheet="sd-photo"><img class="th" id="sd-storyth" src="assets/jeans-clean.jpg" alt=""><span><b>Фото на чистому фоні</b><small id="sd-cvst">Для обкладинки або соцмереж</small></span><i data-lucide="chevron-right"></i></button>
         <button class="sd-row" type="button" data-sheet="sd-texts"><span class="ic"><i data-lucide="type"></i></span><span><b>Тексти для соцмереж</b></span><i data-lucide="chevron-right"></i></button>
       </div>
     </div>
@@ -98,12 +98,20 @@
 
 <div class="toast" id="toast" role="status"></div>
 <div class="scrim"></div>
-<section class="sheet" id="sd-photo" role="dialog" aria-modal="true" aria-label="Рекламне фото">
-  <div class="sheet-head"><h2>Рекламне фото</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+<section class="sheet" id="sd-photo" role="dialog" aria-modal="true" aria-label="Фото на чистому фоні">
+  <div class="sheet-head"><h2>Фото на чистому фоні</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
   <div class="sheet-body sd-sh">
-    <div class="sd-story"><img id="sd-story" src="assets/jeans-story.jpg" alt="Річ на чистому фоні"><span class="pt num" id="sd-storyp">900&nbsp;грн</span><svg class="tg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#FF6F5B" d="M8 16h34l16 16-16 16H8a4 4 0 0 1-4-4V20a4 4 0 0 1 4-4z"/><circle cx="44" cy="32" r="4" fill="#120D18"/><path fill="#1B0A08" d="M12 25h16v5h-5.2v13h-5.6V30H12z"/></svg></div>
-    <p class="sd-note">AI прибрав фон. Колір, стан і деталі речі — як на вашому фото.</p>
-    <button class="btn primary wide" type="button" data-close data-toast="Фото збережено в галерею"><i data-lucide="download"></i>Зберегти фото</button>
+    <div class="sd-ba"><figure><img id="sd-bef" src="assets/jeans-1.jpg" alt="Ваше фото"><figcaption>Ваше фото</figcaption></figure><figure><img id="sd-aft" src="assets/jeans-clean.jpg" alt="Фото без фону"><figcaption>Фото без фону</figcaption></figure></div>
+    <p class="sd-note">AI прибрав лише фон. Колір, стан і деталі речі збережено.</p>
+    <div class="sd-cv" id="sd-cvoff">
+      <button class="btn primary wide" type="button" id="sd-cover"><i data-lucide="image"></i>Зробити обкладинкою</button>
+      <button class="btn ghost wide" type="button" data-close data-toast="Фото збережено в галерею"><i data-lucide="download"></i>Зберегти на телефон</button>
+    </div>
+    <div class="sd-cv" id="sd-cvon" hidden>
+      <p class="sd-cvok"><i data-lucide="circle-check"></i>Обкладинку змінено. Ваше фото — наступне в оголошенні.</p>
+      <a class="btn primary wide" id="sd-cvview" href="product.html?own=1">Переглянути оголошення</a>
+      <button class="btn ghost wide" type="button" id="sd-cvback">Повернути попередню обкладинку</button>
+    </div>
   </div>
 </section>
 <section class="sheet" id="sd-texts" role="dialog" aria-modal="true" aria-label="Тексти для соцмереж">
@@ -146,11 +154,11 @@
   // дані оголошення; тексти беруться лише з оголошення — AI не вигадує характеристик
   var ITEMS = {
     jeans: { name: 'Джинси Levi’s 501, W32 L32', short: 'Джинси Levi’s 501', price: '900', code: '4821', cover: 'jeans-v.jpg', story: 'jeans-story.jpg',
-      photos: ['jeans-1.jpg', 'jeans-2.jpg', 'jeans-3.jpg', 'jeans-4.jpg'], line: 'Вживані, прямого крою, без дефектів', tags: '#levis #джинси #одеса' },
+      photos: ['jeans-1.jpg', 'jeans-2.jpg', 'jeans-3.jpg', 'jeans-4.jpg'], line: 'Вживані, прямого крою, без дефектів', tags: '#levis #джинси #одеса', clean: 'jeans-clean.jpg' },
     bag: { name: 'Сумка шкіряна, коричнева', short: 'Сумка шкіряна', price: '1 100', code: '5307', cover: 'bag.jpg', story: 'bag-story.jpg',
-      photos: ['bag.jpg', 'bag-w.jpg'], line: 'Вживана, натуральна шкіра', tags: '#сумка #шкіра #одеса', few: true },
+      photos: ['bag.jpg', 'bag-w.jpg'], line: 'Вживана, натуральна шкіра', tags: '#сумка #шкіра #одеса', few: true, clean: 'bag-clean.jpg' },
     hoodie: { name: 'Худі сіре, розмір L', short: 'Худі сіре', price: '650', code: '6142', cover: 'hoodie.jpg', story: 'hoodie.jpg',
-      photos: ['hoodie.jpg', 'hoodie-w.jpg'], line: 'Вживане, розмір L', tags: '#худі #одеса', few: true }
+      photos: ['hoodie.jpg', 'hoodie-w.jpg'], line: 'Вживане, розмір L', tags: '#худі #одеса', few: true, clean: 'hoodie-clean.jpg' }
   };
   var key = ITEMS[q.get('item')] ? q.get('item') : 'jeans', it = ITEMS[key], A = 'assets/', P = it.price.replace(' ', NB) + NB + 'грн';
   $('sd-crumb').textContent = it.short; $('sd-close').href = 'ai-studio.html?video=making&item=' + key;   /* студія — окремий розділ: назад і «Закрити» ведуть у неї */
@@ -158,7 +166,8 @@
   $('sd-thumb').src = A + it.photos[0]; $('sd-name').textContent = it.name; $('sd-meta').textContent = P + ' · Одеса';
   $('sd-blur').src = A + it.cover;
   $('sd-ovp').textContent = P; $('sd-ovc').textContent = 'Шукайте в TRAD: ' + it.code;
-  $('sd-story').src = $('sd-storyth').src = A + it.story; $('sd-storyp').textContent = P;
+  $('sd-bef').src = A + it.photos[0]; $('sd-aft').src = $('sd-storyth').src = A + it.clean;
+  var LINK = 'trad.ua/' + it.code;   /* коротке посилання на оголошення: за ним рахуємо переходи (домен — приклад) */
   $('sd-few').hidden = !it.few;
   var pics = it.photos.slice(); while (pics.length < 4) pics.push(it.photos[pics.length % it.photos.length]);
   var POS = [['-7deg', '-6%', '-4%'], ['5deg', '5%', '-1%'], ['-3deg', '-3%', '3%'], ['2deg', '3%', '6%']];
@@ -168,12 +177,12 @@
   $('sd-bars').innerHTML = seq.map(function () { return '<span><i></i></span>'; }).join('');
   $('sd-orig').innerHTML = it.photos.map(function (p, i) { return '<button type="button" data-ph="' + p + '" aria-label="Порівняти фото ' + (i + 1) + '"><img src="' + A + p + '" alt=""></button>'; }).join('');
   var TX = {
-    ig: it.name + ' — ' + P + '.\n' + it.line + '. Одеса, можу відправити поштою.\nПишіть у TRAD: код ' + it.code + ' — посилання в шапці профілю.\n' + it.tags,
-    fb: 'Продаю: ' + it.name + ' — ' + P + '.\n' + it.line + '. Одеса, можу відправити поштою.\nФото й деталі — за посиланням.',
-    tg: it.name + ' — ' + P + '\n' + it.line + ' · Одеса · відправлю поштою'
+    ig: it.name + ' — ' + P + '.\n' + it.line + '. Одеса, можу відправити поштою.\nОголошення: ' + LINK + '. Код для пошуку в TRAD: ' + it.code + '.\n' + it.tags,
+    fb: 'Продаю: ' + it.name + ' — ' + P + '.\n' + it.line + '. Одеса, можу відправити поштою.\nФото й деталі: ' + LINK + ' · Код ' + it.code,
+    tg: it.name + ' — ' + P + '\n' + it.line + ' · Одеса · відправлю поштою\nФото й деталі: ' + LINK + ' · Код ' + it.code
   };
-  $('sd-captxt').textContent = it.name + ' — ' + P + '. ' + it.line + '. Шукайте в TRAD за кодом ' + it.code + '.';
-  function post(n) { $('sd-post').innerHTML = ''; $('sd-post').textContent = TX[n]; $('sd-post').insertAdjacentHTML('beforeend', '<span class="lk"><i data-lucide="link"></i>і посилання на оголошення</span>'); lucide.createIcons(); }
+  $('sd-captxt').textContent = it.name + ' — ' + P + '. ' + it.line + '. Оголошення в TRAD: ' + LINK + ' · Код ' + it.code + '.';
+  function post(n) { $('sd-post').textContent = TX[n]; }
   document.querySelectorAll('[data-net]').forEach(function (b) {
     b.addEventListener('click', function () { document.querySelectorAll('[data-net]').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); }); post(b.dataset.net); });
   });
@@ -254,9 +263,20 @@
   $('sd-retry').addEventListener('click', function () { url('making'); set('making'); });
   var v = q.get('video');
   set(v === 'making' || v === 'ready' || v === 'fail' ? v : 'start');
+  function covers() { try { return JSON.parse(sessionStorage.getItem('trad-covers') || '[]'); } catch (e) { return []; } }
+  function setCovers(a) { try { sessionStorage.setItem('trad-covers', JSON.stringify(a)); } catch (e) {} }
+  function coverUI() {
+    var on = covers().indexOf(key) >= 0;
+    $('sd-cvoff').hidden = on; $('sd-cvon').hidden = !on;
+    $('sd-cvst').textContent = on ? 'Обкладинка оголошення' : 'Для обкладинки або соцмереж';
+  }
+  $('sd-cvview').href = key === 'jeans' ? 'product.html?own=1' : 'my.html';
+  $('sd-cover').addEventListener('click', function () { var a = covers(); if (a.indexOf(key) < 0) a.push(key); setCovers(a); coverUI(); });
+  $('sd-cvback').addEventListener('click', function () { setCovers(covers().filter(function (x) { return x !== key; })); coverUI(); toast('Попередню обкладинку відновлено'); });
+  coverUI();
   if (q.get('tool') === 'photo' || q.get('tool') === 'texts') sheet('sd-' + q.get('tool'), true);   /* з головної студії: одразу потрібний інструмент */
 })();
 </script>
-<script src="shop.js?v=11231219"></script>
+<script src="shop.js?v=11231252"></script>
 </body>
 </html>
