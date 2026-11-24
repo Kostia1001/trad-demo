@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11241053">
+<link rel="stylesheet" href="style.css?v=11241115">
 </head>
 <!-- AI-студія — окремий розділ кабінету (рішення власника 23.11.2026). Розстановка — за рисунком, який обрав власник (refs/trad-gpt-ai-studio-hub.png, за зразком Photoroom): поле «Оголошення» → що створити (три картки з кнопками) → «Фото товару» (панелі готових фонів) → «Мої матеріали»; усе веде на studio.html?item=…. Стилі — tools/studio.css. ?item=bag, ?video=making&item=bag -->
 <body class="acctpage wide has-bar keepbar">
@@ -49,10 +49,10 @@
   <section class="hb-sec" aria-labelledby="hb-h1">
     <h2 class="hb-h" id="hb-h1">Що хочете створити?</h2>
     <div class="hb-cards">
-      <a class="hb-card hb-main" data-tool="video" href="studio.html?item=jeans">
+      <a class="hb-card hb-main" data-tool="video" href="studio.html?item=jeans&amp;tool=video">
         <span class="hb-im"><img data-im="sc-studio-w" src="assets/jeans-sc-studio-w.jpg" alt=""><span class="hb-ai">Створено AI</span><span class="hb-play"><i data-lucide="play"></i></span></span>
         <span class="hb-tx"><b>Відео для соцмереж</b><small>З ваших фото для TikTok і Reels</small><strong>Перше відео безкоштовно</strong></span>
-        <span class="hb-btn hb-hot"><span>Створити відео</span></span>
+        <span class="hb-btn hb-hot"><span>Підготувати відео</span></span>
       </a>
       <a class="hb-card" data-tool="photo" data-anchor href="#hb-photo">
         <span class="hb-im hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span>
@@ -73,17 +73,17 @@
         <h3 class="hb-h3">Обкладинка оголошення</h3>
         <p class="hb-note">Товар на фото без змін</p>
         <div class="hb-thumbs hb-t2">
-          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span><small>Чистий фон</small></a>
-          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti"><img data-im="blur-w" src="assets/jeans-blur-w.jpg" alt=""></span><small>Розмитий фон</small></a>
+          <a class="hb-th" data-go="photo" data-q="cv=clean" href="studio.html?item=jeans&amp;tool=photo&amp;cv=clean"><span class="hb-ti hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span><small>Чистий фон</small></a>
+          <a class="hb-th" data-go="photo" data-q="cv=blur" href="studio.html?item=jeans&amp;tool=photo&amp;cv=blur"><span class="hb-ti"><img data-im="blur-w" src="assets/jeans-blur-w.jpg" alt=""></span><small>Розмитий фон</small></a>
         </div>
       </div>
       <div class="hb-pan">
         <h3 class="hb-h3">Сцени для соцмереж</h3>
         <p class="hb-note">AI змінює фон на фото</p>
         <div class="hb-thumbs">
-          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-studio-2" src="assets/jeans-sc-studio-2.jpg" alt=""></span><small>Студія</small></a>
-          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-interior-2" src="assets/jeans-sc-interior-2.jpg" alt=""></span><small>Кімната</small></a>
-          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-street-2" src="assets/jeans-sc-street-2.jpg" alt=""></span><small>Вулиця</small></a>
+          <a class="hb-th" data-go="photo" data-q="sc=studio" href="studio.html?item=jeans&amp;tool=photo&amp;sc=studio"><span class="hb-ti hb-scene"><img data-im="sc-studio-2" src="assets/jeans-sc-studio-2.jpg" alt=""></span><small>Студія</small></a>
+          <a class="hb-th" data-go="photo" data-q="sc=interior" href="studio.html?item=jeans&amp;tool=photo&amp;sc=interior"><span class="hb-ti hb-scene"><img data-im="sc-interior-2" src="assets/jeans-sc-interior-2.jpg" alt=""></span><small>Кімната</small></a>
+          <a class="hb-th" data-go="photo" data-q="sc=street" href="studio.html?item=jeans&amp;tool=photo&amp;sc=street"><span class="hb-ti hb-scene"><img data-im="sc-street-2" src="assets/jeans-sc-street-2.jpg" alt=""></span><small>Вулиця</small></a>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@
     [].forEach.call(document.querySelectorAll('.hb-opt'), function (b) { b.setAttribute('aria-selected', String(b.dataset.item === it)); });
     $('hb-simg').src = 'assets/' + ITEMS[it][1]; $('hb-sname').textContent = ITEMS[it][0];
     [].forEach.call(document.querySelectorAll('[data-im]'), function (im) { im.src = 'assets/' + it + '-' + im.dataset.im + '.jpg'; });
-    [].forEach.call(document.querySelectorAll('[data-tool]:not([data-anchor]), [data-go]'), function (l) { var t = l.dataset.tool || l.dataset.go; l.setAttribute('href', 'studio.html?item=' + it + (t === 'video' ? '' : '&tool=' + t)); });
+    [].forEach.call(document.querySelectorAll('[data-tool]:not([data-anchor]), [data-go]'), function (l) { var t = l.dataset.tool || l.dataset.go; l.setAttribute('href', 'studio.html?item=' + it + '&tool=' + t + (l.dataset.q ? '&' + l.dataset.q : '')); });
     $('hb-cap').textContent = ITEMS[it][0] + '. Напишіть, якщо потрібні заміри.';
     if (save) try { sessionStorage.setItem('trad-hub-item', it); } catch (e) {}
   }
@@ -151,6 +151,6 @@
   }
 })();
 </script>
-<script src="shop.js?v=11241053"></script>
+<script src="shop.js?v=11241115"></script>
 </body>
 </html>

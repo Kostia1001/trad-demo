@@ -2265,6 +2265,7 @@ div.more > .card { scroll-snap-align: start; }
 
 /* рекламне фото і тексти */
 .sd-more { display: grid; gap: 8px; }
+.sd-solo .sd-more { display: none; }   /* прийшли з головної по відео: вибір уже зроблено там */
 .sd-row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 8px 12px 8px 8px; border-radius: 18px; background: var(--card); box-shadow: 0 0 0 1px var(--line); text-align: left; transition: box-shadow 0.15s; }
 .sd-row:hover { box-shadow: 0 0 0 1px var(--text-2); }
 .sd-row .th, .sd-row .ic { flex: none; width: 34px; height: 50px; border-radius: 8px; }

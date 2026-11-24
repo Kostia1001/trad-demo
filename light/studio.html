@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11241053">
+<link rel="stylesheet" href="style.css?v=11241115">
 </head>
 <!-- AI-студія: реклама для соцмереж із готового оголошення (рішення власника 22.11.2026). Стилі — tools/studio.css. -->
 <body class="acctpage wide has-bar keepbar aispage">
@@ -53,8 +53,8 @@
         <h2>Відео для TikTok та Reels</h2>
         <p>Відео на 5–8 секунд із ваших фото, з музикою, ціною й кодом TRAD. Камера рухається, річ лишається такою, як на фото.</p>
         <p class="sd-few" id="sd-few" hidden><i data-lucide="camera"></i><span>Додайте фото деталей і етикетки. <a href="create.html?step=1">Додати фото</a></span></p>
-        <button class="btn primary wide" type="button" id="sd-make">Створити відео</button>
-        <small>Перше відео — безкоштовно</small>
+        <button class="btn primary wide" type="button" id="sd-make">Створити відео безкоштовно</button>
+        <small>Зазвичай це займає до 2 хвилин</small>
       </section>
 
       <section class="sd-s sd-making">
@@ -210,8 +210,11 @@
   }
   window.openSheet = function (id) { sheet(id, true); };
   document.querySelectorAll('[data-sheet]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); sheet(b.dataset.sheet, true); }); });
-  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
+  // вікно, відкрите з головної студії (фото або тексти), після закриття повертає на головну: вибір роблять один раз там
+  var fromHub = false;
+  function shut() { var was = document.body.classList.contains('sheet-on'); sheet('', false); if (was && fromHub) location.href = 'ai-studio.html?item=' + key; }
+  document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', shut); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') shut(); });
   var toastEl = $('toast'), toastT;
   function toast(t, ms) { if (!t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, ms || 2200); }
   window.toast = toast;
@@ -322,9 +325,14 @@
     });
   });
   scenePic();
-  if (q.get('tool') === 'photo' || q.get('tool') === 'texts') sheet('sd-' + q.get('tool'), true);   /* з головної студії: одразу потрібний інструмент */
+  // з головної студії: одразу потрібний інструмент. Відео — сторінка без рядків «Фото» й «Тексти»; фото — з обраним там фоном
+  var tool = q.get('tool');
+  if (tool === 'video') main.classList.add('sd-solo');
+  if (tool === 'photo' || tool === 'texts') { fromHub = true; sheet('sd-' + tool, true); }
+  if (tool === 'photo' && (q.get('cv') === 'clean' || q.get('cv') === 'blur')) choose(q.get('cv'));
+  if (tool === 'photo' && q.get('sc')) { var sb = document.querySelector('[data-sc="' + q.get('sc') + '"]'); if (sb) { document.querySelector('button[data-pm=social]').click(); sb.click(); } }
 })();
 </script>
-<script src="shop.js?v=11241053"></script>
+<script src="shop.js?v=11241115"></script>
 </body>
 </html>
