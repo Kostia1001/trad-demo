@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11232350">
+<link rel="stylesheet" href="style.css?v=11241053">
 </head>
-<!-- AI-студія — окремий розділ кабінету (рішення власника 23.11.2026). Розстановка — як у лідера (Photoroom): плитки оголошень → що створити (великі картки) → готові фони з цією річчю → «Мої матеріали»; усе веде на studio.html?item=…. Стилі — tools/studio.css. ?item=bag, ?video=making&item=bag -->
+<!-- AI-студія — окремий розділ кабінету (рішення власника 23.11.2026). Розстановка — за рисунком, який обрав власник (refs/trad-gpt-ai-studio-hub.png, за зразком Photoroom): поле «Оголошення» → що створити (три картки з кнопками) → «Фото товару» (панелі готових фонів) → «Мої матеріали»; усе веде на studio.html?item=…. Стилі — tools/studio.css. ?item=bag, ?video=making&item=bag -->
 <body class="acctpage wide has-bar keepbar">
 <header class="top">
   <div class="top-row">
@@ -36,55 +36,62 @@
 <aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
 
 <main class="page ahp" id="ahp">
-  <section class="hb-sec" aria-labelledby="hb-h0">
-    <h2 class="hb-h" id="hb-h0">Оголошення</h2>
-    <div class="hb-items" role="radiogroup" aria-labelledby="hb-h0">
-      <button class="hb-item" type="button" role="radio" aria-checked="true" data-item="jeans"><img src="assets/jeans-1.jpg" alt=""><span><b>Джинси Levi’s 501</b><small class="num">900&nbsp;грн</small></span></button>
-      <button class="hb-item" type="button" role="radio" aria-checked="false" data-item="bag"><img src="assets/bag-w.jpg" alt=""><span><b>Сумка шкіряна</b><small class="num">1&nbsp;100&nbsp;грн</small></span></button>
-      <button class="hb-item" type="button" role="radio" aria-checked="false" data-item="hoodie"><img src="assets/hoodie-w.jpg" alt=""><span><b>Худі сіре</b><small class="num">650&nbsp;грн</small></span></button>
+  <div class="hb-pick">
+    <button class="hb-sel" type="button" id="hb-sel" aria-haspopup="listbox" aria-expanded="false" aria-controls="hb-list">
+      <span class="hb-lab">Оголошення</span><img id="hb-simg" src="assets/jeans-1.jpg" alt=""><b id="hb-sname">Джинси Levi’s 501</b><i data-lucide="chevron-down"></i>
+    </button>
+    <div class="hb-list" id="hb-list" role="listbox" aria-label="Оголошення" hidden>
+      <button class="hb-opt" type="button" role="option" aria-selected="true" data-item="jeans"><img src="assets/jeans-1.jpg" alt=""><span><b>Джинси Levi’s 501</b><small class="num">900&nbsp;грн</small></span></button>
+      <button class="hb-opt" type="button" role="option" aria-selected="false" data-item="bag"><img src="assets/bag-w.jpg" alt=""><span><b>Сумка шкіряна</b><small class="num">1&nbsp;100&nbsp;грн</small></span></button>
+      <button class="hb-opt" type="button" role="option" aria-selected="false" data-item="hoodie"><img src="assets/hoodie-w.jpg" alt=""><span><b>Худі сіре</b><small class="num">650&nbsp;грн</small></span></button>
     </div>
-  </section>
+  </div>
   <section class="hb-sec" aria-labelledby="hb-h1">
     <h2 class="hb-h" id="hb-h1">Що хочете створити?</h2>
     <div class="hb-cards">
       <a class="hb-card hb-main" data-tool="video" href="studio.html?item=jeans">
-        <span class="hb-im"><img data-im="sc-studio-w" src="assets/jeans-sc-studio-w.jpg" alt=""><span class="hb-ai">Створено AI</span><span class="hb-play"><i data-lucide="play"></i></span><span class="hb-free">Перше відео безкоштовно</span></span>
-        <span class="hb-ft"><span class="hb-t"><b>Відео для соцмереж</b><small>Для TikTok і Reels</small></span><span class="hb-go"><i data-lucide="arrow-right"></i></span></span>
+        <span class="hb-im"><img data-im="sc-studio-w" src="assets/jeans-sc-studio-w.jpg" alt=""><span class="hb-ai">Створено AI</span><span class="hb-play"><i data-lucide="play"></i></span></span>
+        <span class="hb-tx"><b>Відео для соцмереж</b><small>З ваших фото для TikTok і Reels</small><strong>Перше відео безкоштовно</strong></span>
+        <span class="hb-btn hb-hot"><span>Створити відео</span></span>
       </a>
-      <a class="hb-card" data-tool="photo" href="studio.html?item=jeans&amp;tool=photo">
+      <a class="hb-card" data-tool="photo" data-anchor href="#hb-photo">
         <span class="hb-im hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span>
-        <span class="hb-ft"><span class="hb-t"><b>Фото товару</b><small>Обкладинка або фото для соцмереж</small></span><span class="hb-go"><i data-lucide="arrow-right"></i></span></span>
+        <span class="hb-tx"><b>Фото товару</b><small>Обкладинка оголошення або фото для соцмереж</small></span>
+        <span class="hb-btn"><span>Обрати фон</span><i data-lucide="arrow-right"></i></span>
       </a>
       <a class="hb-card" data-tool="texts" href="studio.html?item=jeans&amp;tool=texts">
-        <span class="hb-im hb-post"><img data-im="sc-interior-1" src="assets/jeans-sc-interior-1.jpg" alt=""><span class="hb-cap" id="hb-cap">Джинси Levi’s 501. Напишіть, якщо потрібні заміри.</span></span>
-        <span class="hb-ft"><span class="hb-t"><b>Текст для допису</b><small>Instagram, Facebook, Telegram</small></span><span class="hb-go"><i data-lucide="arrow-right"></i></span></span>
+        <span class="hb-im hb-post"><i class="hb-tic" data-lucide="text"></i><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""><span class="hb-cap" id="hb-cap">Джинси Levi’s 501. Напишіть, якщо потрібні заміри.</span></span>
+        <span class="hb-tx"><b>Текст для допису</b><small>Підпис для Instagram, Facebook і Telegram</small></span>
+        <span class="hb-btn"><span>Створити текст</span><i data-lucide="arrow-right"></i></span>
       </a>
     </div>
   </section>
-  <div class="hb-two">
-    <section class="hb-sec" aria-labelledby="hb-h2">
-      <h2 class="hb-h" id="hb-h2">Обкладинка оголошення</h2>
-      <p class="hb-note">Товар на фото без змін</p>
-      <div class="hb-thumbs">
-        <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti"><img data-im="orig" src="assets/jeans-1.jpg" alt=""></span><small>Як є</small></a>
-        <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span><small>Чистий фон</small></a>
-        <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti"><img data-im="blur-w" src="assets/jeans-blur-w.jpg" alt=""></span><small>Розмитий фон</small></a>
+  <section class="hb-sec" id="hb-photo" aria-labelledby="hb-h2">
+    <h2 class="hb-h" id="hb-h2">Фото товару</h2>
+    <div class="hb-two">
+      <div class="hb-pan">
+        <h3 class="hb-h3">Обкладинка оголошення</h3>
+        <p class="hb-note">Товар на фото без змін</p>
+        <div class="hb-thumbs hb-t2">
+          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span><small>Чистий фон</small></a>
+          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti"><img data-im="blur-w" src="assets/jeans-blur-w.jpg" alt=""></span><small>Розмитий фон</small></a>
+        </div>
       </div>
-    </section>
-    <section class="hb-sec" aria-labelledby="hb-h3">
-      <h2 class="hb-h" id="hb-h3">Сцени для соцмереж</h2>
-      <p class="hb-note">AI змінює фон на фото</p>
-      <div class="hb-thumbs">
-        <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-studio-2" src="assets/jeans-sc-studio-2.jpg" alt=""><span class="hb-ai">AI</span></span><small>Студія</small></a>
-        <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-interior-2" src="assets/jeans-sc-interior-2.jpg" alt=""><span class="hb-ai">AI</span></span><small>Кімната</small></a>
-        <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-street-2" src="assets/jeans-sc-street-2.jpg" alt=""><span class="hb-ai">AI</span></span><small>Вулиця</small></a>
+      <div class="hb-pan">
+        <h3 class="hb-h3">Сцени для соцмереж</h3>
+        <p class="hb-note">AI змінює фон на фото</p>
+        <div class="hb-thumbs">
+          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-studio-2" src="assets/jeans-sc-studio-2.jpg" alt=""></span><small>Студія</small></a>
+          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-interior-2" src="assets/jeans-sc-interior-2.jpg" alt=""></span><small>Кімната</small></a>
+          <a class="hb-th" data-go="photo" href="studio.html?item=jeans&amp;tool=photo"><span class="hb-ti hb-scene"><img data-im="sc-street-2" src="assets/jeans-sc-street-2.jpg" alt=""></span><small>Вулиця</small></a>
+        </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
   <section class="hb-sec" aria-labelledby="hb-h4">
     <h2 class="hb-h" id="hb-h4">Мої матеріали</h2>
     <div class="ah-mine" id="ah-mine">
-      <a class="ah-row" href="studio.html?video=ready&amp;push=0"><span class="ah-vth"><img src="assets/jeans-v.jpg" alt=""><i data-lucide="play"></i></span><span class="ah-t"><b>Відео · Джинси Levi’s 501</b><small>За 3 дні · <strong class="num">120</strong> переходів<br>2 людини написали вам</small></span><i class="ah-chev" data-lucide="chevron-right"></i></a>
+      <a class="ah-row hb-mat" href="studio.html?video=ready&amp;push=0"><span class="ah-vth hb-vsq"><img src="assets/jeans-sc-studio-w.jpg" alt=""><span class="hb-play"><i data-lucide="play"></i></span></span><span class="ah-t"><b>Відео · Джинси Levi’s 501</b><span class="hb-tagai">Створено AI</span><small>За 3 дні · <strong class="num">120</strong> переходів<br>2 людини написали вам</small></span><span class="hb-view"><span>Переглянути відео</span><i data-lucide="arrow-right"></i></span></a>
     </div>
   </section>
 </main>
@@ -105,20 +112,23 @@
   window.openSheet = function (id) { sheet(id, true); };
   document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
-  // оголошення обирають плиткою: усі приклади нижче й посилання — для цієї речі
+  // оголошення обирають у полі зверху: усі приклади нижче й посилання — для цієї речі
   var ITEMS = { jeans: ['Джинси Levi’s 501', 'jeans-1.jpg'], bag: ['Сумка шкіряна', 'bag-w.jpg'], hoodie: ['Худі сіре', 'hoodie-w.jpg'] };
+  var sel = $('hb-sel'), list = $('hb-list');
+  function drop(on) { list.hidden = !on; sel.setAttribute('aria-expanded', String(on)); }
   function pick(it, save) {
     if (!ITEMS[it]) it = 'jeans';
-    [].forEach.call(document.querySelectorAll('.hb-item'), function (b) {
-      var on = b.dataset.item === it; b.setAttribute('aria-checked', String(on));
-      if (on) b.parentNode.scrollLeft = Math.max(0, b.offsetLeft - b.parentNode.offsetLeft - 16);   // на телефоні обрана плитка — у кадрі
-    });
-    [].forEach.call(document.querySelectorAll('[data-im]'), function (im) { im.src = 'assets/' + (im.dataset.im === 'orig' ? ITEMS[it][1] : it + '-' + im.dataset.im + '.jpg'); });
-    [].forEach.call(document.querySelectorAll('[data-tool], [data-go]'), function (l) { var t = l.dataset.tool || l.dataset.go; l.setAttribute('href', 'studio.html?item=' + it + (t === 'video' ? '' : '&tool=' + t)); });
+    [].forEach.call(document.querySelectorAll('.hb-opt'), function (b) { b.setAttribute('aria-selected', String(b.dataset.item === it)); });
+    $('hb-simg').src = 'assets/' + ITEMS[it][1]; $('hb-sname').textContent = ITEMS[it][0];
+    [].forEach.call(document.querySelectorAll('[data-im]'), function (im) { im.src = 'assets/' + it + '-' + im.dataset.im + '.jpg'; });
+    [].forEach.call(document.querySelectorAll('[data-tool]:not([data-anchor]), [data-go]'), function (l) { var t = l.dataset.tool || l.dataset.go; l.setAttribute('href', 'studio.html?item=' + it + (t === 'video' ? '' : '&tool=' + t)); });
     $('hb-cap').textContent = ITEMS[it][0] + '. Напишіть, якщо потрібні заміри.';
     if (save) try { sessionStorage.setItem('trad-hub-item', it); } catch (e) {}
   }
-  [].forEach.call(document.querySelectorAll('.hb-item'), function (b) { b.addEventListener('click', function () { pick(b.dataset.item, true); }); });
+  sel.addEventListener('click', function () { drop(list.hidden); });
+  [].forEach.call(document.querySelectorAll('.hb-opt'), function (b) { b.addEventListener('click', function () { pick(b.dataset.item, true); drop(false); sel.focus(); }); });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.hb-pick')) drop(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !list.hidden) { drop(false); sel.focus(); } });
   var saved = null; try { saved = sessionStorage.getItem('trad-hub-item'); } catch (e) {}
   pick(q.get('item') || saved || 'jeans');
   // закрили студію, поки AI робить відео: рядок «Робимо відео», потім сповіщення «Відео готове»
@@ -141,6 +151,6 @@
   }
 })();
 </script>
-<script src="shop.js?v=11232350"></script>
+<script src="shop.js?v=11241053"></script>
 </body>
 </html>
