@@ -953,7 +953,7 @@
         lst.insertBefore(nbuy, lst.firstChild);
         nbuy.after(el('<div class="nrow new" id="nconf"><span class="ic"><i data-lucide="handshake"></i></span><div class="b"><div class="tt">Максим просить підтвердити продаж</div><div class="tx">Сумка шкіряна, коричнева</div><a class="mini" href="dialog.html?as=seller&amp;confirm=1">Відкрити розмову</a><div class="tm">13:10</div></div></div>'));
         var exp = $$('.nrow', lst).filter(function (r) { return /завершується/.test(r.textContent); })[0];
-        var nup = el('<div class="nrow" id="nup"><span class="ic"><i data-lucide="arrow-up"></i></span><div class="b"><div class="tt">Підніміть оголошення про джинси</div><div class="tx">Оголошення стане першим у категорії «Жіночий одяг» за сортуванням «Спочатку нові».</div><a class="mini" href="promote.html?item=jeans">Підняти за 19 грн</a><div class="tm">вчора</div></div></div>');
+        var nup = el('<div class="nrow" id="nup"><span class="ic"><i data-lucide="arrow-up"></i></span><div class="b"><div class="tt">Підніміть оголошення про джинси</div><div class="tx">Оголошення стане першим у стрічці категорії «Жіночий одяг» за сортуванням «Спочатку нові».</div><a class="mini" href="promote.html?item=jeans">Підняти за 19 грн</a><div class="tm">вчора</div></div></div>');
         if (exp) exp.before(nup); else lst.appendChild(nup);
       }
     }
@@ -993,13 +993,17 @@
           var day = q.get('day') === '1', cat = up === 'bag' ? 'Сумки' : 'Жіночий одяг';
           var line = svc === 'top' ? 'Оголошення в ряду «Топ» над каталогом категорії «' + cat + '» до 14:32 1 грудня.'
             : svc === 'three' ? 'Виконано 1 із 3 піднять. Наступне — завтра о 14:32.'
-            : (day ? '24 листопада' : 'Сьогодні') + ' о 14:32 оголошення стало першим у категорії «' + cat + '».';
+            : (day ? '24 листопада' : 'Сьогодні') + ' о 14:32 оголошення стало першим у стрічці категорії «' + cat + '».';
           var stat = day ? '<table><tr><th></th><th>24 год до<small>23.11, 14:32 — 24.11, 14:32</small></th><th>24 год після<small>24.11, 14:32 — 25.11, 14:32</small></th></tr><tr><td>Перегляди</td><td>12</td><td><b>47</b></td></tr><tr><td>Повідомлення</td><td>1</td><td><b>3</b></td></tr></table>' : '<p>Дані для порівняння ще збираються.</p>';
           note.className = 'note pm-res';
+          if (q.get('pay') === 'wait') {      /* оплату надіслано, банк ще не відповів (людина закрила вікно чи сторінка не оновилась) */
+            note.innerHTML = '<div class="pm-r1"><span class="py-spin" aria-hidden="true"></span><span>Перевіряємо оплату. Зазвичай це займає до хвилини.</span></div><span class="pm-links"><a class="pm-see" href="my.html?up=' + up + '&svc=' + svc + '">Оновити статус</a></span>';
+          } else {
           note.innerHTML = '<div class="pm-r1"><i data-lucide="circle-check"></i><span>' + line + '</span></div><span class="pm-links"><a class="pm-see" href="catalog.html?' + (svc === 'top' ? 'top' : 'up') + '=' + up + '">Переглянути в каталозі</a><button class="pm-see" type="button" aria-expanded="' + day + '" aria-controls="pm-stat">Переглянути результат<i data-lucide="chevron-down"></i></button></span><div class="pm-stat" id="pm-stat"' + (day ? '' : ' hidden') + '><b>Перегляди й повідомлення</b>' + stat + '</div>';
           $('button.pm-see', note).addEventListener('click', function () {
             var o = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', String(o)); $('.pm-stat', note).hidden = !o;
           });
+          }
         }
       }
     }
@@ -1013,7 +1017,7 @@
       if (mine) {
         if (cards.indexOf(mine) < 4 && cards[4]) cards[4].after(mine);      /* до підняття — нижче в стрічці */
         var ttl = $('.title', mine);
-        if (ttl && !$('.pm-paid', mine)) ttl.after(el('<div class="pm-paid" title="Продавець оплатив підняття. Оголошення піднялося на перше місце в категорії за сортуванням «Спочатку нові». Нові оголошення з’являються вище.">Платне підняття</div>'));
+        if (ttl && !$('.pm-paid', mine)) ttl.after(el('<div class="pm-paid" title="Продавець оплатив підняття. Оголошення піднялося на перше місце у стрічці категорії за сортуванням «Спочатку нові». Нові оголошення з’являються вище.">Платне підняття</div>'));
         var tw = document.createTreeWalker(mine, NodeFilter.SHOW_TEXT), tn;   /* час у картці — час підняття */
         while ((tn = tw.nextNode())) if (/·\s*(сьогодні|вчора)/.test(tn.nodeValue)) tn.nodeValue = tn.nodeValue.replace(/·.*$/, '· 14:32');
         setTimeout(function () {
@@ -1030,19 +1034,39 @@
         }, 900);
       }
     }
-    /* каталог: оплачений «Топ» — окремий ряд над каталогом, на кожній картці «Топ · Реклама» (?top=jeans|hoodie) */
-    if (page === 'catalog.html' && q.get('top')) {
+    /* каталог: ряд «Топ» — постійна частина каталогу категорії. У ньому оголошення, за які продавці оплатили «Топ на 7 днів»:
+       до 4 на компʼютері, до 2 на телефоні; якщо оплачених немає (інші розділи, пошук, порожня видача) — ряду немає.
+       Ряд лежить на підкладці з підписом «Оплачені оголошення»; на фото позначок немає (24.11.2026, вибір із трьох малюнків Codex — menu/codex/topmark-3.png).
+       ?top=jeans|hoodie — своє оголошення після оплати стоїть у ряду першим і не повторюється у стрічці */
+    if (page === 'catalog.html' && !q.get('q') && q.get('empty') !== '1' && (!q.get('cat') || q.get('cat') === 'women')) {
+      var TOPS = [['jeans-light.jpg', '750', 'Джинси мом', 'Вживане · W30 L30', 'Львів · сьогодні'], ['it-scarf.jpg', '250', 'Шарф вовняний', 'Вживане', 'Харків · вчора'],
+        ['jeans-black.jpg', '1 100', 'Джинси чорні слім', 'Вживане · W27 L32', 'Київ · сьогодні'], ['it-crossbody.jpg', '850', 'Сумка через плече, чорна', 'Вживане', 'Одеса · сьогодні']];
       var RT = { jeans: /Levi/, hoodie: /Худі сіре/ }[q.get('top')];
       var tg0 = $('#grid') || $('main .grid'), tc = tg0 ? $$('.card', tg0) : [];
       var tm = RT && tc.filter(function (c) { return RT.test(c.textContent); })[0];
-      if (tm && !$('.pm-topg')) {
-        var th2 = el('<h2 class="pm-toph2">Топ</h2>'), tg = el('<div class="grid tight pm-topg"></div>');
-        [tm].concat(tc.filter(function (c) { return c !== tm && !$('.state', c); }).slice(3, 6)).forEach(function (c) {
-          var k = c.cloneNode(true);
-          $('.frame', k).appendChild(el('<span class="state pm-ad" title="Продавець оплатив показ цього оголошення протягом 7 днів в окремому ряду «Топ» над каталогом цієї категорії.">Топ · Реклама</span>'));
-          tg.appendChild(k);
-        });
-        tg0.before(th2); th2.after(tg);
+      var tpl = tc.filter(function (c) { return !$('.state', c); })[0];
+      if (tpl && !$('.pm-topg')) {
+        var mark = function (k) {
+          var sg = $('.segs', k); if (sg) sg.parentNode.removeChild(sg);
+          var fv = $('.fav', k); if (fv) { fv.setAttribute('aria-pressed', 'false'); fv.setAttribute('aria-label', 'Додати в обране'); }
+          return k;
+        };
+        var make = function (x) {
+          var k = tpl.cloneNode(true), im = $('img', k), mt = $('.meta', k);
+          im.src = 'assets/' + x[0].replace('.jpg', '-w.jpg'); im.setAttribute('data-base', 'assets/' + x[0]);
+          $('.price', k).innerHTML = x[1].replace(/ /g, '&nbsp;') + '&nbsp;грн'; $('.title', k).textContent = x[2];
+          var at = $('.attrs', k); if (at) at.textContent = x[3];
+          if (mt && mt.lastChild) mt.lastChild.nodeValue = x[4];
+          return mark(k);
+        };
+        var th = el('<div class="pm-toprow"><span><h2 class="pm-toph2" id="pm-toph2">Топ</h2><small class="pm-sub">Оплачені оголошення</small></span><button class="pm-why" type="button" aria-expanded="false" aria-controls="pm-whyt">Чому я це бачу?</button></div>');
+        var tp = el('<section class="pm-toppanel" aria-labelledby="pm-toph2"></section>');
+        var tw = el('<p class="pm-whyt" id="pm-whyt" hidden>Продавці оплатили просування цих оголошень. Вони показуються в ряду «Топ», якщо відповідають вибраній категорії та фільтрам.</p>');
+        var tg = el('<div class="grid tight pm-topg"></div>');
+        if (tm) { tg.appendChild(mark(tm.cloneNode(true))); tm.hidden = true; }
+        TOPS.slice(0, tm ? 3 : 4).forEach(function (x) { tg.appendChild(make(x)); });
+        tg0.before(tp); tp.appendChild(th); tp.appendChild(tw); tp.appendChild(tg);
+        $('.pm-why', th).addEventListener('click', function () { var on = tw.hidden; tw.hidden = !on; this.setAttribute('aria-expanded', String(on)); });
         tg.addEventListener('click', function (e) { var f = e.target.closest('.fav'); if (!f) return; e.preventDefault(); f.setAttribute('aria-pressed', String(f.getAttribute('aria-pressed') !== 'true')); });
       }
     }
@@ -1052,6 +1076,15 @@
     var cur = { 'favorites.html': 'favorites.html', 'chat.html': 'chat.html', 'notifications.html': 'notifications.html' }[page];
     if (cur) $$('.desk .icon-btn[href="' + cur + '"]').forEach(function (a) { a.setAttribute('aria-current', 'page'); });
     if (page === 'notifications.html') $$('#list .mini.hot').forEach(function (b) { if (/Поновити/.test(b.textContent)) b.classList.remove('hot'); });
+    if (page === 'rules.html') {      /* «Платні послуги»: сюди ведуть «публічна оферта» й «Умови повернення коштів» з вікна оплати */
+      var rh = $$('main.doc h2').filter(function (h) { return /Що буде за порушення/.test(h.textContent); })[0];
+      if (rh && !$('#paid')) {
+        rh.before(el('<h2 id="paid">Платні послуги</h2>'));
+        rh.before(el('<p>Просування оголошення — платна послуга. Ви бачите ціну до оплати. Просування починається одразу після підтвердження оплати. Квитанцію надішлемо на вашу електронну пошту.</p>'));
+        rh.before(el('<p>Якщо гроші списано, а просування не почалося, зверніться до служби підтримки. Ми перевіримо платіж і повернемо кошти.</p>'));
+        if (location.hash === '#paid') $('#paid').scrollIntoView();
+      }
+    }
     if (page === 'help.html') {
       var hm = $('main.page.doc'), sup = $('#support');
       if (hm && sup && !$('#helptop')) {

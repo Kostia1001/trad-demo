@@ -10,9 +10,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11241446">
+<link rel="stylesheet" href="style.css?v=11242319">
 </head>
-<!-- «Просування оголошення»: три послуги — «Підняття», «3 підняття», «Топ на 7 днів» (24.11.2026; ціни — приклад). Вибір за місцем у каталозі: ліворуч послуги, праворуч превʼю каталогу. Малюнок — menu/codex/promo2-1.png, стилі — tools/trust.css. ?item=jeans|hoodie|bag, ?svc=lift|three|top -->
+<!-- «Просування оголошення»: три послуги — «Підняття», «3 підняття», «Топ на 7 днів» (24.11.2026; ціни — приклад). Вибір за місцем у каталозі: ліворуч послуги, праворуч превʼю каталогу. Малюнок — menu/codex/promo2-1.png, стилі — tools/trust.css. ?item=jeans|hoodie|bag, ?svc=lift|three|top.
+     Оплата — вікно поверх сторінки (#py): замовлення, Apple Pay або Google Pay, картка. ?pay=1 — одразу відкрите, ?pay=fail — перша спроба з відмовою банку,
+     ?card=saved — картку вже збережено, ?card=new — забути збережену, ?wallet=apple|google|none -->
 <body class="acctpage wide has-bar keepbar">
 <header class="top">
   <div class="top-row">
@@ -40,15 +42,46 @@
   <div class="pm-grid">
     <div class="pm-left">
       <fieldset class="pm-opts" aria-label="Послуга">
-        <label class="pm-opt is-sel"><input type="radio" name="svc" value="lift" checked><span class="pm-rd"></span><span class="pm-tx"><b>Підняття</b><small>Один раз стане першим у категорії</small></span><span class="pm-pr num">19&nbsp;грн</span></label>
+        <label class="pm-opt is-sel"><input type="radio" name="svc" value="lift" checked><span class="pm-rd"></span><span class="pm-tx"><b>Підняття</b><small>Один раз стане першим у стрічці категорії</small></span><span class="pm-pr num">19&nbsp;грн</span></label>
         <label class="pm-opt"><input type="radio" name="svc" value="three"><span class="pm-rd"></span><span class="pm-tx"><b>3 підняття</b><small>Раз на день, 3 дні поспіль</small></span><span class="pm-pr num">29&nbsp;грн</span></label>
         <label class="pm-opt"><input type="radio" name="svc" value="top"><span class="pm-rd"></span><span class="pm-tx"><b>Топ на 7 днів</b><small>Окремий ряд над каталогом категорії</small></span><span class="pm-pr num">49&nbsp;грн</span></label>
       </fieldset>
-      <div class="pr-pay pm-pay"><button class="btn primary wide" type="button" id="pr-pay"><span class="pr-lbl" id="pm-lbl">Сплатити 19&nbsp;грн</span><span class="pr-ld" aria-hidden="true"><i></i></span></button><p class="pm-ways">Банківська картка, Apple Pay або Google Pay</p></div>
+      <div class="pr-pay pm-pay"><button class="btn primary wide" type="button" id="pr-pay" aria-haspopup="dialog"><span class="pr-lbl" id="pm-lbl">Перейти до оплати · 19&nbsp;грн</span><span class="pr-ld" aria-hidden="true"><i></i></span></button><p class="pm-ways">Банківська картка, Apple Pay або Google Pay</p></div>
     </div>
     <div class="pm-pv" id="pm-pv"></div>
   </div>
 </main>
+
+<div class="scrim" id="py-scrim"></div>
+<section class="sheet py" id="py" role="dialog" aria-modal="true" aria-labelledby="py-h" tabindex="-1">
+  <div class="sheet-head"><h2 id="py-h">Оплата просування</h2><button class="x" type="button" id="py-x" aria-label="Закрити оплату"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body py-body">
+    <div class="py-order"><img id="py-img" src="assets/jeans-1.jpg" alt=""><span class="py-ot"><b id="py-svc">Підняття</b><small id="py-nm">Джинси Levi’s 501, W32 L32</small></span><span class="py-sum num" id="py-sum">19&nbsp;грн</span></div>
+    <p class="py-rc">Квитанцію надішлемо на o•••a@gmail.com</p>
+    <div id="py-main">
+      <button class="py-wal" type="button" id="py-wal"></button>
+      <div class="py-or" id="py-or"><span>або карткою</span></div>
+      <div class="py-saved" id="py-saved" role="radiogroup" aria-label="Картка" hidden>
+        <label class="py-card is-sel"><input type="radio" name="pcard" value="saved" checked><span class="pm-rd"></span><span id="py-sl">Mastercard •• 4421</span></label>
+        <label class="py-card"><input type="radio" name="pcard" value="new"><span class="pm-rd"></span><span>Інша картка</span></label>
+      </div>
+      <form class="py-form" id="py-form" novalidate>
+        <div class="py-f"><label for="py-num">Номер картки</label><input class="input num" id="py-num" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" maxlength="19"></div>
+        <div class="py-f2">
+          <div class="py-f"><label for="py-exp">Термін дії</label><input class="input num" id="py-exp" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="ММ/РР" maxlength="5"></div>
+          <div class="py-f"><label for="py-cvv">Код CVV</label><input class="input num" id="py-cvv" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="000" maxlength="3"></div>
+        </div>
+        <p class="py-err" id="py-err" role="alert" hidden></p>
+        <label class="py-keep"><input type="checkbox" id="py-keep"><span class="py-box" aria-hidden="true"></span><span>Зберегти картку для наступних оплат</span></label>
+      </form>
+    </div>
+    <div class="py-state" id="py-state" role="status" hidden></div>
+  </div>
+  <div class="sheet-foot py-foot" id="py-foot">
+    <div class="pr-pay py-pay"><button class="btn primary wide" type="button" id="py-go"><span class="pr-lbl" id="py-lbl">Сплатити 19&nbsp;грн</span><span class="pr-ld" aria-hidden="true"><i></i>Опрацьовуємо платіж…</span></button></div>
+    <p class="py-legal">Натискаючи «Сплатити», ви приймаєте <a href="rules.html#paid">публічну оферту</a> й просите почати просування одразу після оплати. <a href="rules.html#paid">Умови повернення коштів</a></p>
+  </div>
+</section>
 
 <div class="toast" id="toast" role="status"></div>
 <script src="assets/icons/lucide.min.js"></script>
@@ -82,28 +115,102 @@
   var head = '<div class="pm-pvh"><b>' + it.cat + '</b><span class="pm-sort">Спочатку нові<i data-lucide="chevron-down"></i></span></div>';
   /* превʼю: шматок каталогу очима покупця — де опиниться оголошення */
   function draw(k) {
-    if (k === 'top') pv.innerHTML = head + '<div class="pm-toph">Топ</div><div class="pm-row">' + mine('Топ · Реклама') + other(4) + other(5) + '</div><div class="pm-sep"></div><div class="pm-row">' + other(0) + other(1) + other(2) + '</div><p class="pm-cap">Окремий ряд над каталогом</p>';
-    else pv.innerHTML = head + '<div class="pm-row">' + mine('Платне підняття', true) + other(0) + other(1) + other(2) + other(3) + other(4) + '</div><p class="pm-cap">' + (k === 'three' ? 'Раз на день, 3 дні поспіль. ' : '') + 'У сортуванні «Спочатку нові» нові оголошення з’являтимуться вище</p>';
+    if (k === 'top') pv.innerHTML = head + '<div class="pm-tp"><div class="pm-toph">Топ<small>Оплачені оголошення</small></div><div class="pm-row">' + mine() + other(4) + other(5) + '</div></div><div class="pm-row">' + other(0) + other(1) + other(2) + '</div><p class="pm-cap">Окремий ряд над каталогом</p>';
+    else pv.innerHTML = head + '<div class="pm-tpbar"><b>Топ</b><small>Оплачені оголошення</small></div><div class="pm-row">' + mine('Платне підняття', true) + other(0) + other(1) + other(2) + other(3) + other(4) + '</div><p class="pm-cap">' + (k === 'three' ? 'Раз на день, 3 дні поспіль. ' : '') + 'У сортуванні «Спочатку нові» нові оголошення з’являтимуться вище</p>';
     lucide.createIcons();
   }
   function pick(k, move) {
     var was = pv.querySelector('.pm-c.me'), a = was && was.getBoundingClientRect();
     svc = k;
     all('.pm-opt').forEach(function (o) { var i = o.querySelector('input'), on = i.value === k; o.classList.toggle('is-sel', on); i.checked = on; });
-    lbl.textContent = 'Сплатити ' + money(PRICE[k]);
+    lbl.textContent = 'Перейти до оплати · ' + money(PRICE[k]);
     draw(k);
     var now = pv.querySelector('.pm-c.me'), b = now.getBoundingClientRect();   /* картка переїжджає на нове місце */
     if (move && a && now.animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && (a.top !== b.top || a.left !== b.left))
       now.animate([{ transform: 'translate(' + (a.left - b.left) + 'px,' + (a.top - b.top) + 'px)' }, { transform: 'none' }], { duration: 400, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
   }
   all('.pm-opt input').forEach(function (i) { i.addEventListener('change', function () { pick(i.value, true); }); });
-  pay.addEventListener('click', function () {
-    pay.classList.add('pr-loading'); pay.setAttribute('aria-busy', 'true');
-    setTimeout(function () { location.href = 'my.html?up=' + key + '&svc=' + svc; }, 1200);   /* для показу: оплата пройшла — одразу видно результат */
+  /* ---- вікно оплати: замовлення → Apple Pay / Google Pay або картка → результат у «Моїх оголошеннях» ---- */
+  var SVC = { lift: 'Підняття', three: '3 підняття', top: 'Топ на 7 днів' };
+  var APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>Pay</span>';
+  var GOOGLE = '<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Pay</span>';
+  var pyGo = $('py-go'), pyLbl = $('py-lbl'), pyMain = $('py-main'), pyState = $('py-state'), pyFoot = $('py-foot'), pyForm = $('py-form'), pySaved = $('py-saved'), pyWal = $('py-wal'), pyErr = $('py-err');
+  var num = $('py-num'), exp = $('py-exp'), cvv = $('py-cvv'), keep = $('py-keep');
+  var LS = 'trad-pay-card', busy = false, failNext = q.get('pay') === 'fail';
+  function mem(v) { try { if (v === null) localStorage.removeItem(LS); else if (v) localStorage.setItem(LS, v); return localStorage.getItem(LS); } catch (e) { return null; } }
+  if (q.get('card') === 'new') mem(null);
+  var saved = q.get('card') === 'saved' ? 'Mastercard •• 4421' : mem();
+  var wq = q.get('wallet'), wallet = wq === 'none' ? '' : (wq === 'apple' || wq === 'google') ? wq : (/Mac|iPhone|iPad|iPod/.test(navigator.platform || '') ? 'apple' : 'google');
+  var WNAME = { apple: 'Apple Pay', google: 'Google Pay' };
+  function newCard() { var r = document.querySelector('input[name=pcard]:checked'); return !saved || (r && r.value === 'new'); }
+  function paint() {   /* що показати: гаманець пристрою, збережену картку або поля нової */
+    pyWal.hidden = !wallet; $('py-or').hidden = !wallet;
+    if (wallet) { pyWal.innerHTML = wallet === 'apple' ? APPLE : GOOGLE; pyWal.className = 'py-wal ' + wallet; pyWal.setAttribute('aria-label', 'Сплатити через ' + WNAME[wallet]); }
+    pySaved.hidden = !saved; if (saved) $('py-sl').textContent = saved;
+    all('.py-card').forEach(function (c) { c.classList.toggle('is-sel', c.querySelector('input').checked); });
+    pyForm.hidden = !newCard();
+  }
+  function view(v) { pyMain.hidden = v !== 'form'; pyFoot.hidden = v !== 'form'; pyState.hidden = v === 'form'; }
+  function state(html) { pyState.innerHTML = html; view('state'); lucide.createIcons(); }
+  function lock(on) { busy = on; pyGo.classList.toggle('pr-loading', on); if (on) pyGo.setAttribute('aria-busy', 'true'); else pyGo.removeAttribute('aria-busy'); $('py-x').hidden = on; }
+  function openPay() {
+    $('py-img').src = A + it.img; $('py-svc').textContent = SVC[svc]; $('py-nm').textContent = it.name; $('py-sum').textContent = money(PRICE[svc]); pyLbl.textContent = 'Сплатити ' + money(PRICE[svc]);
+    lock(false); view('form'); paint(); document.body.classList.add('sheet-on'); setTimeout(function () { $('py').focus(); }, 80);
+  }
+  function closePay() { if (busy || !document.body.classList.contains('sheet-on')) return; document.body.classList.remove('sheet-on'); pay.focus(); }
+  function done() { location.href = 'my.html?up=' + key + '&svc=' + svc; }   /* для показу: оплата пройшла — одразу видно результат */
+  function fail(kind) {
+    failNext = false; lock(false);
+    state('<i data-lucide="circle-alert"></i><b>Банк відхилив оплату</b><p>Гроші не списано.</p><div class="py-acts"><button class="btn primary wide" type="button" data-py="again">Спробувати ще раз</button>' + (kind === 'saved' ? '<button class="btn ghost wide" type="button" data-py="other">Інша картка</button>' : '') + '</div>');
+    var b = pyState.querySelector('button'); if (b) b.focus();
+  }
+  function finish(kind) { if (failNext) fail(kind); else done(); }
+  function bad(el, text) { [num, exp, cvv].forEach(function (i) { i.classList.toggle('need', i === el); if (i === el) i.setAttribute('aria-invalid', 'true'); else i.removeAttribute('aria-invalid'); }); pyErr.textContent = text || ''; pyErr.hidden = !text; if (el) el.focus(); return !el; }
+  function check() {
+    var d = num.value.replace(/\D/g, ''), e = exp.value.split('/'), m = +e[0], y = +e[1], now = new Date(), cy = now.getFullYear() % 100, cm = now.getMonth() + 1;
+    if (d.length !== 16) return bad(num, 'Перевірте номер картки');
+    if (!(e.length === 2 && e[1].length === 2 && m >= 1 && m <= 12 && (y > cy || (y === cy && m >= cm)))) return bad(exp, 'Перевірте термін дії');
+    if (cvv.value.length !== 3) return bad(cvv, 'Перевірте код CVV');
+    return bad(null);
+  }
+  function payCard() {
+    if (busy) return;
+    if (!newCard()) { lock(true); setTimeout(function () { finish('saved'); }, 1300); return; }
+    if (!check()) return;
+    lock(true);
+    setTimeout(function () {   /* банк просить підтвердити оплату у своєму застосунку */
+      state('<span class="py-spin" aria-hidden="true"></span><b>Підтвердьте оплату в застосунку банку</b><p>Потім поверніться на цю сторінку.</p>');
+      setTimeout(function () {
+        if (!failNext && keep.checked) { var d = num.value.replace(/\D/g, ''); mem((d[0] === '4' ? 'Visa' : (d[0] === '5' || d[0] === '2') ? 'Mastercard' : 'Картка') + ' •• ' + d.slice(-4)); }
+        finish('card');
+      }, 1700);
+    }, 900);
+  }
+  pyWal.addEventListener('click', function () {
+    if (busy) return; lock(true);
+    state('<span class="py-spin" aria-hidden="true"></span><b>Підтвердьте оплату в ' + WNAME[wallet] + '</b>');
+    setTimeout(function () { finish('wallet'); }, 1500);
   });
+  pyGo.addEventListener('click', payCard);
+  pyForm.addEventListener('submit', function (e) { e.preventDefault(); payCard(); });
+  pyForm.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT' && e.target.type !== 'checkbox') { e.preventDefault(); payCard(); } });
+  num.addEventListener('input', function () { var d = num.value.replace(/\D/g, '').slice(0, 16); num.value = d.replace(/(.{4})(?=.)/g, '$1 '); if (!pyErr.hidden) bad(null); });
+  exp.addEventListener('input', function () { var d = exp.value.replace(/\D/g, '').slice(0, 4); exp.value = d.length > 2 ? d.slice(0, 2) + '/' + d.slice(2) : d; if (!pyErr.hidden) bad(null); });
+  cvv.addEventListener('input', function () { cvv.value = cvv.value.replace(/\D/g, '').slice(0, 3); if (!pyErr.hidden) bad(null); });
+  all('input[name=pcard]').forEach(function (r) { r.addEventListener('change', function () { paint(); if (newCard()) num.focus(); }); });
+  pyState.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-py]'); if (!b) return;
+    if (b.getAttribute('data-py') === 'other') { var r = document.querySelector('input[name=pcard][value=new]'); r.checked = true; }
+    view('form'); paint(); (newCard() ? num : pyGo).focus();
+  });
+  pay.addEventListener('click', openPay);
+  $('py-x').addEventListener('click', closePay);
+  $('py-scrim').addEventListener('click', closePay);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePay(); });
   pick(PRICE[q.get('svc')] ? q.get('svc') : 'lift', false);
+  if (q.get('pay')) openPay();
 })();
 </script>
-<script src="shop.js?v=11241446"></script>
+<script src="shop.js?v=11242319"></script>
 </body>
 </html>
