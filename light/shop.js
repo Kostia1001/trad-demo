@@ -1076,51 +1076,31 @@
     }
   })();
   /* ---- Поради щодо оголошення (24.11.2026; ТЗ: «Рекомендації щодо покращення оголошення»). Блок на сторінці свого
-          оголошення й посилання «N порад» у «Моїх оголошеннях». Кожна порада — з цифрою або конкретною прогалиною, без
-          відсотків і «шкал якості»; AI пропонує, продавець підтверджує; заброньовану річ до зниження ціни не підштовхуємо.
+          оголошення й посилання «N порад» у «Моїх оголошеннях». Радимо лише те, чого AI сам зробити не може: ціна за ринком,
+          заміри, опис, фото. Назву й опис AI пише сам під час створення, тож поради «уточніть назву» немає. Кожна порада —
+          з цифрою або конкретною прогалиною, без відсотків і «шкал якості»; заброньовану річ до зниження ціни не підштовхуємо.
           Розклад і тексти — Codex (critique/codex/tips-plan.txt, tips-review.txt). Стилі — tools/studio.css ---- */
   (function () {
     var EDIT = 'create.html?step=2';
     var TIPS = {
       jeans: { name: 'Джинси Levi’s 501, W32 L32', price: '900', img: 'jeans-1.jpg', tips: [
-        { id: 'title', t: 'Уточніть назву', why: 'Якщо це жіночі джинси, додайте це до назви.', sug: 'Джинси жіночі Levi’s 501, W32 L32', btn: 'Підтвердити й застосувати' },
-        { id: 'price', t: 'Перегляньте ціну', why: 'Ціни в схожих оголошеннях на TRAD — 700–850 грн.', btn: 'Змінити ціну' }] },
+        { t: 'Перегляньте ціну', why: 'Ціни в схожих оголошеннях на TRAD — 700–850 грн.', btn: 'Змінити ціну' }] },
       bag: { name: 'Сумка шкіряна, коричнева', price: '1 100', img: 'bag-w.jpg', tips: [
-        { id: 'desc', t: 'Додайте розміри й матеріал підкладки', why: 'В описі бракує 2 деталей: розмірів сумки й матеріалу підкладки.', btn: 'Доповнити опис' }] },
+        { t: 'Додайте розміри й матеріал підкладки', why: 'В описі бракує 2 деталей: розмірів сумки й матеріалу підкладки.', btn: 'Доповнити опис' }] },
       hoodie: { name: 'Худі сіре, розмір L', price: '650', img: 'hoodie-w.jpg', tips: [
-        { id: 'price', t: 'Перегляньте ціну', why: 'Ціни в схожих оголошеннях на TRAD — 480–600 грн.', btn: 'Змінити ціну' },
-        { id: 'size', t: 'Додайте заміри', why: 'Укажіть ширину худі під пахвами та його довжину.', btn: 'Додати заміри' }] }
+        { t: 'Перегляньте ціну', why: 'Ціни в схожих оголошеннях на TRAD — 480–600 грн.', btn: 'Змінити ціну' },
+        { t: 'Додайте заміри', why: 'Укажіть ширину худі під пахвами та його довжину.', btn: 'Додати заміри' }] }
     };
-    var done = {}; try { done = JSON.parse(sessionStorage.getItem('trad-tips') || '{}'); } catch (e) { done = {}; }
-    function used(k, id) { return (done[k] || []).indexOf(id) >= 0; }
-    function left(k) { return TIPS[k].tips.filter(function (x) { return !used(k, x.id); }); }
-    function mark(k, id) { (done[k] = done[k] || []).push(id); try { sessionStorage.setItem('trad-tips', JSON.stringify(done)); } catch (e) {} }
     function word(n) { return n + (n === 1 ? ' порада' : n < 5 ? ' поради' : ' порад'); }
-    function title(k) { return used(k, 'title') ? TIPS[k].tips[0].sug : TIPS[k].name; }
-    function say(t) {
-      if (typeof window.toast === 'function') { window.toast(t); return; }
-      var e = $('#toast'); if (!e) return; e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(function () { e.classList.remove('on'); }, 2400);
-    }
     function list(k) {
-      var l = left(k);
+      var l = TIPS[k].tips;
       if (!l.length) return '<p class="tp-none">Поки що порад немає.</p>';
-      return l.map(function (x) {
-        return '<div class="tp-i" data-tip="' + x.id + '"><b>' + x.t + '</b><p>' + x.why + '</p>'
-          + (x.sug ? '<div class="tp-sug"><small>Назву запропонував AI</small><span>' + x.sug + '</span></div><button class="mini" type="button" data-apply="' + k + '">' + x.btn + '</button>'
-                   : '<a class="mini" href="' + EDIT + '">' + x.btn + '</a>') + '</div>';
-      }).join('');
+      return l.map(function (x) { return '<div class="tp-i"><b>' + x.t + '</b><p>' + x.why + '</p><a class="mini" href="' + EDIT + '">' + x.btn + '</a></div>'; }).join('');
     }
     /* своє оголошення: блок після кнопок «Редагувати» й «Підняти» (на телефоні — одразу після статистики) */
     if (page === 'product.html' && q.get('own') === '1') {
       var info = $('.pwrap main > .info');
-      if (info && !$('#tips')) {
-        var box = el('<section class="owntips" id="tips" aria-label="Рекомендації щодо оголошення"><div class="t">Рекомендації щодо оголошення</div><div id="tipsl"></div></section>');
-        info.after(box);
-        var h1 = $('h1', info);
-        var paint = function () { $('#tipsl').innerHTML = list('jeans'); if (h1) h1.textContent = title('jeans'); icons(); };
-        paint();
-        box.addEventListener('click', function (e) { if (!e.target.closest('[data-apply]')) return; mark('jeans', 'title'); paint(); say('Назву оновлено'); });
-      }
+      if (info && !$('#tips')) info.after(el('<section class="owntips" id="tips" aria-label="Рекомендації щодо оголошення"><div class="t">Рекомендації щодо оголошення</div>' + list('jeans') + '</section>'));
     }
     /* «Мої оголошення»: «N порад» у рядку → віконце з порадами щодо цієї речі */
     if (page === 'my.html') {
@@ -1129,29 +1109,21 @@
       if (rows.length && !$('#tipsh')) {
         var sh = el('<section class="sheet tp-sheet" id="tipsh" role="dialog" aria-modal="true" aria-label="Рекомендації щодо оголошення"><div class="sheet-head"><h2>Рекомендації щодо оголошення</h2><button class="x" type="button" data-tipclose aria-label="Закрити"><i data-lucide="x"></i></button></div><div class="sheet-body" id="tipsb"></div></section>');
         document.body.appendChild(sh);
-        var cur = '', opener = null;
-        var paintRows = function () {
-          rows.forEach(function (r) {
-            var k = keyOf(r); if (!TIPS[k]) return;
-            var old = $('.tp-row', r), n = left(k).length; if (old) old.remove();
-            $('.nm', r).textContent = title(k);
-            if (n) $('.b', r).appendChild(el('<div class="tp-row"><button class="tp-link" type="button" data-tips="' + k + '"><i data-lucide="lightbulb"></i>' + word(n) + '</button></div>'));
-          });
-          icons();
+        var cur = '';
+        rows.forEach(function (r) {
+          var k = keyOf(r); if (!TIPS[k] || !TIPS[k].tips.length) return;
+          $('.b', r).appendChild(el('<div class="tp-row"><button class="tp-link" type="button" data-tips="' + k + '"><i data-lucide="lightbulb"></i>' + word(TIPS[k].tips.length) + '</button></div>'));
+        });
+        var openT = function (k) {
+          var d = TIPS[k]; cur = k;
+          $('#tipsb').innerHTML = '<div class="tp-for"><img src="assets/' + d.img + '" alt=""><span><b>' + d.name + '</b><small class="num">' + d.price.replace(' ', ' ') + ' грн</small></span></div>' + list(k);
+          $$('.sheet').forEach(function (s) { s.style.display = s === sh ? '' : 'none'; }); document.body.classList.add('sheet-on'); icons();
         };
-        var paintSheet = function () {
-          var d = TIPS[cur];
-          $('#tipsb').innerHTML = '<div class="tp-for"><img src="assets/' + d.img + '" alt=""><span><b>' + title(cur) + '</b><small class="num">' + d.price.replace(' ', ' ') + ' грн</small></span></div>' + list(cur);
-          icons();
-        };
-        var openT = function (k, from) { cur = k; opener = from; paintSheet(); $$('.sheet').forEach(function (s) { s.style.display = s === sh ? '' : 'none'; }); document.body.classList.add('sheet-on'); };
         var closeT = function () { document.body.classList.remove('sheet-on'); $$('.sheet').forEach(function (s) { s.style.display = ''; }); var o = $('[data-tips="' + cur + '"]'); if (o) o.focus(); };
         document.addEventListener('click', function (e) {
-          var b = e.target.closest('[data-tips]'); if (b) { openT(b.dataset.tips, b); return; }
-          if (e.target.closest('[data-tipclose]')) { closeT(); return; }
-          if (e.target.closest('#tipsh [data-apply]')) { mark(cur, 'title'); paintSheet(); paintRows(); say('Назву оновлено'); }
+          var b = e.target.closest('[data-tips]'); if (b) { openT(b.dataset.tips); return; }
+          if (e.target.closest('[data-tipclose]')) closeT();
         });
-        paintRows();
       }
     }
   })();
