@@ -2637,23 +2637,13 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 .tr-rate textarea::placeholder { color: var(--text-2); }
 .tr-rate .btn[disabled] { opacity: 0.45; pointer-events: none; }
 
-/* «Мої оголошення»: стан підняття в рядку */
-.mrow .note.pr-up { display: flex; align-items: center; gap: 6px; color: var(--text); font-weight: 600; }
-.mrow .note.pr-up svg { width: 15px; height: 15px; color: var(--ok); }
-.mrow .note.pr-up a { margin-left: 2px; color: var(--hot-ink); font-weight: 700; }
 
-/* своє оголошення: кнопка «Підняти» в нижній панелі */
+/* своє оголошення: кнопка «Просунути» в нижній панелі */
 #ownbar .pr-own { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 52px; padding: 0 16px; border-radius: 999px; background: var(--s1); color: var(--text); font-size: 14px; font-weight: 700; }
 #ownbar .pr-own svg { width: 18px; height: 18px; }
 
 /* сторінки promote.html і verify.html */
-.prp, .vfp { display: flex; flex-direction: column; }
-.pr-pv { position: relative; width: 100%; max-width: 304px; margin: 4px auto 0; aspect-ratio: 4 / 3; border-radius: 22px; overflow: hidden; background: var(--s1); }
-.pr-pv img { width: 100%; height: 100%; object-fit: cover; }
-.pr-tag { position: relative; z-index: 2; align-self: center; display: inline-flex; align-items: center; height: 34px; margin: -20px auto 0; padding: 0 14px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 700 18px/1 var(--display); }
-.pr-pitch { margin-top: 18px; text-align: center; }
-.pr-pitch h2 { font: 700 18px/1.3 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
-.pr-pitch p { margin: 8px auto 0; max-width: 34ch; font-size: 16px; line-height: 1.45; color: var(--text-2); }
+.vfp { display: flex; flex-direction: column; }
 .pr-pay { margin-top: 24px; }
 .pr-pay .btn { position: relative; width: 100%; }
 .pr-pay .btn .pr-ld, .pr-pay .btn .pr-okk { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; opacity: 0; transition: opacity 0.2s; }
@@ -2662,7 +2652,6 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 .pr-pay .btn.pr-loading .pr-lbl, .pr-pay .btn.pr-paid .pr-lbl, .pr-pay .btn.pr-paid .pr-ld { opacity: 0; }
 .pr-pay .btn.pr-loading .pr-ld, .pr-pay .btn.pr-paid .pr-okk { opacity: 1; }
 .pr-pay .btn.pr-loading, .pr-pay .btn.pr-paid { pointer-events: none; }
-.pr-ways { display: flex; justify-content: center; gap: 18px; margin-top: 12px; font-size: 13px; color: var(--text-2); }
 @keyframes pr-sp { to { transform: rotate(360deg); } }
 
 .vf-intro h2 { font: 700 24px/1.25 var(--display); letter-spacing: -0.01em; }
@@ -2691,14 +2680,7 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 @media (min-width: 900px) {
   /* «Підняти» і перевірка особи — під заголовком, по лівому краю, як решта кабінету */
   body.wide .vfp { max-width: 520px; }
-  body.wide .prp { max-width: 760px; display: grid; grid-template-columns: 320px 1fr; column-gap: 36px; align-items: start; }
-  body.wide .prp .pr-pv { grid-column: 1; grid-row: 1; margin: 4px 0 0; }
-  body.wide .prp .pr-tag { grid-column: 1; grid-row: 2; }
-  body.wide .prp .pr-nm { grid-column: 1; grid-row: 3; }
-  body.wide .prp .pr-pitch { grid-column: 2; grid-row: 1; align-self: center; margin-top: 0; text-align: left; }
-  body.wide .prp .pr-pitch h2 { font-size: 20px; }
-  body.wide .prp .pr-pitch p { margin-left: 0; }
-  body.wide .prp .pr-pay { grid-column: 2; grid-row: 2 / span 2; align-self: start; margin-top: 24px; }
+  body.wide .prp.pm { max-width: 1010px; }
   /* сторінка продавця: оцінка, вкладки й відгуки на одній лінії з профілем і сіткою (max 1488, поля 32) */
   body.sellerpage .tr-score, body.sellerpage .tr-tabs, body.sellerpage .tr-list { margin-left: max(32px, calc((100% - 1488px) / 2 + 32px)); }
   body.sellerpage .tr-score { display: inline-flex; padding-right: 24px; }
@@ -2709,18 +2691,127 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
   .tr-score { margin: 12px 16px 0; padding: 0; background: none; box-shadow: none; gap: 10px; }
   .tr-score .sc-n { font-size: 22px; }
 }
-/* «Підняти»: умова сортування — окремим рядком під обіцянкою */
-.pr-cond { display: block; margin: 0 0 4px; font-weight: 600; color: var(--text); }
 /* розмова на компʼютері: «Позначити як куплене» — у рядку речі, ліворуч від стрілки */
 @media (min-width: 900px) { body .dtop { position: sticky; } body .dtop .tr-slot { position: absolute; right: 56px; top: 79px; margin: 0; } }
 /* «Хто купив?»: підказка над списком */
 .tr-hint { margin: 0 0 6px; font-size: 14px; line-height: 1.4; color: var(--text-2); }
-.pr-nm { display: block; margin-top: 10px; font-size: 16px; font-weight: 600; text-align: center; }
 /* сторінка продавця на телефоні: аватар на рівні імені, менший; позначка нижча (огляд 23.11) */
 @media (max-width: 899px) {
   body.sellerpage .phead { align-items: flex-start; }
   body.sellerpage .phead .ava.lg { width: 64px; height: 64px; }
   .tr-vchip { height: 24px; }
+}
+
+/* ---- «Просування оголошення» (24.11.2026): три послуги, вибір за місцем у каталозі. Малюнок — menu/codex/promo2-1.png ---- */
+.prp.pm { display: block; }
+.pm-item { display: flex; align-items: center; gap: 14px; margin-top: 6px; }
+.pm-item img { flex: none; width: 72px; height: 72px; border-radius: 14px; object-fit: cover; }
+.pm-item b { display: block; font: 700 18px/1.25 var(--display); letter-spacing: -0.01em; }
+.pm-tag { display: inline-flex; align-items: center; height: 28px; margin-top: 6px; padding: 0 12px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 700 14px/1 var(--display); }
+.pm-grid { display: grid; gap: 16px; margin-top: 18px; }
+.pm-left { display: grid; gap: 16px; min-width: 0; }
+.pm-opts { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.pm-opt { position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; column-gap: 14px; min-height: 78px; padding: 12px 18px; border-radius: 16px; background: var(--card, #FFFEFC); box-shadow: inset 0 0 0 1px var(--line); cursor: pointer; transition: box-shadow 0.18s; }
+.pm-opt input { position: absolute; opacity: 0; pointer-events: none; }
+.pm-rd { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #8E8792; transition: border-color 0.18s; }
+.pm-opt.is-sel { box-shadow: inset 0 0 0 2px var(--text); }
+.pm-opt.is-sel .pm-rd { border-color: var(--text); background: radial-gradient(circle, var(--text) 0 6px, transparent 6.5px); }
+.pm-opt:has(input:focus-visible) { outline: 2px solid var(--text); outline-offset: 2px; }
+.pm-tx b { display: block; font: 700 18px/1.25 var(--display); letter-spacing: -0.01em; }
+.pm-tx small { display: block; margin-top: 2px; font-size: 14px; line-height: 1.4; color: var(--text-2); }
+.pm-pr { font: 700 18px/1.25 var(--display); white-space: nowrap; }
+.pr-pay.pm-pay { margin-top: 0; }
+.pm-ways { margin-top: 12px; font-size: 14px; color: var(--text-2); text-align: center; }
+/* превʼю: шматок каталогу очима покупця */
+.pm-pv { padding: 18px 18px 0; border-radius: 18px; background: var(--card, #FFFEFC); box-shadow: inset 0 0 0 1px var(--line); min-width: 0; }
+.pm-pvh { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pm-pvh b { font: 800 22px/1.2 var(--display); letter-spacing: -0.02em; }
+.pm-sort { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px 0 14px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); font-size: 14px; font-weight: 500; white-space: nowrap; }
+.pm-sort svg { width: 16px; height: 16px; }
+.pm-toph { margin-top: 14px; font: 700 16px/1.2 var(--display); }
+.pm-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px 12px; margin-top: 14px; }
+.pm-toph + .pm-row { margin-top: 10px; }
+.pm-c { min-width: 0; }
+.pm-c:not(.me) .pm-ph img { opacity: 0.45; }
+.pm-c:not(.me) .pm-cn { color: var(--text-2); }
+.pm-ph { position: relative; display: block; }
+.pm-ph img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+.pm-c.me .pm-ph img { box-shadow: 0 0 0 2px var(--text); }
+.pm-cp { position: absolute; left: 8px; bottom: -11px; display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 700 13px/1 var(--display); }
+.pm-n1 { position: absolute; left: 8px; top: 8px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--text); color: var(--bg); font: 700 13px/1 var(--display); }
+.pm-cn { display: block; margin-top: 16px; padding: 0 2px; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pm-cl { display: block; margin-top: 2px; padding: 0 2px; font-size: 13px; line-height: 1.25; font-weight: 600; color: var(--hot-ink); }
+.pm-sep { height: 1px; margin-top: 16px; background: var(--line); }
+.pm-cap { margin: 16px -18px 0; padding: 12px 18px 14px; border-top: 1px solid var(--line); font-size: 14px; color: var(--text-2); text-align: center; }
+@media (max-width: 899px) {
+  .pm-pv { padding: 14px 14px 0; }
+  .pm-pvh b { font-size: 18px; }
+  .pm-sort { height: 32px; font-size: 13px; }
+  .pm-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pm-row .pm-c:nth-child(n+3) { display: none; }
+  .pm-pv .pm-sep, .pm-pv .pm-sep + .pm-row { display: none; }
+  .pm-cap { margin: 14px -14px 0; padding: 10px 14px 12px; font-size: 13px; }
+  .pm-item img { width: 56px; height: 56px; }
+  .pm-item b { font-size: 16px; }
+  .pm-opt { min-height: 68px; padding: 10px 14px; column-gap: 12px; }
+  .pm-tx b, .pm-pr { font-size: 16px; }
+  .pm-left { gap: 6px; }
+  .pm-pay { position: sticky; bottom: 0; z-index: 3; margin: 0 -16px; padding: 10px 16px calc(12px + env(safe-area-inset-bottom)); background: var(--bg); }
+  .pm-ways { display: none; }
+}
+@media (min-width: 900px) {
+  body.wide .pm-grid { grid-template-columns: minmax(0, 460px) minmax(0, 1fr); column-gap: 28px; align-items: start; }
+}
+/* «Мої оголошення»: кнопка «Просунути» в рядку, пункт у діях, результат після оплати */
+.tp-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; }
+.tp-row > .tp-link { margin-top: 0; }
+.pm-go { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 9px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--text); font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; transition: background 0.2s; }
+.pm-go:hover { background: var(--s1); }
+.pm-go svg { width: 15px; height: 15px; }
+@media (max-width: 899px) {
+  .pm-go { position: relative; padding: 0 12px; }
+  .pm-go svg { display: none; }
+  .pm-go::after { content: ""; position: absolute; inset: -7px 0; }
+}
+#prrow.pm-off { color: var(--text-2); pointer-events: none; }
+#prrow.pm-off svg { opacity: 0.5; }
+@media (min-width: 900px) {
+  body.wide .mrow.has-go { position: relative; }
+  body.wide .mrow.has-go .b { padding-right: 168px; }
+  body.wide .mrow .pm-go { position: absolute; right: 52px; top: 14px; height: 40px; padding: 0 18px 0 14px; }
+  body.wide .mrow .pm-go svg { width: 17px; height: 17px; }
+}
+.mrow .note.pm-res { margin-top: 8px; font-size: 14px; line-height: 1.45; color: var(--text); }
+.pm-r1 { display: flex; align-items: flex-start; gap: 6px; font-weight: 600; }
+.pm-r1 svg { flex: none; width: 16px; height: 16px; margin-top: 2px; color: var(--ok); }
+.pm-links { display: flex; flex-wrap: wrap; column-gap: 16px; }
+.pm-see { display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--hot-ink); }
+.pm-see svg { width: 15px; height: 15px; transition: transform 0.2s; }
+.pm-see[aria-expanded="true"] svg { transform: rotate(180deg); }
+.pm-stat { margin-top: 10px; padding: 12px 14px; border-radius: 14px; background: var(--card, #FFFEFC); box-shadow: inset 0 0 0 1px var(--line); max-width: 460px; }
+.pm-stat > b { display: block; font-size: 14px; font-weight: 700; }
+.pm-stat p { margin-top: 6px; color: var(--text-2); }
+.pm-stat table { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: 14px; }
+.pm-stat th { padding: 0 0 6px; text-align: left; vertical-align: top; font-size: 13px; font-weight: 600; }
+.pm-stat th small { display: block; font-size: 12px; font-weight: 400; color: var(--text-2); }
+.pm-stat td { padding: 7px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.pm-stat td:first-child { color: var(--text-2); }
+.pm-stat td + td, .pm-stat th + th { padding-left: 12px; }
+.pm-stat td b { font-weight: 700; }
+/* каталог: мітка «Платне підняття» під назвою; оплачений «Топ» — окремий ряд над каталогом */
+.pm-paid { margin: 2px 0; font-size: 13px; line-height: 1.25; font-weight: 600; color: var(--hot-ink); }
+.pm-toph2 { margin: 16px 0 0; font: 800 20px/1.2 var(--display); letter-spacing: -0.01em; }
+.grid.pm-topg { padding-bottom: 24px; margin-bottom: 8px; border-bottom: 1px solid var(--line); }
+.frame .state.pm-ad { background: var(--card, #FFFEFC); color: var(--text); box-shadow: 0 1px 4px rgb(32 27 36 / 0.18); }
+@media (min-width: 900px) { body.wide .grid.pm-topg { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; } }
+@media (max-width: 899px) {
+  .pm-topg .card:nth-child(n+3) { display: none; }
+  .pm-toph2 { padding: 0 16px; font-size: 18px; }
+  .pm-res .pm-stat { margin-left: -90px; padding: 12px; }
+  .pm-stat table { table-layout: fixed; }
+  .pm-stat th:first-child { width: 37%; }
+  .pm-stat th { font-size: 12px; line-height: 1.3; }
+  .pm-stat th small { display: none; }
 }
 
 /* ---------- Знак: бирка ---------- */

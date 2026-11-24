@@ -791,7 +791,7 @@
       if (first && !$('#nvid')) first.before(el('<div class="nrow new" id="nvid"><span class="ic"><i data-lucide="clapperboard"></i></span><div class="b"><div class="tt">Відео готове</div><div class="tx">Джинси Levi’s 501, W32 L32</div><a class="mini" href="studio.html?video=ready&amp;push=0">Переглянути</a><div class="tm">щойно</div></div></div>'));
     }
   })();
-  /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23 листопада 2026). Стилі — tools/trust.css,
+  /* ---- Відгуки, «Особу підтверджено» і «Просування оголошення» (23–24 листопада 2026). Стилі — tools/trust.css,
           сторінки — promote.html, verify.html, опис — кінець docs/SCREENS.md. Відгук — лише після підтвердженої продажу:
           продавець позначає «Продано» й обирає покупця (основний шлях) або покупець сам натискає «Підтвердити покупку» ---- */
   (function () {
@@ -887,7 +887,7 @@
       }
     }
 
-    /* оголошення: оцінка й перевірена особа в блоці продавця; своє оголошення — «Підняти» */
+    /* оголошення: оцінка й перевірена особа в блоці продавця; своє оголошення — «Просунути» */
     if (page === 'product.html') {
       $$('.seller .vbadge').forEach(function (v) { v.remove(); });
       var who = $('.seller .who');
@@ -905,7 +905,7 @@
         $('#cvback').addEventListener('click', function () { covers.remove('jeans'); location.replace('product.html?own=1'); });
       }
       var ob = $('#ownbar'), om = $('#omore');
-      if (ob && om && !$('.pr-own')) om.before(el('<a class="pr-own" href="promote.html?item=jeans"><i data-lucide="arrow-up"></i>Підняти</a>'));
+      if (ob && om && !$('.pr-own')) om.before(el('<a class="pr-own" href="promote.html?item=jeans"><i data-lucide="arrow-up"></i>Просунути</a>'));
     }
 
     /* сторінка продавця: «Особу підтверджено», оцінка, вкладки «Оголошення / Відгуки» */
@@ -953,37 +953,58 @@
         lst.insertBefore(nbuy, lst.firstChild);
         nbuy.after(el('<div class="nrow new" id="nconf"><span class="ic"><i data-lucide="handshake"></i></span><div class="b"><div class="tt">Максим просить підтвердити продаж</div><div class="tx">Сумка шкіряна, коричнева</div><a class="mini" href="dialog.html?as=seller&amp;confirm=1">Відкрити розмову</a><div class="tm">13:10</div></div></div>'));
         var exp = $$('.nrow', lst).filter(function (r) { return /завершується/.test(r.textContent); })[0];
-        var nup = el('<div class="nrow" id="nup"><span class="ic"><i data-lucide="arrow-up"></i></span><div class="b"><div class="tt">Підніміть оголошення про джинси</div><div class="tx">Оголошення стане першим у категорії «Жіночий одяг» за сортуванням «Спочатку нові».</div><a class="mini" href="promote.html?item=jeans">Підняти за 39 грн</a><div class="tm">вчора</div></div></div>');
+        var nup = el('<div class="nrow" id="nup"><span class="ic"><i data-lucide="arrow-up"></i></span><div class="b"><div class="tt">Підніміть оголошення про джинси</div><div class="tx">Оголошення стане першим у категорії «Жіночий одяг» за сортуванням «Спочатку нові».</div><a class="mini" href="promote.html?item=jeans">Підняти за 19 грн</a><div class="tm">вчора</div></div></div>');
         if (exp) exp.before(nup); else lst.appendChild(nup);
       }
     }
 
-    /* «Мої оголошення»: «Підняти за 39 грн» у діях з оголошенням; після оплати — стан у рядку (?up=jeans|hoodie|bag) */
+    /* «Мої оголошення»: «Просунути» — у рядку активного оголошення й у діях; заброньоване не просуваємо.
+       Після оплати — результат у рядку: ?up=jeans|hoodie&svc=lift|three|top, &day=1 — через добу, з цифрами */
     if (page === 'my.html') {
       var KEY = function (r) { var n = $('.nm', r); n = n ? n.textContent : ''; return /Levi/.test(n) ? 'jeans' : /Сумка/.test(n) ? 'bag' : /Худі/.test(n) ? 'hoodie' : ''; };
+      var up = q.get('up'), svc = { three: 1, top: 1 }[q.get('svc')] ? q.get('svc') : 'lift';
+      $$('[data-panel="active"] .mrow').forEach(function (r) {
+        var k = KEY(r); if (!k || k === up || $('.rsv', r) || $('.pm-go', r)) return;
+        var row = $('.tp-row', r) || $('.b', r).appendChild(el('<div class="tp-row"></div>'));
+        row.insertBefore(el('<a class="pm-go" href="promote.html?item=' + k + '"><i data-lucide="arrow-up"></i>Просунути</a>'), row.firstChild);
+        r.classList.add('has-go');
+      });
       var acts = $('#acts .alist');
       if (acts && !$('#prrow')) {
-        var pr = el('<a class="lrow" id="prrow" href="promote.html?item=jeans"><i data-lucide="arrow-up"></i><span class="t">Підняти за 39 грн</span></a>');
+        var pr = el('<a class="lrow" id="prrow" href="promote.html?item=jeans"><i data-lucide="arrow-up"></i><span class="t">Просунути</span></a>');
         acts.insertBefore(pr, acts.firstChild);
         var ai = el('<a class="lrow" id="airow" href="studio.html?item=jeans"><i data-lucide="sparkles"></i><span class="t">Відкрити в AI-студії</span></a>');
         pr.after(ai);
         $$('.mrow .more').forEach(function (b) {
           b.addEventListener('click', function () {
-            var r = b.closest('.mrow'), act = !!r.closest('[data-panel="active"]'), key = KEY(r);
+            var r = b.closest('.mrow'), act = !!r.closest('[data-panel="active"]'), key = KEY(r), off = !!$('.rsv', r);
             pr.hidden = ai.hidden = !act || !key; pr.style.display = ai.style.display = pr.hidden ? 'none' : '';
             if (key) { pr.setAttribute('href', 'promote.html?item=' + key); ai.setAttribute('href', 'studio.html?item=' + key); }
+            pr.classList.toggle('pm-off', off);
+            if (off) { pr.setAttribute('aria-disabled', 'true'); pr.setAttribute('tabindex', '-1'); } else { pr.removeAttribute('aria-disabled'); pr.removeAttribute('tabindex'); }
+            $('.t', pr).innerHTML = off ? 'Просунути<small>Просування недоступне під час бронювання</small>' : 'Просунути';
           }, true);
         });
       }
-      var up = q.get('up');
       if (up) {
         var ur = $$('[data-panel="active"] .mrow').filter(function (r) { return KEY(r) === up; })[0];
         var note = ur && $('.note', ur);
-        if (note) { note.className = 'note pr-up'; note.innerHTML = '<i data-lucide="circle-check"></i>Піднято о 14:32 · <a href="catalog.html?up=' + up + '">Переглянути в каталозі</a>'; }
+        if (note) {
+          var day = q.get('day') === '1', cat = up === 'bag' ? 'Сумки' : 'Жіночий одяг';
+          var line = svc === 'top' ? 'Оголошення в ряду «Топ» над каталогом категорії «' + cat + '» до 14:32 1 грудня.'
+            : svc === 'three' ? 'Виконано 1 із 3 піднять. Наступне — завтра о 14:32.'
+            : (day ? '24 листопада' : 'Сьогодні') + ' о 14:32 оголошення стало першим у категорії «' + cat + '».';
+          var stat = day ? '<table><tr><th></th><th>24 год до<small>23.11, 14:32 — 24.11, 14:32</small></th><th>24 год після<small>24.11, 14:32 — 25.11, 14:32</small></th></tr><tr><td>Перегляди</td><td>12</td><td><b>47</b></td></tr><tr><td>Повідомлення</td><td>1</td><td><b>3</b></td></tr></table>' : '<p>Дані для порівняння ще збираються.</p>';
+          note.className = 'note pm-res';
+          note.innerHTML = '<div class="pm-r1"><i data-lucide="circle-check"></i><span>' + line + '</span></div><span class="pm-links"><a class="pm-see" href="catalog.html?' + (svc === 'top' ? 'top' : 'up') + '=' + up + '">Переглянути в каталозі</a><button class="pm-see" type="button" aria-expanded="' + day + '" aria-controls="pm-stat">Переглянути результат<i data-lucide="chevron-down"></i></button></span><div class="pm-stat" id="pm-stat"' + (day ? '' : ' hidden') + '><b>Перегляди й повідомлення</b>' + stat + '</div>';
+          $('button.pm-see', note).addEventListener('click', function () {
+            var o = this.getAttribute('aria-expanded') !== 'true'; this.setAttribute('aria-expanded', String(o)); $('.pm-stat', note).hidden = !o;
+          });
+        }
       }
     }
 
-    /* каталог: підняте оголошення стає першим (?up=jeans|hoodie) */
+    /* каталог: підняте оголошення стає першим і має мітку «Платне підняття» (?up=jeans|hoodie) */
     if (page === 'catalog.html' && q.get('up')) {
       var RE = { jeans: /Levi/, hoodie: /Худі сіре/ }[q.get('up')];
       var cg = $('#grid') || $('main .grid');
@@ -991,6 +1012,8 @@
       var mine = RE && cards.filter(function (c) { return RE.test(c.textContent); })[0];
       if (mine) {
         if (cards.indexOf(mine) < 4 && cards[4]) cards[4].after(mine);      /* до підняття — нижче в стрічці */
+        var ttl = $('.title', mine);
+        if (ttl && !$('.pm-paid', mine)) ttl.after(el('<div class="pm-paid" title="Продавець оплатив підняття. Оголошення піднялося на перше місце в категорії за сортуванням «Спочатку нові». Нові оголошення з’являються вище.">Платне підняття</div>'));
         var tw = document.createTreeWalker(mine, NodeFilter.SHOW_TEXT), tn;   /* час у картці — час підняття */
         while ((tn = tw.nextNode())) if (/·\s*(сьогодні|вчора)/.test(tn.nodeValue)) tn.nodeValue = tn.nodeValue.replace(/·.*$/, '· 14:32');
         setTimeout(function () {
@@ -1005,6 +1028,22 @@
               { duration: me ? 900 : 700, delay: me ? 0 : 60, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
           });
         }, 900);
+      }
+    }
+    /* каталог: оплачений «Топ» — окремий ряд над каталогом, на кожній картці «Топ · Реклама» (?top=jeans|hoodie) */
+    if (page === 'catalog.html' && q.get('top')) {
+      var RT = { jeans: /Levi/, hoodie: /Худі сіре/ }[q.get('top')];
+      var tg0 = $('#grid') || $('main .grid'), tc = tg0 ? $$('.card', tg0) : [];
+      var tm = RT && tc.filter(function (c) { return RT.test(c.textContent); })[0];
+      if (tm && !$('.pm-topg')) {
+        var th2 = el('<h2 class="pm-toph2">Топ</h2>'), tg = el('<div class="grid tight pm-topg"></div>');
+        [tm].concat(tc.filter(function (c) { return c !== tm && !$('.state', c); }).slice(3, 6)).forEach(function (c) {
+          var k = c.cloneNode(true);
+          $('.frame', k).appendChild(el('<span class="state pm-ad" title="Продавець оплатив показ цього оголошення протягом 7 днів в окремому ряду «Топ» над каталогом цієї категорії.">Топ · Реклама</span>'));
+          tg.appendChild(k);
+        });
+        tg0.before(th2); th2.after(tg);
+        tg.addEventListener('click', function (e) { var f = e.target.closest('.fav'); if (!f) return; e.preventDefault(); f.setAttribute('aria-pressed', String(f.getAttribute('aria-pressed') !== 'true')); });
       }
     }
   })();
@@ -1097,7 +1136,7 @@
       if (!l.length) return '<p class="tp-none">Поки що порад немає.</p>';
       return l.map(function (x) { return '<div class="tp-i"><b>' + x.t + '</b><p>' + x.why + '</p><a class="mini" href="' + EDIT + '">' + x.btn + '</a></div>'; }).join('');
     }
-    /* своє оголошення: блок після кнопок «Редагувати» й «Підняти» (на телефоні — одразу після статистики) */
+    /* своє оголошення: блок після кнопок «Редагувати» й «Просунути» (на телефоні — одразу після статистики) */
     if (page === 'product.html' && q.get('own') === '1') {
       var info = $('.pwrap main > .info');
       if (info && !$('#tips')) info.after(el('<section class="owntips" id="tips" aria-label="Рекомендації щодо оголошення"><div class="t">Рекомендації щодо оголошення</div>' + list('jeans') + '</section>'));
@@ -1112,7 +1151,7 @@
         var cur = '';
         rows.forEach(function (r) {
           var k = keyOf(r); if (!TIPS[k] || !TIPS[k].tips.length) return;
-          $('.b', r).appendChild(el('<div class="tp-row"><button class="tp-link" type="button" data-tips="' + k + '"><i data-lucide="lightbulb"></i>' + word(TIPS[k].tips.length) + '</button></div>'));
+          ($('.tp-row', r) || $('.b', r).appendChild(el('<div class="tp-row"></div>'))).appendChild(el('<button class="tp-link" type="button" data-tips="' + k + '"><i data-lucide="lightbulb"></i>' + word(TIPS[k].tips.length) + '</button>'));
         });
         var openT = function (k) {
           var d = TIPS[k]; cur = k;

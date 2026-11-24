@@ -6,13 +6,13 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#17121C">
-<title>TRAD — Підняти оголошення</title>
+<title>TRAD — Просування оголошення</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11241213">
+<link rel="stylesheet" href="style.css?v=11241446">
 </head>
-<!-- «Підняти оголошення»: одне підняття за фіксовану ціну (рішення власника 23.11.2026; ціна — приклад). Стилі — tools/trust.css. ?item=jeans|hoodie|bag -->
+<!-- «Просування оголошення»: три послуги — «Підняття», «3 підняття», «Топ на 7 днів» (24.11.2026; ціни — приклад). Вибір за місцем у каталозі: ліворуч послуги, праворуч превʼю каталогу. Малюнок — menu/codex/promo2-1.png, стилі — tools/trust.css. ?item=jeans|hoodie|bag, ?svc=lift|three|top -->
 <body class="acctpage wide has-bar keepbar">
 <header class="top">
   <div class="top-row">
@@ -32,42 +32,78 @@
   </form>
 </header>
 
-<div class="bar" style="padding-left:6px"><a class="x" href="my.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><div class="bt"><nav class="sd-crumbs" aria-label="Шлях"><a href="my.html">Мої оголошення</a><i data-lucide="chevron-right"></i><span>Підняти оголошення</span></nav><h1>Підняти оголошення</h1></div></div>
+<div class="bar" style="padding-left:6px"><a class="x" href="my.html" aria-label="Назад"><i data-lucide="arrow-left"></i></a><div class="bt"><nav class="sd-crumbs" aria-label="Шлях"><a href="my.html">Мої оголошення</a><i data-lucide="chevron-right"></i><span>Просування оголошення</span></nav><h1>Просування оголошення</h1></div></div>
 <aside class="acct" aria-label="Кабінет"><div class="me"><span class="ava"><img src="assets/avatar.jpg" alt=""></span><span><b>Олена</b><small>Одеса</small></span></div><nav><a href="profile.html"><i data-lucide="user"></i>Профіль</a><a href="my.html" aria-current="page"><i data-lucide="layout-list"></i>Мої оголошення</a><a href="notifications.html"><i data-lucide="bell"></i>Сповіщення</a><hr><a href="contacts.html"><i data-lucide="send"></i>Способи зв’язку</a><a href="security.html"><i data-lucide="shield-check"></i>Вхід і безпека</a><hr><a href="help.html"><i data-lucide="circle-help"></i>Допомога</a><a href="login.html"><i data-lucide="log-out"></i>Вийти</a></nav></aside>
 
-<main class="page prp" id="prp">
-  <div class="pr-pv"><img id="pr-img" src="assets/jeans-1.jpg" alt=""></div>
-  <span class="pr-tag num" id="pr-price">900&nbsp;грн</span>
-  <b class="pr-nm" id="pr-nm">Джинси Levi’s 501, W32 L32</b>
-  <div class="pr-pitch"><h2 id="pr-h">Ваше оголошення стане першим у категорії «Жіночий одяг»</h2><p><span class="pr-cond">За сортуванням «Спочатку нові»</span>Оголошення, опубліковані пізніше, з’являтимуться вище.</p></div>
-  <div class="pr-pay"><button class="btn primary wide" type="button" id="pr-pay"><span class="pr-lbl">Сплатити 39 грн</span><span class="pr-ld" aria-hidden="true"><i></i></span></button></div>
+<main class="page prp pm" id="prp">
+  <div class="pm-item"><img id="pm-img" src="assets/jeans-1.jpg" alt=""><span><b id="pm-nm">Джинси Levi’s 501, W32 L32</b><span class="pm-tag num" id="pm-price">900&nbsp;грн</span></span></div>
+  <div class="pm-grid">
+    <div class="pm-left">
+      <fieldset class="pm-opts" aria-label="Послуга">
+        <label class="pm-opt is-sel"><input type="radio" name="svc" value="lift" checked><span class="pm-rd"></span><span class="pm-tx"><b>Підняття</b><small>Один раз стане першим у категорії</small></span><span class="pm-pr num">19&nbsp;грн</span></label>
+        <label class="pm-opt"><input type="radio" name="svc" value="three"><span class="pm-rd"></span><span class="pm-tx"><b>3 підняття</b><small>Раз на день, 3 дні поспіль</small></span><span class="pm-pr num">29&nbsp;грн</span></label>
+        <label class="pm-opt"><input type="radio" name="svc" value="top"><span class="pm-rd"></span><span class="pm-tx"><b>Топ на 7 днів</b><small>Окремий ряд над каталогом категорії</small></span><span class="pm-pr num">49&nbsp;грн</span></label>
+      </fieldset>
+      <div class="pr-pay pm-pay"><button class="btn primary wide" type="button" id="pr-pay"><span class="pr-lbl" id="pm-lbl">Сплатити 19&nbsp;грн</span><span class="pr-ld" aria-hidden="true"><i></i></span></button><p class="pm-ways">Банківська картка, Apple Pay або Google Pay</p></div>
+    </div>
+    <div class="pm-pv" id="pm-pv"></div>
+  </div>
 </main>
 
 <div class="toast" id="toast" role="status"></div>
 <script src="assets/icons/lucide.min.js"></script>
 <script>
 (function () {
-  var q = new URLSearchParams(location.search), NB = '\u00a0';
+  var q = new URLSearchParams(location.search), NB = '\u00a0', A = 'assets/';
   function $(id) { return document.getElementById(id); }
+  function all(sel) { return Array.prototype.slice.call(document.querySelectorAll(sel)); }
   lucide.createIcons();
   var toastEl = $('toast'), toastT;
   function toast(t, ms) { if (!t) return; toastEl.textContent = t; toastEl.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, ms || 2200); }
   window.toast = toast;
   var ITEMS = {
-    jeans: { name: 'Джинси Levi’s 501, W32 L32', price: '900', img: 'jeans-1.jpg', cat: 'Жіночий одяг' },
-    hoodie: { name: 'Худі сіре, розмір L', price: '650', img: 'hoodie.jpg', cat: 'Жіночий одяг' },
-    bag: { name: 'Сумка шкіряна, коричнева', price: '1 100', img: 'bag.jpg', cat: 'Сумки' }
+    jeans: { name: 'Джинси Levi’s 501, W32 L32', short: 'Джинси Levi’s 501', price: '900', img: 'jeans-1.jpg', card: 'jeans-1.jpg', cat: 'Жіночий одяг' },
+    hoodie: { name: 'Худі сіре, розмір L', short: 'Худі сіре', price: '650', img: 'hoodie.jpg', card: 'hoodie-w.jpg', cat: 'Жіночий одяг' },
+    bag: { name: 'Сумка шкіряна, коричнева', short: 'Сумка шкіряна', price: '1 100', img: 'bag.jpg', card: 'bag-w.jpg', cat: 'Сумки' }
   };
+  var PRICE = { lift: 19, three: 29, top: 49 };
+  /* сусіди в превʼю — інші оголошення категорії */
+  var OTHERS = [['jeans-1.jpg', 'Джинси Levi’s 501', '900'], ['puffer-green-w.jpg', 'Пуховик зелений', '1 700'], ['tshirt-w.jpg', 'Футболка з принтом', '250'], ['jeans-3.jpg', 'Джинси сині', '700'], ['puffer-w.jpg', 'Пуховик жіночий', '1 900'], ['jeans-2.jpg', 'Джинси прямі', '1 200'], ['hoodie-w.jpg', 'Худі сіре', '650']];
   var key = ITEMS[q.get('item')] ? q.get('item') : 'jeans', it = ITEMS[key];
-  $('pr-img').src = 'assets/' + it.img; $('pr-nm').textContent = it.name; $('pr-price').textContent = it.price.replace(' ', NB) + NB + 'грн';
-  $('pr-h').textContent = 'Ваше оголошення стане першим у категорії «' + it.cat + '»';
-  var pay = $('pr-pay');
+  var N = OTHERS.filter(function (n) { return n[0] !== it.card; });
+  function money(p) { return String(p).replace(/ /g, NB) + NB + 'грн'; }
+  function card(img, nm, pr, me, lab, first) {
+    return '<div class="pm-c' + (me ? ' me' : '') + '"><span class="pm-ph"><img src="' + A + img + '" alt="">' + (first ? '<span class="pm-n1 num" aria-hidden="true">1</span>' : '') + '<span class="pm-cp num">' + money(pr) + '</span></span><span class="pm-cn">' + nm + '</span>' + (lab ? '<span class="pm-cl">' + lab + '</span>' : '') + '</div>';
+  }
+  function other(i) { return card(N[i][0], N[i][1], N[i][2]); }
+  function mine(lab, first) { return card(it.card, it.short, it.price, true, lab, first); }
+  $('pm-img').src = A + it.img; $('pm-nm').textContent = it.name; $('pm-price').textContent = money(it.price);
+  var pv = $('pm-pv'), pay = $('pr-pay'), lbl = $('pm-lbl'), svc = 'lift';
+  var head = '<div class="pm-pvh"><b>' + it.cat + '</b><span class="pm-sort">Спочатку нові<i data-lucide="chevron-down"></i></span></div>';
+  /* превʼю: шматок каталогу очима покупця — де опиниться оголошення */
+  function draw(k) {
+    if (k === 'top') pv.innerHTML = head + '<div class="pm-toph">Топ</div><div class="pm-row">' + mine('Топ · Реклама') + other(4) + other(5) + '</div><div class="pm-sep"></div><div class="pm-row">' + other(0) + other(1) + other(2) + '</div><p class="pm-cap">Окремий ряд над каталогом</p>';
+    else pv.innerHTML = head + '<div class="pm-row">' + mine('Платне підняття', true) + other(0) + other(1) + other(2) + other(3) + other(4) + '</div><p class="pm-cap">' + (k === 'three' ? 'Раз на день, 3 дні поспіль. ' : '') + 'У сортуванні «Спочатку нові» нові оголошення з’являтимуться вище</p>';
+    lucide.createIcons();
+  }
+  function pick(k, move) {
+    var was = pv.querySelector('.pm-c.me'), a = was && was.getBoundingClientRect();
+    svc = k;
+    all('.pm-opt').forEach(function (o) { var i = o.querySelector('input'), on = i.value === k; o.classList.toggle('is-sel', on); i.checked = on; });
+    lbl.textContent = 'Сплатити ' + money(PRICE[k]);
+    draw(k);
+    var now = pv.querySelector('.pm-c.me'), b = now.getBoundingClientRect();   /* картка переїжджає на нове місце */
+    if (move && a && now.animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && (a.top !== b.top || a.left !== b.left))
+      now.animate([{ transform: 'translate(' + (a.left - b.left) + 'px,' + (a.top - b.top) + 'px)' }, { transform: 'none' }], { duration: 400, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+  }
+  all('.pm-opt input').forEach(function (i) { i.addEventListener('change', function () { pick(i.value, true); }); });
   pay.addEventListener('click', function () {
     pay.classList.add('pr-loading'); pay.setAttribute('aria-busy', 'true');
-    setTimeout(function () { location.href = 'my.html?up=' + key; }, 1200);   /* для показу: оплата пройшла — одразу видно «Піднято» */
+    setTimeout(function () { location.href = 'my.html?up=' + key + '&svc=' + svc; }, 1200);   /* для показу: оплата пройшла — одразу видно результат */
   });
+  pick(PRICE[q.get('svc')] ? q.get('svc') : 'lift', false);
 })();
 </script>
-<script src="shop.js?v=11241213"></script>
+<script src="shop.js?v=11241446"></script>
 </body>
 </html>
