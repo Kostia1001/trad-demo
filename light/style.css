@@ -2525,6 +2525,30 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 /* поки AI робить відео: смужка не прилипає до заголовка (огляд 23.11) */
 [data-state="making"] .sd-line { margin-top: 10px; margin-bottom: 12px; }
 
+/* ---- Поради щодо оголошення (24.11.2026; ТЗ: «Рекомендації щодо покращення оголошення»): блок на сторінці свого оголошення,
+        «N порад» і віконце в «Моїх оголошеннях». Розмітка — останній блок shop.js ---- */
+.owntips { margin: 12px 16px 0; padding: 4px 14px 6px; border-radius: 16px; background: var(--s1); }
+.owntips > .t { padding: 10px 0 8px; font-size: 13px; color: var(--text-2); }
+.tp-i { padding: 12px 0 14px; border-top: 1px solid var(--line); }
+.tp-i b { display: block; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.tp-i p { margin-top: 3px; font-size: 14px; line-height: 1.4; color: var(--text-2); }
+.tp-sug { margin-top: 8px; padding: 8px 12px; border-radius: 10px; background: var(--card, #FFFEFC); font-size: 14px; font-weight: 600; }
+.tp-sug small { display: block; margin-bottom: 2px; font-size: 12px; font-weight: 500; color: var(--text-2); }
+.tp-i .mini { height: 36px; background: var(--card, #FFFEFC); box-shadow: 0 0 0 1px var(--line); }
+.tp-i .mini:hover { background: var(--card, #FFFEFC); box-shadow: 0 0 0 1px var(--text-2); }
+.tp-none { padding: 4px 0 12px; font-size: 14px; }
+.tp-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; padding: 5px 12px 5px 9px; border-radius: 999px; background: var(--s1); font-size: 14px; font-weight: 600; transition: background 0.2s; }
+.tp-link svg { width: 16px; height: 16px; }
+.tp-link:hover { background: var(--s2); }
+.tp-for { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.tp-for img { flex: none; width: 48px; height: 48px; border-radius: 10px; object-fit: cover; }
+.tp-for b { display: block; font-size: 16px; font-weight: 600; }
+.tp-for small { display: block; font-size: 14px; color: var(--text-2); }
+.tp-for + .tp-i { border-top: 0; padding-top: 2px; }
+.tp-sheet .tp-i .mini, .tp-sheet .tp-i .mini:hover { background: var(--s1); box-shadow: none; }
+.tp-sheet .tp-sug { background: var(--s1); }
+@media (min-width: 900px) { body.wide .pwrap main > .owntips { order: 1; } }   /* на компʼютері — після кнопок «Редагувати» й «Підняти», перед описом */
+
 /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23.11.2026). Розмітку додає останній блок shop.js;
         сторінки promote.html і verify.html писані руками. Префікси: tr- (відгуки), pr- (підняття), vf- (перевірка особи) ---- */
 
