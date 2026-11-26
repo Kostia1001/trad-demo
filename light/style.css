@@ -2849,8 +2849,8 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 .fx-pv h4 { grid-area: t; align-self: end; margin: 0 0 6px; font: 700 16px/1.25 var(--display); }
 .fx-meta { grid-area: m; align-self: start; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-2); }
 .fx-price { padding: 2px 12px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 800 16px/1.4 var(--display); font-variant-numeric: tabular-nums; }
-.fx-strip { grid-area: s; display: flex; gap: 6px; margin-top: 8px; }
-.fx-strip img { flex: 1; min-width: 0; aspect-ratio: 1; object-fit: cover; border-radius: 8px; box-shadow: 0 0 0 1px var(--line); }
+.fx-strip { grid-area: s; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+.fx-strip img { width: 100%; min-width: 0; aspect-ratio: 1; object-fit: cover; border-radius: 8px; box-shadow: 0 0 0 1px var(--line); }
 .fx-strip img:first-child { box-shadow: 0 0 0 2px var(--text); }
 .fx-d, .fx-chips { display: none; }
 .fx-sec + .fx-sec { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
@@ -2873,8 +2873,8 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 .fx-ai { display: none; position: absolute; left: 10px; top: 10px; padding: 1px 7px; border-radius: 999px; background: var(--text); color: var(--bg); font-size: 12px; font-weight: 600; line-height: 1.5; }
 .fx-cap { margin: 10px 0 0; font-size: 14px; line-height: 1.45; color: var(--text-2); }
 .fx-cap:empty { display: none; }
-.fx-ths { display: flex; gap: 6px; }
-.fx-th { position: relative; flex: 1; min-width: 0; padding: 0; border-radius: 10px; overflow: hidden; background: var(--s1); box-shadow: 0 0 0 1px var(--line); }
+.fx-ths { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.fx-th { position: relative; display: block; width: 100%; min-width: 0; padding: 0; border-radius: 10px; overflow: hidden; background: var(--s1); box-shadow: 0 0 0 1px var(--line); }
 .fx-th img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .fx-th:disabled { cursor: default; }
 .fx-th small { position: absolute; right: 4px; top: 4px; width: 18px; height: 18px; border-radius: 50%; font-size: 0; background: #2E7D4F url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center no-repeat; box-shadow: 0 0 0 2px #fff; }
