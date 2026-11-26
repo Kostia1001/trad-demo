@@ -10,9 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11242319">
+<link rel="stylesheet" href="style.css?v=11270116">
 </head>
-<!-- AI-студія — окремий розділ кабінету (рішення власника 23.11.2026). Розстановка — за рисунком, який обрав власник (refs/trad-gpt-ai-studio-hub.png, за зразком Photoroom): поле «Оголошення» → що створити (три картки з кнопками) → «Фото товару» (панелі готових фонів) → «Мої матеріали»; усе веде на studio.html?item=…. Стилі — tools/studio.css. ?item=bag, ?video=making&item=bag -->
+<!-- AI-студія — окремий розділ кабінету (рішення власника 23.11.2026). З 26.11.2026 — варіант «через задачу продавця», обрав власник (рисунок Codex menu/codex/studio3/studio3-3.png, схема — Photoroom). Поле «Оголошення» → три задачі: «Поділитися в соцмережах», «Знизити ціну й нагадати», «Оформити оголошення» (картка обирає задачу й відкриває вікно, де AI вже все підготував) → інструменти задачі → «Усі інструменти» (14, за розділами) → «Мої матеріали». Річ не перемальовується. Назви й тексти — Codex (critique/codex/studio3-copy.txt). Стилі — tools/studio.css, блок «AI-студія v3». ?item=bag|hoodie, ?video=making&item=bag -->
 <body class="acctpage wide has-bar keepbar">
 <header class="top">
   <div class="top-row">
@@ -46,55 +46,129 @@
       <button class="hb-opt" type="button" role="option" aria-selected="false" data-item="hoodie"><img src="assets/hoodie-w.jpg" alt=""><span><b>Худі сіре</b><small class="num">650&nbsp;грн</small></span></button>
     </div>
   </div>
-  <section class="hb-sec" aria-labelledby="hb-h1">
-    <h2 class="hb-h" id="hb-h1">Що хочете створити?</h2>
-    <div class="hb-cards">
-      <a class="hb-card hb-main" data-tool="video" href="studio.html?item=jeans&amp;tool=video">
-        <span class="hb-im"><img data-im="sc-studio-w" src="assets/jeans-sc-studio-w.jpg" alt=""><span class="hb-ai">Створено AI</span><span class="hb-play"><i data-lucide="play"></i></span></span>
-        <span class="hb-tx"><b>Відео для соцмереж</b><small>З ваших фото для TikTok і Reels</small><strong>Перше відео безкоштовно</strong></span>
-        <span class="hb-btn hb-hot"><span>Підготувати відео</span></span>
-      </a>
-      <a class="hb-card" data-tool="photo" data-anchor href="#hb-photo">
-        <span class="hb-im hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span>
-        <span class="hb-tx"><b>Фото товару</b><small>Обкладинка оголошення або фото для соцмереж</small></span>
-        <span class="hb-btn"><span>Обрати фон</span><i data-lucide="arrow-right"></i></span>
-      </a>
-      <a class="hb-card" data-tool="texts" href="studio.html?item=jeans&amp;tool=texts">
-        <span class="hb-im hb-post"><i class="hb-tic" data-lucide="text"></i><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""><span class="hb-cap" id="hb-cap">Джинси Levi’s 501. Напишіть, якщо потрібні заміри.</span></span>
-        <span class="hb-tx"><b>Текст для допису</b><small>Підпис для Instagram, Facebook і Telegram</small></span>
-        <span class="hb-btn"><span>Створити текст</span><i data-lucide="arrow-right"></i></span>
-      </a>
+  <section class="tkz" aria-label="Що зробити з річчю">
+    <div class="tk-cards">
+      <button class="tk-card" type="button" data-task="share" aria-pressed="true">
+        <span class="tk-im"><img data-im="sc-studio-w" src="assets/jeans-sc-studio-w.jpg" alt=""><span class="tk-pr num" data-price>900 грн</span></span>
+        <span class="tk-bar"><b>Поділитися в соцмережах</b><small>Ролик, підпис і посилання на річ</small><i data-lucide="arrow-right"></i></span>
+      </button>
+      <button class="tk-card" type="button" data-task="price" aria-pressed="false">
+        <span class="tk-im"><img data-im="sc-street-2" src="assets/jeans-sc-street-2.jpg" alt=""><span class="tk-pr num" data-price>900 грн</span></span>
+        <span class="tk-bar"><b>Знизити ціну й нагадати</b><small id="tk-why">Джинси у продажу вже 3 тижні</small><i data-lucide="arrow-right"></i></span>
+      </button>
+      <button class="tk-card" type="button" data-task="fix" aria-pressed="false">
+        <span class="tk-im tk-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span>
+        <span class="tk-bar"><b>Оформити оголошення</b><small>Обкладинка, фото й опис</small><i data-lucide="arrow-right"></i></span>
+      </button>
     </div>
-  </section>
-  <section class="hb-sec" id="hb-photo" aria-labelledby="hb-h2">
-    <h2 class="hb-h" id="hb-h2">Фото товару</h2>
-    <div class="hb-two">
-      <div class="hb-pan">
-        <h3 class="hb-h3">Обкладинка оголошення</h3>
-        <p class="hb-note">Товар на фото без змін</p>
-        <div class="hb-thumbs hb-t2">
-          <a class="hb-th" data-go="photo" data-q="cv=clean" href="studio.html?item=jeans&amp;tool=photo&amp;cv=clean"><span class="hb-ti hb-fit"><img data-im="clean-w" src="assets/jeans-clean-w.jpg" alt=""></span><small>Чистий фон</small></a>
-          <a class="hb-th" data-go="photo" data-q="cv=blur" href="studio.html?item=jeans&amp;tool=photo&amp;cv=blur"><span class="hb-ti"><img data-im="blur-w" src="assets/jeans-blur-w.jpg" alt=""></span><small>Розмитий фон</small></a>
-        </div>
-      </div>
-      <div class="hb-pan">
-        <h3 class="hb-h3">Сцени для соцмереж</h3>
-        <p class="hb-note">AI змінює фон на фото</p>
-        <div class="hb-thumbs">
-          <a class="hb-th" data-go="photo" data-q="sc=studio" href="studio.html?item=jeans&amp;tool=photo&amp;sc=studio"><span class="hb-ti hb-scene"><img data-im="sc-studio-2" src="assets/jeans-sc-studio-2.jpg" alt=""></span><small>Студія</small></a>
-          <a class="hb-th" data-go="photo" data-q="sc=interior" href="studio.html?item=jeans&amp;tool=photo&amp;sc=interior"><span class="hb-ti hb-scene"><img data-im="sc-interior-2" src="assets/jeans-sc-interior-2.jpg" alt=""></span><small>Кімната</small></a>
-          <a class="hb-th" data-go="photo" data-q="sc=street" href="studio.html?item=jeans&amp;tool=photo&amp;sc=street"><span class="hb-ti hb-scene"><img data-im="sc-street-2" src="assets/jeans-sc-street-2.jpg" alt=""></span><small>Вулиця</small></a>
-        </div>
-      </div>
-    </div>
+    <div class="tk-tools" id="tk-tools" role="group" aria-label="Інструменти задачі"></div>
+    <button class="tk-all" type="button" id="tk-all" aria-expanded="false" aria-controls="tk-full">Усі інструменти<i data-lucide="chevron-down"></i></button>
+    <div class="tk-full" id="tk-full" hidden></div>
   </section>
   <section class="hb-sec" aria-labelledby="hb-h4">
     <h2 class="hb-h" id="hb-h4">Мої матеріали</h2>
     <div class="ah-mine" id="ah-mine">
-      <a class="ah-row hb-mat" href="studio.html?video=ready&amp;push=0"><span class="ah-vth hb-vsq"><img src="assets/jeans-sc-studio-w.jpg" alt=""><span class="hb-play"><i data-lucide="play"></i></span></span><span class="ah-t"><b>Відео · Джинси Levi’s 501</b><span class="hb-tagai">Створено AI</span><small>За 3 дні · <strong class="num">120</strong> переходів<br>2 людини написали вам</small></span><span class="hb-view"><span>Переглянути відео</span><i data-lucide="arrow-right"></i></span></a>
+      <a class="ah-row hb-mat" href="assets/jeans-reel.mp4"><span class="ah-vth hb-vsq"><img src="assets/jeans-reel.jpg" alt=""><span class="hb-play"><i data-lucide="play"></i></span></span><span class="ah-t"><b>Ролик · Джинси Levi’s 501</b><small>Instagram · за 3 дні <strong class="num">120</strong> переходів<br>2 людини написали вам</small></span><span class="hb-view"><span>Переглянути</span><i data-lucide="arrow-right"></i></span></a>
     </div>
   </section>
 </main>
+
+<section class="sheet sx-sheet tk-sheet tk-wide" id="tk-share" role="dialog" aria-modal="true" aria-labelledby="tk-sh1">
+  <div class="sheet-head"><h2 id="tk-sh1">Поділитися в соцмережах</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <div class="tk-sh">
+      <div class="tk-pv">
+        <span class="tk-clip"><video id="tk-vid" src="assets/jeans-reel.mp4" poster="assets/jeans-reel.jpg" muted loop playsinline preload="none" aria-label="Ролик оголошення"></video><span class="tk-bld" id="tk-bld" hidden><span class="ah-spin" aria-hidden="true"></span>Збираємо ролик. Це займе 25–40 секунд.</span></span>
+      </div>
+      <div class="tk-cfg">
+        <h3 class="tk-h">Стиль ролика</h3>
+        <div class="tk-styles" role="radiogroup" aria-label="Стиль ролика">
+          <button type="button" role="radio" aria-checked="true" data-style="calm"><img data-sp="calm" src="assets/jeans-reel.jpg" alt=""><b>Спокійний</b><small>Річ, деталі й ціна</small></button>
+          <button type="button" role="radio" aria-checked="false" data-style="fast"><img data-sp="fast" src="assets/jeans-reel-fast.jpg" alt=""><b>Для TikTok</b><small>Ті самі кадри, швидше</small></button>
+          <button type="button" role="radio" aria-checked="false" data-style="price"><img data-sp="price" src="assets/jeans-reel-price0.jpg" alt=""><b>Акцент на ціні</b><small>Ціна на першому плані</small></button>
+          <button type="button" role="radio" aria-checked="false" data-style="sale"><img data-sp="sale" src="assets/sale-reel.jpg" alt=""><b>Розпродаж</b><small>Кілька ваших речей із цінами</small></button>
+        </div>
+        <h3 class="tk-h">Фон</h3>
+        <div class="tk-bgs" role="radiogroup" aria-label="Фон">
+          <button type="button" role="radio" aria-checked="true" data-bg="len"><img src="assets/jeans-reel-bg-len.jpg" alt=""><span>Льон</span></button>
+          <button type="button" role="radio" aria-checked="false" data-bg="shtukaturka"><img src="assets/jeans-reel-bg-shtukaturka.jpg" alt=""><span>Штукатурка</span></button>
+          <button type="button" role="radio" aria-checked="false" data-bg="studio"><img src="assets/jeans-reel-bg-studio.jpg" alt=""><span>Студія</span></button>
+          <button type="button" role="radio" aria-checked="false" data-bg="room"><img src="assets/jeans-reel-bg-room.jpg" alt=""><span>Кімната</span></button>
+          <button type="button" role="radio" aria-checked="false" data-bg="street"><img src="assets/jeans-reel-bg-street.jpg" alt=""><span>Вулиця</span></button>
+          <button type="button" role="radio" aria-checked="false" data-bg="festive"><img src="assets/jeans-reel-bg-festive.jpg" alt=""><span>Святковий</span></button>
+        </div>
+        <h3 class="tk-h">Текст на ролику</h3>
+        <div class="tk-tg">
+          <label><span>Назва</span><input type="checkbox" class="sw" data-show="title" checked></label>
+          <label><span>Розмір</span><input type="checkbox" class="sw" data-show="size" checked></label>
+          <label><span>Ціна</span><input type="checkbox" class="sw" data-show="price" checked></label>
+          <label><span>Заклик написати в TRAD</span><input type="checkbox" class="sw" data-show="cta"></label>
+        </div>
+        <h3 class="tk-h">Музика</h3>
+        <p class="tk-mus"><b>Без музики</b><small>Музику можна буде додати пізніше.</small></p>
+        <button class="btn ghost tk-upd" type="button" id="tk-upd" hidden><i data-lucide="refresh-cw"></i>Оновити ролик</button>
+        <div class="tk-out">
+          <span class="sx-fl">Соцмережа</span>
+          <div class="tk-nets" role="radiogroup" aria-label="Соцмережа">
+            <button class="opt" type="button" role="radio" aria-checked="true" data-net="ig">Instagram</button><button class="opt" type="button" role="radio" aria-checked="false" data-net="tt">TikTok</button><button class="opt" type="button" role="radio" aria-checked="false" data-net="tg">Telegram</button><button class="opt" type="button" role="radio" aria-checked="false" data-net="fb">Facebook</button>
+          </div>
+          <span class="sx-fl">Підпис до допису</span>
+          <p class="tk-cap" id="tk-cap" aria-live="polite"></p>
+          <span class="sx-fl">Посилання на оголошення</span>
+          <p class="tk-link"><span class="num" id="tk-lnk">trad.ua/7kq2</span><span class="tk-clicks">Переходи <b class="num" id="tk-clk">120</b></span></p>
+        </div>
+      </div>
+    </div>
+    <div class="stack sx-m"><button class="btn primary wide" type="button" id="tk-sharebtn"><i data-lucide="share"></i>Поділитися</button></div>
+    <div class="stack tk-acts">
+      <a class="btn ghost wide tk-dl" id="tk-dl" href="assets/jeans-reel.mp4" download><i data-lucide="download"></i>Завантажити ролик</a>
+      <button class="btn ghost wide" type="button" data-copy="cap"><i data-lucide="copy"></i>Скопіювати підпис</button>
+      <button class="btn ghost wide" type="button" data-copy="link"><i data-lucide="link"></i>Скопіювати посилання</button>
+    </div>
+  </div>
+</section>
+<section class="sheet sx-sheet tk-sheet" id="tk-price" role="dialog" aria-modal="true" aria-labelledby="tk-sh2">
+  <div class="sheet-head"><h2 id="tk-sh2">Знизити ціну й нагадати</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <div id="tk-pform">
+      <p class="hint" id="tk-phint"></p>
+      <div class="tk-pgrid">
+        <span class="sx-story tk-story" aria-hidden="true"><img id="tk-simg" src="assets/jeans-clean.jpg" alt=""><b class="sx-sname" id="tk-sname">Джинси Levi’s 501</b><span class="sx-was" id="tk-swas">Було 900 грн</span><span class="sx-now num" id="tk-snow">750 грн</span></span>
+        <div>
+          <label class="sx-fl" for="tk-pin">Нова ціна, грн</label>
+          <div class="pricebox"><input id="tk-pin" class="num" inputmode="numeric" autocomplete="off" value="750"><span>грн</span></div>
+          <p class="tk-err" id="tk-perr" role="alert" hidden></p>
+          <label class="tk-chk" id="tk-notw"><input type="checkbox" id="tk-notify" checked><span id="tk-nott">Повідомити 9 людей, які зберегли річ</span></label>
+          <p class="hint" id="tk-nobody" hidden>Цю річ ще ніхто не зберіг.</p>
+        </div>
+      </div>
+      <button class="btn primary wide" type="button" id="tk-pok">Знизити ціну й повідомити</button>
+    </div>
+    <div id="tk-pdone" hidden>
+      <p class="tk-done" id="tk-pdmsg"></p>
+      <div class="tk-pgrid"><span class="sx-gpv sx-gstory" id="tk-dstory"></span><div><b class="tk-dh">Сторіс готова</b><p class="hint">Викладіть її у своїх соцмережах — люди побачать нову ціну.</p></div></div>
+      <div class="stack"><button class="btn primary wide" type="button" id="tk-sstory"><i data-lucide="share"></i>Поділитися сторіс</button><a class="btn ghost wide" id="tk-up" href="promote.html?item=jeans"><i data-lucide="arrow-up-to-line"></i>Підняти оголошення · від 19 грн</a></div>
+    </div>
+  </div>
+</section>
+<section class="sheet sx-sheet tk-sheet tk-xl" id="tk-fix" role="dialog" aria-modal="true" aria-labelledby="tk-sh3">
+  <div class="sheet-head"><h2 id="tk-sh3">Оформити оголошення</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body" id="fx-body"></div>
+  <div class="sheet-foot fx-foot" id="fx-foot"><button class="btn ghost" type="button" data-close>Скасувати</button><button class="btn primary" type="button" id="fx-save">Зберегти</button></div>
+</section>
+<section class="sheet sx-sheet tk-sheet" id="tk-tool" role="dialog" aria-modal="true" aria-labelledby="tk-sh4">
+  <div class="sheet-head"><h2 id="tk-sh4"></h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body"><p class="hint" id="tk-tai"></p><div id="tk-tbody"></div></div>
+</section>
+<section class="sheet sx-sheet" id="sx-salesh" role="dialog" aria-modal="true" aria-labelledby="sx-sh">
+  <div class="sheet-head"><h2 id="sx-sh">Розпродаж</h2><button class="x" type="button" data-close aria-label="Закрити"><i data-lucide="x"></i></button></div>
+  <div class="sheet-body">
+    <p class="hint">Оберіть від 2 до 8 речей для ролика.</p>
+    <div class="sx-film" id="sx-film" aria-hidden="true"></div>
+    <div class="sx-pickl" id="sx-pickl"></div>
+    <button class="btn primary wide" type="button" id="sx-sok">Створити ролик</button>
+  </div>
+</section>
 
 <div class="scrim"></div>
 
@@ -112,23 +186,331 @@
   window.openSheet = function (id) { sheet(id, true); };
   document.querySelectorAll('.scrim, [data-close]').forEach(function (b) { b.addEventListener('click', function () { sheet('', false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') sheet('', false); });
-  // оголошення обирають у полі зверху: усі приклади нижче й посилання — для цієї речі
-  var ITEMS = { jeans: ['Джинси Levi’s 501', 'jeans-1.jpg'], bag: ['Сумка шкіряна', 'bag-w.jpg'], hoodie: ['Худі сіре', 'hoodie-w.jpg'] };
+  // оголошення обирають у полі зверху: картки задач, інструменти й вікна — для цієї речі
+  var ITEMS = {
+    jeans: { name: 'Джинси Levi’s 501', acc: 'джинси Levi’s 501', price: 900, size: 'W32 L32', tag: 'джинси', link: 'trad.ua/7kq2', pic: 'jeans-1.jpg', fav: 9, clicks: 120,
+      why: 'Джинси у продажу вже 3 тижні', sim: [700, 800], to: 750, sizeTip: 'Додайте обхват талії та довжину джинсів', sizeF: ['Обхват талії, см', 'Довжина, см'],
+      desc: 'Джинси Levi’s 501, розмір W32 L32. Прямий крій, застібка на ґудзиках. Носила один сезон, стан хороший.', faq: [['Який розмір?', 'W32 L32.'], ['Де можна подивитися?', 'В Одесі.']] },
+    bag: { name: 'Сумка шкіряна', acc: 'сумку шкіряну', price: 1100, size: '', tag: 'сумки', link: 'trad.ua/3fm8', pic: 'bag-w.jpg', fav: 4, clicks: 0, reserved: true,
+      why: '', sim: null, to: 990, sizeTip: 'Додайте ширину й висоту сумки', sizeF: ['Ширина, см', 'Висота, см'],
+      desc: 'Шкіряна сумка, коричнева. Дві кишені на пряжках, довгі ручки. Стан хороший.', faq: [['З якої шкіри?', 'Натуральна шкіра.'], ['Де можна подивитися?', 'В Одесі.']] },
+    hoodie: { name: 'Худі сіре', acc: 'худі сіре', price: 650, size: 'L', tag: 'худі', link: 'trad.ua/9wd4', pic: 'hoodie-w.jpg', fav: 12, clicks: 34,
+      why: 'Худі у продажу вже місяць', sim: [500, 600], to: 550, sizeTip: 'Додайте ширину в плечах і довжину худі', sizeF: ['Ширина в плечах, см', 'Довжина, см'],
+      desc: 'Сіре худі, розмір L. Капюшон, кишеня-кенгуру. Стан хороший.', faq: [['Який розмір?', 'L.'], ['Де можна подивитися?', 'В Одесі.']] }
+  };
+  // усі інструменти: назва, що зробить AI, розділ, задача, що відкриває
+  var TOOLS = {
+    reel: ['Ролик для соцмереж', 'Збере ролик із ваших фото', 'video', 'Відео', 'share'],
+    sale: ['Ролик розпродажу', 'Збере вибрані речі в ролик', 'layers', 'Відео', 'share'],
+    own: ['Ролик для оголошення', 'Запропонує порядок фото, фон і музику', 'film', 'Відео', 'fix'],
+    cover: ['Обкладинка', 'Підготує чистий або розмитий фон', 'image', 'Фото', 'fix'],
+    scene: ['Сцена для соцмереж', 'Змінить фон, зберігши річ', 'frame', 'Фото', 'share'],
+    collage: ['Колаж', 'Поєднає кілька фото в кадрі', 'layout-grid', 'Фото', 'share'],
+    light: ['Світло й різкість', 'Вирівняє освітлення й підвищить різкість', 'sun', 'Фото', 'fix'],
+    caption: ['Підпис до допису', 'Підготує підпис із даних оголошення', 'pen-line', 'Тексти', 'share'],
+    desc: ['Опис оголошення', 'Упорядкує опис за вашими даними', 'file-text', 'Тексти', 'fix'],
+    size: ['Заміри й характеристики', 'Підкаже, яких даних бракує', 'ruler', 'Тексти', 'fix'],
+    answers: ['Відповіді покупцям', 'Підготує відповіді з ваших даних', 'messages-square', 'Тексти', 'fix'],
+    story: ['Сторіс про знижку', 'Покаже стару й нову ціни', 'badge-percent', 'Поширення', 'price'],
+    qr: ['Посилання та QR', 'Підготує посилання й QR-код', 'qr-code', 'Поширення', 'share'],
+    shop: ['Вітрина продавця', 'Збере активні оголошення на сторінці', 'store', 'Поширення', 'share']
+  };
+  var TASKS = { share: ['reel', 'caption', 'scene', 'collage', 'sale', 'qr', 'shop'], price: ['story', 'promote'], fix: ['cover', 'light', 'desc', 'size', 'answers', 'own'] };
+  var CITY = 'Одеса', cur = 'jeans', net = 'ig', task = 'share', applied = {};
+  var money = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' грн'; };
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function caption(it, n) {
+    var x = ITEMS[it], line2 = (x.size ? 'Розмір ' + x.size + ' · ' : '') + CITY, tags = '#' + x.tag + ' #продам #' + CITY.toLowerCase();
+    if (n === 'ig') return 'Продаю ' + x.acc + ' за ' + money(x.price) + '.\n' + line2 + '\nПосилання в профілі.\n' + tags;
+    if (n === 'tt') return x.name + ' — ' + money(x.price) + '\n' + line2 + '\nОголошення за посиланням у профілі.\n' + tags;
+    if (n === 'tg') return x.name + ' — ' + money(x.price) + '\n' + line2 + '\nОголошення: ' + x.link;
+    return 'Продаю ' + x.acc + '. Ціна — ' + money(x.price) + '.\n' + line2 + '\nПереглянути оголошення й написати мені: ' + x.link;
+  }
+  function toast(t) { var el = $('toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(function () { el.classList.remove('on'); }, 2400); }
+  function copy(text, msg) { try { navigator.clipboard.writeText(text).then(function () { toast(msg); }, function () { toast(msg); }); } catch (e) { toast(msg); } }
+  function chip(id) {
+    if (id === 'promote') return '<a class="tk-tool" href="promote.html?item=' + cur + '"><i data-lucide="arrow-up-to-line"></i><span>Підняти оголошення<small>від 19 грн</small></span></a>';
+    var t = TOOLS[id]; return '<button class="tk-tool" type="button" data-tool="' + id + '"><i data-lucide="' + t[2] + '"></i><span>' + t[0] + '</span></button>';
+  }
+  function tools() {
+    var box = $('tk-tools'); box.innerHTML = TASKS[task].map(chip).join(''); box.dataset.task = task;
+    if (!still) { box.classList.remove('tk-in'); void box.offsetWidth; box.classList.add('tk-in'); }
+    lucide.createIcons();
+  }
+  function full() {
+    var groups = ['Відео', 'Фото', 'Тексти', 'Поширення'];
+    $('tk-full').innerHTML = groups.map(function (g) {
+      return '<div class="tk-grp"><h3>' + g + '</h3>' + Object.keys(TOOLS).filter(function (k) { return TOOLS[k][3] === g; }).map(function (k) {
+        var t = TOOLS[k]; return '<button class="tk-row" type="button" data-tool="' + k + '"><i data-lucide="' + t[2] + '"></i><span><b>' + t[0] + '</b><small>' + t[1] + '</small></span></button>'; }).join('') + '</div>';
+    }).join('');
+    lucide.createIcons();
+  }
   var sel = $('hb-sel'), list = $('hb-list');
   function drop(on) { list.hidden = !on; sel.setAttribute('aria-expanded', String(on)); }
   function pick(it, save) {
-    if (!ITEMS[it]) it = 'jeans';
+    if (!ITEMS[it]) it = 'jeans'; cur = it; var x = ITEMS[it];
     [].forEach.call(document.querySelectorAll('.hb-opt'), function (b) { b.setAttribute('aria-selected', String(b.dataset.item === it)); });
-    $('hb-simg').src = 'assets/' + ITEMS[it][1]; $('hb-sname').textContent = ITEMS[it][0];
+    $('hb-simg').src = 'assets/' + x.pic; $('hb-sname').textContent = x.name;
     [].forEach.call(document.querySelectorAll('[data-im]'), function (im) { im.src = 'assets/' + it + '-' + im.dataset.im + '.jpg'; });
-    [].forEach.call(document.querySelectorAll('[data-tool]:not([data-anchor]), [data-go]'), function (l) { var t = l.dataset.tool || l.dataset.go; l.setAttribute('href', 'studio.html?item=' + it + '&tool=' + t + (l.dataset.q ? '&' + l.dataset.q : '')); });
-    $('hb-cap').textContent = ITEMS[it][0] + '. Напишіть, якщо потрібні заміри.';
+    [].forEach.call(document.querySelectorAll('[data-price]'), function (el) { el.textContent = money(x.price); });
+    $('tk-why').textContent = x.why || 'Поточна ціна · ' + money(x.price);
+    tools();
     if (save) try { sessionStorage.setItem('trad-hub-item', it); } catch (e) {}
   }
   sel.addEventListener('click', function () { drop(list.hidden); });
   [].forEach.call(document.querySelectorAll('.hb-opt'), function (b) { b.addEventListener('click', function () { pick(b.dataset.item, true); drop(false); sel.focus(); }); });
   document.addEventListener('click', function (e) { if (!e.target.closest('.hb-pick')) drop(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !list.hidden) { drop(false); sel.focus(); } });
+
+  // ---- задача: картка обирає задачу (нижче — її інструменти) й одразу відкриває вікно, де AI вже все підготував
+  function setTask(t) { task = t; [].forEach.call(document.querySelectorAll('.tk-card'), function (c) { c.setAttribute('aria-pressed', String(c.dataset.task === t)); }); tools(); }
+  [].forEach.call(document.querySelectorAll('.tk-card'), function (c) { c.addEventListener('click', function () { setTask(c.dataset.task); openTask(c.dataset.task); }); });
+  function openTask(t, focus) { if (t === 'share') openShare(); else if (t === 'price') openPrice(); else openFix(focus); }
+  $('tk-all').addEventListener('click', function () {
+    var on = $('tk-full').hidden; if (on) full(); $('tk-full').hidden = !on; this.setAttribute('aria-expanded', String(on));
+  });
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tool]'); if (!b || !b.closest('.tk-tools, .tk-full')) return; var k = b.dataset.tool;
+    if (k === 'reel' || k === 'caption') openShare();
+    else if (k === 'story') openPrice();
+    else if (k === 'sale') { saleList(); openSheet('sx-salesh'); }
+    else if (k === 'scene') location.href = 'studio.html?item=' + cur + '&tool=photo&sc=studio';
+    else if (k === 'own') location.href = 'studio.html?item=' + cur + '&tool=video';
+    else if (k === 'cover' || k === 'light' || k === 'desc' || k === 'size') openFix(k);
+    else openTool(k);
+  });
+
+  // ---- «Поділитися в соцмережах»: ролик, підпис під соцмережу, посилання з переходами
+  function showCap() { var c = $('tk-cap'); c.classList.remove('sx-in'); void c.offsetWidth; c.textContent = caption(cur, net); c.classList.add('sx-in'); }
+  // ролик: стиль, фон і текст. AI радить стиль (є привід — «Акцент на ціні»); у макеті превʼю зібрані для джинсів, для інших речей — їхній ролик
+  var look = { style: 'calm', bg: 'len', show: { title: true, size: true, price: true, cta: false }, built: '' };
+  function clip() {
+    var j = cur === 'jeans', x = ITEMS[cur];
+    if (look.style === 'sale') return 'sale-reel';
+    if (!j) return cur + '-reel';
+    if (look.style === 'fast') return 'jeans-reel-fast';
+    if (look.style === 'price') return x.prevShown ? 'jeans-reel-price' : 'jeans-reel-price0';
+    if (look.show.cta && look.built === 'cta') return 'jeans-reel-cta';
+    return look.bg === 'len' ? 'jeans-reel' : 'jeans-reel-bg-' + look.bg;
+  }
+  function play() {
+    var v = $('tk-vid'), n = clip(); if (v.getAttribute('src') !== 'assets/' + n + '.mp4') { v.src = 'assets/' + n + '.mp4'; v.poster = 'assets/' + n + '.jpg'; }
+    $('tk-dl').href = v.src; if (!still) { var pr = v.play(); if (pr) pr.catch(function () {}); }
+  }
+  function marks() {
+    var ai = ITEMS[cur].why ? 'price' : 'calm';
+    [].forEach.call(document.querySelectorAll('[data-style]'), function (b) { b.setAttribute('aria-checked', String(b.dataset.style === look.style)); b.classList.toggle('tk-ai', b.dataset.style === ai); });
+    [].forEach.call(document.querySelectorAll('[data-bg]'), function (b) { b.setAttribute('aria-checked', String(b.dataset.bg === look.bg)); });
+    [].forEach.call(document.querySelectorAll('[data-show]'), function (c) { c.checked = look.show[c.dataset.show]; });
+  }
+  function openShare() {
+    var x = ITEMS[cur];
+    look.style = x.why ? 'price' : 'calm'; look.bg = 'len'; look.show = { title: true, size: !!x.size, price: true, cta: false }; look.built = '';
+    $('tk-upd').hidden = true; $('tk-bld').hidden = true;
+    $('tk-lnk').textContent = x.link; $('tk-clk').textContent = x.clicks; marks(); showCap(); openSheet('tk-share'); play();
+  }
+  [].forEach.call(document.querySelectorAll('[data-style]'), function (b) { b.addEventListener('click', function () { look.style = b.dataset.style; marks(); play(); }); });
+  [].forEach.call(document.querySelectorAll('[data-bg]'), function (b) { b.addEventListener('click', function () { look.bg = b.dataset.bg; if (look.style === 'price' || look.style === 'fast') look.style = 'calm'; marks(); play(); }); });
+  [].forEach.call(document.querySelectorAll('[data-show]'), function (c) { c.addEventListener('change', function () { look.show[c.dataset.show] = c.checked; $('tk-upd').hidden = false; }); });
+  $('tk-upd').addEventListener('click', function () {
+    var b = this; b.hidden = true; $('tk-bld').hidden = false; $('tk-vid').pause();
+    setTimeout(function () { look.built = look.show.cta ? 'cta' : ''; $('tk-bld').hidden = true; play(); }, still ? 600 : 2600);
+  });
+  [].forEach.call(document.querySelectorAll('#tk-share [data-net]'), function (b) { b.addEventListener('click', function () {
+    net = b.dataset.net; [].forEach.call(document.querySelectorAll('#tk-share [data-net]'), function (o) { o.setAttribute('aria-checked', String(o === b)); }); showCap();
+  }); });
+  [].forEach.call(document.querySelectorAll('[data-copy]'), function (b) { b.addEventListener('click', function () {
+    if (b.dataset.copy === 'cap') copy(caption(cur, net), 'Підпис скопійовано'); else copy('https://' + ITEMS[cur].link, 'Посилання скопійовано');
+  }); });
+  $('tk-dl').addEventListener('click', function () { toast('Ролик завантажено'); });
+  $('tk-sharebtn').addEventListener('click', function () { if (navigator.share) navigator.share({ text: caption(cur, net) }).catch(function () {}); else copy(caption(cur, net), 'Підпис скопійовано'); });
+
+  // ---- «Знизити ціну й нагадати»: AI радить ціну за схожими оголошеннями, сторіс, сповіщення тим, хто зберіг
+  function priceUi() {
+    var x = ITEMS[cur], v = parseInt($('tk-pin').value.replace(/\D/g, ''), 10), ok = v > 0 && v < x.price, n = $('tk-notify').checked && x.fav > 0;
+    $('tk-snow').textContent = v ? money(v) : ''; $('tk-perr').hidden = !(v >= x.price); $('tk-perr').textContent = 'Вкажіть ціну нижче за ' + money(x.price);
+    $('tk-pok').disabled = !ok; $('tk-pok').textContent = n ? 'Знизити ціну й повідомити' : 'Знизити ціну до ' + (ok ? money(v) : '…');
+  }
+  function openPrice() {
+    var x = ITEMS[cur];
+    $('tk-phint').textContent = x.sim ? 'У схожих оголошеннях ціни ' + x.sim[0] + '–' + money(x.sim[1]) + '. Запропонована ціна — ' + money(x.to) + '.' : 'Поточна ціна — ' + money(x.price) + '. Вкажіть нову ціну.';
+    $('tk-simg').src = 'assets/' + cur + '-clean.jpg'; $('tk-sname').textContent = x.name; $('tk-swas').textContent = 'Було ' + money(x.price);
+    $('tk-pin').value = x.sim ? x.to : ''; $('tk-notw').hidden = !x.fav; $('tk-nobody').hidden = !!x.fav;
+    $('tk-nott').textContent = 'Повідомити ' + x.fav + ' ' + (x.fav % 10 === 1 && x.fav % 100 !== 11 ? 'людину, яка зберегла' : 'людей, які зберегли') + ' річ';
+    $('tk-pform').hidden = false; $('tk-pdone').hidden = true; priceUi(); openSheet('tk-price');
+  }
+  $('tk-pin').addEventListener('input', priceUi); $('tk-notify').addEventListener('change', priceUi);
+  $('tk-pok').addEventListener('click', function () {
+    var x = ITEMS[cur], v = parseInt($('tk-pin').value.replace(/\D/g, ''), 10), n = $('tk-notify').checked && x.fav > 0; if (!(v > 0 && v < x.price)) return;
+    $('tk-dstory').innerHTML = ''; $('tk-dstory').appendChild(document.querySelector('#tk-price .tk-story').cloneNode(true));
+    x.price = v; x.why = ''; x.prevShown = true; $('tk-pdmsg').textContent = 'Ціну знижено до ' + money(v) + (n ? '. Сповіщення надіслано ' + x.fav + ' людям.' : '.');
+    $('tk-up').href = 'promote.html?item=' + cur; $('tk-pform').hidden = true; $('tk-pdone').hidden = false; pick(cur);
+  });
+  $('tk-sstory').addEventListener('click', function () { if (navigator.share) navigator.share({ text: ITEMS[cur].name + ' — тепер ' + money(ITEMS[cur].price) }).catch(function () {}); else toast('Сторіс збережено'); });
+
+  // ---- «Оформити оголошення» (v1 «Редактор оголошення», 27.11.2026): зліва — вигляд для покупців, справа — чотири правки AI; одна кнопка зберігає вибране.
+  //      Обкладинка: «Як є» / «Чистий фон» / «Розмитий фон» — оригінал іде другим фото. Світло й різкість — лише фото, яким це потрібно (у джинсів два «під лампою»).
+  var FX = {
+    jeans: { orig: 'jeans-1', ph: [['jeans-1'], ['jeans-2-home', 'jeans-2-lit'], ['jeans-4'], ['jeans-5-home', 'jeans-5-lit'], ['jeans-8']], chip: 'W32 L32', own: 'Носила один сезон, все ок. Розмір 32/32',
+      desc: 'Джинси Levi’s 501, розмір W32 L32. Застібка на ґудзиках, п’ять кишень. Носила один сезон, стан хороший, дефектів немає.',
+      tip: 'Виміряйте джинси, розклавши їх на рівній поверхні.', sz: [['Ширина по поясу, см', 'Пояс'], ['Довжина по зовнішньому шву, см', 'Довжина']] },
+    bag: { orig: 'bag', ph: [['bag']], chip: '', own: 'Сумка шкіряна, коричнева. Стан хороший.',
+      desc: 'Шкіряна сумка, коричнева. Дві кишені на пряжках, довгі ручки. Стан хороший.',
+      tip: 'Виміряйте сумку без ручок.', sz: [['Ширина, см', 'Ширина'], ['Висота, см', 'Висота']] },
+    hoodie: { orig: 'hoodie', ph: [['hoodie']], chip: 'L', own: 'Худі сіре, розмір L. Носила мало.',
+      desc: 'Сіре худі, розмір L. Капюшон, кишеня-кенгуру. Стан хороший.',
+      tip: 'Виміряйте худі, розклавши його на рівній поверхні.', sz: [['Ширина в плечах, см', 'Плечі'], ['Довжина, см', 'Довжина']] }
+  };
+  var COVN = { as: 'Як є', clean: 'Чистий фон', blur: 'Розмитий фон' }, COVL = { clean: 'Фон прибрано', blur: 'Фон розмито' };
+  var COVC = { as: '', clean: 'AI прибрав лише фон. Оригінал буде другим фото в оголошенні.', blur: 'AI розмив лише фон. Оригінал буде другим фото в оголошенні.' };
+  var fxs = {};
+  var A_ = function (n) { return 'assets/' + n + '.jpg'; };
+  var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  function fxState() { var f = FX[cur]; return fxs[cur] || (fxs[cur] = { cover: 'clean', light: true, orig: {}, desc: true, text: f.desc, sz: ['', ''], saved: false }); }
+  function covSrc(k) { return k === 'as' ? A_(FX[cur].orig) : A_(cur + '-' + k + '-w'); }
+  function fxLit() { var S = fxState(); return FX[cur].ph.filter(function (p, i) { return p[1] && S.light && !S.orig[i]; }).length; }
+  function fxCanLit() { return FX[cur].ph.some(function (p) { return p[1]; }); }
+  function szOk() { var z = fxState().sz; return !!(z[0].trim() && z[1].trim()); }
+  function fxCount() { var S = fxState(); return (S.cover !== 'as') + (fxLit() > 0) + (S.desc && S.text.trim() !== FX[cur].own) + (szOk() ? 1 : 0); }
+  function fxWord(n) { return n === 1 ? 'зміну' : n < 5 ? 'зміни' : 'змін'; }
+  function fxOrder() {
+    var S = fxState(), l = FX[cur].ph.map(function (p, i) { return { id: 'p' + i, src: A_(p[1] && S.light && !S.orig[i] ? p[1] : p[0]) }; });
+    if (S.cover !== 'as') l.unshift({ id: 'cv', src: covSrc(S.cover) }); return l.slice(0, 6);
+  }
+  function fxChips() { var S = fxState(), f = FX[cur]; return (f.chip ? '<span>' + f.chip + '</span>' : '') + (szOk() ? '<span>' + f.sz[0][1] + ' ' + esc(S.sz[0]) + ' см</span><span>' + f.sz[1][1] + ' ' + esc(S.sz[1]) + ' см</span>' : ''); }
+  function fxSec(id, title, st, good, body, tg) {
+    return '<section class="fx-sec" data-fxs="' + id + '"><div class="fx-sh"><h3>' + title + '</h3><span class="fx-st' + (good ? ' fx-good' : '') + '">' + st + '</span>' +
+      (tg === undefined ? '' : '<input class="fx-tg" type="checkbox" role="switch" aria-label="' + title + '" data-fxtg="' + id + '"' + (tg ? ' checked' : '') + '>') + '</div>' + body + '</section>';
+  }
+  function fxRender() {
+    var S = fxState(), f = FX[cur], x = ITEMS[cur], body = $('fx-body');
+    if (S.saved) {
+      var l = [];
+      if (S.cover !== 'as') l.push('Обкладинка: ' + COVN[S.cover].toLowerCase());
+      if (fxLit()) l.push('Світло й різкість: ' + fxLit() + ' фото');
+      if (S.desc && S.text.trim() !== f.own) l.push('Новий опис');
+      if (szOk()) l.push('Заміри: ' + f.sz[0][1].toLowerCase() + ' ' + S.sz[0] + ' см, ' + f.sz[1][1].toLowerCase() + ' ' + S.sz[1] + ' см');
+      body.innerHTML = '<div class="fx-fin"><span class="fx-ic"><i data-lucide="check"></i></span><h3>Оголошення оновлено</h3><ul>' + l.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><div class="stack">' +
+        (cur === 'jeans' ? '<a class="btn primary wide" href="product.html">Переглянути оголошення</a>' : '<button class="btn primary wide" type="button" data-close>Готово</button>') +
+        '<button class="btn ghost wide" type="button" id="fx-undo">Скасувати зміни</button></div></div>';
+      $('fx-foot').hidden = true; lucide.createIcons(); return;
+    }
+    $('fx-foot').hidden = false;
+    var lit = fxLit(), can = fxCanLit(), n = f.ph.length;
+    var tiles = '<div class="fx-opts" role="group" aria-label="Обкладинка">' + ['as', 'clean', 'blur'].map(function (k) {
+      return '<button class="fx-opt" type="button" data-fxcv="' + k + '" aria-pressed="' + (S.cover === k) + '">' + (k === 'clean' ? '<span class="fx-ai">Радить AI</span>' : '') + '<img src="' + covSrc(k) + '" alt=""><b>' + COVN[k] + '</b></button>';
+    }).join('') + '</div><p class="fx-cap" id="fx-cvc">' + COVC[S.cover] + '</p>';
+    var ths = '<div class="fx-ths">' + f.ph.map(function (p, i) {
+      if (!p[1]) return '<button class="fx-th" type="button" disabled><img src="' + A_(p[0]) + '" alt=""></button>';
+      var o = S.orig[i] || !S.light;
+      return '<button class="fx-th" type="button" data-fxor="' + i + '" aria-pressed="' + !o + '"' + (S.light ? '' : ' disabled') + ' aria-label="' + (o ? 'Оригінал' : 'Покращено') + '"><img src="' + A_(o ? p[0] : p[1]) + '" alt=""><small>Покращено</small></button>';
+    }).join('') + '</div>' + (can && S.light ? '<p class="fx-cap">Натисніть на покращене фото, щоб повернути оригінал.</p>' : '');
+    var desc = S.desc ? '<div class="fx-desc"><textarea id="fx-dt" aria-label="Опис оголошення">' + esc(S.text) + '</textarea><div class="fx-from"><span>AI підготував опис на основі даних оголошення.</span>' +
+      (S.text !== f.own ? '<button class="fx-lnk" type="button" data-fxown>Повернути мій опис</button>' : '<button class="fx-lnk" type="button" data-fxai>Показати опис від AI</button>') + '</div></div>' : '<p class="fx-cap" style="margin:0">' + esc(f.own) + '</p>';
+    var size = '<p class="fx-cap" style="margin:0 0 10px">' + f.tip + '</p><div class="fx-flds">' + f.sz.map(function (z, i) { return '<label class="fx-fld">' + z[0] + '<input class="num" inputmode="numeric" data-fxsz="' + i + '" value="' + esc(S.sz[i]) + '"></label>'; }).join('') + '</div>';
+    body.innerHTML = '<div class="fx-ed"><aside class="fx-pv" aria-label="Вигляд для покупців"><p class="fx-pk">Вигляд для покупців</p><div class="fx-cv" id="fx-cv">' +
+      ['as', 'clean', 'blur'].map(function (k) { return '<img src="' + covSrc(k) + '" alt="" data-k="' + k + '" style="opacity:' + (S.cover === k ? 1 : 0) + '">'; }).join('') +
+      '<span class="fx-lbl" id="fx-lbl" style="opacity:' + (S.cover === 'as' ? 0 : 1) + '">' + (COVL[S.cover] || '') + '</span></div>' +
+      '<div class="fx-strip" id="fx-strip">' + fxOrder().map(function (p) { return '<img src="' + p.src + '" alt="" data-id="' + p.id + '">'; }).join('') + '</div>' +
+      '<h4>' + x.name + '</h4><div class="fx-meta"><span class="fx-price">' + money(x.price) + '</span><span>' + CITY + '</span></div><p class="fx-d" id="fx-pd">' + esc(S.desc ? S.text : f.own) + '</p><div class="fx-chips" id="fx-ch">' + fxChips() + '</div></aside><div>' +
+      fxSec('cover', 'Обкладинка', S.cover === 'as' ? 'Без змін' : 'Готово', S.cover !== 'as', tiles) +
+      fxSec('light', 'Світло й різкість', !can ? 'Фото вже добре' : S.light ? 'Покращено ' + lit + ' фото з ' + n : 'Без змін', can && lit > 0, ths, can ? S.light : undefined) +
+      fxSec('desc', 'Опис', S.desc ? 'Підготовлено' : 'Ваш опис', S.desc, desc, S.desc) +
+      fxSec('size', 'Заміри', szOk() ? 'Додано' : 'Бракує 2 замірів', szOk(), size) + '</div></div>';
+    fxFoot(); lucide.createIcons();
+  }
+  function fxFoot() { var n = fxCount(), b = $('fx-save'); b.disabled = !n; b.textContent = n ? 'Зберегти ' + n + ' ' + fxWord(n) : 'Немає змін'; }
+  function fxCover(k) {                    // нова обкладинка встає першою, оригінал зсувається на друге місце
+    var S = fxState(), strip = $('fx-strip'), before = {};
+    [].forEach.call(strip.children, function (el) { before[el.dataset.id] = el.getBoundingClientRect(); });
+    S.cover = k;
+    [].forEach.call($('fx-cv').querySelectorAll('img'), function (im) { im.style.opacity = im.dataset.k === k ? 1 : 0; });
+    $('fx-lbl').style.opacity = k === 'as' ? 0 : 1; if (COVL[k]) $('fx-lbl').textContent = COVL[k];
+    strip.innerHTML = fxOrder().map(function (p) { return '<img src="' + p.src + '" alt="" data-id="' + p.id + '">'; }).join('');
+    if (!still) [].forEach.call(strip.children, function (el) {
+      var b = before[el.dataset.id], a = el.getBoundingClientRect(), E = 'cubic-bezier(0.16, 1, 0.3, 1)';
+      if (!b) el.animate([{ transform: 'translateY(-10px) scale(0.9)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 380, easing: E });
+      else if (b.left !== a.left) el.animate([{ transform: 'translateX(' + (b.left - a.left) + 'px)' }, { transform: 'none' }], { duration: 380, easing: E });
+    });
+    [].forEach.call(document.querySelectorAll('[data-fxcv]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.fxcv === k)); });
+    $('fx-cvc').textContent = COVC[k];
+    var st = document.querySelector('[data-fxs=cover] .fx-st'); st.textContent = k === 'as' ? 'Без змін' : 'Готово'; st.classList.toggle('fx-good', k !== 'as');
+    fxFoot();
+  }
+  function openFix(focus) {
+    fxRender(); openSheet('tk-fix');
+    var el = focus && document.querySelector('[data-fxs="' + focus + '"]');
+    if (el) { el.scrollIntoView({ block: 'start', behavior: still ? 'auto' : 'smooth' }); el.classList.remove('fx-hl'); void el.offsetWidth; el.classList.add('fx-hl'); }
+  }
+  $('tk-fix').addEventListener('click', function (e) {
+    var S = fxState(), b = e.target.closest('button, input'); if (!b) return;
+    if (b.dataset.fxcv) return fxCover(b.dataset.fxcv);
+    if (b.dataset.fxor) { S.orig[b.dataset.fxor] = !S.orig[b.dataset.fxor]; return fxRender(); }
+    if (b.dataset.fxtg) { if (b.dataset.fxtg === 'light') S.light = b.checked; else S.desc = b.checked; return fxRender(); }
+    if (b.hasAttribute('data-fxown')) { S.text = FX[cur].own; return fxRender(); }
+    if (b.hasAttribute('data-fxai')) { S.text = FX[cur].desc; return fxRender(); }
+    if (b.id === 'fx-save') {
+      S.saved = true;
+      try { var c = JSON.parse(sessionStorage.getItem('trad-covers') || '{}'); if (S.cover === 'as') delete c[cur]; else c[cur] = S.cover; sessionStorage.setItem('trad-covers', JSON.stringify(c)); } catch (er) {}
+      return fxRender();
+    }
+    if (b.id === 'fx-undo') {
+      try { var c2 = JSON.parse(sessionStorage.getItem('trad-covers') || '{}'); delete c2[cur]; sessionStorage.setItem('trad-covers', JSON.stringify(c2)); } catch (er) {}
+      delete fxs[cur]; toast('Зміни скасовано'); return fxRender();
+    }
+  });
+  $('tk-fix').addEventListener('input', function (e) {
+    var S = fxState(), t = e.target, f = FX[cur];
+    if (t.id === 'fx-dt') { S.text = t.value; $('fx-pd').textContent = t.value; fxFoot(); }
+    if (t.dataset.fxsz) {
+      S.sz[+t.dataset.fxsz] = t.value.replace(/\D/g, '').slice(0, 3); t.value = S.sz[+t.dataset.fxsz];
+      $('fx-ch').innerHTML = fxChips(); var miss = S.sz.filter(function (v) { return !v; }).length, st = document.querySelector('[data-fxs=size] .fx-st');
+      st.textContent = !miss ? 'Додано' : miss === 1 ? 'Бракує 1 заміру' : 'Бракує 2 замірів'; st.classList.toggle('fx-good', !miss); fxFoot();
+    }
+  });
+
+  // ---- окремі інструменти: колаж, посилання та QR, вітрина продавця
+  function openTool(k) {
+    var x = ITEMS[cur], t = TOOLS[k], body = '';
+    $('tk-sh4').textContent = t[0]; $('tk-tai').textContent = 'AI ' + t[1].charAt(0).toLowerCase() + t[1].slice(1) + '.';
+    if (k === 'collage') body = '<div class="tk-col">' + (cur === 'jeans' ? ['jeans-1', 'jeans-2', 'jeans-4', 'jeans-8'] : [cur + '-clean', cur + '-sc-studio-2', cur + '-sc-street-2', cur + '-blur']).map(function (n) { return '<img src="assets/' + n + '.jpg" alt="">'; }).join('') + '</div><div class="stack"><button class="btn primary wide" type="button" data-done="Колаж збережено"><i data-lucide="download"></i>Зберегти колаж</button></div>';
+    if (k === 'answers') body = '<dl class="fx-faq">' + x.faq.map(function (q) { return '<dt>' + q[0] + '</dt><dd>' + q[1] + '</dd>'; }).join('') + '</dl><div class="stack"><button class="btn primary wide" type="button" data-done="Відповіді скопійовано"><i data-lucide="copy"></i>Скопіювати відповіді</button></div>';
+    if (k === 'qr') body = '<div class="tk-qr"><img src="assets/qr-' + cur + '.png" alt="QR-код оголошення"><p><b class="num">' + x.link + '</b><span class="tk-clicks">Переходи <b class="num">' + x.clicks + '</b></span></p></div><div class="stack"><a class="btn primary wide" href="assets/qr-' + cur + '.png" download><i data-lucide="download"></i>Завантажити QR-код</a><button class="btn ghost wide" type="button" data-copy2="link"><i data-lucide="link"></i>Скопіювати посилання</button></div>';
+    if (k === 'shop') body = '<div class="tk-shop">' + Object.keys(ITEMS).filter(function (k2) { return !ITEMS[k2].reserved; }).map(function (k2) { return '<span><img src="assets/' + ITEMS[k2].pic + '" alt=""><b class="num">' + money(ITEMS[k2].price) + '</b></span>'; }).join('') + '</div><p class="tk-link"><span class="num">trad.ua/olena-odesa</span></p><div class="stack"><a class="btn primary wide" href="seller.html"><i data-lucide="store"></i>Переглянути вітрину</a><button class="btn ghost wide" type="button" data-copy2="shop"><i data-lucide="link"></i>Скопіювати посилання</button></div>';
+    $('tk-tbody').innerHTML = body; lucide.createIcons(); openSheet('tk-tool');
+  }
+  $('tk-tbody').addEventListener('click', function (e) {
+    var d = e.target.closest('[data-done]'); if (d) toast(d.dataset.done);
+    var c = e.target.closest('[data-copy2]'); if (c) copy('https://' + (c.dataset.copy2 === 'shop' ? 'trad.ua/olena-odesa' : ITEMS[cur].link), 'Посилання скопійовано');
+  });
+  // зупинити ролик, коли вікно закрили
+  [].forEach.call(document.querySelectorAll('.scrim, [data-close]'), function (b) { b.addEventListener('click', function () { $('tk-vid').pause(); }); });
+
+  // ---- «Ролик розпродажу»: обрати 2–8 речей, ролик збирається, рядок у «Моїх матеріалах»
+  var order = ['jeans', 'hoodie', 'bag'], on = {};
+  function film() {
+    var f = $('sx-film'), sel2 = order.filter(function (k) { return on[k]; });
+    f.innerHTML = sel2.map(function (k) { return '<span><img src="assets/' + ITEMS[k].pic + '" alt=""><b class="num">' + money(ITEMS[k].price) + '</b></span>'; }).join('') +
+      '<span class="sx-me"><img src="assets/avatar.jpg" alt=""><b>Олена</b></span>';
+    $('sx-sok').disabled = sel2.length < 2;
+  }
+  function saleList() {
+    on = {}; order.forEach(function (k) { on[k] = !ITEMS[k].reserved; });
+    $('sx-pickl').innerHTML = order.map(function (k) { var x = ITEMS[k];
+      return '<label class="sx-pi' + (x.reserved ? ' sx-off' : '') + '"><input type="checkbox" data-k="' + k + '"' + (on[k] ? ' checked' : '') + (x.reserved ? ' disabled' : '') + '><img src="assets/' + x.pic + '" alt=""><span><b>' + x.name + '</b><small class="num">' + (x.reserved ? 'Заброньовано' : money(x.price)) + '</small></span></label>'; }).join('');
+    [].forEach.call(document.querySelectorAll('#sx-pickl input'), function (c) { c.addEventListener('change', function () { on[c.dataset.k] = c.checked; film(); }); });
+    film();
+  }
+  $('sx-sok').addEventListener('click', function () {
+    sheet('', false); var mine = $('ah-mine'), row = document.createElement('div'); row.className = 'ah-row ah-making'; row.id = 'ah-sale';
+    row.innerHTML = '<span class="ah-vth"><img src="assets/jeans-1.jpg" alt=""><span class="ah-spin" aria-hidden="true"></span></span><span class="ah-t"><b>Розпродаж</b><small>Ролик готується</small></span>';
+    mine.insertBefore(row, mine.firstChild); row.scrollIntoView({ behavior: still ? 'auto' : 'smooth', block: 'center' });
+    setTimeout(function () {
+      var done = document.createElement('a'); done.className = 'ah-row'; done.id = 'ah-sale'; done.href = 'assets/jeans-reel.mp4';
+      done.innerHTML = '<span class="ah-vth"><img src="assets/jeans-1.jpg" alt=""><i data-lucide="play"></i></span><span class="ah-t"><b>Розпродаж</b><small>Ролик готовий</small></span><i class="ah-chev" data-lucide="chevron-right"></i>';
+      row.replaceWith(done); lucide.createIcons();
+    }, 6000);
+  });
   var saved = null; try { saved = sessionStorage.getItem('trad-hub-item'); } catch (e) {}
   pick(q.get('item') || saved || 'jeans');
   // закрили студію, поки AI робить відео: рядок «Робимо відео», потім сповіщення «Відео готове»
@@ -151,6 +533,6 @@
   }
 })();
 </script>
-<script src="shop.js?v=11242319"></script>
+<script src="shop.js?v=11270116"></script>
 </body>
 </html>
