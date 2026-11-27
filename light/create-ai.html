@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11271232">
+<link rel="stylesheet" href="style.css?v=11271414">
 </head>
 <body class="flowpage aiflow">
 
@@ -71,7 +71,7 @@
   <section class="step ai-step" data-step="ai">
     <div class="scan"><img src="assets/jeans-2.jpg" alt=""></div>
     <div class="ai-run">
-      <span class="af-glow" aria-hidden="true"><i data-lucide="aperture"></i></span>
+      <span class="af-glow af-orb" id="af-orb" aria-hidden="true"></span>
       <h1>AI заповнює оголошення</h1>
       <p class="hint">Це кілька секунд. Перед публікацією ви все перевірите.</p>
       <div class="tasks">
@@ -250,12 +250,19 @@
 <div class="toast" id="toast" role="status"></div>
 
 <script src="assets/icons/lucide.min.js"></script>
+<script src="assets/lottie.min.js"></script>
+<script src="assets/orb-coral.js"></script>
 <script>
   lucide.createIcons();
   var q = new URLSearchParams(location.search), $ = function (id) { return document.getElementById(id); };
   var order = ['1', 'ai', '2', 'm', '3', '5'], NUM = { '1': 1, 'ai': 1, '2': 2, 'm': 3, '3': 4 };
   var pos = Math.max(0, order.indexOf(q.get('step') || '1'));
   var hold = q.get('hold') === '1', fail = q.get('err') === '1';
+  // знак AI — коралова куля (безплатна анімація LottieFiles, перефарбована в кольори TRAD); без руху — стоїть на одному кадрі
+  (function () { var el = $('af-orb'); if (!el || !window.lottie || !window.ORB_CORAL) return;
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var a = lottie.loadAnimation({ container: el, renderer: 'svg', loop: true, autoplay: !still, animationData: window.ORB_CORAL });
+    if (still) a.goToAndStop(2000, false); })();
   var steps = document.querySelectorAll('.step'), bars = document.querySelectorAll('#progress i');
   var back = $('back'), next = $('next'), timers = [];
   var big = window.matchMedia('(min-width: 900px)'), fwd = false, gsel = 0, addMore = null, vbT = [];   /* лише для комп'ютера */
