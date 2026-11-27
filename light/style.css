@@ -1566,15 +1566,12 @@ textarea { resize: none; }
   .af-track { flex: 1; height: 18px; border-radius: 999px; background: var(--s2); overflow: hidden; }
   .af-track i { display: block; width: 0; height: 100%; border-radius: 999px; background: var(--hot); transition: width 0.12s linear; }
   .af-bar b { min-width: 2.8em; font-size: var(--f-pct); font-weight: 700; text-align: right; }
-  .af-fan { position: absolute; inset: 0; }
-  .af-fan img { position: absolute; top: 46%; left: 50%; width: 34%; max-width: none; aspect-ratio: 5 / 6; object-fit: cover; border: 6px solid var(--card); border-radius: 22px; box-shadow: 0 16px 40px oklch(0 0 0 / 0.4); transform: translate(-50%, -50%) rotate(-4deg); z-index: 2; }
-  .af-fan img:first-child:not(:only-child) { transform: translate(-128%, -54%) rotate(-8deg); z-index: 3; }
-  .af-fan img:nth-child(3), .af-fan img:nth-child(2):last-child { transform: translate(28%, -50%) rotate(6deg); z-index: 1; }
-  .af-build .af-pl { top: -8%; width: 15%; z-index: 4; }
-  .af-ctl { position: absolute; left: 6%; right: 6%; bottom: 6%; display: flex; align-items: center; gap: 16px; padding-bottom: 14px; border-bottom: 3px solid oklch(1 0 0 / 0.28); color: #fff; font-size: var(--f-md); }
-  .af-ctl svg { width: 22px; height: 22px; }
-  .af-ctl svg:first-child { fill: #fff; }
-  .af-ctl svg:nth-of-type(2) { margin-left: auto; }
+  .af-build .af-orb2 { position: absolute; left: 50%; top: 50%; width: min(52%, 380px); aspect-ratio: 1; transform: translate(-50%, -50%); }
+  /* текст праворуч — як на кроці «AI заповнює» (слово владельця 27.11: «текст меньше»): заголовок 28, кроки 18, кружки 24 */
+  body.flowpage.aiflow .af-making h2 { font-size: 28px; line-height: 34px; }
+  body.flowpage.aiflow .af-vtasks { gap: 14px; margin-top: 18px; font-size: 18px; line-height: 26px; }
+  body.flowpage.aiflow .af-dot { width: 24px; height: 24px; }
+  body.flowpage.aiflow .af-dot svg { width: 22px; height: 22px; }
   body.flowpage.aiflow.vbuild .step[data-step="m"].on { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); align-items: center; }
   body.flowpage.aiflow.vbuild .af-build { display: block; position: absolute; inset: 0; }
   body.flowpage.aiflow.vbuild .af-making { display: block; grid-row: 1 / span 5; }

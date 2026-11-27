@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11271414">
+<link rel="stylesheet" href="style.css?v=11271426">
 </head>
 <body class="flowpage aiflow">
 
@@ -145,11 +145,7 @@
     </dl>
         <div class="mpanel"><div class="clipwrap">
       <div class="af-stage">
-      <div class="af-build" aria-hidden="true">
-        <div class="af-fan" id="af-fan"></div>
-        <span class="af-pl"><i data-lucide="play"></i></span>
-        <div class="af-ctl"><i data-lucide="play"></i><span class="num" id="af-bt">0:00 / 0:12</span><i data-lucide="volume-2"></i><i data-lucide="maximize"></i></div>
-      </div>
+      <div class="af-build" aria-hidden="true"><span class="af-orb2" id="af-orb2"></span></div>
       <div class="clip" id="clip" role="button" tabindex="0" aria-label="Відео: зупинити або відтворити">
         <span class="clipbar" id="clipbar" aria-hidden="true"></span>
         <span class="dur"><i data-lucide="play"></i><span id="cldur">0:12</span></span>
@@ -514,14 +510,16 @@
   });
   // відео «збирається»: чотири кроки й смужка з відсотками, потім готове відео
   function vstop() { vbT.forEach(clearTimeout); vbT = []; document.body.classList.remove('vbuild'); }
+  var vOrb = null;
   function vbuild(frozen) {
     var li = $('af-vtasks').children, p = 0;
     function setp(v) {
       $('af-fill').style.width = v + '%'; $('af-pct').textContent = v + '%';
       [].forEach.call(li, function (t, i) { t.className = v >= (i + 1) * 25 ? 'af-ok' : v >= i * 25 ? 'af-run' : ''; });
     }
-    $('af-fan').innerHTML = photos().slice(0, 3).map(function (m) { return '<img src="' + m.querySelector('img').getAttribute('src') + '" alt="">'; }).join('');
-    $('af-bt').textContent = '0:00 / ' + vinfo().dur;
+    // поки відео збирається — та сама коралова куля, що й на кроці «AI заповнює» (без руху — стоїть на одному кадрі)
+    if (!vOrb && window.lottie && window.ORB_CORAL && $('af-orb2')) { var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      vOrb = lottie.loadAnimation({ container: $('af-orb2'), renderer: 'svg', loop: true, autoplay: !still, animationData: window.ORB_CORAL }); if (still) vOrb.goToAndStop(2000, false); }
     document.body.classList.add('vbuild');
     if (frozen) { setp(72); return; }
     setp(0);
