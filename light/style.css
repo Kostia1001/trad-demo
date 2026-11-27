@@ -2913,6 +2913,56 @@ p.sd-stt { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--text
 }
 @media (prefers-reduced-motion: reduce) { .fx-hl { animation: none; } .fx-cv img { transition: none; } }
 
+/* «Фон під вашу річ» в окні «Поділитися в соцмережах» (28.11.2026).
+   AI малює сцену навколо речі, саму річ кладемо з фото продавця. Рух: перелив, поки AI малює → фон проявляється з розмиття → повільний наїзд камери. */
+.tk-aih { display: flex; align-items: center; gap: 6px; margin: -2px 0 10px; font-size: 13px; line-height: 1.4; color: var(--text-2); }
+.tk-aih svg { width: 16px; height: 16px; flex: none; color: var(--hot-deep); }
+.tk-aig { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.tk-aig button { min-width: 0; display: grid; gap: 6px; padding: 4px 4px 8px; border-radius: 14px; background: var(--card, #FFFEFC); box-shadow: 0 0 0 1px var(--line); text-align: left; transition: box-shadow 0.18s var(--ease); }
+.tk-aig button[aria-checked="true"] { box-shadow: 0 0 0 2px var(--text); }
+.tk-aig button:disabled { cursor: progress; }
+@media (hover: hover) { .tk-aig button.is-ready:hover:not([aria-checked="true"]) { box-shadow: 0 0 0 1px var(--text-2); } }
+.tk-aim { position: relative; display: block; aspect-ratio: 2 / 3; border-radius: 10px; overflow: hidden; background: var(--s1); }
+.tk-aim img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; filter: blur(14px) saturate(0.6); transform: scale(1.06); transition: opacity 0.7s var(--ease), filter 0.9s var(--ease), transform 1.1s var(--ease); }
+.tk-aig .is-ready .tk-aim img { opacity: 1; filter: none; transform: none; }
+.tk-aim::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgb(255 111 91 / 0.16) 44%, rgb(255 255 255 / 0.6) 50%, rgb(255 111 91 / 0.16) 56%, transparent 70%); background-size: 260% 100%; animation: tkShim 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite; transition: opacity 0.4s var(--ease); }
+.tk-aig .is-ready .tk-aim::after { opacity: 0; animation: none; }
+@keyframes tkShim { from { background-position: 130% 0; } to { background-position: -130% 0; } }
+.tk-ain { display: block; padding: 0 4px; font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.tk-aig button:not(.is-ready) .tk-ain { color: var(--text-2); font-weight: 500; }
+.tk-sub { margin: 14px 0 8px; font-size: 13px; font-weight: 600; color: var(--text-2); }
+
+/* превʼю: сцена з назвою й ціною поверх */
+.tk-scn { position: absolute; inset: 0; overflow: hidden; background: var(--s1); }
+.tk-scn[hidden] { display: none; }
+.tk-scn img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 64%; animation: tkPush 9s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate; }
+.tk-scn.drawing img { opacity: 0; animation: none; }
+.tk-scn.reveal img { animation: tkReveal 0.9s var(--ease) both, tkPush 9s cubic-bezier(0.4, 0, 0.2, 1) 0.9s infinite alternate; }
+@keyframes tkReveal { from { opacity: 0; filter: blur(16px); transform: scale(1.08); } to { opacity: 1; filter: none; transform: scale(1); } }
+@keyframes tkPush { from { transform: scale(1); } to { transform: scale(1.07); } }
+.tk-scn::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent 30%, rgb(255 111 91 / 0.16) 44%, rgb(255 255 255 / 0.55) 50%, rgb(255 111 91 / 0.16) 56%, transparent 70%); background-size: 260% 100%; }
+.tk-scn.drawing::before { opacity: 1; animation: tkShim 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.tk-sct { position: absolute; z-index: 2; left: 8px; right: 8px; top: 10px; display: grid; justify-items: start; gap: 6px; transition: opacity 0.4s var(--ease) 0.3s; }
+.tk-scn.drawing .tk-sct { opacity: 0; transition: none; }
+.tk-sct b { box-sizing: border-box; max-width: 100%; padding: 5px 8px; border-radius: 8px; background: rgb(255 254 252 / 0.92); color: var(--text); font: 700 12px/1.3 var(--display); box-shadow: 0 2px 8px rgb(23 18 28 / 0.12); }
+.tk-sct b[hidden], .tk-scp[hidden] { display: none; }
+.tk-scp { display: inline-flex; align-items: center; gap: 4px; }
+.tk-scp span { padding: 4px 10px; border-radius: 999px; background: var(--hot); color: var(--on-hot); font: 800 14px/1.2 var(--display); white-space: nowrap; box-shadow: 0 2px 8px rgb(23 18 28 / 0.14); }
+.tk-scn.big .tk-scp span { padding: 5px 12px; font-size: 16px; }
+.tk-scp i { padding: 2px 6px; border-radius: 4px; background: var(--text); color: var(--bg); font: 800 12px/1.2 var(--display); font-style: normal; letter-spacing: 0.02em; }
+.tk-scai { position: absolute; z-index: 2; right: 6px; bottom: 6px; padding: 2px 6px; border-radius: 6px; background: rgb(23 18 28 / 0.55); color: #fff; font-size: 12px; }
+.tk-scn.drawing .tk-scai { display: none; }
+.tk-scw { position: absolute; z-index: 2; inset: auto 6px 6px; display: none; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px; background: rgb(23 18 28 / 0.84); color: var(--bg); font-size: 12px; line-height: 1.35; }
+.tk-scw .ah-spin { flex: none; position: static; width: 16px; height: 16px; margin: 0; background: none; }
+.tk-scn.drawing .tk-scw { display: flex; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-aim::after, .tk-scn.drawing::before { animation: none; }
+  .tk-aim img, .tk-scn.reveal img, .tk-scn img { transition: none; animation: none; filter: none; transform: none; }
+}
+@media (max-width: 899px) { .tk-scp i { display: none; } .tk-sct { left: 6px; right: 6px; top: 8px; } }
+@media (min-width: 900px) { .tk-aig { grid-template-columns: repeat(4, minmax(0, 1fr)); } .tk-scn.big .tk-scp span { padding: 6px 14px; font-size: 20px; } }
+
 /* ---- Відгуки, «Особу підтверджено» і «Підняти оголошення» (23.11.2026). Розмітку додає останній блок shop.js;
         сторінки promote.html і verify.html писані руками. Префікси: tr- (відгуки), pr- (підняття), vf- (перевірка особи) ---- */
 

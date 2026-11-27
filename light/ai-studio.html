@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=11271426">
+<link rel="stylesheet" href="style.css?v=11280102">
 </head>
 <!-- AI-студія — окремий розділ кабінету (рішення власника 23.11.2026). З 26.11.2026 — варіант «через задачу продавця», обрав власник (рисунок Codex menu/codex/studio3/studio3-3.png, схема — Photoroom). Поле «Оголошення» → три задачі: «Поділитися в соцмережах», «Знизити ціну й нагадати», «Оформити оголошення» (картка обирає задачу й відкриває вікно, де AI вже все підготував) → інструменти задачі → «Усі інструменти» (14, за розділами) → «Мої матеріали». Річ не перемальовується. Назви й тексти — Codex (critique/codex/studio3-copy.txt). Стилі — tools/studio.css, блок «AI-студія v3». ?item=bag|hoodie, ?video=making&item=bag -->
 <body class="acctpage wide has-bar keepbar">
@@ -78,7 +78,7 @@
   <div class="sheet-body">
     <div class="tk-sh">
       <div class="tk-pv">
-        <span class="tk-clip"><video id="tk-vid" src="assets/jeans-reel.mp4" poster="assets/jeans-reel.jpg" muted loop playsinline preload="none" aria-label="Ролик оголошення"></video><span class="tk-bld" id="tk-bld" hidden><span class="ah-spin" aria-hidden="true"></span>Збираємо ролик. Це займе 25–40 секунд.</span></span>
+        <span class="tk-clip"><video id="tk-vid" src="assets/jeans-reel.mp4" poster="assets/jeans-reel.jpg" muted loop playsinline preload="none" aria-label="Ролик оголошення"></video><span class="tk-bld" id="tk-bld" hidden><span class="ah-spin" aria-hidden="true"></span>Збираємо ролик. Це займе 25–40 секунд.</span><span class="tk-scn" id="tk-scn" hidden><img id="tk-scimg" alt=""><span class="tk-sct"><b id="tk-sctt"></b><span class="tk-scp" id="tk-scp"><span id="tk-scpr"></span><i>TRAD</i></span></span><span class="tk-scai">Фон створив AI</span><span class="tk-scw"><span class="ah-spin" aria-hidden="true"></span>AI малює фон…</span></span></span>
       </div>
       <div class="tk-cfg">
         <h3 class="tk-h">Стиль ролика</h3>
@@ -89,7 +89,14 @@
           <button type="button" role="radio" aria-checked="false" data-style="sale"><img data-sp="sale" src="assets/sale-reel.jpg" alt=""><b>Розпродаж</b><small>Кілька ваших речей із цінами</small></button>
         </div>
         <h3 class="tk-h">Фон</h3>
-        <div class="tk-bgs" role="radiogroup" aria-label="Фон">
+        <p class="tk-aih" id="tk-aih" aria-live="polite"><i data-lucide="sparkles"></i><span>AI малює фони для цієї речі…</span></p>
+        <div class="tk-aig" role="radiogroup" aria-label="Фон під вашу річ">
+          <button type="button" role="radio" aria-checked="false" data-ai="1"><span class="tk-aim"><img alt=""></span><span class="tk-ain"></span></button>
+          <button type="button" role="radio" aria-checked="false" data-ai="2"><span class="tk-aim"><img alt=""></span><span class="tk-ain"></span></button>
+          <button type="button" role="radio" aria-checked="false" data-ai="3"><span class="tk-aim"><img alt=""></span><span class="tk-ain"></span></button>
+        </div>
+        <p class="tk-sub">Готові фони</p>
+        <div class="tk-bgs" role="radiogroup" aria-label="Готові фони">
           <button type="button" role="radio" aria-checked="true" data-bg="len"><img src="assets/jeans-reel-bg-len.jpg" alt=""><span>Льон</span></button>
           <button type="button" role="radio" aria-checked="false" data-bg="shtukaturka"><img src="assets/jeans-reel-bg-shtukaturka.jpg" alt=""><span>Штукатурка</span></button>
           <button type="button" role="radio" aria-checked="false" data-bg="studio"><img src="assets/jeans-reel-bg-studio.jpg" alt=""><span>Студія</span></button>
@@ -121,7 +128,7 @@
     </div>
     <div class="stack sx-m"><button class="btn primary wide" type="button" id="tk-sharebtn"><i data-lucide="share"></i>Поділитися</button></div>
     <div class="stack tk-acts">
-      <a class="btn ghost wide tk-dl" id="tk-dl" href="assets/jeans-reel.mp4" download><i data-lucide="download"></i>Завантажити ролик</a>
+      <a class="btn ghost wide tk-dl" id="tk-dl" href="assets/jeans-reel.mp4" download><i data-lucide="download"></i><span id="tk-dlt">Завантажити ролик</span></a>
       <button class="btn ghost wide" type="button" data-copy="cap"><i data-lucide="copy"></i>Скопіювати підпис</button>
       <button class="btn ghost wide" type="button" data-copy="link"><i data-lucide="link"></i>Скопіювати посилання</button>
     </div>
@@ -274,7 +281,7 @@
     if (k === 'reel' || k === 'caption') openShare();
     else if (k === 'story') openPrice();
     else if (k === 'sale') { saleList(); openSheet('sx-salesh'); }
-    else if (k === 'scene') location.href = 'studio.html?item=' + cur + '&tool=photo&sc=studio';
+    else if (k === 'scene') openShare();
     else if (k === 'own') location.href = 'studio.html?item=' + cur + '&tool=video';
     else if (k === 'cover' || k === 'light' || k === 'desc' || k === 'size') openFix(k);
     else openTool(k);
@@ -293,25 +300,64 @@
     if (look.show.cta && look.built === 'cta') return 'jeans-reel-cta';
     return look.bg === 'len' ? 'jeans-reel' : 'jeans-reel-bg-' + look.bg;
   }
+  // «Фон під вашу річ»: AI малює 3 сцени навколо саме цієї речі (річ — з фото продавця, не перемальовується). На старті 3 безкоштовно, без «Ще варіант».
+  // У макеті — готові картинки <річ>-ai-1..3.jpg (tools/item_scenes.py); на сайті — 20–30 с, тут для показу 1,6 / 2,6 / 3,6 с.
+  var AIS = { jeans: ['Біла постіль', 'Підлога біля вікна', 'Стіл із льоном'], bag: ['Столик у кафе', 'Консоль у передпокої', 'Лавка в парку'], hoodie: ['Гачок на стіні', 'Вішак у лофті', 'Двері в передпокої'] };
+  var drawn = {}, ready = {}, drawTok = 0;
+  function aiOn() { return look.bg.indexOf('ai') === 0 && look.style !== 'sale'; }
+  function scene(reveal) {
+    var box = $('tk-scn'), x = ITEMS[cur], n = look.bg.slice(2), ok = ready[cur] && ready[cur][n];
+    $('tk-scimg').src = 'assets/' + cur + '-ai-' + n + '.jpg';
+    $('tk-sctt').textContent = x.name + (look.show.size && x.size ? ', ' + x.size : ''); $('tk-sctt').hidden = !look.show.title;
+    $('tk-scpr').textContent = money(x.price); $('tk-scp').hidden = !look.show.price;
+    box.classList.toggle('big', look.style === 'price'); box.classList.toggle('drawing', !ok);
+    if (reveal && !still) { box.classList.remove('reveal'); void box.offsetWidth; box.classList.add('reveal'); }
+  }
   function play() {
-    var v = $('tk-vid'), n = clip(); if (v.getAttribute('src') !== 'assets/' + n + '.mp4') { v.src = 'assets/' + n + '.mp4'; v.poster = 'assets/' + n + '.jpg'; }
-    $('tk-dl').href = v.src; if (!still) { var pr = v.play(); if (pr) pr.catch(function () {}); }
+    var v = $('tk-vid'), sc = aiOn();
+    $('tk-scn').hidden = !sc; v.style.visibility = sc ? 'hidden' : '';
+    if (sc) { v.pause(); scene(false); $('tk-dl').href = 'assets/' + cur + '-ai-' + look.bg.slice(2) + '.jpg'; $('tk-dlt').textContent = 'Завантажити фото'; return; }
+    var n = clip(); if (v.getAttribute('src') !== 'assets/' + n + '.mp4') { v.src = 'assets/' + n + '.mp4'; v.poster = 'assets/' + n + '.jpg'; }
+    $('tk-dl').href = v.src; $('tk-dlt').textContent = 'Завантажити ролик'; if (!still) { var pr = v.play(); if (pr) pr.catch(function () {}); }
+  }
+  function aiBtns() { return [].slice.call(document.querySelectorAll('[data-ai]')); }
+  function aiHead(t) { $('tk-aih').lastElementChild.textContent = t; }
+  function drawAI() {
+    var it = cur, tok = ++drawTok, names = AIS[it];
+    aiBtns().forEach(function (b, k) {
+      var done = !!drawn[it]; b.classList.toggle('is-ready', done); b.disabled = !done;
+      b.querySelector('img').src = 'assets/' + it + '-ai-' + (k + 1) + '.jpg'; b.querySelector('img').alt = done ? names[k] : '';
+      b.querySelector('.tk-ain').textContent = done ? names[k] : 'AI малює…';
+    });
+    if (drawn[it]) { aiHead('Фони створено для цієї речі. Річ — із вашого фото.'); return; }
+    ready[it] = {}; aiHead('AI малює фони для цієї речі…');
+    [1, 2, 3].forEach(function (n, k) {
+      setTimeout(function () {
+        if (tok !== drawTok) return;
+        ready[it][n] = true; var b = aiBtns()[k]; b.classList.add('is-ready'); b.disabled = false; b.querySelector('.tk-ain').textContent = names[k]; b.querySelector('img').alt = names[k];
+        if (look.bg === 'ai' + n && aiOn()) scene(true);
+        if (n === 3) { drawn[it] = true; aiHead('Фони створено для цієї речі. Річ — із вашого фото.'); }
+      }, still ? 0 : 1600 + k * 1000);
+    });
   }
   function marks() {
     var ai = ITEMS[cur].why ? 'price' : 'calm';
     [].forEach.call(document.querySelectorAll('[data-style]'), function (b) { b.setAttribute('aria-checked', String(b.dataset.style === look.style)); b.classList.toggle('tk-ai', b.dataset.style === ai); });
     [].forEach.call(document.querySelectorAll('[data-bg]'), function (b) { b.setAttribute('aria-checked', String(b.dataset.bg === look.bg)); });
+    aiBtns().forEach(function (b) { b.setAttribute('aria-checked', String('ai' + b.dataset.ai === look.bg)); });
     [].forEach.call(document.querySelectorAll('[data-show]'), function (c) { c.checked = look.show[c.dataset.show]; });
   }
   function openShare() {
     var x = ITEMS[cur];
-    look.style = x.why ? 'price' : 'calm'; look.bg = 'len'; look.show = { title: true, size: !!x.size, price: true, cta: false }; look.built = '';
+    look.style = x.why ? 'price' : 'calm'; look.bg = AIS[cur] ? 'ai1' : 'len'; look.show = { title: true, size: !!x.size, price: true, cta: false }; look.built = '';
     $('tk-upd').hidden = true; $('tk-bld').hidden = true;
-    $('tk-lnk').textContent = x.link; $('tk-clk').textContent = x.clicks; marks(); showCap(); openSheet('tk-share'); play();
+    $('tk-lnk').textContent = x.link; $('tk-clk').textContent = x.clicks; if (AIS[cur]) { ready[cur] = ready[cur] || {}; if (drawn[cur]) ready[cur] = { 1: true, 2: true, 3: true }; drawAI(); }
+    marks(); showCap(); openSheet('tk-share'); play();
   }
+  aiBtns().forEach(function (b) { b.addEventListener('click', function () { if (b.disabled) return; look.bg = 'ai' + b.dataset.ai; if (look.style === 'sale') look.style = 'calm'; marks(); play(); scene(true); }); });
   [].forEach.call(document.querySelectorAll('[data-style]'), function (b) { b.addEventListener('click', function () { look.style = b.dataset.style; marks(); play(); }); });
   [].forEach.call(document.querySelectorAll('[data-bg]'), function (b) { b.addEventListener('click', function () { look.bg = b.dataset.bg; if (look.style === 'price' || look.style === 'fast') look.style = 'calm'; marks(); play(); }); });
-  [].forEach.call(document.querySelectorAll('[data-show]'), function (c) { c.addEventListener('change', function () { look.show[c.dataset.show] = c.checked; $('tk-upd').hidden = false; }); });
+  [].forEach.call(document.querySelectorAll('[data-show]'), function (c) { c.addEventListener('change', function () { look.show[c.dataset.show] = c.checked; if (aiOn()) scene(false); else $('tk-upd').hidden = false; }); });
   $('tk-upd').addEventListener('click', function () {
     var b = this; b.hidden = true; $('tk-bld').hidden = false; $('tk-vid').pause();
     setTimeout(function () { look.built = look.show.cta ? 'cta' : ''; $('tk-bld').hidden = true; play(); }, still ? 600 : 2600);
@@ -322,7 +368,7 @@
   [].forEach.call(document.querySelectorAll('[data-copy]'), function (b) { b.addEventListener('click', function () {
     if (b.dataset.copy === 'cap') copy(caption(cur, net), 'Підпис скопійовано'); else copy('https://' + ITEMS[cur].link, 'Посилання скопійовано');
   }); });
-  $('tk-dl').addEventListener('click', function () { toast('Ролик завантажено'); });
+  $('tk-dl').addEventListener('click', function () { toast(aiOn() ? 'Фото завантажено' : 'Ролик завантажено'); });
   $('tk-sharebtn').addEventListener('click', function () { if (navigator.share) navigator.share({ text: caption(cur, net) }).catch(function () {}); else copy(caption(cur, net), 'Підпис скопійовано'); });
 
   // ---- «Знизити ціну й нагадати»: AI радить ціну за схожими оголошеннями, сторіс, сповіщення тим, хто зберіг
@@ -533,6 +579,6 @@
   }
 })();
 </script>
-<script src="shop.js?v=11271426"></script>
+<script src="shop.js?v=11280102"></script>
 </body>
 </html>
